@@ -1,0 +1,13 @@
+.idea
+*.swp
+*.iml
+.nrepl-port
+.cpcache
+target
+.DS_Store
+pom.xml
+resources/config.edn
+.rebel_readline_history
+.clj-kondo/*/
+.calva
+.lsp
