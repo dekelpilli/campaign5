@@ -1,0 +1,79 @@
+{:label    "Rings"
+ :items    [{:name    "The Hardened"
+             :synergy true
+             :effect  "+1 barrier for each distinct non-synergy ring worn."
+             :points  5}
+            {:name    "The Soldier"
+             :synergy true
+             :effect  "+1 damage for each distinct synergy ring you are wearing."
+             :points  5}
+            {:name    "The Lone Wolf"
+             :synergy true
+             :effect  "+1 critical hit range while not wearing any synergy rings that are not The Lone Wolf."
+             :points  5}
+            {:name    "The Joker"
+             :synergy true
+             :effect  "This ring has no effect, but may count as any ring type you choose. It can only count as one ring type at a time."
+             :points  1}
+            {:name    "The Speedster"
+             :synergy true
+             :effect  "+5 feet to all of your speed types for each 'The Speedster' ring worn."
+             :points  4}
+            {:name    "The Prosperous"
+             :synergy true
+             :effect  "Gain 1 gold from each loot roll for each 'The Prosperous' ring worn, to a maximum of 50. This does not apply when re-rolling due to receiving a crafting result."
+             :points  2}
+            {:name    "The Simpleton"
+             :synergy true
+             :effect  "Your non-synergy rings' cost decreases by 1 point. Your synergy rings' cost increases by 2."
+             :points  0} ;2 if you include the ring's effect once
+            {:name    "The Beacon"
+             :synergy true
+             :effect  "You emit bright light in a radius of 5 feet from you for each ring worn."
+             :points  2}
+            {:name    "The Trained"
+             :synergy true
+             :effect  "If all of your worn synergy rings are 'The Trained', with a minimum of 3, you may choose to gain a feat from one of your rings. This ring grants the option of `{{x|random:feats}}`. You may change the chosen ring during a long rest."
+             :points  2}
+            {:name    "The Able"
+             :synergy true
+             :effect  "{% with x=x|random:ability-scores %}+1 {{x}} and +1 maximum {{x}} while not wearing any synergy rings that are not 'The Able'.{% endwith %}"
+             :points  2}
+            {:name   "Vengeful"
+             :effect "Once per short rest, as a reaction to being damaged, you may cast Hellish Rebuke on the creature that damaged you, ignoring range restrictions."
+             :points 3}
+            {:name   "Jack of All Trades"
+             :effect "None of your ability scores can be below 10. Any ability scores below 10 are considered to be 10 instead."
+             :points 1}
+            {:name   "Watchful"
+             :effect "You may trance instead of sleeping during long rests, but must still rest for 8 hours (by default) to achieve a long rest."
+             :points 2}
+            {:name   "Divergent"
+             :effect "{% with x=x|random:without-replacement:2:damage-types:non-physical %}You take {{x.0}} damage as {{x.1}} damage instead.{% endwith %}"
+             :points 1}
+            {:name   "Multilingual"
+             :effect "You can speak, read, and write {{x|random:languages}} if worn for at least 24 hours."
+             :points 1}
+            {:name   "Prepared"
+             :effect "When you would normally be able to make an opportunity attack, you may use a touch spell or melee maneuver with a usage time of no more than 1 action instead."
+             :points 4}
+            {:name   "Dabbler"
+             :effect "For each ability score type, if you have no proficiencies in skills from that ability score, gain proficiency in one such skill of your choice."
+             :points 3}
+            {:name   "Acrobat"
+             :effect "You may take high and long jumps without a run-up."
+             :points 1}
+            {:name   "Scapegoat"
+             :effect "When a creature within 5 feet of you takes damage, you may choose for them to take no damage instead. You then take an equal amount of true damage."
+             :points 2}
+            {:name   "Jeweller"
+             :effect "Whenever you obtain a loot roll, you may roll a d4. On a roll of 4, gain a ring result instead."
+             :points 3}
+            {:name   "Impactful"
+             :effect "You trigger major effects on attacks with a score of 13+ (after defences), although the attack is still considered a standard success for other purposes."
+             :points 4}]
+ :take     2
+ :title    "Rings"
+ :sections [{:heading "Rings"
+             :each    :items
+             :item    {:title "{% if synergy %}Synergy {% endif %}Ring: {{ name }}" :body "{{effect}}"}}]} ;TODO render randomisations

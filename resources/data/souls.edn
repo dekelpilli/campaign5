@@ -1,0 +1,30 @@
+;TODO add random handling
+[{:name    "Perfectionist"
+  :passive {:state    {:crit-damage 1}
+            :template "+{{ crit-damage }} damage with critical hits"}
+  :proc    {:template "If you hit with an attack during this round, the attack becomes a critical hit"}}
+ {:name    "Specialist"
+  :passive {:state    {:damage 1}
+            :template "+{{ damage }} {{x|random:damage-types|non-physical}} damage with attacks"}
+  :proc    {:state    {:dice 1}
+            :template "Deal {{ dice }}d8 damage to all creatures adjacent to a space within 60ft of you. The type of the damage matches this soul's passive damage type."}}
+ {:name    "Patient"
+  :passive {:state    {:harm 1}
+            :template "+{{ harm }} outgoing harm"}
+  :proc    {:state    {:range   10
+                       :penalty 1}
+            :template "A creature of your choice within {{ range }} of you suffers a -{{ penalty }} penalty to any saves it makes to end ongoing instances of harm at the end of its next turn."}}
+ {:name    "Healer"
+  :passive {:state    {:healing 2}
+            :template "+{{ healing }} outgoing healing with actions"}
+  :proc    {:state    {:limit 1}
+            :template "Up to {{ limit }} creatures of your choice that you can see are healed by this soul. The soul inherits your outgoing healing modifiers for this action."}}
+ {:name    "Martial"
+  :passive {:state    {:damage 2}
+            :template "+{{ damage }} damage with martial weapons"}
+  :proc    {:state    {:multiplier 1}
+            :template "The soul uses your weapon(s) to damage a creature of your choice within 60ft of you. The damage of the soul's attack is multiplied by {{ multiplier }}."}}
+ {:name    "Fighter"
+  :passive {:state    {:damage 2}
+            :template "+{{ damage }} damage with maneuvers"}
+  :proc    {:template "The cost of any non-basic maneuvers you use this round is 1 exertion."}}]

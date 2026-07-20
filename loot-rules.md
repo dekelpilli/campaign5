@@ -7,24 +7,32 @@ Loot can be obtained or improved in the following ways:
 - Loot of any type can be sold for 50 mythic tokens
   - in cases where a loot roll grants multiple things, the total is 50 mythic tokens
   - Items that have been upgraded can generally sell for more mythic tokens, but won't necessarily be 100% refunded
-- Once players have specialisations, mythic shrines can be found alongside loot (weighting of random mythic shrines is inversely proportional to cost)
+- Once players have specialisations, mythic shrines coupons can be found alongside loot (tokens that can only be used on a specific type of mythic shrine)
+
+Potential alternative:
+- Loot rolls cannot be found, and instead players find magic items (or some flavour thereof)
+- Mythic shrines are triggered by found magic items, not loot rolls
+- Magic items sell for gold, which can buy loot rolls, then the rest is the same
+- Pro: reduce access to special loot (especially valuable if we have so few categories), which are generally quite limited in stackability
+- Con: original plan was to remove fully random / random combo items. Could avoid random combo by instead having a system similar to Bentley's gems, but not upgradeable 
 
 # Loot types
 
-## Gems & Gauntlets
-[//]: # (- TODO total usable gems = 2? 3? 5? Decide)
-[//]: # (- TODO do all gems proc together per player, or individually? Decide)
-[//]: # (- TODO Give gems random attributes to interact with gauntlet mods? e.g. colour, and maybe shininess if I want another axis)
-[//]: # (- TODO Decide on how gauntlet mods are upgraded/rolled)
-- Players have one gauntlet, which can socket a maximum of 3 gems by default
-- Players start with a mundane gauntlet, and swapping gems between gauntlets is free
-- Gauntlets can have modifiers on them that can provide bonuses that improve the gems, or buff the player directly
-- Each gem has two passive bonuses; a permanent one, and a proc-only one (whether it's active is determined randomly on each round)
-- By default, proc-only mods have a 10% to trigger
+## Souls & Reliquaries
+[//]: # (- TODO total usable souls = 2? 3? 5? Decide)
+[//]: # (- TODO do all souls proc together per player, or individually? Decide)
+[//]: # (- TODO Give souls random attributes to interact with reliquary mods? e.g. creature type, era/age)
+[//]: # (- TODO Decide on how reliquary mods are upgraded/rolled)
+- Players have one reliquary, which can socket a maximum of 3 bound souls by default
+- Players start with a mundane reliquary, and swapping souls between reliquaries is free
+- Reliquaries can have modifiers on them that can provide bonuses that improve the souls, or buff the player directly
+- Each soul provides a passive bonus and a proc effect
+- Proc effects count as coming from the soul, so bonuses to the character's damage do not impact damage dealt by procs
+- By default, proc effects have a 10% to trigger
 - This loot category has various avenues of scaling/improvement:
   - Improve proc chance
-  - Improve individual gems (either their permanent or their proc-only mods)
-  - Improve the gauntlet that holds the gems
+  - Improve individual souls (either their permanent or their proc mods)
+  - Improve the reliquary that holds the souls
 
 ## Legendary items
 [//]: # (- TODO should these come from tarot cards? If so, cards would influence the contents of the infusable mod pool, maybe including a starting mod, and influence the selection of legendary)
@@ -43,8 +51,14 @@ Loot can be obtained or improved in the following ways:
 - Rings can either have standalone bonuses, or bonuses that scale based on other rings (synergy rings)
 
 ## Divine Dust
-[//]: # (- TODO refactor divine dust to be an infinitely upgradable item?)
-[//]: # (- TODO consider adding a limit to the number of paths you can have, increasable by mythic shrine?)
+[//]: # (- TODO refactor divine dust to be an infinitely upgradable item? astrolabe?)
+[//]: # (- TODO consider adding a limit to the number of paths you can have, increasable by specialisation?)
+- As before, there are different tiers of 'divine paths'. To unlock tiers beyond the first, you need to use a mythic shrine
+- When you get 'divine dust', you can either reveal a mod on the first tier, or reroll the mod of any tier (allowing you to not keep the currently unlocked one if you prefer it over the reroll)
+- The number of paths a player can begin is limited
+- Mythic shrine effects:
+  - Unlock new tier
+  - Reveal all options in a tier
 
 ## Runic tattoos
 [//]: # (- replacing helmets. Goal: improve upgradeability, customisability from players, make it easier/more natural/fluid to introduce new mods over the course of the campaign)
