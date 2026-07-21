@@ -1,0 +1,11 @@
+{:storage    {:backend :file} ;TODO consider mysql?
+ :plugins    [{:type       :jar
+               :id         :souls
+               :jar        "target/campaign5.jar"
+               :entrypoint campaign5.souls/souls-generator}
+              {:type   :data
+               :id     :rings
+               :source "file-plugins/rings.edn"}]
+ :reporting  #include "reporting.edn"
+ :loot-table [{:id :rings}
+              {:id :souls}]}

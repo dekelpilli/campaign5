@@ -1,30 +1,72 @@
-;TODO add random handling
-[{:name    "Perfectionist"
-  :passive {:state    {:crit-damage 1}
+;TODO add progression data
+[{:name    "Perfectionism"
+  :passive {:state    {:crit-damage 2}
             :template "+{{ crit-damage }} damage with critical hits"}
-  :proc    {:template "If you hit with an attack during this round, the attack becomes a critical hit"}}
- {:name    "Specialist"
+  :proc    {:template "For the duration of the round, your proficiency bonus is doubled for the purpose of calculating your critical damage bonus"}}
+ {:name    "Precision"
+  :passive {:state    {:crit-range 1}
+            :template "+{{ crit-range }} critical hit range"}
+  :proc    {:template "For the duration of the round, your critical range increases from 1, instead of decreasing from 20."}}
+ {:name    "Accuracy"
+  :passive {:state    {:ab 1}
+            :template "+{{ ab }} AB"}
+  :proc    {:template "If you hit with a damaging attack during this round, add the attack's AB to its damage."}}
+ {:name    "Specialty"
   :passive {:state    {:damage 1}
-            :template "+{{ damage }} {{x|random:damage-types|non-physical}} damage with attacks"}
+            :template "+{{ damage }} {{x|random:damage-types}} damage with attacks"}
   :proc    {:state    {:dice 1}
             :template "Deal {{ dice }}d8 damage to all creatures adjacent to a space within 60ft of you. The type of the damage matches this soul's passive damage type."}}
- {:name    "Patient"
+ {:name    "Patience"
   :passive {:state    {:harm 1}
-            :template "+{{ harm }} outgoing harm"}
+            :template "+{{ harm }} outgoing harm with ongoing effects"}
   :proc    {:state    {:range   10
                        :penalty 1}
             :template "A creature of your choice within {{ range }} of you suffers a -{{ penalty }} penalty to any saves it makes to end ongoing instances of harm at the end of its next turn."}}
- {:name    "Healer"
+ {:name    "Healing"
   :passive {:state    {:healing 2}
             :template "+{{ healing }} outgoing healing with actions"}
   :proc    {:state    {:limit 1}
             :template "Up to {{ limit }} creatures of your choice that you can see are healed by this soul. The soul inherits your outgoing healing modifiers for this action."}}
- {:name    "Martial"
+ {:name    "Mastery"
   :passive {:state    {:damage 2}
             :template "+{{ damage }} damage with martial weapons"}
   :proc    {:state    {:multiplier 1}
-            :template "The soul uses your weapon(s) to damage a creature of your choice within 60ft of you. The damage of the soul's attack is multiplied by {{ multiplier }}."}}
- {:name    "Fighter"
+            :template "The soul uses your weapon(s) to damage a creature of your choice within 60ft of you. The damage of this strike is multiplied by {{ multiplier }}."}}
+ {:name    "Combat"
   :passive {:state    {:damage 2}
             :template "+{{ damage }} damage with maneuvers"}
-  :proc    {:template "The cost of any non-basic maneuvers you use this round is 1 exertion."}}]
+  :proc    {:state    {:reduction 1}
+            :template "The base exertion cost of any non-basic maneuvers you use this round is reduced by {{ reduction }}, to a minimum of 1."}}
+ {:name    "Toughness"
+  :passive {:state    {:hit-points 4}
+            :template "+{{ hit-points }} hit points"}
+  :proc    {:template "Regain hit points as if from the use of a hit die, but no hit die is consumed."}}
+ {:name    "Durability"
+  :passive {:state    {:defence 1}
+            :template "+{{ defence }} {{x|random:defences:non-armour}}"}
+  :proc    {:state    {:barrier 1}
+            :template "+{{ barrier }} barrier against damage from attacks targeting this soul's granted defence."}}
+ {:name    "Protection"
+  :passive {:state    {:armour 1}
+            :template "+{{ armour }} armour"}
+  :proc    {:template "Your armour does not impose disadvantage on your stealth for the duration of this round"}}
+ {:name    "Restoration"
+  :passive {:state    {:recovery 1}
+            :template "While up, recover {{ recovery }} hit points at the start of each turn"}
+  :proc    {:template "Recover 1 wound"}}
+ {:name    "Strategy"
+  :passive {:state    {:initiative 1}
+            :template "+{{ initiative }} initiative"}
+  :proc    {:template "You may choose this round's initiative order."}}
+ {:name    "Speed"
+  :passive {:state    {:speed 5}
+            :template "+{{ speed }}ft of walking speed"}
+  :proc    {:template "You may dash as a bonus action during this round"}}
+ {:name    "Arcana"
+  :passive {:state    {:threshold 1}
+            :template "-{{ threshold }} standard success threshold with attacks from non-cantrip spells"}
+  :proc    {:template "When you cast a spell during this round and it doesn't score at least one success, its casting cost is refunded."}}
+ {:name    "Skill"
+  :passive {:state    {:skill 2} ;progression: +1
+            :template "+{{ skill }} {{ x|randoms:skills }}"}
+  :proc    {:template "You have advantage when using the skill improved by this soul during this round"}}]

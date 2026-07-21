@@ -1,5 +1,6 @@
 (ns campaign5.souls
   (:require
+    [campaign5.randoms] ;register filter
     [clojure.edn :as edn]
     [clojure.java.io :as io]
     [clojure.string :as str]
@@ -26,7 +27,7 @@
        :inputs   []})
     (generate [_ {:keys [rng progression]}]
       (let [{:keys [name passive proc]} (r/sample rng souls)]
-        {:loot/title    (str "Soul of a " name)
+        {:loot/title    (str "Soul embodying " name)
          :loot/sections [{:section/heading "Passive"
                           :section/items   [{:item/body (-> (p/current-state progression passive [])
                                                             :effect)}]}

@@ -11,3 +11,4 @@ resources/config.edn
 .clj-kondo/*/
 .calva
 .lsp
+reporting.edn
