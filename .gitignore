@@ -12,3 +12,4 @@ resources/config.edn
 .calva
 .lsp
 reporting.edn
+*.jar

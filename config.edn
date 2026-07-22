@@ -2,10 +2,17 @@
  :plugins    [{:type       :jar
                :id         :souls
                :jar        "target/campaign5.jar"
-               :entrypoint campaign5.souls/souls-generator}
+               :entrypoint campaign5.souls/-soul-generator}
               {:type   :data
                :id     :rings
-               :source "file-plugins/rings.edn"}]
+               :source "file-plugins/rings.edn"}
+              {:type   :data
+               :id     :minor-shrines
+               :source "file-plugins/minor-shrines.edn"}
+              {:type       :jar
+               :id         :mythic-shrines
+               :jar        "target/campaign5.jar"
+               :entrypoint campaign5.mythic-shrines/-mythic-shrine-generator}]
  :reporting  #include "reporting.edn"
  :loot-table [{:id :rings}
               {:id :souls}]}

@@ -1,0 +1,12 @@
+[{:name   "Adjustment"
+  :effect "Access a random minor shrine that takes a loot type matching the tokens used."
+  :cost   10
+  :tokens ["dust" "legendary" "ring" "soul" "tattoo"]}
+ {:name   "Fulfilment"
+  :effect "Progress the passive or proc mod of a soul."
+  :cost   50
+  :tokens ["soul"]}
+ {:name   "Refinement"
+  :effect "Progress a mod on a reliquary, or add a random modifier to a reliquary that doesn't have three modifiers."
+  :cost   50
+  :tokens ["soul"]}]

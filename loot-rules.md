@@ -4,7 +4,7 @@ Loot can be obtained or improved in the following ways:
 - Minor shrines can be found throughout the campaign. These grant minor random improvements to items. A player may choose to reject a shrine's offering, instead receiving 10 mythic tokens
 - While in town, players can buy access to specific mythic shrines for a cost that depends on the shrine effect itself
 - Mythic shrines substantially upgrade items, with different effects available for each loot type
-- Loot of any type can be sold for 50 mythic tokens
+- Loot of any type can be sold for 40 mythic tokens and 10 mythic tokens of that type (numbers TBC)
   - in cases where a loot roll grants multiple things, the total is 50 mythic tokens
   - Items that have been upgraded can generally sell for more mythic tokens, but won't necessarily be 100% refunded
 - Once players have specialisations, mythic shrines coupons can be found alongside loot (tokens that can only be used on a specific type of mythic shrine)

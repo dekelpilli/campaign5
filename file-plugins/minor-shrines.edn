@@ -1,0 +1,14 @@
+{:label    "Minor Shrines"
+;TODO depending on spread of shrines, weighting by takeable loot types might be necessary for fairness
+ :items    [{:name   "Entropy"
+             :effect "Choose a mod with any kind of randomisation on it, and reroll that mod's randomisation."
+             :takes  ["legendary" "soul" "reliquary" "ring"]}
+            {:name   "Manifestation"
+             :effect "Increase a soul's proc chance by 1 percentage point."
+             :takes  ["soul"]}]
+ :take     1
+ :title    "Shrine"
+ :sections [{:each :items
+             :item {:title    "Shrine of {{ name }}"
+                    :body     "{{ effect }}"
+                    :metadata :takes}}]}

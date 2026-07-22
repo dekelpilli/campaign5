@@ -1,24 +1,18 @@
 (ns campaign5.souls
   (:require
-    [campaign5.randoms] ;register filter
-    [clojure.edn :as edn]
-    [clojure.java.io :as io]
+    [campaign5.randoms] ; register filter
+    [campaign5.util :as u]
     [clojure.string :as str]
     [randy.core :as r]
-    [sns.spi.protocols :as p])
-  (:import
-    (java.io PushbackReader)))
+    [sns.spi.protocols :as p]))
 
 (def ^:private soul-types ["aberration" "beast" "celestial" "dragon" "elemental"
                            "fey" "fiend" "giant" "humanoid" "monstrosity"])
 (def ^:private soul-eras ["future" "modern" "old" "ancient" "prehistoric"])
 
-(def souls (-> (io/resource "data/souls.edn")
-               io/reader
-               PushbackReader.
-               edn/read))
+(def souls (u/read-edn-resource "data/souls.edn"))
 
-(defn souls-generator [_plugin-config]
+(defn -soul-generator [_plugin-config]
   (reify p/LootGenerator
     (loot-spec [_]
       {:id       :souls
