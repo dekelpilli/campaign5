@@ -1,4 +1,5 @@
 {:storage    {:backend :file} ;TODO consider mysql?
+ :server     {:port 5555}
  :plugins    [{:type       :jar
                :id         :souls
                :jar        "target/campaign5.jar"
@@ -6,6 +7,14 @@
               {:type   :data
                :id     :rings
                :source "file-plugins/rings.edn"}
+              {:type    :data
+               :id      :tarot
+               :hidden? true
+               :inline  {:label    "Tarot cards"
+                         :items    [{:instruction "Draw 3 tarot cards"}]
+                         :title    "Tarot cards"
+                         :sections [{:each :items
+                                     :item {:body "{{ instruction }}"}}]}}
               {:type   :data
                :id     :minor-shrines
                :source "file-plugins/minor-shrines.edn"}
@@ -15,4 +24,5 @@
                :entrypoint campaign5.mythic-shrines/-mythic-shrine-generator}]
  :reporting  #include "reporting.edn"
  :loot-table [{:id :rings}
-              {:id :souls}]}
+              {:id :souls}
+              {:id :tarot}]}

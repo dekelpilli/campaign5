@@ -71,8 +71,8 @@
             :template "-{{ threshold }} standard success threshold with attacks from non-cantrip spells"}
   :proc    {:template "When you cast a spell during this round and it doesn't score at least one success, its casting cost is refunded."}}
  {:name    "Skill"
-  :passive {:state    {:skill 2} ;progression: +1
-            :template "+{{ skill }} {{ x|randoms:skills }}"}
+  :passive {:state    {:skill 2} ;progression: +2
+            :template "+{{ skill }} {{ x|random:skills }}"}
   :proc    {:template "You have advantage when using the skill improved by this soul during this round"}}
  {:name    "Malice"
   :passive {:state    {:penalty 1}
@@ -107,4 +107,9 @@
   :passive {:state    {:range 10}
             :template "+{{ range }}ft to ranged weapon attack ranges"}
   :proc    {:state    {:dice 1}
-            :template "The soul deals {{ dice }}d4 damage to each enemy within range of your ranged weapon attacks."}}]
+            :template "The soul deals {{ dice }}d4 damage to each enemy within range of your ranged weapon attacks."}}
+ {:name    "Potency"
+  :passive {:state    {:asi 1}
+            :template "+{{ asi }} to your {{ x|random:ability-scores }}"}
+  :proc    {:state    {:dice 1}
+            :template "The soul deals {{ dice }}d6 damage to each enemy you can see whose relevant ability score is lower than yours."}}]

@@ -5,10 +5,6 @@
   (:import
     (java.io PushbackReader)))
 
-(defn extract-format-tags [tag-value]
-  (when tag-value
-    (re-seq #"(?:[^:\"]|\"[^\"]*\")+" tag-value)))
-
 (defn read-edn-resource [resource]
   (-> (io/resource resource)
       io/reader

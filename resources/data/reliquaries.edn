@@ -1,0 +1,26 @@
+;(m/defmethod randoms-preset :soul-origin [_ _]
+;  ["otherworldly" "bestial" "celestial" "draconic" "elemental"
+;   "fey" "fiendish" "humanoid" "monstrous"])
+;(m/defmethod randoms-preset :soul-era [_ _]
+;  ["unborn" "modern" "olden" "ancient" #_"forgotten" "prehistoric" #_"primordial"])
+{:era    []
+ :origin [{:template "For each contained soul of {{ x|random:soul-origin }} origin, gain proficiency in one skill of your choice"}
+          {:template "For each contained soul of otherwordly origin, gain proficiency in one language of your choice. You can change your choice of languages on a long rest."}
+          ;bestial
+          {:state    {:rounds 1}
+           :template "When a contained soul of celestial origin procs, gain the benefits of the Bless spell for {{ rounds }} round"}
+          {:state    {:rounds 1}
+           :template "When a contained soul of draconic origin procs, gain the benefits of the Bless spell for {{ rounds }} round"}
+          ;draconic
+          ;elemental
+          ;fey
+          ;fiendish
+          {:state    {:asi 1}
+           :template "While at least one contained soul is of humanoid origin, +{{ asi }} {{ x|random:ability-scores }} maximum"}
+          ;monstrous
+          {:template "If all contained souls are of the same origin, they all proc whenever one of them procs."}]
+ :other  [{:state    {:damage 3}
+           :template "Damage and harm dealt by contained souls is increased by {{ damage }}"}
+          {:state    {:recovery 1}
+           :template "For each contained soul that didn't proc this round, recover {{ recovery }} hit points at the start of your turn"}
+          {:template "If all contained souls embody the same trait, their passive and proc mods are all considered to be one rank higher"}]}

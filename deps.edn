@@ -1,8 +1,8 @@
 {:paths   ["src" "resources"]
  :deps    {org.clojure/clojure         {:mvn/version "1.12.5"}
-           tools.spies/sns-spi         {:mvn/version "0.0.4"}
-           com.github.dekelpilli/randy {:mvn/version "0.0.39"}
-           methodical/methodical       {:mvn/version "1.0.124"}
+           tools.spies/sns-spi         {:mvn/version "0.0.5"}
+           com.github.dekelpilli/randy {:mvn/version "0.0.42"}
+           methodical/methodical       {:mvn/version "1.0.127"}
            selmer/selmer               {:mvn/version "1.13.4"}}
  :aliases {:dev      {:extra-paths ["dev"]
                       :extra-deps  {org.clojure/tools.namespace {:mvn/version "1.5.1"}}}
