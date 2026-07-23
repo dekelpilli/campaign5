@@ -1,9 +1,6 @@
 {:paths   ["src" "resources"]
- :deps    {org.clojure/clojure         {:mvn/version "1.12.5"}
-           tools.spies/sns-spi         {:mvn/version "0.0.5"}
-           com.github.dekelpilli/randy {:mvn/version "0.0.42"}
-           methodical/methodical       {:mvn/version "1.0.127"}
-           selmer/selmer               {:mvn/version "1.13.4"}}
+ :deps    {org.clojure/clojure           {:mvn/version "1.12.5"}
+           tools.spies/sns-companion-sdk {:local/root "libs/sns-companion-sdk"}}
  :aliases {:dev      {:extra-paths ["dev"]
                       :extra-deps  {org.clojure/tools.namespace {:mvn/version "1.5.1"}}}
            :build    {:extra-paths ["."]

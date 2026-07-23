@@ -1,9 +1,10 @@
 (ns campaign5.mythic-shrines
   (:require
+    [campaign5.randoms]
     [campaign5.util :as u]
     [clojure.string :as str]
     [randy.core :as r]
-    [sns.spi.protocols :as p]))
+    [sns.sdk.protocols :as p]))
 
 (def mythic-shrines (u/read-edn-resource "data/mythic-shrines.edn"))
 

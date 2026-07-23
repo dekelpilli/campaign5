@@ -1,10 +1,11 @@
 (ns campaign5.souls
   (:require
-    [campaign5.randoms :as randoms]
+    [campaign5.randoms]
     [campaign5.util :as u]
     [clojure.string :as str]
     [randy.core :as r]
-    [sns.spi.protocols :as p]))
+    [sns.sdk.protocols :as p]
+    [sns.sdk.randoms :as randoms]))
 
 (defn- random-details [rng]
   {:origin (randoms/sample-preset rng :soul-origin)
@@ -37,12 +38,11 @@
                                                                                  :state   (keyword (name kw))
                                                                                  :soul    soul}}]}))))})
 
-(defn- new-soul [souls rng]
+(defn- new-soul [souls {:keys [rng render]}]
   (-> (r/sample rng souls)
       (assoc :details (random-details rng))
-      (update-in [:passive :template] randoms/render-randoms rng)
-      (update-in [:proc :template] randoms/render-randoms rng)
-      (assoc :details (random-details rng))))
+      (update-in [:passive :template] render {})
+      (update-in [:proc :template] render {})))
 
 (defrecord SoulGenerator [souls]
   p/LootGenerator
@@ -51,8 +51,8 @@
      :label    "Soul"
      :utility? false
      :inputs   []})
-  (generate [_ {:keys [rng] :as ctx}]
-    (-> (new-soul souls rng)
+  (generate [_ ctx]
+    (-> (new-soul souls ctx)
         (soul->view-model ctx)))
   p/LootAction
   (handle-action [_ ctx _action {:keys [section state soul]}]
@@ -63,4 +63,7 @@
   (->SoulGenerator (u/read-edn-resource "data/souls.edn")))
 
 (comment
-  (new-soul (u/read-edn-resource "data/souls.edn") @randy.core/default-rng))
+  ;; the companion supplies :render; leaving templates untouched here is enough
+  ;; to eyeball the drawn soul
+  (new-soul (u/read-edn-resource "data/souls.edn")
+            {:rng @r/default-rng :render (fn [template _] template)}))

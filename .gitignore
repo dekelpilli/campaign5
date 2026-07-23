@@ -13,3 +13,4 @@ resources/config.edn
 .lsp
 reporting.edn
 *.jar
+libs/
