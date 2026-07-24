@@ -1,4 +1,3 @@
-;TODO add progression data
 [{:name    "Perfectionism"
   :passive {:state    {:crit-damage 2}
             :template "+{{ crit-damage }} critical damage bonus"}
@@ -51,7 +50,7 @@
             :template "+{{ armour }} armour"}
   :proc    {:template "Your armour does not impose disadvantage on your stealth for the duration of this round"}}
  {:name    "Durability"
-  :passive {:state    {:resistance 1} ;+1? +1/2?
+  :passive {:state    {:resistance 1}
             :template "+{{ resistance }} damage resistance"}
   :proc    {:template "For the duration of this round, your barriers and resistances also apply to damage from major successes"}}
  {:name    "Restoration"
@@ -71,7 +70,7 @@
             :template "-{{ threshold }} standard success threshold with attacks from non-cantrip spells"}
   :proc    {:template "When you cast a spell during this round and it doesn't score at least one success, its casting cost is refunded."}}
  {:name    "Skill"
-  :passive {:state    {:skill 2} ;progression: +2
+  :passive {:state    {:skill 2}
             :template "+{{ skill }} {{ x|random:skills }}"}
   :proc    {:template "You have advantage when using the skill improved by this soul during this round"}}
  {:name    "Malice"
@@ -87,8 +86,11 @@
  {:name    "Renewal"
   :passive {:state    {:bonus 1}
             :template "+{{ bonus }} to your gained temporary hit points."}
-  :proc    {:state    {:extra 0} ;progression: +2
-            :template "Gain temporary hit points equal to your level + {{ extra }}."}}
+  :proc    {:state    {:extra 0}
+            :template "Gain temporary hit points equal to your level + {{ extra }}."
+            :upgrades {:select  :choice
+                       :options [{:id  :extra
+                                  :inc {:extra 2}}]}}}
  {:name    "Command"
   :passive {:state    {:bonus 2}
             :template "+{{ bonus }} minion {{ x|random:literal:harm:damage }}"}
@@ -100,8 +102,11 @@
   :proc    {:state    {:recovery 10}
             :template "Your bloodied minions regain {{ recovery }}% of their hit points, or until they are no longer bloodied, whichever is less."}}
  {:name    "Sensing"
-  :passive {:state    {:range 10} ;+5
-            :template "+{{ range }}ft of blindsight"}
+  :passive {:state    {:range 10}
+            :template "+{{ range }}ft of blindsight"
+            :upgrades {:select  :choice
+                       :options [{:id  :range
+                                  :inc {:range 5}}]}}
   :proc    {:template "For the duration of the round, you have truesight with a range equal to the largest of your blindsight and darkvision ranges."}}
  {:name    "Marksmanship"
   :passive {:state    {:range 10}

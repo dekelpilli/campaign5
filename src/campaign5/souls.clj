@@ -7,38 +7,64 @@
     [sns.sdk.protocols :as p]
     [sns.sdk.randoms :as randoms]))
 
-(defn- random-details [rng]
-  {:origin (randoms/sample-preset rng :soul-origin)
-   :era    (randoms/sample-preset rng :soul-era)})
+(def ^:private mod-sections
+  [[:passive "Passive"] [:proc "Proc"]])
 
-(defn- soul->view-model [{:keys                [passive proc]
-                          soul-name            :name
+(defn- effect [progression mod]
+  (:effect (p/current-state progression mod (:path mod []))))
+
+(defn- options-at [progression mod]
+  (:options (p/level-options progression mod (:path mod []))))
+
+(defn- humanise [kw]
+  (-> (name kw)
+      (str/replace "-" " ")
+      str/capitalize))
+
+(defn- mod-actions [progression soul [section heading]]
+  (mapv (fn [{:keys [id]}]
+          {:action/label (str "Progress " heading ": " (humanise id))
+           :action/event [:loot/action {:id     :souls
+                                        :action :progress
+                                        :params {:section section
+                                                 :option  id
+                                                 ;; souls are not persisted, so the path travels with the item
+                                                 :soul    soul}}]})
+        (options-at progression (get soul section))))
+
+(defn- soul->view-model [{soul-name            :name
                           {:keys [origin era]} :details
                           :as                  soul}
                          {:keys [progression]}]
   {:loot/title    (str "Soul embodying " soul-name)
-   :loot/sections [{:section/heading "Passive"
-                    :section/items   [{:item/body (-> (p/current-state progression passive (:path passive [])) ;TODO proper progression handling
-                                                      :effect)}]}
-                   {:section/heading "Proc"
-                    :section/items   [{:item/body (-> (p/current-state progression proc (:path proc [])) ;TODO proper progression handling
-                                                      :effect)}]}
-                   {:section/heading "Details"
-                    :section/items   [{:item/title "Origin"
-                                       :item/body  (str/capitalize origin)}
-                                      {:item/title "Era"
-                                       :item/body  (str/capitalize era)}]}]
-   ;TODO centralise progression/state->upgrade actions logic
-   :loot/actions  (-> (mapv (fn [proc-kw] (keyword "proc" (name proc-kw))) (keys (:state proc)))
-                      (into (map (fn [passive-kw] (keyword "passive" (name passive-kw)))) (keys (:state passive)))
-                      (->> (mapv (fn [kw] {:action/label (str "Progress " kw) ; TODO make it nicer
-                                           :action/event [:loot/action {:id     :souls
-                                                                        :action :progress
-                                                                        :params {:section (keyword (namespace kw))
-                                                                                 :state   (keyword (name kw))
-                                                                                 :soul    soul}}]}))))})
+   :loot/sections (conj (mapv (fn [[section heading]]
+                                {:section/heading heading
+                                 :section/items   [{:item/body (effect progression (get soul section))}]})
+                              mod-sections)
+                        {:section/heading "Details"
+                         :section/items   [{:item/title "Origin"
+                                            :item/body  (str/capitalize origin)}
+                                           {:item/title "Era"
+                                            :item/body  (str/capitalize era)}]})
+   :loot/actions  (into [] (mapcat #(mod-actions progression soul %)) mod-sections)})
 
-(defn- new-soul [souls {:keys [rng render]}]
+(defn- take-option
+  "Append the chosen upgrade to `section`'s path. An option that is no longer
+   available is ignored."
+  [progression soul section option-id]
+  (if-let [option (->> (options-at progression (get soul section))
+                       (some #(when (= option-id (:id %)) %)))]
+    (update-in soul [section :path] (fnil conj []) {:id (:id option)})
+    soul))
+
+(defn- random-details [rng]
+  {:origin (randoms/sample-preset rng :soul-origin)
+   :era    (randoms/sample-preset rng :soul-era)})
+
+(defn- new-soul
+  "Draw a soul, resolving its `{{x|random:…}}` filters while leaving the
+   `{{state}}` placeholders for progression to fill in."
+  [souls {:keys [rng render]}]
   (-> (r/sample rng souls)
       (assoc :details (random-details rng))
       (update-in [:passive :template] render {})
@@ -55,15 +81,22 @@
     (-> (new-soul souls ctx)
         (soul->view-model ctx)))
   p/LootAction
-  (handle-action [_ ctx _action {:keys [section state soul]}]
-    (-> (update-in soul [section :state state] inc) ;TODO proper progression handling
+  (handle-action [_ {:keys [progression] :as ctx} _action {:keys [section option soul]}]
+    (-> (take-option progression soul section option)
         (soul->view-model ctx))))
 
+(defn- initialise-souls-data [souls]
+  (mapv
+    (fn [soul]
+      (-> (update soul :passive u/add-default-upgrades)
+          (update :proc u/add-default-upgrades)))
+    souls))
+
 (defn -soul-generator [_plugin-config]
-  (->SoulGenerator (u/read-edn-resource "data/souls.edn")))
+  (-> (u/read-edn-resource "data/souls.edn")
+      initialise-souls-data
+      ->SoulGenerator))
 
 (comment
-  ;; the companion supplies :render; leaving templates untouched here is enough
-  ;; to eyeball the drawn soul
   (new-soul (u/read-edn-resource "data/souls.edn")
             {:rng @r/default-rng :render (fn [template _] template)}))
