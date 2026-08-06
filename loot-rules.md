@@ -20,9 +20,6 @@ Potential alternative:
 
 ## Souls & Reliquaries
 [//]: # (- TODO total usable souls = 2? 3? 5? Decide)
-[//]: # (- TODO do all souls proc together per player, or individually? Decide)
-[//]: # (- TODO Give souls random attributes to interact with reliquary mods? e.g. creature type, era/age)
-[//]: # (- TODO Decide on how reliquary mods are upgraded/rolled)
 [//]: # (- identity: soul passives are quite numeric/basic)
 - Players have one reliquary, which can socket a maximum of 3 bound souls by default
 - Players start with a mundane reliquary, and swapping souls between reliquaries is free

@@ -37,7 +37,7 @@
              :points   2}
             {:name     "The Able"
              :synergy  true
-             :template "{% with x=x|random:ability-scores %}+1 {{x}} and +1 maximum {{x}} while not wearing any synergy rings that are not 'The Able'.{% endwith %}"
+             :template "+1 {{ x|random:ability-scores }} while not wearing any synergy rings that are not 'The Able'."
              :points   2}
             {:name     "Vengeful"
              :template "Once per short rest, as a reaction to being damaged, you may cast Hellish Rebuke on the creature that damaged you, ignoring range restrictions."

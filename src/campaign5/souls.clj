@@ -23,12 +23,11 @@
 
 (defn- mod-actions [progression soul [section heading]]
   (mapv (fn [{:keys [id]}]
-          {:action/label (str "Progress " heading ": " (humanise id))
+          {:action/label (str "Mythic Shrine of Fulfilment (" heading ": " (humanise id) ")")
            :action/event [:loot/action {:id     :souls
-                                        :action :progress
+                                        :action ::fulfilment
                                         :params {:section section
                                                  :option  id
-                                                 ;; souls are not persisted, so the path travels with the item
                                                  :soul    soul}}]})
         (options-at progression (get soul section))))
 
@@ -46,7 +45,17 @@
                                             :item/body  (str/capitalize origin)}
                                            {:item/title "Era"
                                             :item/body  (str/capitalize era)}]})
-   :loot/actions  (into [] (mapcat #(mod-actions progression soul %)) mod-sections)})
+   ;TODO add actions for shrine effects (which are random instead of chosen)
+   :loot/actions  (into [{:action/label "Mythic Shrine of Soul Transference"
+                          :action/event [:loot/action {:id     :souls
+                                                       :action ::soul-transference
+                                                       :params {:soul soul}}]}
+                         {:action/label "Mythic Shrine of Temporal Shifting"
+                          :action/event [:loot/action {:id     :souls
+                                                       :action ::temporal-shifting
+                                                       :params {:soul soul}}]}]
+                        (mapcat #(mod-actions progression soul %))
+                        mod-sections)})
 
 (defn- take-option
   "Append the chosen upgrade to `section`'s path. An option that is no longer
@@ -70,6 +79,12 @@
       (update-in [:passive :template] render {})
       (update-in [:proc :template] render {})))
 
+(defn- reroll-different [current rng preset]
+  (loop [sampled (randoms/sample-preset rng preset)]
+    (if (= current sampled)
+      (recur (randoms/sample-preset rng preset))
+      sampled)))
+
 (defrecord SoulGenerator [souls]
   p/LootGenerator
   (loot-spec [_]
@@ -81,9 +96,12 @@
     (-> (new-soul souls ctx)
         (soul->view-model ctx)))
   p/LootAction
-  (handle-action [_ {:keys [progression] :as ctx} _action {:keys [section option soul]}]
-    (-> (take-option progression soul section option)
-        (soul->view-model ctx))))
+  (handle-action [_ {:keys [progression rng] :as ctx} action {:keys [section option soul]}]
+    (let [soul (case action
+                 ::fulfilment (take-option progression soul section option)
+                 ::soul-transference (update-in soul [:details :origin] reroll-different rng :soul-origin)
+                 ::temporal-shifting (update-in soul [:details :era] reroll-different rng :soul-era))]
+      (soul->view-model soul ctx))))
 
 (defn- initialise-souls-data [souls]
   (mapv

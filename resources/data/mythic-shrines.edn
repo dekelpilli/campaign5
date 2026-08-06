@@ -3,18 +3,22 @@
   :cost   10
   :tokens ["dust" "legendary" "ring" "soul" "tattoo"]}
  {:name   "Fulfilment"
-  :effect "Progress the passive or proc mod of a soul."
-  :cost   50
+  :effect "Progress the passive or proc mod of a soul (player choice)."
+  :cost   75
   :tokens ["soul"]}
- {:name   "Temporal shifting"
+ {:name   "Temporal Shifting"
   :effect "Reroll the era of a soul into a different era"
   :cost   10
   :tokens ["soul"]}
- {:name   "Soul transference"
+ {:name   "Soul Transference"
   :effect "Reroll the origin of a soul into a different origin"
   :cost   5
   :tokens ["soul"]}
  {:name   "Refinement"
-  :effect "Progress a mod on a reliquary, or add a random modifier to a reliquary that doesn't have three modifiers."
+  :effect "Add a random mod to a reliquary that doesn't have three mods. Otherwise, progress a random mod on a reliquary"
+  :cost   50
+  :tokens ["soul"]}
+ {:name   "Correction"
+  :effect "Remove a random mod from reliquary"
   :cost   50
   :tokens ["soul"]}]
