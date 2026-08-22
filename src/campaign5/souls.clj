@@ -31,11 +31,11 @@
                                                  :soul    soul}}]})
         (options-at progression (get soul section))))
 
-(defn- soul->view-model [{soul-name            :name
+(defn- soul->view-model [{:keys                [trait]
                           {:keys [origin era]} :details
                           :as                  soul}
                          {:keys [progression]}]
-  {:loot/title    (str "Soul embodying " soul-name)
+  {:loot/title    (str "Soul embodying " trait)
    :loot/sections (conj (mapv (fn [[section heading]]
                                 {:section/heading heading
                                  :section/items   [{:item/body (effect progression (get soul section))}]})

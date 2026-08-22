@@ -48,15 +48,13 @@ Potential alternative:
 - The ring points limit is 50
 - Rings can either have standalone bonuses, or bonuses that scale based on other rings (synergy rings)
 
-## Divine Dust
-[//]: # (- TODO refactor divine dust to be an infinitely upgradable item? astrolabe?)
-[//]: # (- TODO consider adding a limit to the number of paths you can have, increasable by specialisation?)
-- As before, there are different tiers of 'divine paths'. To unlock tiers beyond the first, you need to use a mythic shrine
-- When you get 'divine dust', you can either reveal a mod on the first tier, or reroll the mod of any tier (allowing you to not keep the currently unlocked one if you prefer it over the reroll)
-- The number of paths a player can begin is limited
+## Otherworldly Trinkets
+[//]: # (- replaces divine paths)
+- Players find otherworldly trinkets, each loaded with the first level of a set of upgrades (5 tiers? 6?)
+- Maybe each tier has multiple mods? Not sure
+  - If so, there will be a mythic shrine for rerolling a tier
 - Mythic shrine effects:
   - Unlock new tier
-  - Reveal all options in a tier
 
 ## Runic tattoos
 [//]: # (- replacing helmets. Goal: improve upgradeability, customisability from players, make it easier/more natural/fluid to introduce new mods over the course of the campaign)
