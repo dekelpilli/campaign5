@@ -10,7 +10,7 @@
                :entrypoint campaign5.reliquaries/-reliquary-generator}
               {:type   :data
                :id     :rings
-               :source "file-plugins/rings.edn"}
+               :source "data-plugins/rings.edn"}
               {:type    :data
                :id      :tarot
                :hidden? true
@@ -21,7 +21,7 @@
                                      :item {:body "{{ instruction }}"}}]}}
               {:type   :data
                :id     :minor-shrines
-               :source "file-plugins/minor-shrines.edn"}
+               :source "data-plugins/minor-shrines.edn"}
               {:type       :jar
                :id         :mythic-shrines
                :jar        "target/campaign5.jar"

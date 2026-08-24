@@ -10,5 +10,5 @@
  :title    "Shrine"
  :sections [{:each :items
              :item {:title    "Shrine of {{ name }}"
-                    :body     "{{ effect }}"
+                    :body     :effect
                     :metadata :takes}}]}
