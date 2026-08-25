@@ -1,4 +1,3 @@
-;TODO add more era-based mods
 {:era    [{:template "While all contained souls are from different eras, +1 rank to the passive mod of the last soul in this reliquary"}
           {:vars     {:absorption  1
                       :damage-type {:random :damage-types}}
@@ -14,7 +13,11 @@
           {:vars     {:asi 1}
            :template "+{{ asi }} Wisdom while at least one contained soul is from the prehistoric era"}
           {:vars     {:initiative 1}
-           :template "+{{ initiative }} for each contained soul with a non-unique era"}]
+           :template "+{{ initiative }} for each contained soul with a non-unique era"}
+          {:vars     {:chance 3}
+           :template "+{{ chance }}% to proc souls in this reliquary while you have at least one other era-dependent modifier that is active."}
+          {:template "Whenever a soul in this reliquary procs, you may choose to instead proc a different soul from the same era."}
+          {:template "Whenever exactly one contained soul procs, other souls from different eras proc instead."}]
  :origin [{:vars     {:origin {:random :soul-origin}}
            :template "For each contained soul of {{ origin }} origin, gain proficiency in one skill of your choice"}
           {:template "For each contained soul of otherwordly origin, gain proficiency in one language of your choice. You can change your choice of languages on a long rest."}
@@ -42,7 +45,9 @@
           {:vars     {:rounds 1}
            :template "While not under any duration-based soul effects, effects granted by contained souls' procs last for {{ rounds }} additional round(s)"}
           {:template "If all contained souls embody the same trait, their passive and proc mods are all considered to be one rank higher"}
-          {:template "The proc chance of the first soul in this reliquary is doubled, but the other contained souls cannot proc"}
+          {:template "The proc chance of the first soul in this reliquary is doubled, but the other contained souls have a proc chance of 0%."}
           {:template "The proc chance of the last soul in this reliquary is doubled, but it grants no passive bonus"}
           {:template "The passive mods of contained souls are considered to be one higher, but you gain no bonuses from souls on rounds where at least one soul has procced"}
-          {:template "When rolling for initiative for the first time on a given day, generate a random soul to be added to this reliquary until your next long rest"}]}
+          {:template "When rolling for initiative for the first time on a given day, generate a random soul to be added to this reliquary until your next long rest"}
+          {:template "The last soul in this reliquary always procs during the first round of combat, but otherwise has a proc chance of 0%."}
+          {:template "Souls in this reliquary have -10% chance to proc, but benefit three-fold from Manifestation shrines (retroactively)."}]}
