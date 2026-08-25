@@ -8,35 +8,48 @@
 
 (def ^:private mod-types [:era :origin :other])
 
-(defn- effect [progression mod]
-  (:effect (p/current-state progression mod (:path mod []))))
-
-(defn- options-at [progression mod]
-  (:options (p/level-options progression mod (:path mod []))))
-
-(defn- reliquary->view-model [reliquary {:keys [progression]}]
+;; Only the progression bookkeeping travels in `:loot/state`; the mods themselves
+;; are read back off the displayed items (`view-model->reliquary`), so a DM's
+;; edits are what the next shrine operates on.
+(defn- reliquary->view-model [reliquary {:keys [progression rng]}]
   {:loot/title    "Reliquary"
    :loot/sections [{:section/heading "Mods"
-                    :section/items   (mapv
-                                       (fn [mod] {:item/body (effect progression mod)})
-                                       reliquary)}]
+                    :section/items   (mapv (partial u/mod-item rng) reliquary)}]
    :loot/actions  (cond-> []
                           (seq reliquary) (conj {:action/label "Mythic Shrine of Correction"
                                                  :action/event [:loot/action {:id     :reliquaries
-                                                                              :action ::correction
-                                                                              :params {:reliquary reliquary}}]})
+                                                                              :action ::correction}]})
                           (or (< (count reliquary) 3)
-                              (some (comp seq (partial options-at progression)) reliquary))
+                              (some (comp seq (partial u/options-at progression)) reliquary))
                           (conj {:action/label "Mythic Shrine of Refinement"
                                  :action/event [:loot/action {:id     :reliquaries
-                                                              :action ::refinement
-                                                              :params {:reliquary reliquary}}]}))})
+                                                              :action ::refinement}]}))
+   ;; `:origin` identifies which mod in the data file this is, so its upgrade
+   ;; graph can be looked back up; the path is how far it has been refined.
+   ;; Neither is visible, so neither can be read off the item.
+   :loot/state    {:mods (mapv #(select-keys % [::origin :path]) reliquary)}})
 
-(defn- new-mod [reliquaries {:keys [rng render]}]
-  (let [mod (->> (r/sample rng mod-types)
-                 (get reliquaries)
-                 (r/sample rng))]
-    (update mod :template render {})))
+(defn- view-model->reliquary
+  "Rebuild the reliquary from the displayed mods — their templates and var
+   values as the DM currently has them — over the upgrade graph and path
+   `:loot/state` identifies."
+  [reliquaries view-model]
+  (let [state (get-in view-model [:loot/state :mods] [])]
+    (into []
+          (map-indexed (fn [i {:item/keys [body vars]}]
+                         (let [{::keys [origin] :keys [path]} (get state i)
+                               base (get-in reliquaries origin)]
+                           (cond-> (assoc base ::origin origin
+                                          :path (or path [])
+                                          :template body)
+                                   (seq vars) (assoc :vars vars)))))
+          (get-in view-model [:loot/sections 0 :section/items]))))
+
+(defn- new-mod [reliquaries {:keys [rng]}]
+  (let [type (r/sample rng mod-types)
+        mods (get reliquaries type)
+        idx  (rng/next-int rng 0 (count mods))]
+    (assoc (nth mods idx) ::origin [type idx])))
 
 (def ^:private new-reliquary (comp vector new-mod))
 
@@ -47,13 +60,13 @@
 (defn- handle-refinement-shrine [reliquary {:keys [rng progression] :as ctx} reliquaries]
   (if (< (count reliquary) 3)
     (conj reliquary (new-mod reliquaries ctx))
-    (let [{:keys [index id]} (->> (into []
-                                        (comp (map-indexed (fn [idx mod]
-                                                             (mapv #(assoc % :index idx) (options-at progression mod))))
-                                              (mapcat identity))
-                                        reliquary)
-                                  (r/sample rng))]
-      (update-in reliquary [index :path] (fnil conj []) {:id id}))))
+    (let [{:keys [index] :as option} (->> (into []
+                                                (comp (map-indexed (fn [idx mod]
+                                                                     (mapv #(assoc % :index idx) (u/options-at progression mod))))
+                                                      (mapcat identity))
+                                                reliquary)
+                                          (r/sample rng))]
+      (update reliquary index #(u/advance rng % (dissoc option :index))))))
 
 (defrecord ReliquaryGenerator [reliquaries]
   p/LootGenerator
@@ -67,8 +80,9 @@
     (-> (new-reliquary reliquaries ctx)
         (reliquary->view-model ctx)))
   p/LootAction
-  (handle-action [_ ctx action {:keys [reliquary]}]
-    (let [reliquary (case action
+  (handle-action [_ {:keys [view-model] :as ctx} action _params]
+    (let [reliquary (view-model->reliquary reliquaries view-model)
+          reliquary (case action
                       ::correction (handle-correction-shrine reliquary ctx)
                       ::refinement (handle-refinement-shrine reliquary ctx reliquaries))]
       (reliquary->view-model reliquary ctx))))
@@ -82,8 +96,5 @@
       ->ReliquaryGenerator))
 
 (comment
-  (->> (r/sample  mod-types)
-       (get (u/read-edn-resource "data/reliquaries.edn"))
-       (r/sample))
   (new-reliquary (u/read-edn-resource "data/reliquaries.edn")
-                 {:rng @r/default-rng :render (fn [template _] template)}))
+                 {:rng @r/default-rng}))

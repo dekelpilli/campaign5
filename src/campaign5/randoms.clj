@@ -17,7 +17,7 @@
    "Insight" "Investigation" "Perception" "Survival"
    "Deception" "Intimidation" "Persuasion"])
 
-(defmethod randoms/preset :damage-types [_ [type]]
+(defmethod randoms/preset :damage-types [_ {:keys [type]}]
   (case (or type "all")
     "physical" ["bludgeoning" "piercing" "slashing"]
     "non-physical" ["acid" "cold" "fire" "force" "lightning" "necrotic" "poison" "psychic" "radiant" "thunder"]
@@ -39,7 +39,7 @@
 (defmethod randoms/preset :weapon-categories [_ _]
   ["Axe" "Bow" "Brawling" "Caster" "Club" "Dart" "Flail" "Hammer" "Knife" "Pick" "Polearm" "Sling" "Spear" "Sword" "Targe" "Trap"])
 
-(defmethod randoms/preset :defences [_ [type]]
+(defmethod randoms/preset :defences [_ {:keys [type]}]
   (cond-> ["Fortitude" "Reflexes" "Will"]
           (not= "non-armour" type) (conj "Armour")))
 
