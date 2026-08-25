@@ -4,7 +4,6 @@
     [campaign5.util :as u]
     [randy.core :as r]
     [randy.rng :as rng]
-    [sns.sdk.progression :as sp]
     [sns.sdk.protocols :as p]))
 
 (def ^:private mod-types [:era :origin :other])
@@ -12,16 +11,16 @@
 ;; Only the progression bookkeeping travels in `:loot/state`; the mods themselves
 ;; are read back off the displayed items (`view-model->reliquary`), so a DM's
 ;; edits are what the next shrine operates on.
-(defn- reliquary->view-model [reliquary {:keys [progression]}]
+(defn- reliquary->view-model [reliquary {:keys [progression rng]}]
   {:loot/title    "Reliquary"
    :loot/sections [{:section/heading "Mods"
-                    :section/items   (mapv (partial sp/mod-item progression) reliquary)}]
+                    :section/items   (mapv (partial u/mod-item rng) reliquary)}]
    :loot/actions  (cond-> []
                           (seq reliquary) (conj {:action/label "Mythic Shrine of Correction"
                                                  :action/event [:loot/action {:id     :reliquaries
                                                                               :action ::correction}]})
                           (or (< (count reliquary) 3)
-                              (some (comp seq (partial sp/options-at progression)) reliquary))
+                              (some (comp seq (partial u/options-at progression)) reliquary))
                           (conj {:action/label "Mythic Shrine of Refinement"
                                  :action/event [:loot/action {:id     :reliquaries
                                                               :action ::refinement}]}))
@@ -61,13 +60,13 @@
 (defn- handle-refinement-shrine [reliquary {:keys [rng progression] :as ctx} reliquaries]
   (if (< (count reliquary) 3)
     (conj reliquary (new-mod reliquaries ctx))
-    (let [{:keys [index id]} (->> (into []
-                                        (comp (map-indexed (fn [idx mod]
-                                                             (mapv #(assoc % :index idx) (sp/options-at progression mod))))
-                                              (mapcat identity))
-                                        reliquary)
-                                  (r/sample rng))]
-      (update-in reliquary [index :path] (fnil conj []) {:id id}))))
+    (let [{:keys [index] :as option} (->> (into []
+                                                (comp (map-indexed (fn [idx mod]
+                                                                     (mapv #(assoc % :index idx) (u/options-at progression mod))))
+                                                      (mapcat identity))
+                                                reliquary)
+                                          (r/sample rng))]
+      (update reliquary index #(u/advance rng % (dissoc option :index))))))
 
 (defrecord ReliquaryGenerator [reliquaries]
   p/LootGenerator

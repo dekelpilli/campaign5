@@ -21,7 +21,7 @@
             :template "+{{ harm }} outgoing ongoing harm"}
   :proc    {:vars     {:range   10
                        :penalty 1}
-            :template "A creature of your choice within {{ range }} of you suffers a -{{ penalty }} penalty to any saves it makes to end ongoing instances of harm at the end of its next turn."}}
+            :template "A creature of your choice within {{ range }}ft of you suffers a -{{ penalty }} penalty to any saves it makes to end ongoing instances of harm at the end of its next turn."}}
  {:trait   "Healing"
   :passive {:vars     {:healing 2}
             :template "+{{ healing }} outgoing healing with actions"}
@@ -42,7 +42,8 @@
             :template "+{{ hit-points }} hit points"}
   :proc    {:template "Regain hit points as if from the use of a hit die, but no hit die is consumed."}}
  {:trait   "Protection"
-  :vars    {:defence-type {:random :defences :type "non-armour"}}
+  :vars    {:defence-type {:random :defences
+                           :type   "non-armour"}}
   :passive {:vars     {:defence 1}
             :template "+{{ defence }} {{ defence-type }}"}
   :proc    {:vars     {:barrier 1}
@@ -90,12 +91,13 @@
   :passive {:vars     {:bonus 1}
             :template "+{{ bonus }} to your gained temporary hit points."}
   :proc    {:vars     {:extra 0}
-            :template "Gain temporary hit points equal to your level + {{ extra }}."
+            :template "Gain temporary hit points equal to your level{{#if extra}} + {{ extra }}{{/if}}."
             :upgrades {:select  :choice
                        :options [{:id  :extra
                                   :inc {:extra 2}}]}}}
  {:trait   "Command"
-  :vars    {:hurt {:random :literal :options ["harm" "damage"]}}
+  :vars    {:hurt {:random  :literal
+                   :options ["harm" "damage"]}}
   :passive {:vars     {:bonus 2}
             :template "+{{ bonus }} minion {{ hurt }}"}
   :proc    {:vars     {:bonus 1}
@@ -123,4 +125,4 @@
   :passive {:vars     {:asi 1}
             :template "+{{ asi }} to your {{ ability }}"}
   :proc    {:vars     {:dice 1}
-            :template "The soul deals {{ dice }}d6 damage to each enemy you can see whose relevant ability score is lower than yours."}}]
+            :template "The soul deals {{ dice }}d6 damage to each enemy you can see whose {{ ability }} is lower than yours."}}]
