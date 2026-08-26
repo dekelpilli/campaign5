@@ -48,8 +48,11 @@
    "frightened" "grappled" "incapacitated" "poisoned" "prone" "rattled" "retrained" "slowed" "sluggish" "staggered"
    "strife" "taunted" "unconscious" "weakened"])
 
-(defmethod randoms/preset :soul-origin [_ _]
+(defmethod randoms/preset :soul-origins [_ _]
   ["otherworldly" "bestial" "celestial" "draconic" "elemental" "fey" "fiendish" "humanoid" "monstrous"])
 
-(defmethod randoms/preset :soul-era [_ _]
-  ["unborn" "modern" "olden" "ancient" #_"forgotten" "prehistoric" #_"primordial"])
+(defmethod randoms/preset :soul-eras [_ _]
+  ["unborn" "modern" "olden" "ancient" "prehistoric"])
+
+(defmethod randoms/preset :affinities [_ _]
+  ["control" "support" "mobility" "resource" "offence" "survivability" "meta" "utility"])

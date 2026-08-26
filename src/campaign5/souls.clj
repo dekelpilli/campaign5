@@ -10,8 +10,8 @@
   [[:passive "Passive"] [:proc "Proc"]])
 
 (def ^:private base-soul-vars
-  {:origin {:random :soul-origin}
-   :era    {:random :soul-era}})
+  {:origin {:random :soul-origins}
+   :era    {:random :soul-eras}})
 
 (defn- mod-actions [progression soul [section heading]]
   (mapv (fn [{:keys [id]}]
@@ -30,8 +30,10 @@
                                  :section/items   [(u/mod-item rng (get soul section))]})
                               mod-sections)
                         {:section/heading "Details"
-                         :section/items   [{:item/title "Origin" :item/body "{{ origin }}"}
-                                           {:item/title "Era" :item/body "{{ era }}"}]})
+                         :section/items   [{:item/title "Origin"
+                                            :item/body  "{{ origin }}"}
+                                           {:item/title "Era"
+                                            :item/body  "{{ era }}"}]})
    :loot/actions  (into [{:action/label "Mythic Shrine of Soul Transference"
                           :action/event [:loot/action {:id     :souls
                                                        :action ::soul-transference}]}
@@ -50,11 +52,13 @@
         base      (or (some #(when (= trait (:trait %)) %) souls)
                       (throw (ex-info "Unknown soul" {:trait trait})))
         adopt     (fn [soul [idx [section _]]]
-                    (let [{:item/keys [body vars]} (get-in view-model [:loot/sections idx :section/items 0])]
-                      (assoc soul section (assoc (get base section)
-                                                 :template body
-                                                 :vars vars
-                                                 :path (get paths section [])))))]
+                    (let [{:item/keys [body vars metadata]} (get-in view-model [:loot/sections idx :section/items 0])
+                          section-data (-> (get base section)
+                                           (assoc :template body
+                                                  :vars vars
+                                                  :path (get paths section []))
+                                           (into (u/parse-metadata metadata)))]
+                      (assoc soul section section-data)))]
     (-> (reduce adopt base (map-indexed vector mod-sections))
         (assoc :trait trait
                :vars (dissoc loot-vars :trait)))))

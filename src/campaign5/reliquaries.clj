@@ -36,13 +36,14 @@
   [reliquaries view-model]
   (let [state (get-in view-model [:loot/state :mods] [])]
     (into []
-          (map-indexed (fn [i {:item/keys [body vars]}]
+          (map-indexed (fn [i {:item/keys [body vars metadata]}]
                          (let [{::keys [origin] :keys [path]} (get state i)
                                base (get-in reliquaries origin)]
-                           (cond-> (assoc base ::origin origin
-                                          :path (or path [])
-                                          :template body)
-                                   (seq vars) (assoc :vars vars)))))
+                           (-> (assoc base ::origin origin
+                                      :path (or path [])
+                                      :template body)
+                               (into (u/parse-metadata metadata))
+                               (cond-> (seq vars) (assoc :vars vars))))))
           (get-in view-model [:loot/sections 0 :section/items]))))
 
 (defn- new-mod [reliquaries {:keys [rng]}]

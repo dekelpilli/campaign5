@@ -1,128 +1,179 @@
 [{:trait   "Perfectionism"
-  :passive {:vars     {:crit-damage 2}
-            :template "+{{ crit-damage }} critical damage bonus"}
-  :proc    {:template "For the duration of the round, your proficiency bonus is doubled for the purpose of calculating your critical damage bonus"}}
+  :passive {:vars       {:crit-damage 2}
+            :template   "+{{crit-damage}} critical damage bonus"
+            :affinities #{:offence}}
+  :proc    {:template   "For the duration of the round, your proficiency bonus is doubled for the purpose of calculating your critical damage bonus"
+            :affinities #{:offence}}}
  {:trait   "Precision"
-  :passive {:vars     {:crit-range 1}
-            :template "+{{ crit-range }} critical hit range"}
-  :proc    {:template "For the duration of the round, your critical range increases from 1, instead of decreasing from 20."}}
+  :passive {:vars       {:crit-range 1}
+            :template   "+{{crit-range}} critical hit range"
+            :affinities #{:offence}}
+  :proc    {:template   "For the duration of the round, your critical range increases from 1, instead of decreasing from 20."
+            :affinities #{:offence}}}
  {:trait   "Accuracy"
-  :passive {:vars     {:ab 1}
-            :template "+{{ ab }} AB"}
-  :proc    {:template "If you hit with a damaging attack during this round, add the attack's AB to its damage."}}
+  :passive {:vars       {:ab 1}
+            :template   "+{{ab}} AB"
+            :affinities #{:offence}}
+  :proc    {:template   "Add your attacks' ABs to their damage on hits during this round."
+            :affinities #{:offence}}}
  {:trait   "Specialty"
   :vars    {:type {:random :damage-types}}
-  :passive {:vars     {:damage 1}
-            :template "+{{ damage }} {{ type }} damage with attacks"}
-  :proc    {:vars     {:dice 1}
-            :template "The soul deals {{ dice }}d8 {{ type }} damage to all creatures adjacent to a space within 60ft of you."}}
+  :passive {:vars       {:damage 1}
+            :template   "+{{damage}} {{type}} damage with attacks"
+            :affinities #{:offence}}
+  :proc    {:vars       {:dice 1}
+            :template   "The soul deals {{dice}}d8 {{type}} damage to all creatures adjacent to a space within 60ft of you."
+            :affinities #{:offence}}}
  {:trait   "Patience"
-  :passive {:vars     {:harm 1}
-            :template "+{{ harm }} outgoing ongoing harm"}
-  :proc    {:vars     {:range   10
-                       :penalty 1}
-            :template "A creature of your choice within {{ range }}ft of you suffers a -{{ penalty }} penalty to any saves it makes to end ongoing instances of harm at the end of its next turn."}}
+  :passive {:vars       {:harm 1}
+            :template   "+{{harm}} outgoing ongoing harm"
+            :affinities #{:offence}}
+  :proc    {:vars       {:range   10
+                         :penalty 1}
+            :template   "A creature of your choice within {{range}}ft of you suffers a -{{penalty}} penalty to any saves it makes to end ongoing instances of harm at the end of its next turn."
+            :affinities #{:support}}}
  {:trait   "Healing"
-  :passive {:vars     {:healing 2}
-            :template "+{{ healing }} outgoing healing with actions"}
-  :proc    {:vars     {:limit 1}
-            :template "Up to {{ limit }} creatures of your choice that you can see are healed by this soul. The soul inherits your outgoing healing modifiers for this action."}}
+  :passive {:vars       {:healing 2}
+            :template   "+{{healing}} outgoing healing with actions"
+            :affinities #{:support}}
+  :proc    {:vars       {:limit 1}
+            :template   "Up to {{limit}} creatures of your choice that you can see are healed by this soul. The soul inherits your outgoing healing modifiers for this action."
+            :affinities #{:support}}}
  {:trait   "Mastery"
-  :passive {:vars     {:damage 2}
-            :template "+{{ damage }} damage with martial weapons"}
-  :proc    {:vars     {:multiplier 1}
-            :template "The soul uses your weapon(s) to damage a creature of your choice within 60ft of you. The damage of this strike is multiplied by {{ multiplier }}."}}
+  :passive {:vars       {:damage 2}
+            :template   "+{{damage}} damage with martial weapons"
+            :affinities #{:offence}}
+  :proc    {:vars       {:multiplier 1}
+            :template   "The soul uses your weapon(s) to damage a creature of your choice within 60ft of you. The damage of this strike is multiplied by {{multiplier}}."
+            ;TODO add {{#if}} statement to hide the multiplied by statement when multi=1
+            :affinities #{:offence}}}
  {:trait   "Combat"
-  :passive {:vars     {:damage 2}
-            :template "+{{ damage }} damage with maneuvers"}
-  :proc    {:vars     {:reduction 1}
-            :template "The base exertion cost of any non-basic maneuvers you use this round is reduced by {{ reduction }}, to a minimum of 1."}}
+  :passive {:vars       {:damage 2}
+            :template   "+{{damage}} damage with maneuvers"
+            :affinities #{:offence}}
+  :proc    {:vars       {:reduction 1}
+            :template   "The base exertion cost of any non-basic maneuvers you use this round is reduced by {{reduction}}, to a minimum of 1."
+            :affinities #{:resource}}}
  {:trait   "Toughness"
-  :passive {:vars     {:hit-points 4}
-            :template "+{{ hit-points }} hit points"}
-  :proc    {:template "Regain hit points as if from the use of a hit die, but no hit die is consumed."}}
+  :passive {:vars       {:hit-points 4}
+            :template   "+{{hit-points}} hit points"
+            :affinities #{:survivability}}
+  :proc    {:template   "Regain hit points as if from the use of a hit die, but no hit die is consumed."
+            :affinities #{:survivability}}}
  {:trait   "Protection"
   :vars    {:defence-type {:random :defences
                            :type   "non-armour"}}
-  :passive {:vars     {:defence 1}
-            :template "+{{ defence }} {{ defence-type }}"}
-  :proc    {:vars     {:barrier 1}
-            :template "+{{ barrier }} barrier against damage from {{ defence-type }} attacks."}}
+  :passive {:vars       {:defence 1}
+            :template   "+{{defence}} {{defence-type}}"
+            :affinities #{:survivability}}
+  :proc    {:vars       {:barrier 1}
+            :template   "+{{barrier}} barrier against damage from {{defence-type}} attacks."
+            :affinities #{:survivability}}}
  {:trait   "Shielding"
-  :passive {:vars     {:armour 1}
-            :template "+{{ armour }} armour"}
-  :proc    {:template "Your armour does not impose disadvantage on your stealth for the duration of this round"}}
+  :passive {:vars       {:armour 1}
+            :template   "+{{armour}} armour"
+            :affinities #{:survivability}}
+  :proc    {:template   "Your armour does not impose disadvantage on your stealth for the duration of this round"
+            :affinities #{:utility}}}
  {:trait   "Durability"
-  :passive {:vars     {:resistance 1}
-            :template "+{{ resistance }} damage resistance"}
-  :proc    {:template "For the duration of this round, your barriers and resistances also apply to damage from major successes"}}
+  :passive {:vars       {:resistance 1}
+            :template   "+{{resistance}} damage resistance"
+            :affinities #{:survivability}}
+  :proc    {:template   "For the duration of this round, your barriers and resistances also apply to damage from major successes"
+            :affinities #{:survivability}}}
  {:trait   "Restoration"
-  :passive {:vars     {:recovery 1}
-            :template "While up, recover {{ recovery }} hit points at the start of each turn"}
-  :proc    {:template "Recover 1 wound"}}
+  :passive {:vars       {:recovery 1}
+            :template   "While up, recover {{recovery}} hit points at the start of each turn"
+            :affinities #{:survivability}}
+  :proc    {:template   "Recover 1 wound"
+            :affinities #{:survivability}}}
  {:trait   "Strategy"
-  :passive {:vars     {:initiative 1}
-            :template "+{{ initiative }} initiative"}
-  :proc    {:template "You may choose this round's initiative order."}}
+  :passive {:vars       {:initiative 1}
+            :template   "+{{initiative}} initiative"
+            :affinities #{:mobility}}
+  :proc    {:template   "You may choose this round's initiative order."
+            :affinities #{:mobility}}}
  {:trait   "Speed"
-  :passive {:vars     {:speed 5}
-            :template "+{{ speed }}ft of walking speed"}
-  :proc    {:template "You may dash as a bonus action during this round"}}
+  :passive {:vars       {:speed 5}
+            :template   "+{{speed}}ft of walking speed"
+            :affinities #{:mobility}}
+  :proc    {:template   "You may dash as a bonus action during this round"
+            :affinities #{:mobility}}}
  {:trait   "Arcana"
-  :passive {:vars     {:threshold 1}
-            :template "-{{ threshold }} standard success threshold with attacks from non-cantrip spells"}
-  :proc    {:template "When you cast a spell during this round and it doesn't score at least one success, its casting cost is refunded."}}
+  :passive {:vars       {:threshold 1}
+            :template   "-{{threshold}} standard success threshold with attacks from non-cantrip spells"
+            :affinities #{:offence}}
+  :proc    {:template   "When you cast a spell during this round and it doesn't score at least one success, its casting cost is refunded."
+            :affinities #{:resource}}}
  {:trait   "Skill"
   :vars    {:improved-skill {:random :skills}}
-  :passive {:vars     {:skill 2}
-            :template "+{{ skill }} {{ improved-skill }}"}
-  :proc    {:template "You have advantage when using {{ improved-skill }} during this round"}}
+  :passive {:vars       {:skill 2}
+            :template   "+{{skill}} {{improved-skill}}"
+            :affinities #{:utility}}
+  :proc    {:template   "Your next use of {{improved-skill}} is made with advantage"
+            :affinities #{:utility}}}
  {:trait   "Malice"
-  :passive {:vars     {:penalty 1}
-            :template "Creatures afflicted by your ailments or diseases have -{{ penalty }} to their saving throws"}
-  :proc    {:vars     {:ab 1}
-            :template "For the duration of this round, your attacks that target creatures afflicted by your ailments or diseases have +{{ ab }} if they can cause further ailments or diseases."}}
+  :passive {:vars       {:penalty 1}
+            :template   "Creatures afflicted by your ailments or diseases have -{{penalty}} to their saving throws"
+            :affinities #{:support}}
+  :proc    {:vars       {:ab 1}
+            :template   "For the duration of this round, your attacks that target creatures afflicted by your ailments or diseases have +{{ab}} if they can cause further ailments or diseases."
+            :affinities #{:offence}}}
  {:trait   "Vilification"
-  :passive {:vars     {:penalty 1}
-            :template "Creatures marked by you have -{{ penalty }} resistance to damage and harm."}
-  :proc    {:vars     {:dice 1}
-            :template "The soul deals {{ dice }}d6 harm to all creatures marked by you. You may choose the damage type for this harm."}}
+  :passive {:vars       {:penalty 1}
+            :template   "Creatures marked by you have -{{penalty}} resistance to damage and harm."
+            :affinities #{:support}}
+  :proc    {:vars       {:dice 1}
+            :template   "The soul deals {{dice}}d6 harm to all creatures marked by you. You may choose the damage type for this harm."
+            :affinities #{:offence}}}
  {:trait   "Renewal"
-  :passive {:vars     {:bonus 1}
-            :template "+{{ bonus }} to your gained temporary hit points."}
-  :proc    {:vars     {:extra 0}
-            :template "Gain temporary hit points equal to your level{{#if extra}} + {{ extra }}{{/if}}."
-            :upgrades {:select  :choice
-                       :options [{:id  :extra
-                                  :inc {:extra 2}}]}}}
+  :passive {:vars       {:bonus 1}
+            :template   "+{{bonus}} to your gained temporary hit points."
+            :affinities #{:survivability}}
+  :proc    {:vars       {:extra 0}
+            :template   "Gain temporary hit points equal to your level{{#if extra}} + {{extra}}{{/if}}."
+            :affinities #{:survivability}
+            :upgrades   {:select  :choice
+                         :options [{:id  :extra
+                                    :inc {:extra 2}}]}}}
  {:trait   "Command"
   :vars    {:hurt {:random  :literal
                    :options ["harm" "damage"]}}
-  :passive {:vars     {:bonus 2}
-            :template "+{{ bonus }} minion {{ hurt }}"}
-  :proc    {:vars     {:bonus 1}
-            :template "For the rest of the combat, the {{ hurt }} granted by this soul's passive effect is increased by {{ bonus }}."}}
+  :passive {:vars       {:bonus 2}
+            :template   "+{{bonus}} minion {{hurt}}"
+            :affinities #{:offence}}
+  :proc    {:vars       {:bonus 1}
+            :template   "For the rest of the combat, your minions deal +{{bonus}} {{hurt}}."
+            :affinities #{:offence}}}
  {:trait   "Guarding"
   :vars    {:defence-type {:random :defences}}
-  :passive {:vars     {:defence 1}
-            :template "Your minions have +{{ defence }} {{ defence-type }}"}
-  :proc    {:vars     {:recovery 10}
-            :template "Your bloodied minions regain {{ recovery }}% of their hit points, or until they are no longer bloodied, whichever is less."}}
+  :passive {:vars       {:defence 1}
+            :template   "Your minions have +{{defence}} {{defence-type}}"
+            :affinities #{:survivability}}
+  :proc    {:vars       {:recovery 10}
+            :template   "Your bloodied minions regain hit points equal to {{recovery}}% of their maximum, or until they are no longer bloodied, whichever is less."
+            :affinities #{:survivability}}}
  {:trait   "Sensing"
-  :passive {:vars     {:range 10}
-            :template "+{{ range }}ft of blindsight"
-            :upgrades {:select  :choice
-                       :options [{:id  :range
-                                  :inc {:range 5}}]}}
-  :proc    {:template "For the duration of the round, you have truesight with a range equal to the largest of your blindsight and darkvision ranges."}}
+  :passive {:vars       {:range 10}
+            :template   "+{{range}}ft of blindsight"
+            :affinities #{:utility}
+            :upgrades   {:select  :choice
+                         :options [{:id  :range
+                                    :inc {:range 5}}]}}
+  :proc    {:template   "For the duration of the round, you have truesight with a range equal to the largest of your blindsight and darkvision ranges."
+            :affinities #{:utility}}}
  {:trait   "Marksmanship"
-  :passive {:vars     {:range 10}
-            :template "+{{ range }}ft to ranged weapon attack ranges"}
-  :proc    {:vars     {:dice 1}
-            :template "The soul deals {{ dice }}d4 damage to each enemy within range of your ranged weapon attacks."}}
+  :passive {:vars       {:range 10}
+            :template   "+{{range}}ft to ranged weapon attack ranges"
+            :affinities #{:offence}}
+  :proc    {:vars       {:dice 1}
+            :template   "The soul deals {{dice}}d4 damage to each enemy within range of your ranged weapon attacks."
+            :affinities #{:offence}}}
  {:trait   "Potency"
   :vars    {:ability {:random :ability-scores}}
-  :passive {:vars     {:asi 1}
-            :template "+{{ asi }} to your {{ ability }}"}
-  :proc    {:vars     {:dice 1}
-            :template "The soul deals {{ dice }}d6 damage to each enemy you can see whose {{ ability }} is lower than yours."}}]
+  :passive {:vars       {:asi 1}
+            :template   "+{{asi}} to your {{ability}}"
+            :affinities #{:offence}}
+  :proc    {:vars       {:dice 1}
+            :template   "The soul deals {{dice}}d6 damage to each enemy you can see whose {{ability}} is lower than yours."
+            :affinities #{:offence}}}]

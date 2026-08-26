@@ -2,6 +2,7 @@
   (:require
     [clojure.edn :as edn]
     [clojure.java.io :as io]
+    [clojure.string :as str]
     [sns.sdk.progression :as sp]
     [sns.sdk.protocols :as p]
     [sns.sdk.vars :as vars])
@@ -20,12 +21,27 @@
 ;; displayed item, so the vars on screen are the current state. These three
 ;; steps between such a mod and the view-model are shared by both.
 
+(defn parse-metadata [metadata]
+  {:affinities (into []
+                     (comp (keep #(when (str/starts-with? % "Affinities: ")
+                                    (subs % (count "Affinities: "))))
+                           (mapcat #(str/split % #", "))
+                           (map keyword))
+                     metadata)})
+
+(defn- affinities->metadata [affinities]
+  (->> (mapv name affinities)
+       (str/join ", ")
+       (str "Affinities: ")
+       vector))
+
 (defn mod-item
   "`mod` as an `sns.sdk.schema/item`: our `:template` as the item body, its vars
    as `:item/vars`, for the browser to render one against the other."
   [rng mod]
   (let [vars (vars/resolve-vars rng (:vars mod))]
     (cond-> {:item/body (:template mod)}
+            (seq (:affinities mod)) (assoc :item/metadata (affinities->metadata (:affinities mod)))
             (seq vars) (assoc :item/vars vars))))
 
 (defn options-at

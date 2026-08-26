@@ -63,3 +63,13 @@ Potential alternative:
 - A player can no more than 4 active runic tattoos at a time. On a long rest, a player may choose which of their runes is active
 - A player can have no more than one runic tattoo per source of inspiration
 - Shrines can be used to level up a tattoo, or to cause the effect of the tattoo to change (keeping any levels it has gained)
+
+## Affinities
+- Control (lower enemy Offence/Mobility)
+- Support (outgoing healing, allies/area benefits, lowering enemy Survivability)
+- Mobility (avoiding control conditions, initiative, movement)
+- Resource (reduce resource usage/improve resource recovery)
+- Offence (damage, harm, AB)
+- Survivability (defence/hp/regen/incoming healing)
+- Meta (gold/token improvements, xp, impact on other loot)
+- Utility (skills, out of combat benefits)

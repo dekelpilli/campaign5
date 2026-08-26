@@ -19,6 +19,6 @@
   :cost   50
   :tokens ["soul"]}
  {:name   "Correction"
-  :effect "Remove a random mod from reliquary"
+  :effect "Remove a mod from a reliquary"
   :cost   50
   :tokens ["soul"]}]
