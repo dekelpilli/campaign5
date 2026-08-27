@@ -49,7 +49,7 @@
             :affinities #{:offence}}}
  {:trait   "Combat"
   :passive {:vars       {:damage 2}
-            :template   "+{{damage}} damage with maneuvers"
+            :template   "+{{damage}} damage with maneuvers and attacks triggered by maneuvers"
             :affinities #{:offence}}
   :proc    {:vars       {:reduction 1}
             :template   "The base exertion cost of any non-basic maneuvers you use this round is reduced by {{reduction}}, to a minimum of 1."
