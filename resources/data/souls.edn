@@ -44,8 +44,7 @@
             :template   "+{{damage}} damage with martial weapons"
             :affinities #{:offence}}
   :proc    {:vars       {:multiplier 1}
-            :template   "The soul uses your weapon(s) to damage a creature of your choice within 60ft of you. The damage of this strike is multiplied by {{multiplier}}."
-            ;TODO add {{#if}} statement to hide the multiplied by statement when multi=1
+            :template   "The soul uses your weapon(s) to damage a creature of your choice within 60ft of you.{{#gt multiplier 1}} The damage of this strike is multiplied by {{multiplier}}.{{/gt}}"
             :affinities #{:offence}}}
  {:trait   "Combat"
   :passive {:vars       {:damage 2}

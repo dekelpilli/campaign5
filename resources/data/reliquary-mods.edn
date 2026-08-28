@@ -1,0 +1,89 @@
+[{:template   "While all contained souls are from different eras, +1 rank to the passive mod of the last soul in this reliquary"
+  :affinities #{:meta}}
+ {:vars       {:absorption  1
+               :damage-type {:random :damage-types}}
+  :template   "+{{absorption}} {{damage-type}} absorption for each unique soul era in this reliquary"
+  :affinities #{:survivability}}
+ {:vars       {:asi 1}
+  :template   "+{{asi}} Charisma while at least one contained soul is from the unborn era"
+  :affinities #{:offence}}
+ {:vars       {:asi 1}
+  :template   "+{{asi}} Dexterity while at least one contained soul is from the modern era"
+  :affinities #{:offence}}
+ {:vars       {:asi 1}
+  :template   "+{{asi}} Intelligence while at least one contained soul is from the olden era"
+  :affinities #{:offence}}
+ {:vars       {:asi 1}
+  :template   "+{{asi}} Strength while at least one contained soul is from the ancient era"
+  :affinities #{:offence}}
+ {:vars       {:asi 1}
+  :template   "+{{asi}} Wisdom while at least one contained soul is from the prehistoric era"
+  :affinities #{:offence}}
+ {:vars       {:initiative 1}
+  :template   "+{{initiative}} for each contained soul with a non-unique era"
+  :affinities #{:mobility}}
+ {:vars       {:chance 3}
+  :template   "+{{chance}}% to proc souls in this reliquary while you have at least one other era-dependent modifier that is active."
+  :affinities #{:meta}}
+ {:template   "Whenever a soul in this reliquary procs, you may choose to instead proc a different soul from the same era."
+  :affinities #{:meta}}
+ {:template   "Whenever exactly one contained soul procs, all contained souls from different eras proc instead."
+  :affinities #{:meta}}
+ {:vars       {:origin {:random :soul-origins}}
+  :template   "For each contained soul of {{origin}} origin, gain proficiency in one skill of your choice"
+  :affinities #{:utility}}
+ {:template   "For each contained soul of otherwordly origin, gain proficiency in one language of your choice. You can change your choice of languages on a long rest."
+  :affinities #{:utility}}
+ {:vars       {:damage 1}
+  :template   "While at least one contained soul is of bestial origin, +{{damage}} physical damage."
+  :affinities #{:offence}}
+ {:vars       {:rounds 1}
+  :template   "When a contained soul of celestial origin procs, gain the benefits of the Bless spell for {{rounds}} round(s)"
+  :affinities #{:offence :survivability}}
+ {:vars       {:tokens 5}
+  :template   "While at least one contained soul is of draconic origin, selling items grants {{tokens}} additional generic mythic tokens."
+  :affinities #{:meta}}
+ {:vars       {:damage 1}
+  :template   "While at least one contained soul is of elemental origin, +{{damage}} non-physical damage."
+  :affinities #{:offence}}
+ {:vars       {:skills  1
+               :ability {:random :ability-scores}}
+  :template   "While at least one contained soul is of humanoid origin, +{{skills}} with {{ability}} skills"
+  :affinities #{:utility}}
+ {:template   "When a contained soul of fey origin procs, gain one free-action use of the Dash action that expires at the end of the combat"
+  :affinities #{:mobility}}
+ {:vars       {:ab 1}
+  :template   "While at least two contained souls are of fiendish origin, +{{ab}} AB with spells"
+  :affinities #{:offence}}
+ {:vars       {:ab 1}
+  :template   "While at least one contained souls is of monstrous origin, +{{ab}} AB with maneuvers and with attacks triggered by maneuvers"
+  :affinities #{:offence}}
+ {:template   "If all contained souls are of the same origin, they all proc whenever one of them procs."
+  :affinities #{:meta}}
+ {:vars       {:damage 3}
+  :template   "Damage and harm dealt by contained souls is increased by {{damage}}"
+  :affinities #{:offence}}
+ {:vars       {:recovery 1}
+  :template   "For each contained soul that didn't proc this round, recover {{recovery}} hit points at the start of your turn"
+  :affinities #{:survivability}}
+ {:vars       {:rounds 1}
+  :template   "While not under any duration-based soul effects, effects granted by contained souls' procs last for {{rounds}} additional round(s)"
+  :affinities #{:meta}}
+ {:template   "If all contained souls embody the same trait, their passive and proc mods are all considered to be one rank higher"
+  :affinities #{:meta}}
+ {:template   "The proc chance of the first soul in this reliquary is doubled, but the other contained souls have a proc chance of 0%."
+  :affinities #{:meta}}
+ {:template   "The proc chance of the last soul in this reliquary is doubled, but it grants no passive bonus"
+  :affinities #{:meta}}
+ {:template   "The passive mods of contained souls are considered to be one rank higher, but you gain no bonuses from souls on rounds where at least one soul has procced"
+  :affinities #{:meta}}
+ {:template   "When rolling for initiative for the first time on a given day, generate a random soul to be added to this reliquary until your next long rest"
+  :affinities #{:meta}}
+ {:template   "The last soul in this reliquary always procs during the first round of combat, but otherwise has a proc chance of 0%."
+  :affinities #{:meta}}
+ {:template   "Souls in this reliquary have -10% chance to proc, but benefit three-fold from Manifestation shrines (retroactively)."
+  :affinities #{:meta}}
+ {:vars       {:chance   3
+               :affinity {:random :affinities}}
+  :template   "Souls with whose proc mod has an {{affinity}} affinity have +{{chance}}% to proc."
+  :affinities #{:meta}}]

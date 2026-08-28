@@ -1,0 +1,158 @@
+[{:shape  "Question mark"
+  :info   "Focuses on improving conversations (exclusively out of combat)."
+  :levels [{:template   "You gain proficiency or +1 expertise die in Deception and Insight."
+            :affinities #{:utility}}
+           {:template   "At the end of a conversation, you may find out whether or not a lie was told during that conversation."
+            :affinities #{:utility}}
+           {:template   "You may choose for your Persuasion and Deception bonuses to be considered twice when calculating the party's bonus."
+            :affinities #{:utility}}
+           {:template   "Any expertise dice granted to your Charisma skills instead apply to all of your Charisma skills."
+            :affinities #{:utility}}
+           {:template   "No more than once per conversation, when you make a Deception or Persuasion check, you may immediately learn the success of that check for one target of that check. This allows you to then immediately add to that statement, potentially salvaging the situation."
+            :affinities #{:utility}}]}
+ {:shape  "Caduceus"
+  :info   "Improves healing you grant, including via spells."
+  :levels [{:effect "Downed you revive gain an additional 10% of their maximum hit points."
+            :tags   #{:support}}
+           {:effect "When you use an action to heal a creature with no temporary hit points, they gain temporary his points equal to your level. When you use an action to heal a creature with temporary hit points, gain temporary hit points equal to their temporary hit points."
+            :tags   #{:support :survivability}}
+           {:effect "You may learn any Concentration spell that grants hit points and cast it with your spell slots. You may concentrate on two such spells at one time. This includes, but is not limited to, Aura of Life, Enervation, Beacon of Hope, Healing Spirit, and Vampiric Touch."
+            :tags   #{:support}}
+           {:effect "When you use an action to heal a single creature, that creature cannot drop below 1 hit point from their next instance of hurt."
+            :tags   #{:survivability}}
+           {:effect "Modifiers to healing on your legendary items, tattoos, souls, reliquaries, and rings have their magnitudes doubled."
+            :tags   #{:support :meta}}]}]
+#_[{:name   "Eternal Vigour"
+    :info   "Improves your longevity in combat through various avenues."
+    :levels [{:effect "While you have at least one non-depleted barrier, for each barrier type you have, gain +1 damage reduction for that type."
+              :tags   #{:survivability}}
+             {:effect "You may enchant one of your gloves with armour enchantments (relics, uniques, or curios)."
+              :tags   #{:utility}}
+             {:effect "Armour attacks against you need to score at least 9 to be considered a standard success."
+              :tags   #{:survivability}}
+             {:effect "You take no additional damage from critical hits."
+              :tags   #{:survivability}}
+             {:effect "No more than once per combat, when a condition is applied to you, you may attempt a saving throw. On a success, the condition is not applied, and you are immune to that condition until the end of your next turn."
+              :tags   #{:survivability}}
+             {:effect "Each 'survivability' tagged mod on you (from uniques, relics, magic items - including talismans, and divine paths) also increases your maximum hit points by 1."
+              :tags   #{:survivability}}]
+    :spell  "Globe of Invulnerability"}
+   {:name   "Perpetual Learning"
+    :info   "Improves your ability to acquire knowledge through skill checks, and improves Divination spellcasting."
+    :levels [{:effect "Any text within line of sight within 100 feet of you becomes readable to you regardless of its language, distance/size, legibility, and lighting. Additionally, you gain +2 expertise dice for Investigation checks relating to reading."
+              :tags   #{:utility}}
+             {:effect "When you make a Magiscience, Investigation, or History check, you may choose to treat the d20 roll as though you had rolled an 11."
+              :tags   #{:utility}}
+             {:effect "You may learn any Divination spell as if it were on your class' spell list."
+              :tags   #{:utility}}
+             {:effect "You may spend a bonus action inspecting a creature you can see in combat. While under the effect of a Divination spell you have cast, you have +1 Armour against attacks from creatures you have investigated. Also, your non-cantrip Divination spells no longer require concentration."
+              :tags   #{:utility :survivability}}
+             {:effect "At the start of each of your turns in combat while conscious, you have a percent chance to be affected by Warrior's Instincts until the start of your next turn equal to double the number of Divination spells (including cantrips) you have prepared, to a minimum of 10%."
+              :tags   #{:survivability :utility :accuracy}}]
+    :spell  "Scrying"}
+   {:name   "Unrelenting Fortune"
+    :info   "Improves your luck and your ability to acquire better items."
+    :levels [{:effect "You may add or subtract 5 from any loot roll you make."
+              :tags   #{:wealth}}
+             {:effect "Whenever you roll a 1 on any die, you may reroll that die. You must then accept that result"
+              :tags   #{:utility :damage :survivability :accuracy}}
+             {:effect "Whenever you obtain a loot result you have specialised in, roll a d4. On a 4, gain a loot roll."
+              :tags   #{:wealth}}
+             {:effect "You may cast Fortune's Favour at any spell level as a free action on your turn once per round in combat. You can use no more than 10 spell slot levels on this per long rest."
+              :tags   #{:accuracy}}
+             {:effect "Whenever you gain any amount of generic perk points, gain an equivalent amount of Wealth perk points."
+              :tags   #{:wealth}}
+             {:effect "For every 2 loot specialisations you unlock, unlock a further one that does not count towards this mod. This works retroactively and for future specialisations, to a minimum of +1 specialisation."
+              :tags   #{:wealth}}]
+    :spell  "Secret Chest. When cast in this way, if the spell ends while the chest is still in the Ethereal Plane, the chest and all of its contents appear in an unoccupied space adjacent to you (or as close as possible). Additionally, whenever the chest returns to your plane, you may replace any of its contained items with their respective vendor valuation."}
+   {:name   "Wrathful Judgement"
+    :info   "Grants a mark and improves your marks."
+    :levels [{:effect "Creatures of your choice that damage you, or land a killing blow against an ally of yours, become marked by Brand of Vengeance for a minute. Creatures marked with BoV have +1 damage taken from you."
+              :tags   #{:damage}}
+             {:effect "Your attacks and spells deal +1d4 radiant damage against marked enemies."
+              :tags   #{:damage}}
+             {:effect "Whenever you mark an enemy, you may choose one other creature to also obtain the same mark. Whenever a creature marked by you dies, make a Will attack against one other creature you can see. On a hit, they gain all of the marks that were on the killed creature."
+              :tags   #{:utility}}
+             {:effect "Creatures marked by you take +1 damage for each distinct mark on them."
+              :tags   #{:damage}}
+             {:effect "No more than once per turn, when a creature marked by you attacks or casts a spell, they take 5 radiant thorns damage, and lose one level of resistance to a damage type they are resistant or immune to."
+              :tags   #{:damage}}]}
+   {:name   "Aggressive Combat"
+    :info   "Grants bonuses that make you a more competent close combatant."
+    :levels [{:effect "You gain +1 global damage for each enemy that is close to you (within 5 feet of you, or within reach of your melee attacks)."
+              :tags   #{:damage}}
+             {:effect "No more than once per combat, when a creature enters a space that is within 5 feet of your reach, you may immediately move 5 feet towards it."
+              :tags   #{:utility}}
+             {:effect "You have an unstabilising aura, causing creatures of your choice within 10 feet of you to be rattled. Additionally, you cannot be rattled."
+              :tags   #{:control}}
+             {:effect "Whenever an attack from a creature that is close to you scores a success against you, the defence used for that attack gains +1 until the end of the attacker's next turn. You cannot gain this bonus again while under its effects (for any defence type)."
+              :tags   #{:survivability}}
+             {:effect "Your barriers apply to all damage from creatures that are close to you, regardless of if conditions on those barriers are met."
+              :tags   #{:survivability}}
+             {:effect "You gain +1 AB against creatures that are close to you for each enemy that is within 5 feet of you, to a maximum of +3 AB."
+              :tags   #{:accuracy}}]
+    :spell  "Steel Wind Strike"}
+   {:name   "Unbound Arcana"
+    :info   "Improves your general spellcasting prowess."
+    :levels [{:effect "You may cast spells with a range that isn't Self as if they had a range of Touch instead. When you land a major success against a creature with a spell cast with a range of Touch, they become rattled until the start of their next turn."
+              :tags   #{:utility :control}}
+             {:effect "You have an additional spell slot in each but your top two spells slots. This always grants at least a first level spell slot."
+              :tags   #{:resources}}
+             {:effect "Once per short rest, if you've been concentrating on a spell for at least two whole turns in combat, you may choose for that cast to no longer require concentration."
+              :tags   #{:utility}}
+             {:effect "When you upcast a spell, you may cast it at a level one above the spell slot consumed."
+              :tags   #{:resources}}
+             {:effect "Whenever you make a spell attack that did not land a hit against at least one creature, you may revert time to before that spell was cast. When you do this, you may not cast that spell again for a minute."
+              :tags   #{:utility}}]}
+   {:name   "Arcane Combat"
+    :info   "Improves spellcasting and weapon attacks for characters that utilise both."
+    :levels [{:effect "Enemies you have targeted with both a weapon attack and a spell in the last minute cannot make opportunity attacks against you, and do not impose disadvantage on your ranged attacks as a result of being within 5 feet of you."
+              :tags   #{:utility :control}}
+             {:effect "-1 to your Major Success threshold with weapon attacks and spells if you cast a spell or made a weapon attack (respectively) with your action in the last round."
+              :tags   #{:accuracy}}
+             {:effect "+1 defences against spells from creatures you've attacked with a weapon attack."
+              :tags   #{:survivability}}
+             {:effect "You have +1 AB with weapon attacks while you are concentrating on a spell or are under the effect of a spell you have cast, and +1 AB with spells against enemies you have hit with a weapon attack."
+              :tags   #{:accuracy}}
+             {:effect "If you have made a weapon attack in the last 18 seconds, you have +4 spell damage, and minions from your spells have +4 damage. If you have used a spell slot or finished casting a spell with a casting time of at least an action in the last 18 seconds, you have +4 weapon damage."
+              :tags   #{:damage}}]}
+   {:name   "Elemental Mastery"
+    :info   "Improves your prowess with and against elemental damage (acid, cold, fire, lightning, or thunder damage)."
+    :levels [{:effect "+1 damage with attacks for each elemental damage type they deal (acid, cold, fire, lightning, or thunder damage)."
+              :tags   #{:damage}}
+             {:effect "You can cast Absorb Elements an amount of times per long rest equal to an ability score modifier of your choice."
+              :tags   #{:survivability}}
+             {:effect "You may cast Fire Shield as a bonus action once per long rest. When cast in this way, you may cast it for any elemental damage type (rather than just cold and fire)."
+              :tags   #{:survivability :damage}}
+             {:effect "+1 critical hit range for attacks that would deal elemental damage. -1 major success threshold for attacks that would deal multiple elemental damage types."
+              :tags   #{:critical :accuracy}}
+             {:effect "+1 AB with attacks that would deal elemental damage."
+              :tags   #{:accuracy}}]
+    :spell  "Immolation. When cast in this way, you may convert its base damage (including the DoT) to any elemental damage type."}
+   {:name   "Volatile Presence"
+    :info   "Specialises in teleportation and conjuration, without a focus on spellcasting, granting greater control of the battlefield."
+    :levels [{:effect "When you make an opportunity attack, you may make a Will spell attack against that target instead. If the attack succeeds, teleport the target to a random safe and unoccupied space you can see within 20 feet of them (2d9, where 5/5 is no effect). Note that you can make opportunity attacks with ranged weapons as improvised weapons."
+              :tags   #{:control}}
+             {:effect "You may replace your movement with teleportation (limited to spaces you can see), allowing you to move across otherwise uncrossable/difficult terrain, move vertically, and avoid opportunity attacks. Teleporting any distance consumes your entire regular movement for the turn."
+              :tags   #{:utility}}
+             {:effect "Once per turn, as a free action, you may either conjure or remove up to 4 stone pillars (5x5 feet each) from the ground on unoccupied spaces you can see within 60 feet of you. These pillars are up to 20 feet tall. These pillars last for 10 minutes, and have defences equal to yours, and have maximum HP equal to a fifth of your maximum HP, disappearing when reaching 0 life. Max 16 active pillars at one time."
+              :tags   #{:utility}}
+             {:effect "When within 5 feet of one of your pillars, you have full visibility from the perspectives of any of your pillars. Additionally, also while within 5 feet of one of your pillars, you may choose to cause any attack, spell, or Medicine check you make to instead originate from another pillar you have created in the same plane. For example, a pillar 500 feet away might make a sword attack against an adjacent creature, or cast Fireball into a room you would otherwise not be able to see. At the end of your turn, any pillars used in this way are destroyed (affects both pillars)."
+              :tags   #{:utility}}
+             {:effect "Whenever a creature you can see teleports or is teleported, you can immediately target one other creature you can see to teleport to a safe and unoccupied space within 5 feet of the original creature's new location. If the target creature is not willing, you must hit it with a Will attack to teleport it in this way. This does not chain."
+              :tags   #{:utility}}
+             {:effect "Your pillars have a 5ft aura centred on them. Creatures of your choice within this aura deal half damage against your pillars, and become sluggish while affected by at least two stacks of this aura."
+              :tags   #{:control}}]
+    :spell  "Wall of Stone"}
+   {:name   "Leader's Dominion"
+    :info   "Grants benefits relating to minions and magic relating to minions."
+    :levels [{:effect "Your minions have +2 damage while you have an active talisman power from a creature with the same creature type. You have +2 damage while at least one of your minions is benefiting from this effect."
+              :tags   #{:damage}}
+             {:effect "You and your minions gain temporary hit points equal to your level at the start of your turn while you are concentrating on a minion spell, or on a spell targeting one of your minions (e.g. Summon Draconic Spirit, or Haste targeting one of your minions)."
+              :tags   #{:survivability}}
+             {:effect "The Generosity vial causes mods to affect both you and your minions, instead of just your minions. This also works for mods that originally only affected minions. Additionally, you may convert any vial you have into a Generosity vial."
+              :tags   #{:utility}}
+             {:effect "Whenever you cast a concentration spell targeting at least one your existing minions, you may choose for one of the targeted minions to hold that concentration instead of you."
+              :tags   #{:utility}}
+             {:effect "Whenever one of your minions would die, they may make a saving throw. On a success, they remain on 1 hit point instead, but die one round later (at which point they can attempt the saving throw again)."
+              :tags   #{:survivability}}]}]

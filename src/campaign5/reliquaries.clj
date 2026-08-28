@@ -6,8 +6,6 @@
     [randy.rng :as rng]
     [sns.sdk.protocols :as p]))
 
-(def ^:private mod-types [:era :origin :other])
-
 ;; Only the progression bookkeeping travels in `:loot/state`; the mods themselves
 ;; are read back off the displayed items (`view-model->reliquary`), so a DM's
 ;; edits are what the next shrine operates on.
@@ -33,12 +31,12 @@
   "Rebuild the reliquary from the displayed mods — their templates and var
    values as the DM currently has them — over the upgrade graph and path
    `:loot/state` identifies."
-  [reliquaries view-model]
+  [reliquary-mods view-model]
   (let [state (get-in view-model [:loot/state :mods] [])]
     (into []
           (map-indexed (fn [i {:item/keys [body vars metadata]}]
                          (let [{::keys [origin] :keys [path]} (get state i)
-                               base (get-in reliquaries origin)]
+                               base (nth reliquary-mods origin)]
                            (-> (assoc base ::origin origin
                                       :path (or path [])
                                       :template body)
@@ -46,11 +44,9 @@
                                (cond-> (seq vars) (assoc :vars vars))))))
           (get-in view-model [:loot/sections 0 :section/items]))))
 
-(defn- new-mod [reliquaries {:keys [rng]}]
-  (let [type (r/sample rng mod-types)
-        mods (get reliquaries type)
-        idx  (rng/next-int rng 0 (count mods))]
-    (assoc (nth mods idx) ::origin [type idx])))
+(defn- new-mod [reliquary-mods {:keys [rng]}]
+  (let [idx (rng/next-int rng 0 (count reliquary-mods))]
+    (assoc (nth reliquary-mods idx) ::origin idx)))
 
 (def ^:private new-reliquary (comp vector new-mod))
 
@@ -58,9 +54,9 @@
   (as-> (rng/next-int rng 0 (count reliquary)) idx
     (into (subvec reliquary 0 idx) (subvec reliquary (inc idx)))))
 
-(defn- handle-refinement-shrine [reliquary {:keys [rng progression] :as ctx} reliquaries]
+(defn- handle-refinement-shrine [reliquary {:keys [rng progression] :as ctx} reliquary-mods]
   (if (< (count reliquary) 3)
-    (conj reliquary (new-mod reliquaries ctx))
+    (conj reliquary (new-mod reliquary-mods ctx))
     (let [{:keys [index] :as option} (->> (into []
                                                 (comp (map-indexed (fn [idx mod]
                                                                      (mapv #(assoc % :index idx) (u/options-at progression mod))))
@@ -69,33 +65,48 @@
                                           (r/sample rng))]
       (update reliquary index #(u/advance rng % (dissoc option :index))))))
 
-(defrecord ReliquaryGenerator [reliquaries]
+(defn- mod-inputs->reliquary [reliquary-mods mods]
+  (let [by-template (into {}
+                          (map-indexed (fn [idx mod]
+                                         [(:template mod) (assoc mod ::origin idx)]))
+                          reliquary-mods)]
+    (into [] (keep by-template) mods)))
+
+(defn- generate-reliquary [reliquary-mods {:keys [inputs] :as ctx}]
+  (if-let [mods (seq (:mods inputs))]
+    (mod-inputs->reliquary reliquary-mods mods)
+    (new-reliquary reliquary-mods ctx)))
+
+(defrecord ReliquaryGenerator [reliquary-mods]
   p/LootGenerator
   (loot-spec [_]
     {:id       :reliquaries
      :label    "Reliquaries"
      :utility? false
-     ; TODO add mod chooser for loading existing reliquaries once list-typed inputs are available in companion
-     :inputs   []})
+     :inputs   [{:id      :mods
+                 :label   "Mods (optional)"
+                 :type    :enum
+                 :list?   true
+                 :options (mapv :template reliquary-mods)}]})
   (generate [_ ctx]
-    (-> (new-reliquary reliquaries ctx)
+    (-> (generate-reliquary reliquary-mods ctx)
         (reliquary->view-model ctx)))
   p/LootAction
   (handle-action [_ {:keys [view-model] :as ctx} action _params]
-    (let [reliquary (view-model->reliquary reliquaries view-model)
+    (let [reliquary (view-model->reliquary reliquary-mods view-model)
           reliquary (case action
                       ::correction (handle-correction-shrine reliquary ctx)
-                      ::refinement (handle-refinement-shrine reliquary ctx reliquaries))]
+                      ::refinement (handle-refinement-shrine reliquary ctx reliquary-mods))]
       (reliquary->view-model reliquary ctx))))
 
-(defn- initialise-reliquaries-data [reliquaries]
-  (update-vals reliquaries (fn [mods] (mapv u/add-default-upgrades mods))))
+(defn- initialise-reliquaries-data [reliquary-mods]
+  (mapv u/add-default-upgrades reliquary-mods))
 
 (defn -reliquary-generator [_plugin-config]
-  (-> (u/read-edn-resource "data/reliquaries.edn")
+  (-> (u/read-edn-resource "data/reliquary-mods.edn")
       initialise-reliquaries-data
       ->ReliquaryGenerator))
 
 (comment
-  (new-reliquary (u/read-edn-resource "data/reliquaries.edn")
+  (new-reliquary (u/read-edn-resource "data/reliquary-mods.edn")
                  {:rng @r/default-rng}))

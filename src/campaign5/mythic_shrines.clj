@@ -15,11 +15,11 @@
      :label    "Mythic Shrines"
      :utility? false
      :inputs   [{:id      :name
-                 :label   "Name"
+                 :label   "Name (optional)"
                  :type    :enum
                  :options (mapv :name mythic-shrines)}
                 {:id      :tokens
-                 :label   "Tokens"
+                 :label   "Tokens (optional)"
                  :type    :enum
                  :options ["Dust" "Legendary" "Ring" "Soul" "Tattoo"]}]})
   (generate [_ {:keys [inputs rng]}]
