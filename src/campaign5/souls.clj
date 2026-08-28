@@ -72,10 +72,24 @@
     (update soul section #(u/advance rng % option))
     soul))
 
+(defn- add-soul-vars [soul rng]
+  (update soul :vars (fn [vars] (->> (merge base-soul-vars vars)
+                                     (vars/resolve-vars rng)))))
+
 (defn- new-soul [souls {:keys [rng]}]
   (-> (r/sample rng souls)
-      (update :vars (fn [vars] (->> (merge base-soul-vars vars)
-                                    (vars/resolve-vars rng))))))
+      (add-soul-vars rng)))
+
+(defn- soul-from-trait [souls {{:keys [trait]} :inputs
+                               :keys           [rng]}]
+  (some-> (some #(when (= trait (:trait %)) %) souls)
+          (add-soul-vars rng)))
+
+(defn- generate-soul [souls {{:keys [trait]} :inputs
+                             :as             ctx}]
+  (if trait
+    (soul-from-trait souls ctx)
+    (new-soul souls ctx)))
 
 (defrecord SoulGenerator [souls]
   p/LootGenerator
@@ -83,10 +97,13 @@
     {:id       :souls
      :label    "Soul"
      :utility? false
-     :inputs   []})
+     :inputs   [{:id      :trait
+                 :label   "Trait (optional)"
+                 :type    :enum
+                 :options (sort (mapv :trait souls))}]})
   (generate [_ ctx]
-    (-> (new-soul souls ctx)
-        (soul->view-model ctx)))
+    (some-> (generate-soul souls ctx)
+            (soul->view-model ctx)))
   p/LootAction
   (handle-action [_ {:keys [progression rng view-model] :as ctx} action {:keys [section option]}]
     (let [soul (view-model->soul souls view-model)
