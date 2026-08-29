@@ -16,12 +16,12 @@
    :loot/actions  (cond-> []
                           (seq reliquary) (conj {:action/label "Mythic Shrine of Correction"
                                                  :action/event [:loot/action {:id     :reliquaries
-                                                                              :action ::correction}]})
+                                                                              :action ::refinement}]})
                           (or (< (count reliquary) 3)
                               (some (comp seq (partial u/options-at progression)) reliquary))
                           (conj {:action/label "Mythic Shrine of Refinement"
                                  :action/event [:loot/action {:id     :reliquaries
-                                                              :action ::refinement}]}))
+                                                              :action ::annexation}]}))
    ;; `:origin` identifies which mod in the data file this is, so its upgrade
    ;; graph can be looked back up; the path is how far it has been refined.
    ;; Neither is visible, so neither can be read off the item.
@@ -50,11 +50,14 @@
 
 (def ^:private new-reliquary (comp vector new-mod))
 
-(defn- handle-correction-shrine [reliquary {:keys [rng]}]
-  (as-> (rng/next-int rng 0 (count reliquary)) idx
-    (into (subvec reliquary 0 idx) (subvec reliquary (inc idx)))))
+(defn- handle-refinement-shrine [reliquary {:keys [rng] :as ctx} reliquary-mods]
+  (let [idx (rng/next-int rng 0 (count reliquary))
+        replacement (new-mod reliquary-mods ctx)]
+    (-> (subvec reliquary 0 idx)
+        (conj replacement)
+        (into (subvec reliquary (inc idx))))))
 
-(defn- handle-refinement-shrine [reliquary {:keys [rng progression] :as ctx} reliquary-mods]
+(defn- handle-annexation-shrine [reliquary {:keys [rng progression] :as ctx} reliquary-mods]
   (if (< (count reliquary) 3)
     (conj reliquary (new-mod reliquary-mods ctx))
     (let [{:keys [index] :as option} (->> (into []
@@ -95,8 +98,8 @@
   (handle-action [_ {:keys [view-model] :as ctx} action _params]
     (let [reliquary (view-model->reliquary reliquary-mods view-model)
           reliquary (case action
-                      ::correction (handle-correction-shrine reliquary ctx)
-                      ::refinement (handle-refinement-shrine reliquary ctx reliquary-mods))]
+                      ::refinement (handle-refinement-shrine reliquary ctx reliquary-mods)
+                      ::annexation (handle-annexation-shrine reliquary ctx reliquary-mods))]
       (reliquary->view-model reliquary ctx))))
 
 (defn- initialise-reliquaries-data [reliquary-mods]

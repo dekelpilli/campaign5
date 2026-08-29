@@ -1,7 +1,7 @@
 [{:name   "Adjustment"
   :effect "Access a random minor shrine that takes a loot type matching the tokens used."
   :cost   10
-  :tokens ["dust" "legendary" "ring" "soul" "tattoo"]}
+  :tokens ["trinket" "legendary" "ring" "soul" "tattoo"]}
  {:name   "Fulfilment"
   :effect "Progress the passive or proc mod of a soul (player choice)."
   :cost   75
@@ -14,11 +14,11 @@
   :effect "Reroll the origin of a soul into a different origin"
   :cost   5
   :tokens ["soul"]}
- {:name   "Refinement"
+ {:name   "Annexation"
   :effect "Add a random mod to a reliquary that doesn't have three mods. Otherwise, progress a random mod on a reliquary"
   :cost   50
   :tokens ["soul"]}
- {:name   "Correction"
-  :effect "Remove a mod from a reliquary"
-  :cost   50
+ {:name   "Refinement"
+  :effect "Replace a mod on a reliquary with another random mod. If possible, that mod will be upgraded until it is at least of at least equal value."
+  :cost   75
   :tokens ["soul"]}]

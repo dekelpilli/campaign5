@@ -19,7 +19,7 @@ Potential alternative:
 # Loot types
 
 ## Souls & Reliquaries
-[//]: # (- TODO total usable souls = 2? 3? 5? Decide)
+[//]: # (- TODO When are reliquaries gained? Could be never and all changes happen via shrines)
 [//]: # (- identity: soul passives are quite numeric/basic)
 - Players have one reliquary, which can socket a maximum of 3 bound souls by default
 - Players start with a mundane reliquary, and swapping souls between reliquaries is free
