@@ -19,6 +19,10 @@
                          :title    "Tarot cards"
                          :sections [{:each :items
                                      :item {:body "{{ instruction }}"}}]}}
+              {:type       :jar
+               :id         :trinkets
+               :jar        "target/campaign5.jar"
+               :entrypoint campaign5.trinkets/-trinket-generator}
               {:type   :data
                :id     :minor-shrines
                :source "data-plugins/minor-shrines.edn"}
@@ -27,6 +31,10 @@
                :jar        "target/campaign5.jar"
                :entrypoint campaign5.mythic-shrines/-mythic-shrine-generator}]
  :reporting  #include "reporting.edn"
+ ;TODO consider adding missions/omens as a low-weight loot result (gives mission + reroll), or some other special result at 96+/100
+ ;  missions could be a good way to grant perk points?
  :loot-table [{:id :rings}
               {:id :souls}
-              {:id :tarot}]}
+              {:id :tarot}
+              #_{:id :tattoos}
+              {:id :trinkets}]}

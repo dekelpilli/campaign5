@@ -1,4 +1,4 @@
-[{:shape  "Question mark"
+[{:shape  "a question mark"
   :info   "Focuses on improving conversations (exclusively out of combat)."
   :levels [{:template   "You gain proficiency or +1 expertise die in Deception and Insight."
             :affinities #{:utility}}
@@ -22,47 +22,44 @@
             :affinities #{:survivability}}
            {:template   "Modifiers to healing on your legendary items, tattoos, souls, reliquaries, and rings have their magnitudes doubled."
             :affinities #{:support :meta}}]}
- {:shape  "?" ;TODO
+ {:shape  "a tower shield"
   :info   "Improves your longevity in combat through various avenues."
   :levels [{:template   "You have +2 absorption against attacks targeting your lowest defence(s)."
             :affinities #{:survivability}}
            {:template   "You may have an additional soul in your reliquary, so long as all of the contained souls have at least one 'survivability' modifier."
             :affinities #{:meta}}
-           {:template   "The threshold for armour attacks against you to score a minor success is increased by 2."
-            :affinities #{:survivability}}
            {:template   "You take no additional damage from critical hits."
             :affinities #{:survivability}}
-           {:template   "No more than once per combat, when a condition is applied to you, you may attempt a saving throw. On a success, the condition is not applied, and you are immune to that condition until the end of your next turn."
+           {:template   "The threshold for armour attacks against you to score a minor success is increased by 2."
             :affinities #{:survivability}}
            {:template   "Each 'survivability' mod on you (from trinkets, souls, reliquaries, rings, and tattoos) also increases your maximum hit points by 1."
-            :affinities #{:survivability}}]}]
-#_[{:shape  "Scroll"
-    :info   "Improves your ability to acquire knowledge through skill checks, and improves Divination spellcasting."
-    :levels [{:template   "Any text within line of sight within 100 feet of you becomes readable to you regardless of its language, distance/size, legibility, and lighting. Additionally, you gain +2 expertise dice for Investigation checks relating to reading."
-              :affinities #{:utility}}
-             {:template   "When you make a Magiscience, Investigation, or History check, you may choose to treat the d20 roll as though you had rolled an 11."
-              :affinities #{:utility}}
-             {:template   "You may learn any Divination spell as if it were on your class' spell list."
-              :affinities #{:utility}}
-             {:template   "You may spend a bonus action inspecting a creature you can see in combat. While under the effect of a Divination spell you have cast, you have +1 Armour against attacks from creatures you have investigated. Also, your non-cantrip Divination spells no longer require concentration."
-              :affinities #{:utility :survivability}}
-             {:template   "At the start of each of your turns in combat while conscious, you have a percent chance to be affected by Warrior's Instincts until the start of your next turn equal to double the number of Divination spells (including cantrips) you have prepared, to a minimum of 10%."
-              :affinities #{:survivability :utility :accuracy}}]}
-   {:shape  "Horseshoe"
-    :info   "Improves your luck and your ability to acquire better items."
-    :levels [{:template   "You may add or subtract 5 from any loot roll you make."
-              :affinities #{:wealth}}
-             {:template   "Whenever you roll a 1 on any die, you may reroll that die. You must then accept that result"
-              :affinities #{:utility :damage :survivability :accuracy}}
-             {:template   "Whenever you obtain a loot result you have specialised in, roll a d4. On a 4, gain a loot roll."
-              :affinities #{:wealth}}
-             {:template   "You may cast Fortune's Favour at any spell level as a free action on your turn once per round in combat. You can use no more than 10 spell slot levels on this per long rest."
-              :affinities #{:accuracy}}
-             {:template   "Whenever you gain any amount of generic perk points, gain an equivalent amount of Wealth perk points."
-              :affinities #{:wealth}}
-             {:template   "For every 2 loot specialisations you unlock, unlock a further one that does not count towards this mod. This works retroactively and for future specialisations, to a minimum of +1 specialisation."
-              :affinities #{:wealth}}]}
-   {:name   "Wrathful Judgement"
+            :affinities #{:survivability}}]}
+ {:shape  "a scroll"
+  :info   "Improves your ability to acquire knowledge through skill checks, and improves Divination spellcasting."
+  :levels [{:template   "Any text within line of sight within 100 feet of you becomes readable to you regardless of its language, distance/size, legibility, and lighting. Additionally, you gain +2 expertise dice for Investigation checks relating to reading."
+            :affinities #{:utility}}
+           {:template   "When you make a Magiscience, Investigation, or History check, you may choose to treat the d20 roll as though you had rolled an 11."
+            :affinities #{:utility}}
+           {:template   "You may learn any Divination spell as if it were on your class' spell list."
+            :affinities #{:utility}}
+           {:template   "Whenever you use a spell slot to cast a Divination spell in combat, you may choose one creature type and Expose its Weaknesses, or reroll its Exposed Weakness. You may only Expose one creature type at a time in this way."
+            :affinities #{:control :support}}
+           {:template   "At the start of each of your turns in combat while conscious, you have a percent chance to be affected by Warrior's Instincts until the start of your next turn equal to double the number of Divination spells (including cantrips) you have prepared, to a minimum of 10%."
+            :affinities #{:survivability :mobility :offence}}]}
+ {:shape  "a four-leaf clover"
+  :info   "Improves your luck and your ability to acquire better items."
+  :levels [{:template   "Whenever you roll for loot, roll an additional d100. If the additional die's result would grant a special loot result, gain that in additional to the loot result from the first die."
+            :affinities #{:meta}}
+           {:template   "Whenever you roll a 1 on any die, you may reroll that die. You must then accept that result"
+            :affinities #{:utility :offence :survivability}}
+           {:template   "Roll a d10 whenever you use a shrine. On a result of 10, you immediately gain another use of that shrine."
+            :affinities #{:meta}}
+           {:template   "You may cast Fortune's Favour at any spell level as a free action on your turn once per round in combat. You can use no more than 10 spell slot levels on this per long rest."
+            :affinities #{:accuracy}}
+           {:template   "" ;TODO something to do with perk points for wealth?
+            :affinities #{:meta}}]}]
+#_[{:shape  "a branding iron"
+    :name   "Wrathful Judgement"
     :info   "Grants a mark and improves your marks."
     :levels [{:template   "Creatures of your choice that damage you, or land a killing blow against an ally of yours, become marked by Brand of Vengeance for a minute. Creatures marked with BoV have +1 damage taken from you."
               :affinities #{:damage}}
@@ -74,7 +71,8 @@
               :affinities #{:damage}}
              {:template   "No more than once per turn, when a creature marked by you attacks or casts a spell, they take 5 radiant thorns damage, and lose one level of resistance to a damage type they are resistant or immune to."
               :affinities #{:damage}}]}
-   {:name   "Aggressive Combat"
+   {:shape  "a fist"
+    :name   "Aggressive Combat"
     :info   "Grants bonuses that make you a more competent close combatant."
     :levels [{:template   "You gain +1 global damage for each enemy that is close to you (within 5 feet of you, or within reach of your melee attacks)."
               :affinities #{:damage}}
@@ -88,7 +86,8 @@
               :affinities #{:survivability}}
              {:template   "You gain +1 AB against creatures that are close to you for each enemy that is within 5 feet of you, to a maximum of +3 AB."
               :affinities #{:accuracy}}]}
-   {:name   "Unbound Arcana"
+   {:shape  "an orb"
+    :name   "Unbound Arcana"
     :info   "Improves your general spellcasting prowess."
     :levels [{:template   "You may cast spells with a range that isn't Self as if they had a range of Touch instead. When you land a major success against a creature with a spell cast with a range of Touch, they become rattled until the start of their next turn."
               :affinities #{:utility :control}}
@@ -100,7 +99,8 @@
               :affinities #{:resources}}
              {:template   "Whenever you make a spell attack that did not land a hit against at least one creature, you may revert time to before that spell was cast. When you do this, you may not cast that spell again for a minute."
               :affinities #{:utility}}]}
-   {:name   "Arcane Combat"
+   {:shape  "a runed sword"
+    :name   "Arcane Combat"
     :info   "Improves spellcasting and weapon attacks for characters that utilise both."
     :levels [{:template   "Enemies you have targeted with both a weapon attack and a spell in the last minute cannot make opportunity attacks against you, and do not impose disadvantage on your ranged attacks as a result of being within 5 feet of you."
               :affinities #{:utility :control}}
@@ -112,7 +112,8 @@
               :affinities #{:accuracy}}
              {:template   "If you have made a weapon attack in the last 18 seconds, you have +4 spell damage, and minions from your spells have +4 damage. If you have used a spell slot or finished casting a spell with a casting time of at least an action in the last 18 seconds, you have +4 weapon damage."
               :affinities #{:damage}}]}
-   {:name   "Elemental Mastery"
+   {:shape  "a prism"
+    :name   "Elemental Mastery"
     :info   "Improves your prowess with and against elemental damage (acid, cold, fire, lightning, or thunder damage)."
     :levels [{:template   "+1 damage with attacks for each elemental damage type they deal (acid, cold, fire, lightning, or thunder damage)."
               :affinities #{:damage}}
@@ -124,7 +125,8 @@
               :affinities #{:critical :accuracy}}
              {:template   "+1 AB with attacks that would deal elemental damage."
               :affinities #{:accuracy}}]}
-   {:name   "Volatile Presence"
+   {:shape  "an obelisk"
+    :name   "Volatile Presence"
     :info   "Specialises in teleportation and conjuration, without a focus on spellcasting, granting greater control of the battlefield."
     :levels [{:template   "When you make an opportunity attack, you may make a Will spell attack against that target instead. If the attack succeeds, teleport the target to a random safe and unoccupied space you can see within 20 feet of them (2d9, where 5/5 is no effect). Note that you can make opportunity attacks with ranged weapons as improvised weapons."
               :affinities #{:control}}
@@ -138,7 +140,8 @@
               :affinities #{:utility}}
              {:template   "Your pillars have a 5ft aura centred on them. Creatures of your choice within this aura deal half damage against your pillars, and become sluggish while affected by at least two stacks of this aura."
               :affinities #{:control}}]}
-   {:name   "Leader's Dominion"
+   {:shape  "a banner"
+    :name   "Leader's Dominion"
     :info   "Grants benefits relating to minions and magic relating to minions."
     :levels [{:template   "Your minions have +2 damage while you have an active talisman power from a creature with the same creature type. You have +2 damage while at least one of your minions is benefiting from this effect."
               :affinities #{:damage}}

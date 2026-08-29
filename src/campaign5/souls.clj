@@ -24,7 +24,8 @@
 
 (defn- soul->view-model [{:keys [trait vars] :as soul} {:keys [progression rng]}]
   {:loot/title    "Soul embodying {{ trait }}"
-   :loot/vars     (assoc vars :trait {:value trait :context? true})
+   :loot/vars     (assoc vars :trait {:value    trait
+                                      :context? true})
    :loot/sections (conj (mapv (fn [[section heading]]
                                 {:section/heading heading
                                  :section/items   [(u/mod-item rng (get soul section))]})
