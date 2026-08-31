@@ -3,6 +3,7 @@
     [clojure.edn :as edn]
     [clojure.java.io :as io]
     [clojure.string :as str]
+    [randy.core :as r]
     [sns.sdk.progression :as sp]
     [sns.sdk.protocols :as p]
     [sns.sdk.vars :as vars])
@@ -60,9 +61,6 @@
       (update :path (fnil conj []) {:id (:id option)})))
 
 (defn add-default-upgrades
-  "Give every numeric var an `:inc`-by-its-own-starting-value upgrade, unless
-   the mod already declares one that touches it. Only numbers: a drawn var
-   (a damage type, a skill) has nothing to increment."
   [{:keys [vars upgrades] :as mod}]
   (let [numeric (into {} (filter (comp number? val)) vars)]
     (if (seq numeric)
@@ -78,6 +76,11 @@
                                                                                  :inc {id value}}))) numeric)]
         (assoc mod :upgrades upgrades))
       mod)))
+
+(defn- choose-by-input [k {:keys [inputs rng]} coll]
+  (if (k inputs)
+    (some #(when (= (k %) (k inputs)) %) coll)
+    (r/sample rng coll)))
 
 (comment
   (add-default-upgrades

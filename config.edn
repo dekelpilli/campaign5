@@ -32,9 +32,13 @@
                :entrypoint campaign5.mythic-shrines/-mythic-shrine-generator}]
  :reporting  #include "reporting.edn"
  ;TODO consider adding missions/omens as a low-weight loot result (gives mission + reroll), or some other special result at 96+/100
- ;  missions could be a good way to grant perk points?
- :loot-table [{:id :rings}
-              {:id :souls}
-              {:id :tarot}
-              #_{:id :tattoos}
-              {:id :trinkets}]}
+ :loot-table [{:id     :rings
+               :weight 19}
+              {:id     :souls
+               :weight 19}
+              {:id     :tarot
+               :weight 19}
+              #_{:id     :tattoos
+                 :weight 19}
+              {:id     :trinkets
+               :weight 19}]}

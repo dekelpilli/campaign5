@@ -2,14 +2,14 @@
   (:require
     [campaign5.randoms]
     [campaign5.util :as u]
-    [randy.core :as r]
     [sns.sdk.protocols :as p]))
 
 (defn- trinket->view-model [{:keys [levels]
-                             :as   trinket} {:keys [rng]}]
-  {:loot/title    "Trinket in the shape of {{shape}}"
+                             :as   trinket}
+                            {:keys [rng]}]
+  {:loot/title    "Trinket depicting {{depiction}}"
    :loot/subtitle "{{info}}"
-   :loot/vars     (-> (select-keys trinket [:shape :info])
+   :loot/vars     (-> (select-keys trinket [:depiction :info])
                       (update-vals (fn [s] {:value    s
                                             :context? true})))
    :loot/sections [{:section/heading "Mods"
@@ -24,16 +24,12 @@
     {:id       :trinkets
      :label    "Trinket"
      :utility? false
-     :inputs   [{:id      :shape
-                 :label   "Shape (optional)"
+     :inputs   [{:id      :depiction
+                 :label   "Depiction (optional)"
                  :type    :enum
-                 :options (sort (mapv :shape trinkets))}]})
-  (generate [_ {{:keys [shape]} :inputs
-                :keys           [rng]
-                :as             ctx}]
-    (-> (if shape
-          (some #(when (= shape (:shape %)) %) trinkets)
-          (r/sample rng trinkets))
+                 :options (sort (mapv :depiction trinkets))}]})
+  (generate [_ ctx]
+    (-> (u/choose-by-input :depiction ctx trinkets)
         (trinket->view-model ctx))))
 
 (defn -trinket-generator [_plugin-config]

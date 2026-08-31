@@ -65,9 +65,9 @@ Potential alternative:
 - Shrines can be used to level up a tattoo, or to cause the effect of the tattoo to change (keeping any levels it has gained)
 
 ## Affinities
-- Control (lower enemy Offence/Mobility)
+- Control (lower enemy Offence/Tactics)
 - Support (outgoing healing, allies/area benefits, lowering enemy Survivability)
-- Mobility (avoiding control conditions, initiative, movement)
+- Tactical (avoiding control conditions, initiative, movement, improved uptime/usability of abilities (range, reach, etc), disengage)
 - Resource (reduce resource usage/improve resource recovery)
 - Offence (damage, harm, AB)
 - Survivability (defence/hp/regen/incoming healing)

@@ -2,7 +2,6 @@
   (:require
     [campaign5.randoms]
     [campaign5.util :as u]
-    [randy.core :as r]
     [sns.sdk.protocols :as p]
     [sns.sdk.vars :as vars]))
 
@@ -77,21 +76,6 @@
   (update soul :vars (fn [vars] (->> (merge base-soul-vars vars)
                                      (vars/resolve-vars rng)))))
 
-(defn- new-soul [souls {:keys [rng]}]
-  (-> (r/sample rng souls)
-      (add-soul-vars rng)))
-
-(defn- soul-from-trait [souls {{:keys [trait]} :inputs
-                               :keys           [rng]}]
-  (some-> (some #(when (= trait (:trait %)) %) souls)
-          (add-soul-vars rng)))
-
-(defn- generate-soul [souls {{:keys [trait]} :inputs
-                             :as             ctx}]
-  (if trait
-    (soul-from-trait souls ctx)
-    (new-soul souls ctx)))
-
 (defrecord SoulGenerator [souls]
   p/LootGenerator
   (loot-spec [_]
@@ -103,7 +87,8 @@
                  :type    :enum
                  :options (sort (mapv :trait souls))}]})
   (generate [_ ctx]
-    (some-> (generate-soul souls ctx)
+    (some-> (u/choose-by-input :trait ctx souls)
+            (add-soul-vars ctx)
             (soul->view-model ctx)))
   p/LootAction
   (handle-action [_ {:keys [progression rng view-model] :as ctx} action {:keys [section option]}]
@@ -125,7 +110,3 @@
   (-> (u/read-edn-resource "data/souls.edn")
       initialise-souls-data
       ->SoulGenerator))
-
-(comment
-  (new-soul (u/read-edn-resource "data/souls.edn")
-            {:rng @r/default-rng}))

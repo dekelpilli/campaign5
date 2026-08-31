@@ -1,155 +1,150 @@
-[{:shape  "a question mark"
-  :info   "Focuses on improving conversations (exclusively out of combat)."
-  :levels [{:template   "You gain proficiency or +1 expertise die in Deception and Insight."
-            :affinities #{:utility}}
-           {:template   "At the end of a conversation, you may find out whether or not a lie was told during that conversation."
-            :affinities #{:utility}}
-           {:template   "You may choose for your Persuasion and Deception bonuses to be considered twice when calculating the party's bonus."
-            :affinities #{:utility}}
-           {:template   "Any expertise dice granted to your Charisma skills instead apply to all of your Charisma skills."
-            :affinities #{:utility :meta}}
-           {:template   "No more than once per conversation, when you make a Deception or Persuasion check, you may immediately learn the success of that check for one target of that check. This allows you to then immediately add to that statement, potentially salvaging the situation."
-            :affinities #{:utility}}]}
- {:shape  "Caduceus"
-  :info   "Improves healing you grant, including via spells."
-  :levels [{:template   "Downed you revive gain an additional 10% of their maximum hit points."
-            :affinities #{:support}}
-           {:template   "When you use an action to heal a creature with no temporary hit points, they gain temporary his points equal to your level. When you use an action to heal a creature with temporary hit points, gain temporary hit points equal to their temporary hit points."
-            :affinities #{:support :survivability}}
-           {:template   "You may learn any Concentration spell that grants hit points and cast it with your spell slots. You may concentrate on two such spells at one time. This includes, but is not limited to, Aura of Life, Enervation, Beacon of Hope, Healing Spirit, and Vampiric Touch."
-            :affinities #{:support}}
-           {:template   "When you use an action to heal a single creature, that creature cannot drop below 1 hit point from their next instance of hurt."
-            :affinities #{:survivability}}
-           {:template   "Modifiers to healing on your legendary items, tattoos, souls, reliquaries, and rings have their magnitudes doubled."
-            :affinities #{:support :meta}}]}
- {:shape  "a tower shield"
-  :info   "Improves your longevity in combat through various avenues."
-  :levels [{:template   "You have +2 absorption against attacks targeting your lowest defence(s)."
-            :affinities #{:survivability}}
-           {:template   "You may have an additional soul in your reliquary, so long as all of the contained souls have at least one 'survivability' modifier."
-            :affinities #{:meta}}
-           {:template   "You take no additional damage from critical hits."
-            :affinities #{:survivability}}
-           {:template   "The threshold for armour attacks against you to score a minor success is increased by 2."
-            :affinities #{:survivability}}
-           {:template   "Each 'survivability' mod on you (from trinkets, souls, reliquaries, rings, and tattoos) also increases your maximum hit points by 1."
-            :affinities #{:survivability}}]}
- {:shape  "a scroll"
-  :info   "Improves your ability to acquire knowledge through skill checks, and improves Divination spellcasting."
-  :levels [{:template   "Any text within line of sight within 100 feet of you becomes readable to you regardless of its language, distance/size, legibility, and lighting. Additionally, you gain +2 expertise dice for Investigation checks relating to reading."
-            :affinities #{:utility}}
-           {:template   "When you make a Magiscience, Investigation, or History check, you may choose to treat the d20 roll as though you had rolled an 11."
-            :affinities #{:utility}}
-           {:template   "You may learn any Divination spell as if it were on your class' spell list."
-            :affinities #{:utility}}
-           {:template   "Whenever you use a spell slot to cast a Divination spell in combat, you may choose one creature type and Expose its Weaknesses, or reroll its Exposed Weakness. You may only Expose one creature type at a time in this way."
-            :affinities #{:control :support}}
-           {:template   "At the start of each of your turns in combat while conscious, you have a percent chance to be affected by Warrior's Instincts until the start of your next turn equal to double the number of Divination spells (including cantrips) you have prepared, to a minimum of 10%."
-            :affinities #{:survivability :mobility :offence}}]}
- {:shape  "a four-leaf clover"
-  :info   "Improves your luck and your ability to acquire better items."
-  :levels [{:template   "Whenever you roll for loot, roll an additional d100. If the additional die's result would grant a special loot result, gain that in additional to the loot result from the first die."
-            :affinities #{:meta}}
-           {:template   "Whenever you roll a 1 on any die, you may reroll that die. You must then accept that result"
-            :affinities #{:utility :offence :survivability}}
-           {:template   "Roll a d10 whenever you use a shrine. On a result of 10, you immediately gain another use of that shrine."
-            :affinities #{:meta}}
-           {:template   "You may cast Fortune's Favour at any spell level as a free action on your turn once per round in combat. You can use no more than 10 spell slot levels on this per long rest."
-            :affinities #{:accuracy}}
-           {:template   "" ;TODO something to do with perk points for wealth?
-            :affinities #{:meta}}]}]
-#_[{:shape  "a branding iron"
-    :name   "Wrathful Judgement"
-    :info   "Grants a mark and improves your marks."
-    :levels [{:template   "Creatures of your choice that damage you, or land a killing blow against an ally of yours, become marked by Brand of Vengeance for a minute. Creatures marked with BoV have +1 damage taken from you."
-              :affinities #{:damage}}
-             {:template   "Your attacks and spells deal +1d4 radiant damage against marked enemies."
-              :affinities #{:damage}}
-             {:template   "Whenever you mark an enemy, you may choose one other creature to also obtain the same mark. Whenever a creature marked by you dies, make a Will attack against one other creature you can see. On a hit, they gain all of the marks that were on the killed creature."
-              :affinities #{:utility}}
-             {:template   "Creatures marked by you take +1 damage for each distinct mark on them."
-              :affinities #{:damage}}
-             {:template   "No more than once per turn, when a creature marked by you attacks or casts a spell, they take 5 radiant thorns damage, and lose one level of resistance to a damage type they are resistant or immune to."
-              :affinities #{:damage}}]}
-   {:shape  "a fist"
-    :name   "Aggressive Combat"
-    :info   "Grants bonuses that make you a more competent close combatant."
-    :levels [{:template   "You gain +1 global damage for each enemy that is close to you (within 5 feet of you, or within reach of your melee attacks)."
-              :affinities #{:damage}}
-             {:template   "No more than once per combat, when a creature enters a space that is within 5 feet of your reach, you may immediately move 5 feet towards it."
-              :affinities #{:utility}}
-             {:template   "You have an unstabilising aura, causing creatures of your choice within 10 feet of you to be rattled. Additionally, you cannot be rattled."
-              :affinities #{:control}}
-             {:template   "Whenever an attack from a creature that is close to you scores a success against you, the defence used for that attack gains +1 until the end of the attacker's next turn. You cannot gain this bonus again while under its effects (for any defence type)."
-              :affinities #{:survivability}}
-             {:template   "Your barriers apply to all damage from creatures that are close to you, regardless of if conditions on those barriers are met."
-              :affinities #{:survivability}}
-             {:template   "You gain +1 AB against creatures that are close to you for each enemy that is within 5 feet of you, to a maximum of +3 AB."
-              :affinities #{:accuracy}}]}
-   {:shape  "an orb"
-    :name   "Unbound Arcana"
-    :info   "Improves your general spellcasting prowess."
-    :levels [{:template   "You may cast spells with a range that isn't Self as if they had a range of Touch instead. When you land a major success against a creature with a spell cast with a range of Touch, they become rattled until the start of their next turn."
-              :affinities #{:utility :control}}
-             {:template   "You have an additional spell slot in each but your top two spells slots. This always grants at least a first level spell slot."
-              :affinities #{:resources}}
-             {:template   "Once per short rest, if you've been concentrating on a spell for at least two whole turns in combat, you may choose for that cast to no longer require concentration."
-              :affinities #{:utility}}
-             {:template   "When you upcast a spell, you may cast it at a level one above the spell slot consumed."
-              :affinities #{:resources}}
-             {:template   "Whenever you make a spell attack that did not land a hit against at least one creature, you may revert time to before that spell was cast. When you do this, you may not cast that spell again for a minute."
-              :affinities #{:utility}}]}
-   {:shape  "a runed sword"
-    :name   "Arcane Combat"
-    :info   "Improves spellcasting and weapon attacks for characters that utilise both."
-    :levels [{:template   "Enemies you have targeted with both a weapon attack and a spell in the last minute cannot make opportunity attacks against you, and do not impose disadvantage on your ranged attacks as a result of being within 5 feet of you."
-              :affinities #{:utility :control}}
-             {:template   "-1 to your Major Success threshold with weapon attacks and spells if you cast a spell or made a weapon attack (respectively) with your action in the last round."
-              :affinities #{:accuracy}}
-             {:template   "+1 defences against spells from creatures you've attacked with a weapon attack."
-              :affinities #{:survivability}}
-             {:template   "You have +1 AB with weapon attacks while you are concentrating on a spell or are under the effect of a spell you have cast, and +1 AB with spells against enemies you have hit with a weapon attack."
-              :affinities #{:accuracy}}
-             {:template   "If you have made a weapon attack in the last 18 seconds, you have +4 spell damage, and minions from your spells have +4 damage. If you have used a spell slot or finished casting a spell with a casting time of at least an action in the last 18 seconds, you have +4 weapon damage."
-              :affinities #{:damage}}]}
-   {:shape  "a prism"
-    :name   "Elemental Mastery"
-    :info   "Improves your prowess with and against elemental damage (acid, cold, fire, lightning, or thunder damage)."
-    :levels [{:template   "+1 damage with attacks for each elemental damage type they deal (acid, cold, fire, lightning, or thunder damage)."
-              :affinities #{:damage}}
-             {:template   "You can cast Absorb Elements an amount of times per long rest equal to an ability score modifier of your choice."
-              :affinities #{:survivability}}
-             {:template   "You may cast Fire Shield as a bonus action once per long rest. When cast in this way, you may cast it for any elemental damage type (rather than just cold and fire)."
-              :affinities #{:survivability :damage}}
-             {:template   "+1 critical hit range for attacks that would deal elemental damage. -1 major success threshold for attacks that would deal multiple elemental damage types."
-              :affinities #{:critical :accuracy}}
-             {:template   "+1 AB with attacks that would deal elemental damage."
-              :affinities #{:accuracy}}]}
-   {:shape  "an obelisk"
-    :name   "Volatile Presence"
-    :info   "Specialises in teleportation and conjuration, without a focus on spellcasting, granting greater control of the battlefield."
-    :levels [{:template   "When you make an opportunity attack, you may make a Will spell attack against that target instead. If the attack succeeds, teleport the target to a random safe and unoccupied space you can see within 20 feet of them (2d9, where 5/5 is no effect). Note that you can make opportunity attacks with ranged weapons as improvised weapons."
-              :affinities #{:control}}
-             {:template   "You may replace your movement with teleportation (limited to spaces you can see), allowing you to move across otherwise uncrossable/difficult terrain, move vertically, and avoid opportunity attacks. Teleporting any distance consumes your entire regular movement for the turn."
-              :affinities #{:utility}}
-             {:template   "Once per turn, as a free action, you may either conjure or remove up to 4 stone pillars (5x5 feet each) from the ground on unoccupied spaces you can see within 60 feet of you. These pillars are up to 20 feet tall. These pillars last for 10 minutes, and have defences equal to yours, and have maximum HP equal to a fifth of your maximum HP, disappearing when reaching 0 life. Max 16 active pillars at one time."
-              :affinities #{:utility}}
-             {:template   "When within 5 feet of one of your pillars, you have full visibility from the perspectives of any of your pillars. Additionally, also while within 5 feet of one of your pillars, you may choose to cause any attack, spell, or Medicine check you make to instead originate from another pillar you have created in the same plane. For example, a pillar 500 feet away might make a sword attack against an adjacent creature, or cast Fireball into a room you would otherwise not be able to see. At the end of your turn, any pillars used in this way are destroyed (affects both pillars)."
-              :affinities #{:utility}}
-             {:template   "Whenever a creature you can see teleports or is teleported, you can immediately target one other creature you can see to teleport to a safe and unoccupied space within 5 feet of the original creature's new location. If the target creature is not willing, you must hit it with a Will attack to teleport it in this way. This does not chain."
-              :affinities #{:utility}}
-             {:template   "Your pillars have a 5ft aura centred on them. Creatures of your choice within this aura deal half damage against your pillars, and become sluggish while affected by at least two stacks of this aura."
-              :affinities #{:control}}]}
-   {:shape  "a banner"
-    :name   "Leader's Dominion"
-    :info   "Grants benefits relating to minions and magic relating to minions."
-    :levels [{:template   "Your minions have +2 damage while you have an active talisman power from a creature with the same creature type. You have +2 damage while at least one of your minions is benefiting from this effect."
-              :affinities #{:damage}}
-             {:template   "You and your minions gain temporary hit points equal to your level at the start of your turn while you are concentrating on a minion spell, or on a spell targeting one of your minions (e.g. Summon Draconic Spirit, or Haste targeting one of your minions)."
-              :affinities #{:survivability}}
-             {:template   "The Generosity vial causes mods to affect both you and your minions, instead of just your minions. This also works for mods that originally only affected minions. Additionally, you may convert any vial you have into a Generosity vial."
-              :affinities #{:utility}}
-             {:template   "Whenever you cast a concentration spell targeting at least one your existing minions, you may choose for one of the targeted minions to hold that concentration instead of you."
-              :affinities #{:utility}}
-             {:template   "Whenever one of your minions would die, they may make a saving throw. On a success, they remain on 1 hit point instead, but die one round later (at which point they can attempt the saving throw again)."
-              :affinities #{:survivability}}]}]
+[{:depiction "a question mark"
+  :info      "Focuses on improving conversations (exclusively out of combat)."
+  :levels    [{:template   "You gain proficiency or +1 expertise die in Deception and Insight."
+               :affinities #{:utility}}
+              {:template   "At the end of a conversation, you may find out whether or not a lie was told during that conversation."
+               :affinities #{:utility}}
+              {:template   "You may choose for your Persuasion and Deception bonuses to be considered twice when calculating the party's bonus."
+               :affinities #{:utility}}
+              {:template   "Any expertise dice granted to your Charisma skills instead apply to all of your Charisma skills."
+               :affinities #{:utility :meta}}
+              {:template   "No more than once per conversation, when you make a Deception or Persuasion check, you may immediately learn the success of that check for one target of that check. This allows you to then immediately add to that statement, potentially salvaging the situation."
+               :affinities #{:utility}}]}
+ {:depiction "Caduceus"
+  :info      "Improves healing you grant, including via spells."
+  :levels    [{:template   "Downed you revive gain an additional 10% of their maximum hit points."
+               :affinities #{:support}}
+              {:template   "When you use an action to heal a creature with no temporary hit points, they gain temporary his points equal to your level. When you use an action to heal a creature with temporary hit points, gain temporary hit points equal to their temporary hit points."
+               :affinities #{:support :survivability}}
+              {:template   "You may learn any Concentration spell that grants hit points and cast it with your spell slots. You may concentrate on two such spells at one time. This includes, but is not limited to, Aura of Life, Enervation, Beacon of Hope, Healing Spirit, and Vampiric Touch."
+               :affinities #{:support}}
+              {:template   "When you use an action to heal a single creature, that creature cannot drop below 1 hit point from their next instance of hurt."
+               :affinities #{:survivability}}
+              {:template   "Modifiers to healing on your legendary items, tattoos, souls, reliquaries, and rings have their magnitudes doubled."
+               :affinities #{:support :meta}}]}
+ {:depiction "a tower shield"
+  :info      "Improves your longevity in combat through various avenues."
+  :levels    [{:template   "You have +2 absorption against attacks targeting your lowest defence(s)."
+               :affinities #{:survivability}}
+              {:template   "You may have an additional soul in your reliquary, so long as all of the contained souls have at least one 'survivability' modifier."
+               :affinities #{:meta}}
+              {:template   "You take no additional damage from critical hits."
+               :affinities #{:survivability}}
+              {:template   "The threshold for armour attacks against you to score a minor success is increased by 2."
+               :affinities #{:survivability}}
+              {:template   "Each 'survivability' mod on you (from trinkets, souls, reliquaries, rings, and tattoos) also increases your maximum hit points by 1."
+               :affinities #{:survivability}}]}
+ {:depiction "a scroll"
+  :info      "Improves your ability to acquire knowledge through skill checks, and improves Divination spellcasting."
+  :levels    [{:template   "Any text within line of sight within 100 feet of you becomes readable to you regardless of its language, distance/size, legibility, and lighting. Additionally, you gain +2 expertise dice for Investigation checks relating to reading."
+               :affinities #{:utility}}
+              {:template   "When you make a Magiscience, Investigation, or History check, you may choose to treat the d20 roll as though you had rolled an 11."
+               :affinities #{:utility}}
+              {:template   "You may learn any Divination spell as if it were on your class' spell list."
+               :affinities #{:utility}}
+              {:template   "Whenever you use a spell slot to cast a Divination spell in combat, you may choose one creature type and Expose its Weaknesses, or reroll its Exposed Weakness. You may only Expose one creature type at a time in this way."
+               :affinities #{:control :support}}
+              {:template   "At the start of each of your turns in combat while conscious, you have a percent chance to be affected by Warrior's Instincts until the start of your next turn equal to double the number of Divination spells (including cantrips) you have prepared, to a minimum of 10%."
+               :affinities #{:survivability :tactical :offence}}]}
+ {:depiction "a four-leaf clover"
+  :info      "Improves your luck and your ability to acquire better items."
+  :levels    [{:template   "Whenever you roll for loot, roll an additional d100. If the additional die's result would grant a special loot result, gain that in additional to the loot result from the first die."
+               :affinities #{:meta}}
+              {:template   "Whenever you roll a 1 on any die, you may reroll that die. You must then accept that result"
+               :affinities #{:utility :offence :survivability}}
+              {:template   "Roll a d10 whenever you use a shrine. On a result of 10, you immediately gain another use of that shrine."
+               :affinities #{:meta}}
+              {:template   "You may cast Fortune's Favour at any spell level as a free action on your turn once per round in combat. You can use no more than 10 spell slot levels on this per long rest."
+               :affinities #{:accuracy}}
+              {:template   "" ;TODO
+               :affinities #{:meta}}]}
+ {:depiction "a fist"
+  :info      "Grants bonuses that make you a more competent close combatant."
+  :levels    [{:template   "You gain +1 global damage for each enemy that is Close to you (within 5 feet of you, or within reach of your melee attacks)."
+               :affinities #{:offence}}
+              {:template   "No more than once per combat, when a creature enters a space that is within 5 feet of your reach, you may immediately move 5 feet towards it."
+               :affinities #{:tactical}}
+              {:template   "Creatures that are Close to you are rattled. Additionally, you cannot be rattled."
+               :affinities #{:control :survivability}}
+              {:template   "Gain resistance against attacks equal to the defence used against that attack."
+               :affinities #{:survivability}}
+              {:template   "+1 armour while Close to two or more enemies. +1AB against Close enemies that are adjacent to at least one hostile creature other than yourself."
+               :affinities #{:offence :survivability}}]}
+ {:depiction "an orb"
+  :info      "Improves your general spellcasting prowess."
+  :levels    [{:template   "You have an additional spell slot in each but your top two spells slots. This always grants at least a first level spell slot."
+               :affinities #{:resources}}
+              {:template   "You may cast spells with a range that isn't Self as if they had a range of Touch instead. When you land a major success against a creature with a spell cast with a range of Touch, they become rattled until the start of their next turn."
+               :affinities #{:tactical :control}}
+              {:template   "The threshold for your spell attacks to score a major success is decreased by 1."
+               :affinities #{:offence}}
+              {:template   "When you upcast a spell, you may cast it at a level one above the spell slot consumed."
+               :affinities #{:resources}}
+              {:template   "Whenever you make a spell attack that did not score at least a standard success against at least one creature, you may revert time to before that spell was cast. When you do this, you may not cast that spell again for a minute."
+               :affinities #{:tactical :resources}}]}
+ {:depiction "a runed sword"
+  :info      "Improves spellcasting and weapon attacks for characters that utilise both."
+  :levels    [{:template   "When you make a ranged weapon attack, you may use your Wisdom, Charisma, or Intelligence for it instead. When you make a spell attack against an adjacent creature, you may use your Dexterity or Strength for it instead."
+               :affinities #{:offence}}
+              {:template   "Enemies you have targeted with both a weapon attack and a spell in the last minute cannot make opportunity attacks against you, and do not impose disadvantage on your ranged attacks as a result of being within 5 feet of you."
+               :affinities #{:tactical :control}}
+              {:template   "You have +1 AB with weapon attacks while you are concentrating on a spell or are under the effect of a spell you have cast, and +1 AB with spells against enemies you have hit with a weapon attack."
+               :affinities #{:offence}}
+              {:template   "Loot modifiers that specifically benefit your attacks or maneuvers also benefit your spells."
+               :affinities #{:meta}}
+              {:template   "+1 damage with attacks for each of your loot modifiers that specifically benefit spells." ;TODO revisit after other loot slots are fully defined, might be too strong?
+               :affinities #{:meta}}]}]
+#_[{:depiction "a branding iron" ;TODO redesign without vengeance theme, stick to marks
+    :name      "Wrathful Judgement"
+    :info      "Grants a mark and improves your marks."
+    :levels    [{:template   "Creatures of your choice that damage you, or land a killing blow against an ally of yours, become marked by Brand of Vengeance for a minute. Creatures marked with Brand of Vengeance have -1 resistance."
+                 :affinities #{:offence :support}}
+                {:template   "Your attacks and spells deal +1d4 radiant damage against marked enemies."
+                 :affinities #{:offence}}
+                {:template   "Whenever you mark an enemy, you may choose one other creature to also obtain the same mark. Whenever a creature marked by you dies, make a Will attack against one other creature you can see. On a hit, they gain all of the marks that were on the killed creature."
+                 :affinities #{:offence}}
+                {:template   "Creatures marked by you take +1 damage for each distinct mark on them."
+                 :affinities #{:offence :support}}
+                {:template   "When a creature marked by you attacks or casts a spell, they take 1 harm for each mark on them."
+                 :affinities #{:offence}}]}
+   {:depiction "a prism"
+    :name      "Elemental Mastery"
+    :info      "Improves your prowess with and against elemental damage (acid, cold, fire, lightning, or thunder damage)."
+    :levels    [{:template   "+1 damage with attacks for each elemental damage type they deal (acid, cold, fire, lightning, or thunder damage)."
+                 :affinities #{:damage}}
+                {:template   "You can cast Absorb Elements an amount of times per long rest equal to an ability score modifier of your choice."
+                 :affinities #{:survivability}}
+                {:template   "You may cast Fire Shield as a bonus action once per long rest. When cast in this way, you may cast it for any elemental damage type (rather than just cold and fire)."
+                 :affinities #{:survivability :damage}}
+                {:template   "+1 critical hit range for attacks that would deal elemental damage. -1 major success threshold for attacks that would deal multiple elemental damage types."
+                 :affinities #{:critical :accuracy}}
+                {:template   "+1 AB with attacks that would deal elemental damage."
+                 :affinities #{:accuracy}}]}
+   {:depiction "an obelisk"
+    :name      "Volatile Presence"
+    :info      "Specialises in teleportation and conjuration, without a focus on spellcasting, granting greater control of the battlefield."
+    :levels    [{:template   "When you make an opportunity attack, you may make a Will spell attack against that target instead. If the attack succeeds, teleport the target to a random safe and unoccupied space you can see within 20 feet of them (2d9, where 5/5 is no effect). Note that you can make opportunity attacks with ranged weapons as improvised weapons."
+                 :affinities #{:control}}
+                {:template   "You may replace your movement with teleportation (limited to spaces you can see), allowing you to move across otherwise uncrossable/difficult terrain, move vertically, and avoid opportunity attacks. Teleporting any distance consumes your entire regular movement for the turn."
+                 :affinities #{:utility}}
+                {:template   "Once per turn, as a free action, you may either conjure or remove up to 4 stone pillars (5x5 feet each) from the ground on unoccupied spaces you can see within 60 feet of you. These pillars are up to 20 feet tall. These pillars last for 10 minutes, and have defences equal to yours, and have maximum HP equal to a fifth of your maximum HP, disappearing when reaching 0 life. Max 16 active pillars at one time."
+                 :affinities #{:utility}}
+                {:template   "When within 5 feet of one of your pillars, you have full visibility from the perspectives of any of your pillars. Additionally, also while within 5 feet of one of your pillars, you may choose to cause any attack, spell, or Medicine check you make to instead originate from another pillar you have created in the same plane. For example, a pillar 500 feet away might make a sword attack against an adjacent creature, or cast Fireball into a room you would otherwise not be able to see. At the end of your turn, any pillars used in this way are destroyed (affects both pillars)."
+                 :affinities #{:utility}}
+                {:template   "Whenever a creature you can see teleports or is teleported, you can immediately target one other creature you can see to teleport to a safe and unoccupied space within 5 feet of the original creature's new location. If the target creature is not willing, you must hit it with a Will attack to teleport it in this way. This does not chain."
+                 :affinities #{:utility}}
+                {:template   "Your pillars have a 5ft aura centred on them. Creatures of your choice within this aura deal half damage against your pillars, and become sluggish while affected by at least two stacks of this aura."
+                 :affinities #{:control}}]}
+   {:depiction "a banner"
+    :name      "Leader's Dominion"
+    :info      "Grants benefits relating to minions and magic relating to minions."
+    :levels    [{:template   "Your minions have +2 damage while you have an active talisman power from a creature with the same creature type. You have +2 damage while at least one of your minions is benefiting from this effect."
+                 :affinities #{:damage}}
+                {:template   "You and your minions gain temporary hit points equal to your level at the start of your turn while you are concentrating on a minion spell, or on a spell targeting one of your minions (e.g. Summon Draconic Spirit, or Haste targeting one of your minions)."
+                 :affinities #{:survivability}}
+                {:template   "The Generosity vial causes mods to affect both you and your minions, instead of just your minions. This also works for mods that originally only affected minions. Additionally, you may convert any vial you have into a Generosity vial."
+                 :affinities #{:utility}}
+                {:template   "Whenever you cast a concentration spell targeting at least one your existing minions, you may choose for one of the targeted minions to hold that concentration instead of you."
+                 :affinities #{:utility}}
+                {:template   "Whenever one of your minions would die, they may make a saving throw. On a success, they remain on 1 hit point instead, but die one round later (at which point they can attempt the saving throw again)."
+                 :affinities #{:survivability}}]}]

@@ -89,15 +89,15 @@
  {:trait   "Strategy"
   :passive {:vars       {:initiative 1}
             :template   "+{{initiative}} initiative"
-            :affinities #{:mobility}}
+            :affinities #{:tactical}}
   :proc    {:template   "You may choose this round's initiative order."
-            :affinities #{:mobility}}}
+            :affinities #{:tactical}}}
  {:trait   "Speed"
   :passive {:vars       {:speed 5}
             :template   "+{{speed}}ft of walking speed"
-            :affinities #{:mobility}}
+            :affinities #{:tactical}}
   :proc    {:template   "You may dash as a bonus action during this round"
-            :affinities #{:mobility}}}
+            :affinities #{:tactical}}}
  {:trait   "Arcana"
   :passive {:vars       {:threshold 1}
             :template   "-{{threshold}} standard success threshold with attacks from non-cantrip spells"
@@ -176,3 +176,4 @@
   :proc    {:vars       {:dice 1}
             :template   "The soul deals {{dice}}d6 damage to each enemy you can see whose {{ability}} is lower than yours."
             :affinities #{:offence}}}]
+;TODO add some wealth related mod(s)
