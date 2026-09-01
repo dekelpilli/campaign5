@@ -21,4 +21,8 @@
  {:name   "Refinement"
   :effect "Replace a mod on a reliquary with another random mod. If possible, that mod will be upgraded until it is at least of at least equal value."
   :cost   75
-  :tokens ["soul"]}]
+  :tokens ["soul"]}
+ {:name   "Bestowing"
+  :effect "Unlock the next tier of boons granted by a relic"
+  :cost   100
+  :tokens ["trinket"]}]

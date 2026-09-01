@@ -80,7 +80,7 @@
   p/LootGenerator
   (loot-spec [_]
     {:id       :souls
-     :label    "Soul"
+     :label    "Souls"
      :utility? false
      :inputs   [{:id      :trait
                  :label   "Trait (optional)"

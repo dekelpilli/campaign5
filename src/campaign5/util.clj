@@ -23,7 +23,7 @@
 ;; steps between such a mod and the view-model are shared by both.
 
 (defn parse-metadata [metadata]
-  {:affinities (into []
+  {:affinities (into #{}
                      (comp (keep #(when (str/starts-with? % "Affinities: ")
                                     (subs % (count "Affinities: "))))
                            (mapcat #(str/split % #", "))
@@ -77,7 +77,7 @@
         (assoc mod :upgrades upgrades))
       mod)))
 
-(defn- choose-by-input [k {:keys [inputs rng]} coll]
+(defn choose-by-input [k {:keys [inputs rng]} coll]
   (if (k inputs)
     (some #(when (= (k %) (k inputs)) %) coll)
     (r/sample rng coll)))
