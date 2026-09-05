@@ -8,10 +8,10 @@
 
 (def mythic-shrines (u/read-edn-resource "data/mythic-shrines.edn"))
 
-(defrecord MythicShrineGenerator [souls]
+(defrecord MythicShrineGenerator [id souls]
   p/LootGenerator
   (loot-spec [_]
-    {:id       :mythic-shrines
+    {:id       id
      :label    "Mythic Shrines"
      :utility? false
      :inputs   [{:id      :name
@@ -39,5 +39,5 @@
                         :section/items   [{:item/body     (str cost)
                                            :item/metadata tokens}]}]})))
 
-(defn -mythic-shrine-generator [_plugin-config]
-  (->MythicShrineGenerator (u/read-edn-resource "data/souls.edn")))
+(defn -mythic-shrine-generator [{:keys [id]}]
+  (->MythicShrineGenerator id (u/read-edn-resource "data/souls.edn")))

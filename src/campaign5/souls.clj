@@ -72,14 +72,14 @@
     (update soul section #(u/advance rng % option))
     soul))
 
-(defn- add-soul-vars [soul rng]
+(defn- add-soul-vars [soul {:keys [rng]}]
   (update soul :vars (fn [vars] (->> (merge base-soul-vars vars)
                                      (vars/resolve-vars rng)))))
 
-(defrecord SoulGenerator [souls]
+(defrecord SoulGenerator [id souls]
   p/LootGenerator
   (loot-spec [_]
-    {:id       :souls
+    {:id       id
      :label    "Souls"
      :utility? false
      :inputs   [{:id      :trait
@@ -106,7 +106,7 @@
           (update :proc u/add-default-upgrades)))
     souls))
 
-(defn -soul-generator [_plugin-config]
-  (-> (u/read-edn-resource "data/souls.edn")
-      initialise-souls-data
-      ->SoulGenerator))
+(defn -soul-generator [{:keys [id]}]
+  (->> (u/read-edn-resource "data/souls.edn")
+       initialise-souls-data
+       (->SoulGenerator id)))

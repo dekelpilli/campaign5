@@ -80,10 +80,10 @@
     (mod-inputs->reliquary reliquary-mods mods)
     (new-reliquary reliquary-mods ctx)))
 
-(defrecord ReliquaryGenerator [reliquary-mods]
+(defrecord ReliquaryGenerator [id reliquary-mods]
   p/LootGenerator
   (loot-spec [_]
-    {:id       :reliquaries
+    {:id       id
      :label    "Reliquaries"
      :utility? false
      :inputs   [{:id      :mods
@@ -105,10 +105,10 @@
 (defn- initialise-reliquaries-data [reliquary-mods]
   (mapv u/add-default-upgrades reliquary-mods))
 
-(defn -reliquary-generator [_plugin-config]
-  (-> (u/read-edn-resource "data/reliquary-mods.edn")
-      initialise-reliquaries-data
-      ->ReliquaryGenerator))
+(defn -reliquary-generator [{:keys [id]}]
+  (->> (u/read-edn-resource "data/reliquary-mods.edn")
+       initialise-reliquaries-data
+       (->ReliquaryGenerator id)))
 
 (comment
   (new-reliquary (u/read-edn-resource "data/reliquary-mods.edn")

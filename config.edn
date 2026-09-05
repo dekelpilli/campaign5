@@ -1,4 +1,4 @@
-{:storage    {:backend :file} ;TODO consider mysql?
+{:storage    {:backend :file}
  :server     {:port 5555}
  :plugins    [{:type       :jar
                :id         :souls
@@ -29,7 +29,13 @@
               {:type       :jar
                :id         :mythic-shrines
                :jar        "target/campaign5.jar"
-               :entrypoint campaign5.mythic-shrines/-mythic-shrine-generator}]
+               :entrypoint campaign5.mythic-shrines/-mythic-shrine-generator}
+              {:type       :jar
+               :id         :soul-procs
+               :jar        "target/campaign5.jar"
+               :entrypoint campaign5.soul-procs/-soul-proc-generator}
+              {:type :builtin
+               :id   :social}]
  :reporting  #include "reporting.edn"
  ;TODO consider adding missions/omens as a low-weight loot result (gives mission + reroll), or some other special result at 96+/100
  :loot-table [{:id     :rings
