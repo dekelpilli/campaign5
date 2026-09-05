@@ -1,0 +1,2 @@
+{"alice" {:deception 10M, :persuasion 5M, :present? true},
+ "bob"   {:deception 3M, :persuasion 3.5M, :present? true}}

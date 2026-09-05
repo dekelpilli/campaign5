@@ -10,6 +10,8 @@
   (:import
     (java.io PushbackReader)))
 
+(def characters #{"alice" "bob" "carol" "dave"})
+
 (defn read-edn-resource [resource]
   (-> (io/resource resource)
       io/reader

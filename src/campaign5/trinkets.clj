@@ -37,10 +37,10 @@
 (defn- upgrade-trinket-level [trinket]
   (update trinket :level (fn [level] (min (inc level) 5))))
 
-(defrecord TrinketGenerator [trinkets]
+(defrecord TrinketGenerator [id trinkets]
   p/LootGenerator
   (loot-spec [_]
-    {:id       :trinkets
+    {:id       id
      :label    "Trinkets"
      :utility? false
      :inputs   [{:id      :depiction
@@ -57,7 +57,7 @@
                     ::bestowing (upgrade-trinket-level trinket))]
       (trinket->view-model trinket ctx))))
 
-(defn -trinket-generator [_plugin-config]
+(defn -trinket-generator [{:keys [id]}]
   (->> (u/read-edn-resource "data/trinkets.edn")
        (mapv #(assoc % :level 1))
-       ->TrinketGenerator))
+       (->TrinketGenerator id)))

@@ -1,0 +1,7 @@
+{"bob"
+ [{:soul "Arcana", :proc-chance 10}
+  {:soul "Mastery", :proc-chance 19}
+  {:soul "Healing", :proc-chance 10}],
+ "alice"
+ [{:soul "Perfectionism", :proc-chance 10}
+  {:soul "Toughness", :proc-chance 10}]}
