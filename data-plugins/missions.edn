@@ -1,0 +1,21 @@
+{:label    "Missions"
+ :items    [{:mission "Roll the same number on each d20 during advantage or disadvantage"}
+            {:mission "Score a natural 20 on any attack or skill check without advantage"}
+            {:mission "Complete a mission"}
+            {:mission "Obtain a mission"}
+            {:mission "Have this be the only mission in the party"}
+            {:mission "Empty yourself of spell slots or exertion"}
+            {:mission "Score a major success with a disadvantaged attack, or a minor success with an advantaged attack"}
+            {:mission "Consume at least 150 tokens in one day"}
+            {:mission "Score 2 killing blows in the same combat, or score a killing blow against a boss"}
+            {:mission "Score a killing blow with no damage overflow"}
+            {:mission "Complete a combat while the party has 3+ wounds"}
+            {:mission "Sell an item for at least 100 tokens"}
+            {:mission "Finish a round in which you've used an action, bonus action, reaction, and all of your movement"}
+            {:mission "Level up"}
+            {:mission "Be the only present party member to not receive a loot roll after an encounter"}]
+ :take     1
+ :title    "Special result"
+ :sections [{:each :items
+             :item {:title "Gain 1 loot roll, and 1 loot result when you finish the mission"
+                    :body  :mission}}]}

@@ -73,3 +73,6 @@ Potential alternative:
 - Survivability (defence/hp/regen/incoming healing)
 - Meta (gold/token improvements, xp, impact on other loot)
 - Utility (skills, out of combat benefits)
+
+## Specialisations
+Make these always apply to everyone? Maybe the individual's choice still impacts how often they find that thing 

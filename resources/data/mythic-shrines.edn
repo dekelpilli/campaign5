@@ -23,6 +23,10 @@
   :cost   75
   :tokens ["soul"]}
  {:name   "Bestowing"
-  :effect "Unlock the next tier of boons granted by a relic"
+  :effect "Unlock the next tier of boons granted by a trinket"
   :cost   100
-  :tokens ["trinket"]}]
+  :tokens ["trinket"]}
+ {:name   "Delegation"
+  :effect "Cause one of your missions to only be considered done when their condition is completed by another character of your choice"
+  :cost   10
+  :tokens ["trinket" "legendary" "ring" "soul" "tattoo"]}]

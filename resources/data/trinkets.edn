@@ -1,5 +1,5 @@
 [{:depiction "a question mark"
-  :info      "Focuses on improving conversations (exclusively out of combat)."
+  :info      "Focuses on improving conversations (exclusively out of combat)"
   :boons     [{:template   "You gain proficiency or +1 expertise die in Deception and Insight."
                :affinities #{:utility}}
               {:template   "At the end of a conversation, you may find out whether or not a lie was told during that conversation."
@@ -11,8 +11,8 @@
               {:template   "No more than once per conversation, when you make a Deception or Persuasion check, you may immediately learn the success of that check for one target of that check. This allows you to then immediately add to that statement, potentially salvaging the situation."
                :affinities #{:utility}}]}
  {:depiction "Caduceus"
-  :info      "Improves healing you grant, including via spells."
-  :boons     [{:template   "Downed you revive gain an additional 10% of their maximum hit points."
+  :info      "Improves healing you grant, including via spells"
+  :boons     [{:template   "Downed allies you revive gain an additional 10% of their maximum hit points."
                :affinities #{:support}}
               {:template   "When you use an action to heal a creature with no temporary hit points, they gain temporary his points equal to your level. When you use an action to heal a creature with temporary hit points, gain temporary hit points equal to their temporary hit points."
                :affinities #{:support :survivability}}
@@ -23,7 +23,7 @@
               {:template   "Modifiers to healing on your legendary items, tattoos, souls, reliquaries, and rings have their magnitudes doubled."
                :affinities #{:support :meta}}]}
  {:depiction "a tower shield"
-  :info      "Improves your longevity in combat through various avenues."
+  :info      "Improves your longevity in combat through various avenues"
   :boons     [{:template   "You have +2 absorption against attacks targeting your lowest defence(s)."
                :affinities #{:survivability}}
               {:template   "You may have an additional soul in your reliquary, so long as all of the contained souls have at least one 'survivability' modifier."
@@ -35,7 +35,7 @@
               {:template   "Each 'survivability' mod on you (from trinkets, souls, reliquaries, rings, and tattoos) also increases your maximum hit points by 1."
                :affinities #{:survivability}}]}
  {:depiction "an eye"
-  :info      "Improves your ability to acquire knowledge through skill checks, and improves Divination spellcasting."
+  :info      "Improves your ability to acquire knowledge through skill checks, and improves Divination spellcasting"
   :boons     [{:template   "Any text within line of sight within 100 feet of you becomes readable to you regardless of its language, distance/size, legibility, and lighting. Additionally, you gain +2 expertise dice for Investigation checks relating to reading."
                :affinities #{:utility}}
               {:template   "When you make a Perception, Magiscience, Investigation, or History check, you may choose to treat the d20 roll as though you had rolled an 11."
@@ -47,7 +47,7 @@
               {:template   "At the start of each of your turns in combat while conscious, you have a percent chance to be affected by Warrior's Instincts until the start of your next turn equal to double the number of Divination spells (including cantrips) you have prepared, to a minimum of 10%."
                :affinities #{:survivability :tactical :offence}}]}
  {:depiction "a four-leaf clover"
-  :info      "Improves your luck and your ability to acquire better items."
+  :info      "Improves your luck and your ability to acquire better items"
   :boons     [{:template   "Whenever you roll for loot, roll an additional d100. If the additional die's result would grant a special loot result, gain that in additional to the loot result from the first die."
                :affinities #{:meta}}
               {:template   "Whenever you roll a 1 on any die, you may reroll that die. You must then accept that result"
@@ -59,7 +59,7 @@
               {:template   "" ;TODO
                :affinities #{:meta}}]}
  {:depiction "a fist"
-  :info      "Grants bonuses that make you a more competent close combatant."
+  :info      "Grants bonuses that make you a more competent close combatant"
   :boons     [{:template   "You gain +1 global damage for each enemy that is Close to you (within 5 feet of you, or within reach of your melee attacks)."
                :affinities #{:offence}}
               {:template   "No more than once per combat, when a creature enters a space that is within 5 feet of your reach, you may immediately move 5 feet towards it."
@@ -71,7 +71,7 @@
               {:template   "+1 armour while Close to two or more enemies. +1AB against Close enemies that are adjacent to at least one hostile creature other than yourself."
                :affinities #{:offence :survivability}}]}
  {:depiction "a scroll"
-  :info      "Improves your general spellcasting prowess."
+  :info      "Improves your general spellcasting prowess"
   :boons     [{:template   "You have an additional spell slot in each but your top two spells slots. This always grants at least a first level spell slot."
                :affinities #{:resources}}
               {:template   "You may cast spells with a range that isn't Self as if they had a range of Touch instead. When you land a major success against a creature with a spell cast with a range of Touch, they become rattled until the start of their next turn."
@@ -83,7 +83,7 @@
               {:template   "Whenever you make a spell attack that did not score at least a standard success against at least one creature, you may revert time to before that spell was cast. When you do this, you may not cast that spell again for a minute."
                :affinities #{:tactical :resources}}]}
  {:depiction "a runed sword"
-  :info      "Improves spellcasting and weapon attacks for characters that utilise both."
+  :info      "Improves spellcasting and weapon attacks for characters that utilise both"
   :boons     [{:template   "When you make a ranged weapon attack, you may use your Wisdom, Charisma, or Intelligence for it instead. When you make a spell attack against an adjacent creature, you may use your Dexterity or Strength for it instead."
                :affinities #{:offence}}
               {:template   "Enemies you have targeted with both a weapon attack and a spell in the last minute cannot make opportunity attacks against you, and do not impose disadvantage on your ranged attacks as a result of being within 5 feet of you."
@@ -109,16 +109,28 @@
                :affinities #{:tactical}}]}
  {:depiction "a banner"
   :info      "Grants benefits relating to minions"
-  :boons     [{:template   "Minions you have summoned in the last 3 rounds gain damage and harm equal to your proficiency bonus. Your other minions gain +1 to each of their defences."
-               :affinities #{:survivability :offence}}
+  :boons     [{:template   "You gain access to the Mythic Shrine of Generosity, which allows you to cause a loot modifier to apply to your minions instead of to you, for a cost of 10 mythic tokens of any type."
+               :affinities #{:meta}}
               {:template   "Gain temporary hit points equal to your level at the start of your minions' turns. When you summon a minion, they are summoned with temporary hit points equal to yours."
                :affinities #{:survivability}}
-              {:template   "You gain access to the Mythic Shrine of Generosity, which allows you to cause a loot modifier to apply to your minions instead of to you, for a cost of 10 mythic tokens of any type."
-               :affinities #{:meta}}
+              {:template   "Minions you have summoned in the last 3 rounds gain damage and harm equal to your proficiency bonus. Your other minions gain +1 to each of their defences."
+               :affinities #{:survivability :offence}}
               {:template   "When you are about to make an opportunity attack, you may choose to be temporarily possessed by an active minion of yours, allowing it to make the attack from your position."
                :affinities #{:tactical}}
               {:template   "Whenever one of your minions would die, they may make a saving throw. On a success, they remain on 1 hit point instead, but die one round later (at which point they can attempt the saving throw again)."
-               :affinities #{:survivability}}]}]
+               :affinities #{:survivability}}]}
+ {:depiction "a branding iron"
+  :info      "Grants a mark and improves your marks"
+  :boons     [{:template   "When you roll for initiative, and whenever you hit a creature while no have -1 resistance."
+               :affinities #{:offence :support}}
+              {:template   "Your attacks and spells deal +1d4 radiant damage against marked enemies."
+               :affinities #{:offence}}
+              {:template   "Whenever you mark an enemy, you may choose one other creature to also obtain the same mark. Whenever a creature marked by you dies, make a Will attack against one other creature you can see. On a hit, they gain all of the marks that were on the killed creature."
+               :affinities #{:offence}}
+              {:template   "Creatures marked by you take +1 damage for each distinct mark on them."
+               :affinities #{:offence :support}}
+              {:template   "When a creature marked by you attacks or casts a spell, they take 1 harm for each mark on them."
+               :affinities #{:offence}}]}]
 #_[{:depiction "a branding iron" ;TODO redesign without vengeance theme, stick to marks
     :name      "Wrathful Judgement"
     :info      "Grants a mark and improves your marks."

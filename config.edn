@@ -1,50 +1,57 @@
 {:storage    {:backend :file}
  :server     {:port 5555}
- :plugins    [{:type       :jar
-               :id         :souls
-               :jar        "target/campaign5.jar"
-               :entrypoint campaign5.souls/-soul-generator}
-              {:type       :jar
-               :id         :reliquaries
-               :jar        "target/campaign5.jar"
-               :entrypoint campaign5.reliquaries/-reliquary-generator}
-              {:type   :data
-               :id     :rings
-               :source "data-plugins/rings.edn"}
+ :history    :always
+ :plugins    [{:type :jar
+               :id   :souls
+               :jar  {:path       "target/campaign5.jar"
+                      :entrypoint campaign5.souls/-soul-generator}}
+              {:type :jar
+               :id   :reliquaries
+               :jar  {:path       "target/campaign5.jar"
+                      :entrypoint campaign5.reliquaries/-reliquary-generator}}
+              {:type :data
+               :id   :rings
+               :data {:source "data-plugins/rings.edn"}}
               {:type    :data
                :id      :tarot
                :hidden? true
-               :inline  {:label    "Tarot cards"
-                         :items    [{:instruction "Draw 3 tarot cards"}]
-                         :title    "Tarot cards"
-                         :sections [{:each :items
-                                     :item {:body "{{ instruction }}"}}]}}
-              {:type       :jar
-               :id         :trinkets
-               :jar        "target/campaign5.jar"
-               :entrypoint campaign5.trinkets/-trinket-generator}
-              {:type   :data
-               :id     :minor-shrines
-               :source "data-plugins/minor-shrines.edn"}
-              {:type       :jar
-               :id         :mythic-shrines
-               :jar        "target/campaign5.jar"
-               :entrypoint campaign5.mythic-shrines/-mythic-shrine-generator}
-              {:type       :jar
-               :id         :soul-procs
-               :jar        "target/campaign5.jar"
-               :entrypoint campaign5.soul-procs/-soul-proc-generator}
+               :data    {:inline {:label    "Tarot cards"
+                                  :items    [{:instruction "Draw 3 tarot cards"}]
+                                  :title    "Tarot cards"
+                                  :sections [{:each :items
+                                              :item {:body "{{ instruction }}"}}]}}}
+              {:type    :jar
+               :id      :trinkets
+               :history :button
+               :jar     {:path       "target/campaign5.jar"
+                         :entrypoint campaign5.trinkets/-trinket-generator}}
+              {:type :data
+               :id   :missions
+               :data {:source "data-plugins/missions.edn"}}
+              {:type :data
+               :id   :minor-shrines
+               :data {:source "data-plugins/minor-shrines.edn"}}
+              {:type :jar
+               :id   :mythic-shrines
+               :jar  {:path       "target/campaign5.jar"
+                      :entrypoint campaign5.mythic-shrines/-mythic-shrine-generator}}
+              {:type :jar
+               :id   :soul-procs
+               :jar  {:path       "target/campaign5.jar"
+                      :entrypoint campaign5.soul-procs/-soul-proc-generator}}
               {:type :builtin
                :id   :social}]
  :reporting  #include "reporting.edn"
  ;TODO consider adding missions/omens as a low-weight loot result (gives mission + reroll), or some other special result at 96+/100
  :loot-table [{:id     :rings
-               :weight 19}
+               :weight 18}
               {:id     :souls
-               :weight 19}
+               :weight 18}
               {:id     :tarot
-               :weight 19}
+               :weight 18}
               #_{:id     :tattoos
                  :weight 19}
               {:id     :trinkets
-               :weight 19}]}
+               :weight 18}
+              {:id     :missions
+               :weight 10}]}
