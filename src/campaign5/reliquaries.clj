@@ -9,10 +9,10 @@
 ;; Only the progression bookkeeping travels in `:loot/state`; the mods themselves
 ;; are read back off the displayed items (`view-model->reliquary`), so a DM's
 ;; edits are what the next shrine operates on.
-(defn- reliquary->view-model [reliquary {:keys [progression rng]}]
+(defn- reliquary->view-model [reliquary {:keys [progression]}]
   {:loot/title    "Reliquary"
    :loot/sections [{:section/heading "Mods"
-                    :section/items   (mapv (partial u/mod-item rng) reliquary)}]
+                    :section/items   (mapv u/mod-item reliquary)}]
    :loot/actions  (cond-> []
                           (seq reliquary) (conj {:action/label "Mythic Shrine of Correction"
                                                  :action/event [:loot/action {:id     :reliquaries

@@ -21,13 +21,13 @@
                                                  :option  id}}]})
         (u/options-at progression (get soul section))))
 
-(defn- soul->view-model [{:keys [trait vars] :as soul} {:keys [progression rng]}]
+(defn- soul->view-model [{:keys [trait vars] :as soul} {:keys [progression]}]
   {:loot/title    "Soul embodying {{ trait }}"
    :loot/vars     (assoc vars :trait {:value    trait
                                       :context? true})
    :loot/sections (conj (mapv (fn [[section heading]]
                                 {:section/heading heading
-                                 :section/items   [(u/mod-item rng (get soul section) vars)]})
+                                 :section/items   [(u/mod-item (get soul section) vars)]})
                               mod-sections)
                         {:section/heading "Details"
                          :section/items   [{:item/title "Origin"
@@ -72,9 +72,8 @@
     (update soul section #(u/advance rng % option))
     soul))
 
-(defn- add-soul-vars [soul {:keys [rng]}]
-  (update soul :vars (fn [vars] (->> (merge base-soul-vars vars)
-                                     (vars/resolve-vars rng)))))
+(defn- add-soul-vars [soul]
+  (update soul :vars (partial merge base-soul-vars)))
 
 (defrecord SoulGenerator [id souls]
   p/LootGenerator
@@ -88,7 +87,7 @@
                  :options (sort (mapv :trait souls))}]})
   (generate [_ ctx]
     (some-> (u/choose-by-input :trait ctx souls)
-            (add-soul-vars ctx)
+            add-soul-vars
             (soul->view-model ctx)))
   p/LootAction
   (handle-action [_ {:keys [progression rng view-model] :as ctx} action {:keys [section option]}]

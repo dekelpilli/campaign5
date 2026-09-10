@@ -5,8 +5,7 @@
     [clojure.string :as str]
     [randy.core :as r]
     [sns.sdk.progression :as sp]
-    [sns.sdk.protocols :as p]
-    [sns.sdk.vars :as vars])
+    [sns.sdk.protocols :as p])
   (:import
     (java.io PushbackReader)))
 
@@ -38,11 +37,9 @@
        (str "Affinities: ")))
 
 (defn mod-item
-  "`mod` as an `sns.sdk.schema/item`: our `:template` as the item body, its vars
-   as `:item/vars`, for the browser to render one against the other."
-  ([rng mod] (mod-item rng mod {}))
-  ([rng mod item-vars]
-   (let [vars (vars/resolve-vars rng (:vars mod))
+  ([mod] (mod-item mod {}))
+  ([mod item-vars]
+   (let [vars (:vars mod)
          metadata (cond-> []
                           (seq (:affinities mod)) (conj (affinities->metadata (:affinities mod)))
                           (or (some :random (vals vars))
