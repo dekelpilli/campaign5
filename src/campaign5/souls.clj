@@ -27,7 +27,7 @@
                                       :context? true})
    :loot/sections (conj (mapv (fn [[section heading]]
                                 {:section/heading heading
-                                 :section/items   [(u/mod-item rng (get soul section))]})
+                                 :section/items   [(u/mod-item rng (get soul section) vars)]})
                               mod-sections)
                         {:section/heading "Details"
                          :section/items   [{:item/title "Origin"

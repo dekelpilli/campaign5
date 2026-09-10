@@ -35,17 +35,21 @@
 (defn- affinities->metadata [affinities]
   (->> (mapv name affinities)
        (str/join ", ")
-       (str "Affinities: ")
-       vector))
+       (str "Affinities: ")))
 
 (defn mod-item
   "`mod` as an `sns.sdk.schema/item`: our `:template` as the item body, its vars
    as `:item/vars`, for the browser to render one against the other."
-  [rng mod]
-  (let [vars (vars/resolve-vars rng (:vars mod))]
-    (cond-> {:item/body (:template mod)}
-            (seq (:affinities mod)) (assoc :item/metadata (affinities->metadata (:affinities mod)))
-            (seq vars) (assoc :item/vars vars))))
+  ([rng mod] (mod-item rng mod {}))
+  ([rng mod item-vars]
+   (let [vars (vars/resolve-vars rng (:vars mod))
+         metadata (cond-> []
+                          (seq (:affinities mod)) (conj (affinities->metadata (:affinities mod)))
+                          (or (some :random (vals vars))
+                              (some :random (vals item-vars))) (conj "Randomised"))]
+     (cond-> {:item/body (:template mod)}
+             (seq metadata) (assoc :item/metadata metadata)
+             (seq vars) (assoc :item/vars vars)))))
 
 (defn options-at
   "The upgrade options available to `mod` as its next step, or nil at a terminal

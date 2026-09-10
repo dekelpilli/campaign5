@@ -48,15 +48,15 @@
                :affinities #{:survivability :tactical :offence}}]}
  {:depiction "a four-leaf clover"
   :info      "Improves your luck and your ability to acquire better items"
-  :boons     [{:template   "Whenever you roll for loot, roll an additional d100. If the additional die's result would grant a special loot result, gain that in additional to the loot result from the first die."
+  :boons     [{:template   "Whenever you roll for loot, roll an additional d100. If the additional die's result would grant a mission, gain that mission in addition to the loot result from the first die."
                :affinities #{:meta}}
-              {:template   "Whenever you roll a 1 on any die, you may reroll that die. You must then accept that result"
+              {:template   "Whenever you roll a 1 on any die, you may reroll that die. You must then accept that result."
                :affinities #{:utility :offence :survivability}}
               {:template   "Roll a d10 whenever you use a shrine. On a result of 10, you immediately gain another use of that shrine."
                :affinities #{:meta}}
               {:template   "You may cast Fortune's Favour at any spell level as a free action on your turn once per round in combat. You can use no more than 10 spell slot levels on this per long rest."
-               :affinities #{:accuracy}}
-              {:template   "" ;TODO
+               :affinities #{:utility :offence :survivability :support}}
+              {:template   "Whenever you gain a loot roll, gain +10% chance to duplicate your loot rolls, including the one just received (rolled with a d10). Once you duplicate a loot roll in this way, the chance resets to 0%."
                :affinities #{:meta}}]}
  {:depiction "a fist"
   :info      "Grants bonuses that make you a more competent close combatant"
@@ -120,27 +120,14 @@
               {:template   "Whenever one of your minions would die, they may make a saving throw. On a success, they remain on 1 hit point instead, but die one round later (at which point they can attempt the saving throw again)."
                :affinities #{:survivability}}]}
  {:depiction "a branding iron"
-  :info      "Grants a mark and improves your marks"
-  :boons     [{:template   "When you roll for initiative, and whenever you hit a creature while no have -1 resistance."
-               :affinities #{:offence :support}}
-              {:template   "Your attacks and spells deal +1d4 radiant damage against marked enemies."
-               :affinities #{:offence}}
-              {:template   "Whenever you mark an enemy, you may choose one other creature to also obtain the same mark. Whenever a creature marked by you dies, make a Will attack against one other creature you can see. On a hit, they gain all of the marks that were on the killed creature."
-               :affinities #{:offence}}
-              {:template   "Creatures marked by you take +1 damage for each distinct mark on them."
-               :affinities #{:offence :support}}
-              {:template   "When a creature marked by you attacks or casts a spell, they take 1 harm for each mark on them."
-               :affinities #{:offence}}]}]
-#_[{:depiction "a branding iron" ;TODO redesign without vengeance theme, stick to marks
-    :name      "Wrathful Judgement"
-    :info      "Grants a mark and improves your marks."
-    :boons     [{:template   "Creatures of your choice that damage you, or land a killing blow against an ally of yours, become marked by Brand of Vengeance for a minute. Creatures marked with Brand of Vengeance have -1 resistance."
-                 :affinities #{:offence :support}}
-                {:template   "Your attacks and spells deal +1d4 radiant damage against marked enemies."
-                 :affinities #{:offence}}
-                {:template   "Whenever you mark an enemy, you may choose one other creature to also obtain the same mark. Whenever a creature marked by you dies, make a Will attack against one other creature you can see. On a hit, they gain all of the marks that were on the killed creature."
-                 :affinities #{:offence}}
-                {:template   "Creatures marked by you take +1 damage for each distinct mark on them."
-                 :affinities #{:offence :support}}
-                {:template   "When a creature marked by you attacks or casts a spell, they take 1 harm for each mark on them."
-                 :affinities #{:offence}}]}]
+  :info      "Grants a mark and improves your use of marks"
+  :boons     [{:template   "When you roll for initiative, mark one creature you can see, causing it to have -1 resistance. You may also mark a creature you hit in this way if no creature in the current is currently marked by you."
+               :affinities #{:support}}
+              {:template   "Whenever you mark an enemy, you may choose one other creature to also obtain the same mark."
+               :affinities #{:tactical :support}}
+              {:template   "Creatures marked by you have -1 resistance for each distinct mark on them."
+               :affinities #{:support}}
+              {:template   "When you roll for initiative, choose yourself or an ally. Attacks against an enemy that has damaged the chosen ally have +1 critical hit range."
+               :affinities #{:support}}
+              {:template   "Whenever you mark an enemy, lower one of their non-armour defences by 1. If that enemy was already marked with a different mark, also lower their armour by 1. Each of a creature's defences cannot be lowered more than once in this way."
+               :affinities #{:support}}]}]
