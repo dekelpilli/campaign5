@@ -9,7 +9,7 @@
              :points   5}
             {:name     "The Lone Wolf"
              :synergy  true
-             :template "+1 critical hit range while not wearing any synergy rings that are not The Lone Wolf."
+             :template "+1 critical hit range while not wearing any synergy rings that are not 'The Lone Wolf'."
              :points   5}
             {:name     "The Joker"
              :synergy  true
@@ -25,7 +25,7 @@
              :points   2}
             {:name     "The Simpleton"
              :synergy  true
-             :template "Your non-synergy rings' cost decreases by 1 point. Your synergy rings' cost increases by 2."
+             :template "Your non-synergy rings' cost decreases by 1 point. Your synergy rings' cost increases by 2 points."
              :points   0} ;2 if you include the ring's effect once
             {:name     "The Beacon"
              :synergy  true
@@ -45,7 +45,7 @@
              :template "Once per short rest, as a reaction to being damaged, you may cast Hellish Rebuke on the creature that damaged you, ignoring range restrictions."
              :points   3}
             {:name     "Jack of All Trades"
-             :template "None of your ability scores can be below 10. Any ability scores below 10 are considered to be 10 instead."
+             :template "Any of your ability scores that are below 10 are considered to be 10 instead."
              :points   1}
             {:name     "Watchful"
              :template "You may trance instead of sleeping during long rests, but must still rest for 8 hours (by default) to achieve a long rest."

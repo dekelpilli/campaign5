@@ -7,26 +7,26 @@
   :cost   75
   :tokens ["soul"]}
  {:name   "Temporal Shifting"
-  :effect "Reroll the era of a soul into a different era"
+  :effect "Reroll the era of a soul into a different era."
   :cost   10
   :tokens ["soul"]}
  {:name   "Soul Transference"
-  :effect "Reroll the origin of a soul into a different origin"
+  :effect "Reroll the origin of a soul into a different origin."
   :cost   5
   :tokens ["soul"]}
  {:name   "Annexation"
-  :effect "Add a random mod to a reliquary that doesn't have three mods. Otherwise, progress a random mod on a reliquary"
+  :effect "Add a random mod to a reliquary that doesn't have three mods. Otherwise, progress a random mod on a reliquary."
   :cost   50
   :tokens ["soul"]}
  {:name   "Refinement"
-  :effect "Replace a mod on a reliquary with another random mod. If possible, that mod will be upgraded until it is at least of at least equal value."
+  :effect "Replace a mod on a reliquary with another random mod. If possible, that mod will be upgraded until it is of at least equal value."
   :cost   75
   :tokens ["soul"]}
  {:name   "Bestowing"
-  :effect "Unlock the next tier of boons granted by a trinket"
+  :effect "Unlock the next tier of boons granted by a trinket."
   :cost   100
   :tokens ["trinket"]}
  {:name   "Delegation"
-  :effect "Cause one of your missions to only be considered done when their condition is completed by another character of your choice"
+  :effect "Cause one of your missions to only be considered done when its condition is completed by another character of your choice."
   :cost   10
   :tokens ["trinket" "legendary" "ring" "soul" "tattoo"]}]

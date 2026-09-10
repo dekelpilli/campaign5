@@ -14,7 +14,7 @@
   :info      "Improves healing you grant, including via spells"
   :boons     [{:template   "Downed allies you revive gain an additional 10% of their maximum hit points."
                :affinities #{:support}}
-              {:template   "When you use an action to heal a creature with no temporary hit points, they gain temporary his points equal to your level. When you use an action to heal a creature with temporary hit points, gain temporary hit points equal to their temporary hit points."
+              {:template   "When you use an action to heal a creature with no temporary hit points, they gain temporary hit points equal to your level. When you use an action to heal a creature with temporary hit points, gain temporary hit points equal to their temporary hit points."
                :affinities #{:support :survivability}}
               {:template   "You may learn any Concentration spell that grants hit points and cast it with your spell slots. You may concentrate on two such spells at one time. This includes, but is not limited to, Aura of Life, Enervation, Beacon of Hope, Healing Spirit, and Vampiric Touch."
                :affinities #{:support}}
@@ -72,16 +72,16 @@
                :affinities #{:offence :survivability}}]}
  {:depiction "a scroll"
   :info      "Improves your general spellcasting prowess"
-  :boons     [{:template   "You have an additional spell slot in each but your top two spells slots. This always grants at least a first level spell slot."
-               :affinities #{:resources}}
+  :boons     [{:template   "You have an additional spell slot in each but your top two spell slot levels. This always grants at least a first level spell slot."
+               :affinities #{:resource}}
               {:template   "You may cast spells with a range that isn't Self as if they had a range of Touch instead. When you land a major success against a creature with a spell cast with a range of Touch, they become rattled until the start of their next turn."
                :affinities #{:tactical :control}}
               {:template   "The threshold for your spell attacks to score a major success is decreased by 1."
                :affinities #{:offence}}
               {:template   "When you upcast a spell, you may cast it at a level one above the spell slot consumed."
-               :affinities #{:resources}}
+               :affinities #{:resource}}
               {:template   "Whenever you make a spell attack that did not score at least a standard success against at least one creature, you may revert time to before that spell was cast. When you do this, you may not cast that spell again for a minute."
-               :affinities #{:tactical :resources}}]}
+               :affinities #{:tactical :resource}}]}
  {:depiction "a runed sword"
   :info      "Improves spellcasting and weapon attacks for characters that utilise both"
   :boons     [{:template   "When you make a ranged weapon attack, you may use your Wisdom, Charisma, or Intelligence for it instead. When you make a spell attack against an adjacent creature, you may use your Dexterity or Strength for it instead."
@@ -99,7 +99,7 @@
   :info      "Specialises in teleportation and conjuration, without a focus on spellcasting, granting greater control of the battlefield."
   :boons     [{:template   "When you make an opportunity attack, you may make a Will spell attack against that target instead. If the attack succeeds, teleport the target to a random safe and unoccupied space you can see within 20 feet of them (2d9, where 5/5 is no effect)."
                :affinities #{:control}}
-              {:template   "Once per turn, as a free action, you may either conjure or remove a stone pillar (5x5 feet each) from the ground on an unoccupied space you can see within 60 feet of you. These pillars are up to 20 feet tall, last for 10 minutes, and have defences equal to yours, and have maximum HP equal to a fifth of your maximum HP, disappearing when reaching 0 life. Max 8 active pillars at one time."
+              {:template   "Once per turn, as a free action, you may either conjure or remove a stone pillar (5x5 feet each) from the ground on an unoccupied space you can see within 60 feet of you. These pillars are up to 20 feet tall, last for 10 minutes, have defences equal to yours, and have maximum hit points equal to a fifth of your maximum hit points, disappearing when they reach 0 hit points. Max 8 active pillars at one time."
                :affinities #{:tactical}}
               {:template   "You may replace your movement with teleportation (limited to spaces you can see), allowing you to move across otherwise uncrossable/difficult terrain, move vertically, and avoid opportunity attacks. Teleporting any distance consumes your entire regular movement for the turn."
                :affinities #{:tactical}}
@@ -121,7 +121,7 @@
                :affinities #{:survivability}}]}
  {:depiction "a branding iron"
   :info      "Grants a mark and improves your use of marks"
-  :boons     [{:template   "When you roll for initiative, mark one creature you can see, causing it to have -1 resistance. You may also mark a creature you hit in this way if no creature in the current is currently marked by you."
+  :boons     [{:template   "When you roll for initiative, mark one creature you can see, causing it to have -1 resistance. You may also mark a creature you hit in this way if no creature in the combat is marked by you."
                :affinities #{:support}}
               {:template   "Whenever you mark an enemy, you may choose one other creature to also obtain the same mark."
                :affinities #{:tactical :support}}
