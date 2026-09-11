@@ -51,8 +51,10 @@
              :template "You may trance instead of sleeping during long rests, but must still rest for 8 hours (by default) to achieve a long rest."
              :points   2}
             {:name      "Divergent"
-             :item/vars {:damage-types {:random :without-replacement :amount 2
-                                        :preset :damage-types        :type   "non-physical"}}
+             :item/vars {:damage-types {:random :without-replacement
+                                        :amount 2
+                                        :preset :damage-types
+                                        :type   "non-physical"}}
              :template  "You take {{ damage-types.[0] }} damage as {{ damage-types.[1] }} damage instead."
              :points    1}
             #_{:name      "Multilingual"

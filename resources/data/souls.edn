@@ -129,12 +129,9 @@
   :passive {:vars       {:bonus 1}
             :template   "+{{bonus}} to your gained temporary hit points."
             :affinities #{:survivability}}
-  :proc    {:vars       {:extra 0}
+  :proc    {:vars       {:extra {:value 0 :step 2}}
             :template   "Gain temporary hit points equal to your level{{#if extra}} + {{extra}}{{/if}}."
-            :affinities #{:survivability}
-            :upgrades   {:select  :choice
-                         :options [{:id  :extra
-                                    :inc {:extra 2}}]}}}
+            :affinities #{:survivability}}}
  {:trait   "Command"
   :vars    {:hurt {:random  :literal
                    :options ["harm" "damage"]}}
@@ -153,12 +150,9 @@
             :template   "Your bloodied minions regain hit points equal to {{recovery}}% of their maximum, or just enough to no longer be bloodied, whichever is less."
             :affinities #{:survivability}}}
  {:trait   "Sensing"
-  :passive {:vars       {:range 10}
+  :passive {:vars       {:range {:value 10 :step 5}}
             :template   "+{{range}}ft of blindsight."
-            :affinities #{:utility}
-            :upgrades   {:select  :choice
-                         :options [{:id  :range
-                                    :inc {:range 5}}]}}
+            :affinities #{:utility}}
   :proc    {:template   "For the duration of the round, you have truesight with a range equal to the greater of your blindsight and darkvision ranges."
             :affinities #{:utility}}}
  {:trait   "Marksmanship"
