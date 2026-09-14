@@ -78,17 +78,14 @@
     (mod-inputs->reliquary reliquary-mods rng mods)
     (new-reliquary reliquary-mods ctx)))
 
-(defrecord ReliquaryGenerator [id reliquary-mods]
+(defrecord ReliquaryGenerator [reliquary-mods]
   p/LootGenerator
   (loot-spec [_]
-    {:id       id
-     :label    "Reliquaries"
-     :utility? false
-     :inputs   [{:id      :mods
-                 :label   "Mods (optional)"
-                 :type    :enum
-                 :list?   true
-                 :options (mapv :template reliquary-mods)}]})
+    {:inputs [{:id      :mods
+               :label   "Mods (optional)"
+               :type    :enum
+               :list?   true
+               :options (mapv :template reliquary-mods)}]})
   (generate [_ ctx]
     (-> (generate-reliquary reliquary-mods ctx)
         reliquary->view-model))
@@ -100,9 +97,9 @@
                       ::annexation (handle-annexation-shrine reliquary ctx reliquary-mods))]
       (reliquary->view-model reliquary))))
 
-(defn -reliquary-generator [{:keys [id]}]
+(defn -reliquary-generator [_config]
   (->> (u/read-edn-resource "data/reliquary-mods.edn")
-       (->ReliquaryGenerator id)))
+       ->ReliquaryGenerator))
 
 (comment
   (new-reliquary (u/read-edn-resource "data/reliquary-mods.edn")

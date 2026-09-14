@@ -1,6 +1,5 @@
-{:label    "Minor Shrines"
 ;TODO depending on spread of shrines, weighting by takeable loot types might be necessary for fairness
- :items    [{:name   "Entropy"
+{:items    [{:name   "Entropy"
              :effect "Choose a mod with any kind of randomisation on it, and reroll that mod's randomisation."
              :takes  ["legendary" "soul" "reliquary" "ring"]}
             {:name   "Manifestation"

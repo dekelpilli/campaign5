@@ -1,5 +1,4 @@
-{:label    "Rings"
- :items    [{:name     "The Hardened"
+{:items    [{:name     "The Hardened"
              :synergy  true
              :template "+1 barrier for each distinct non-synergy ring worn."
              :points   5}

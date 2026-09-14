@@ -72,12 +72,10 @@
           soul
           mod-sections))
 
-(defrecord SoulGenerator [id souls]
+(defrecord SoulGenerator [souls]
   p/LootGenerator
   (loot-spec [_]
-    {:id     id
-     :label  "Souls"
-     :inputs [{:id      :trait
+    {:inputs [{:id      :trait
                :label   "Trait (optional)"
                :type    :enum
                :options (sort (mapv :trait souls))}]})
@@ -95,7 +93,7 @@
                  ::temporal-shifting (update soul :vars #(vars/redraw-distinct rng % :era)))]
       (soul->view-model soul))))
 
-(defn -soul-generator [{:keys [id] :as m}]
+(defn -soul-generator [m]
   (println "SG ---- " m)
   (->> (u/read-edn-resource "data/souls.edn")
-       (->SoulGenerator id)))
+       ->SoulGenerator))

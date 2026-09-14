@@ -1,5 +1,4 @@
-{:label    "Missions"
- :items    [{:mission "Roll the same number on each d20 during advantage or disadvantage"}
+{:items    [{:mission "Roll the same number on each d20 during advantage or disadvantage"}
             {:mission "Score a natural 20 on any attack or skill check without advantage"}
             {:mission "Complete a mission"}
             {:mission "Obtain a mission"}

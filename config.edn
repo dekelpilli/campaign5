@@ -1,46 +1,57 @@
 {:storage    {:backend :file}
  :server     {:port 5555}
  :history    :always
- :plugins    [{:type :jar
-               :id   :souls
-               :jar  {:path       "target/campaign5.jar"
-                      :entrypoint campaign5.souls/-soul-generator}}
-              {:type :jar
-               :id   :reliquaries
-               :jar  {:path       "target/campaign5.jar"
-                      :entrypoint campaign5.reliquaries/-reliquary-generator}}
-              {:type :data
-               :id   :rings
-               :data {:source "data-plugins/rings.edn"}}
-              {:type    :data
-               :id      :tarot
-               :hidden? true
-               :data    {:inline {:label    "Tarot cards"
-                                  :items    [{:instruction "Draw 3 tarot cards"}]
-                                  :title    "Tarot cards"
-                                  :sections [{:each :items
-                                              :item {:body "{{ instruction }}"}}]}}}
+ :tools      [{:type  :jar
+               :id    :souls
+               :label "Souls"
+               :jar   {:path       "target/campaign5.jar"
+                       :entrypoint campaign5.souls/-soul-generator}}
+              {:type  :jar
+               :id    :reliquaries
+               :label "Reliquaries"
+               :jar   {:path       "target/campaign5.jar"
+                       :entrypoint campaign5.reliquaries/-reliquary-generator}}
+              {:type  :data
+               :id    :rings
+               :label "Rings"
+               :data  {:source "data-plugins/rings.edn"}}
+              {:type      :data
+               :id        :tarot
+               :label     "Tarot cards"
+               :generator {:hidden? true}
+               :data      {:inline {:items    [{:instruction "Draw 3 tarot cards"}]
+                                    :title    "Tarot cards"
+                                    :sections [{:each :items
+                                                :item {:body "{{ instruction }}"}}]}}}
+              {:type      :jar
+               :id        :trinkets
+               :label     "Trinkets"
+               :generator {:history :button}
+               :jar       {:path       "target/campaign5.jar"
+                           :entrypoint campaign5.trinkets/-trinket-generator}}
+              {:type  :data
+               :id    :missions
+               :label "Missions"
+               :data  {:source "data-plugins/missions.edn"}}
+              {:type  :data
+               :id    :minor-shrines
+               :label "Minor Shrines"
+               :data  {:source "data-plugins/minor-shrines.edn"}}
+              {:type  :jar
+               :id    :mythic-shrines
+               :label "Mythic Shrines"
+               :jar   {:path       "target/campaign5.jar"
+                       :entrypoint campaign5.mythic-shrines/-mythic-shrine-generator}}
               {:type    :jar
-               :id      :trinkets
-               :history :button
+               :id      :soul-procs
+               :label   "Soul Procs"
+               :section "Utilities"
                :jar     {:path       "target/campaign5.jar"
-                         :entrypoint campaign5.trinkets/-trinket-generator}}
-              {:type :data
-               :id   :missions
-               :data {:source "data-plugins/missions.edn"}}
-              {:type :data
-               :id   :minor-shrines
-               :data {:source "data-plugins/minor-shrines.edn"}}
-              {:type :jar
-               :id   :mythic-shrines
-               :jar  {:path       "target/campaign5.jar"
-                      :entrypoint campaign5.mythic-shrines/-mythic-shrine-generator}}
-              {:type :jar
-               :id   :soul-procs
-               :jar  {:path       "target/campaign5.jar"
-                      :entrypoint campaign5.soul-procs/-soul-proc-generator}}
-              {:type :builtin
-               :id   :social}]
+                         :entrypoint campaign5.soul-procs/-soul-proc-generator}}
+              {:type    :builtin
+               :id      :social
+               :label   "Group Social"
+               :section "Utilities"}]
  :reporting  #include "reporting.edn"
  :loot-table [{:id     :rings
                :weight 18}

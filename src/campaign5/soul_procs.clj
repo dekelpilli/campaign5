@@ -53,10 +53,7 @@
 (defrecord SoulProcGenerator [id traits]
   p/LootGenerator
   (loot-spec [_]
-    {:id             id
-     :label          "Soul Procs"
-     :utility?       true
-     :generate-label "Roll procs"
+    {:generate-label "Roll procs"
      :store/manual   {:key-label "Character"
                       :list?     true
                       :fields    [{:id      :soul
