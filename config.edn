@@ -42,7 +42,6 @@
               {:type :builtin
                :id   :social}]
  :reporting  #include "reporting.edn"
- ;TODO consider adding missions/omens as a low-weight loot result (gives mission + reroll), or some other special result at 96+/100
  :loot-table [{:id     :rings
                :weight 18}
               {:id     :souls

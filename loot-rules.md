@@ -9,17 +9,10 @@ Loot can be obtained or improved in the following ways:
   - Items that have been upgraded can generally sell for more mythic tokens, but won't necessarily be 100% refunded
 - Once players have specialisations, mythic shrines coupons can be found alongside loot (tokens that can only be used on a specific type of mythic shrine)
 
-Potential alternative:
-- Loot rolls cannot be found, and instead players find magic items (or some flavour thereof)
-- Mythic shrines are triggered by found magic items, not loot rolls
-- Magic items sell for gold, which can buy loot rolls, then the rest is the same
-- Pro: reduce access to special loot (especially valuable if we have so few categories), which are generally quite limited in stackability
-- Con: original plan was to remove fully random / random combo items. Could avoid random combo by instead having a system similar to Bentley's gems, but not upgradeable 
-
 # Loot types
 
 ## Souls & Reliquaries
-[//]: # (- TODO When are reliquaries gained? Could be never and all changes happen via shrines)
+[//]: # (- TODO When are reliquaries gained? Could be never and all changes happen via shrines. Alternatively, split soul/reliquary loot slot in 2, potentially granting both on one of the split, or just one)
 [//]: # (- identity: soul passives are quite numeric/basic)
 - Players have one reliquary, which can socket a maximum of 3 bound souls by default
 - Players start with a mundane reliquary, and swapping souls between reliquaries is free

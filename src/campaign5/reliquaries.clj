@@ -23,11 +23,7 @@
                                                               :action ::annexation}]}))
    :loot/state    {:mods (mapv #(select-keys % [::origin]) reliquary)}})
 
-(defn- view-model->reliquary
-  "Rebuild the reliquary from the displayed mods — their templates, var values
-   and ranks as the DM currently has them — over the data entries
-   `:loot/state` identifies."
-  [reliquary-mods view-model]
+(defn- view-model->reliquary [reliquary-mods view-model]
   (let [state (get-in view-model [:loot/state :mods] [])]
     (into []
           (map-indexed (fn [i {:item/keys [body vars metadata]}]
@@ -38,11 +34,7 @@
                                (cond-> (seq vars) (assoc :vars vars))))))
           (get-in view-model [:loot/sections 0 :section/items]))))
 
-(defn- resolve-mod
-  "Draw a mod's declared vars. Ranking reads `:value`, so a mod still holding
-   declarations has nothing to offer; from here on it comes back off the
-   view-model already resolved."
-  [rng mod]
+(defn- resolve-mod [rng mod]
   (update mod :vars #(vars/resolve-vars rng %)))
 
 (defn- new-mod [reliquary-mods {:keys [rng]}]

@@ -59,10 +59,7 @@
         (assoc :trait trait
                :vars (dissoc loot-vars :trait)))))
 
-(defn- take-option
-  "Rank up one of `section`'s vars. A var that cannot take another rank is
-   ignored."
-  [soul section var-id]
+(defn- take-option [soul section var-id]
   (if (some #{var-id} (rank/available (:vars (get soul section)) nil))
     (update-in soul [section :vars] rank/rank-up var-id)
     soul))
@@ -78,13 +75,12 @@
 (defrecord SoulGenerator [id souls]
   p/LootGenerator
   (loot-spec [_]
-    {:id       id
-     :label    "Souls"
-     :utility? false
-     :inputs   [{:id      :trait
-                 :label   "Trait (optional)"
-                 :type    :enum
-                 :options (sort (mapv :trait souls))}]})
+    {:id     id
+     :label  "Souls"
+     :inputs [{:id      :trait
+               :label   "Trait (optional)"
+               :type    :enum
+               :options (sort (mapv :trait souls))}]})
   (generate [_ {:keys [rng] :as ctx}]
     (some->> (u/choose-by-input :trait ctx souls)
              add-soul-vars
@@ -99,6 +95,7 @@
                  ::temporal-shifting (update soul :vars #(vars/redraw-distinct rng % :era)))]
       (soul->view-model soul))))
 
-(defn -soul-generator [{:keys [id]}]
+(defn -soul-generator [{:keys [id] :as m}]
+  (println "SG ---- " m)
   (->> (u/read-edn-resource "data/souls.edn")
        (->SoulGenerator id)))

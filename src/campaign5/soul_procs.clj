@@ -1,9 +1,4 @@
 (ns campaign5.soul-procs
-  "Rolls each character's soul procs over a stretch of combat rounds.
-
-   The ledger of who owns which souls is manual state (`:store/manual`), so the
-   UI renders its editor and this only reads it: one row per character, holding
-   a record per soul they carry."
   (:require
     [campaign5.util :as u]
     [clojure.string :as str]
