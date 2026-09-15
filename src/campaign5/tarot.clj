@@ -23,12 +23,13 @@
                    :cards {:value    cards
                            :context? true}
                    :level level}
-   :loot/subtitle "Made with {{cards.0}}, {{cards.1}}, and {{cards.2}}"
+   :loot/subtitle "Made with {{cards[0]}}, {{cards[1]}}, and {{cards[2]}}"
    :loot/sections [{:section/heading "Inherent mods"
                     :section/items   (mapv #(u/mod-item % {:level level}) inherent)}
                    {:section/heading "Discovered mods"
                     :section/items   (mapv #(u/mod-item % {:level level}) discovered)}
-                   {:section/heading "Discoverable mods" ;TODO make this hidden
+                   {:section/heading "Discoverable mods"
+                    :section/secret? true
                     :section/items   (mapv #(u/mod-item % {:level level}) discoverable)}]
    ;TODO add shrines
    :loot/actions  []})
