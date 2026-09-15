@@ -35,7 +35,7 @@
           :boons boons))))
 
 (defrecord TrinketGenerator [id trinkets]
-  p/LootGenerator
+  p/Generator
   (loot-spec [_]
     {:inputs [{:id      :depiction
                :label   "Depiction (optional)"
@@ -43,7 +43,7 @@
                :options (sort (mapv :depiction trinkets))}]})
   (generate [_ ctx]
     (trinket->view-model id (u/choose-by-input :depiction ctx trinkets)))
-  p/LootAction
+  p/Action
   (handle-action [_ {:keys [view-model]} action _]
     (let [trinket (view-model->trinket view-model)]
       (trinket->view-model

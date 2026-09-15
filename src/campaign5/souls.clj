@@ -13,16 +13,16 @@
   {:origin {:random :soul-origins}
    :era    {:random :soul-eras}})
 
-(defn- mod-actions [soul [section heading]]
-  (mapv (fn [id]
-          {:action/label (str "Mythic Shrine of Fulfilment (" heading ": " (vars/humanise-label id) ")")
-           :action/event [:loot/action {:id     :souls
+(defn- mod-actions [id soul [section heading]]
+  (mapv (fn [var-id]
+          {:action/label (str "Mythic Shrine of Fulfilment (" heading ": " (vars/humanise-label var-id) ")")
+           :action/event [:loot/action {:id     id
                                         :action ::fulfilment
                                         :params {:section section
-                                                 :option  id}}]})
+                                                 :option  var-id}}]})
         (rank/available (:vars (get soul section)) nil)))
 
-(defn- soul->view-model [{:keys [trait vars] :as soul}]
+(defn- soul->view-model [id {:keys [trait vars] :as soul}]
   {:loot/title    "Soul embodying {{ trait }}"
    :loot/vars     (assoc vars :trait {:value    trait
                                       :context? true})
@@ -36,12 +36,12 @@
                                            {:item/title "Era"
                                             :item/body  "{{ era }}"}]})
    :loot/actions  (into [{:action/label "Mythic Shrine of Soul Transference"
-                          :action/event [:loot/action {:id     :souls
+                          :action/event [:loot/action {:id     id
                                                        :action ::soul-transference}]}
                          {:action/label "Mythic Shrine of Temporal Shifting"
-                          :action/event [:loot/action {:id     :souls
+                          :action/event [:loot/action {:id     id
                                                        :action ::temporal-shifting}]}]
-                        (mapcat #(mod-actions soul %))
+                        (mapcat #(mod-actions id soul %))
                         mod-sections)})
 
 (defn- view-model->soul [souls view-model]
@@ -72,8 +72,8 @@
           soul
           mod-sections))
 
-(defrecord SoulGenerator [souls]
-  p/LootGenerator
+(defrecord SoulGenerator [id souls]
+  p/Generator
   (loot-spec [_]
     {:inputs [{:id      :trait
                :label   "Trait (optional)"
@@ -83,17 +83,17 @@
     (some->> (u/choose-by-input :trait ctx souls)
              add-soul-vars
              (resolve-mod-vars rng)
-             soul->view-model))
-  p/LootAction
+             (soul->view-model id)))
+  p/Action
   (handle-action [_ {:keys [rng view-model]} action {:keys [section option]}]
     (let [soul (view-model->soul souls view-model)
           soul (case action
                  ::fulfilment (take-option soul section option)
                  ::soul-transference (update soul :vars #(vars/redraw-distinct rng % :origin))
                  ::temporal-shifting (update soul :vars #(vars/redraw-distinct rng % :era)))]
-      (soul->view-model soul))))
+      (soul->view-model id soul))))
 
-(defn -soul-generator [m]
-  (println "SG ---- " m)
+(defn -soul-generator [config]
   (->> (u/read-edn-resource "data/souls.edn")
-       ->SoulGenerator))
+       (assoc config :souls)
+       map->SoulGenerator))

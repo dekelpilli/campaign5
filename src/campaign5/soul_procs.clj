@@ -51,7 +51,7 @@
        :loot/actions  [(roll-action id rounds)]})))
 
 (defrecord SoulProcGenerator [id traits]
-  p/LootGenerator
+  p/Generator
   (loot-spec [_]
     {:generate-label "Roll procs"
      :store/manual   {:key-label "Character"
@@ -70,7 +70,7 @@
                        :default 5}]})
   (generate [_ {:keys [store rng inputs]}]
     (view id rng (p/read-collection store id) (rounds-input (:rounds inputs))))
-  p/LootAction
+  p/Action
   (handle-action [_ {:keys [store rng]} action {:keys [rounds]}]
     (when-not (= ::roll action)
       (throw (ex-info "Unknown action" {:action action})))

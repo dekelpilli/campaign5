@@ -29,4 +29,12 @@
  {:name   "Delegation"
   :effect "Cause one of your missions to only be considered done when its condition is completed by another character of your choice."
   :cost   10
-  :tokens ["trinket" "legendary" "ring" "soul" "tattoo"]}]
+  :tokens ["trinket" "legendary" "ring" "soul" "tattoo"]}
+ {:name   "Revealed Potential"
+  :effect "Level up a legendary item."
+  :cost   100
+  :tokens ["legendary"]}
+ {:name   "Discovered Potential"
+  :effect "Add a new random discovery modifier on a legendary item, or upgrade an already discovered modifier."
+  :cost   75
+  :tokens ["legendary"]}]

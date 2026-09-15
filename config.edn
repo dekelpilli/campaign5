@@ -16,13 +16,20 @@
                :label "Rings"
                :data  {:source "data-plugins/rings.edn"}}
               {:type      :data
-               :id        :tarot
-               :label     "Tarot cards"
-               :generator {:hidden? true}
+               :id        :tarot-loot
+               :label     "Draw tarot cards"
+               :generator {:hidden? true
+                           :history :never}
                :data      {:inline {:items    [{:instruction "Draw 3 tarot cards"}]
                                     :title    "Tarot cards"
                                     :sections [{:each :items
                                                 :item {:body "{{ instruction }}"}}]}}}
+              {:type      :jar
+               :id        :tarot
+               :label     "Tarot/Legendary items"
+               :generator {:history :button}
+               :jar       {:path       "target/campaign5.jar"
+                           :entrypoint campaign5.tarot/-tarot-generator}}
               {:type      :jar
                :id        :trinkets
                :label     "Trinkets"

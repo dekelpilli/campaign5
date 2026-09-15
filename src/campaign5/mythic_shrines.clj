@@ -9,7 +9,7 @@
 (def mythic-shrines (u/read-edn-resource "data/mythic-shrines.edn"))
 
 (defrecord MythicShrineGenerator [souls]
-  p/LootGenerator
+  p/Generator
   (loot-spec [_]
     {:inputs [{:id      :name
                :label   "Name (optional)"

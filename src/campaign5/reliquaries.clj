@@ -8,19 +8,24 @@
     [sns.sdk.rank :as rank]
     [sns.sdk.vars :as vars]))
 
-(defn- reliquary->view-model [reliquary]
+(defn- reliquary-actions [reliquary]
+  (cond-> []
+          (seq reliquary) (conj {:label  "Mythic Shrine of Refinement"
+                                 :action ::refinement})
+          (or (< (count reliquary) 3)
+              (some #(rank/available (:vars %) nil) reliquary))
+          (conj {:label  "Mythic Shrine of Annexation"
+                 :action ::annexation})))
+
+(defn- reliquary->view-model [id reliquary]
   {:loot/title    "Reliquary"
    :loot/sections [{:section/heading "Mods"
                     :section/items   (mapv u/mod-item reliquary)}]
-   :loot/actions  (cond-> []
-                          (seq reliquary) (conj {:action/label "Mythic Shrine of Correction"
-                                                 :action/event [:loot/action {:id     :reliquaries
-                                                                              :action ::refinement}]})
-                          (or (< (count reliquary) 3)
-                              (some #(rank/available (:vars %) nil) reliquary))
-                          (conj {:action/label "Mythic Shrine of Refinement"
-                                 :action/event [:loot/action {:id     :reliquaries
-                                                              :action ::annexation}]}))
+   :loot/actions  (->> (reliquary-actions reliquary)
+                       (mapv (fn [{:keys [label action]}]
+                               {:action/label label
+                                :action/event [:loot/action {:id     id
+                                                             :action action}]})))
    :loot/state    {:mods (mapv #(select-keys % [::origin]) reliquary)}})
 
 (defn- view-model->reliquary [reliquary-mods view-model]
@@ -78,8 +83,8 @@
     (mod-inputs->reliquary reliquary-mods rng mods)
     (new-reliquary reliquary-mods ctx)))
 
-(defrecord ReliquaryGenerator [reliquary-mods]
-  p/LootGenerator
+(defrecord ReliquaryGenerator [id reliquary-mods]
+  p/Generator
   (loot-spec [_]
     {:inputs [{:id      :mods
                :label   "Mods (optional)"
@@ -87,19 +92,20 @@
                :list?   true
                :options (mapv :template reliquary-mods)}]})
   (generate [_ ctx]
-    (-> (generate-reliquary reliquary-mods ctx)
-        reliquary->view-model))
-  p/LootAction
+    (->> (generate-reliquary reliquary-mods ctx)
+         (reliquary->view-model id)))
+  p/Action
   (handle-action [_ {:keys [view-model] :as ctx} action _params]
     (let [reliquary (view-model->reliquary reliquary-mods view-model)
           reliquary (case action
                       ::refinement (handle-refinement-shrine reliquary ctx reliquary-mods)
                       ::annexation (handle-annexation-shrine reliquary ctx reliquary-mods))]
-      (reliquary->view-model reliquary))))
+      (reliquary->view-model id reliquary))))
 
-(defn -reliquary-generator [_config]
+(defn -reliquary-generator [config]
   (->> (u/read-edn-resource "data/reliquary-mods.edn")
-       ->ReliquaryGenerator))
+       (assoc config :reliquary-mods)
+       map->ReliquaryGenerator))
 
 (comment
   (new-reliquary (u/read-edn-resource "data/reliquary-mods.edn")

@@ -1,0 +1,43 @@
+[{:name         "Aurifex' Crystal"
+  :inherent     [{:template   "Your main hand weapon gains the 'sweep' trait."
+                  :affinities #{:offence}}
+                 {:template   "Whenever at least one of your souls procs, this crystal flares, dealing {{level}}d10 damage to each enemy within 10 feet of you."
+                  :signature? true
+                  :affinities #{:offence}}
+                 {:template   "{{#gt level 1}}When you use an action to heal a creature, it may immediately attempt to save out of any ongoing effects with passive saves on it.{{/gt}}"
+                  :affinities #{:support}}
+                 {:template "The passive bonus of your first soul grants nothing."}]
+  :discoverable [{:template   "+{{damage}} damage with souls."
+                  :vars       {:damage 2}
+                  :affinities #{:offence}}]}
+ {:name         "Lorg Mór"
+  :inherent     [{:template   "Your main hand weapon gains the 'sweep' trait."
+                  :affinities #{:offence}}
+                 {:template   "Make a medicine check when healing{{#eq level 1}} downed{{/eq}} allies. The result of the check{{#lt level 2}}, halved,{{/lt}} is the additional percentage of the target's maximum hit points this healing grants."
+                  :signature? true
+                  :affinities #{:support}}
+                 {:template   "{{#gt level 1}}When you use an action to heal a creature, it may immediately attempt to save out of any ongoing effects with passive saves on it.{{/gt}}"
+                  :affinities #{:support}}
+                 {:template "You are large."}
+                 {:template "You cannot dual-wield weapons."}]
+  :discoverable [{:template   "+{{medicine}} to Medicine checks."
+                  :vars       {:medicine {:value 5
+                                          :step  2}}
+                  :affinities #{:utility}}
+                 {:template   "+{{damage}} bludgeoning damage against creatures smaller than you."
+                  :vars       {:damage 2}
+                  :affinities #{:offence}}
+                 {:template   "+{{healing}} incoming healing."
+                  :vars       {:healing 2}
+                  :affinities #{:survivability}}
+                 {:template   "+{{healing}} outgoing healing with actions."
+                  :vars       {:healing 2}
+                  :affinities #{:support}}]}
+ #_{:name         ""
+    :inherent     [{:template   ""
+                    :affinities #{}}
+                   {:template   ""
+                    :signature? true
+                    :affinities #{}}
+                   {:template ""}]
+    :discoverable []}]

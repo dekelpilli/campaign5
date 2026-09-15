@@ -55,4 +55,4 @@
   ["unborn" "modern" "olden" "ancient" "prehistoric"])
 
 (defmethod randoms/preset :affinities [_ _]
-  ["control" "support" "mobility" "resource" "offence" "survivability" "meta" "utility"])
+  ["control" "support" "tactical" "resource" "offence" "survivability" "meta" "utility"])
