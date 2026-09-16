@@ -55,20 +55,23 @@
 (defmethod handle-card "The Hierophant" [legendary _ _ _]
   (assoc legendary :revealed-discoverable? true))
 
-(defmethod handle-card "Temperance" [{:keys [mods] :as reliquary} _ {:keys [rng]} _]
-  (let [{downsides false
-         upsides   true} (group-by (comp some? :affinities) mods)
-        idx (rng/next-int rng 1 (inc (count downsides)))]
-    (assoc reliquary :mods
-           (into upsides
-                 (update-in downsides [idx :template]
-                            #(format "The following mod has been disabled by Temperance: '%s'." %))))))
+(defn- downside-mod? [{:keys [restriction? affinities]}]
+  (and (not restriction?)
+       (empty? affinities)))
+
+(defmethod handle-card "Temperance" [{:keys [mods] :as legendary} _ {:keys [rng]} _]
+  (let [downside-idxs (into [] (keep-indexed (fn [idx mod] (when (downside-mod? mod) idx))) mods)]
+    (if (seq downside-idxs)
+      (update-in legendary [:mods (r/sample rng downside-idxs) :template]
+                 #(format "The following mod has been disabled by Temperance: '%s'." %))
+      legendary)))
 
 (defmethod handle-card "The Hermit" [legendary _ _ card]
   (-> (dissoc legendary :discoverable)
       (update :mods conj
-              {:template "Cannot be targeted by Mythic Shrines of Discovered Potential"
-               :metadata [(card-origin-meta card)]}
+              {:template     "Cannot be targeted by Mythic Shrines of Discovered Potential"
+               :restriction? true
+               :metadata     [(card-origin-meta card)]}
               {:template   "Mythic Shrines of Revealed Potential targeting this item are cheaper by 20 tokens."
                :affinities #{:meta}
                :metadata   [(card-origin-meta card)]})))
@@ -79,29 +82,31 @@
            :affinities #{:meta}
            :metadata   [(card-origin-meta card)]}))
 
-(defmethod handle-card "The Devil" [legendary {:keys [legendaries]} {:keys [rng]} card]
+(defmethod handle-card "The Devil" [{:keys [name]
+                                     :as   legendary} {:keys [legendaries]} {:keys [rng]} card]
   (let [{downsides false
          upsides   true} (group-by (comp some? :affinities)
                                    (eduction
                                      (comp (remove (comp #{name} :name))
                                            (mapcat :inherent))
                                      legendaries))
-        {num-downsides 0
-         num-upsides   1} (frequencies (repeatedly 5 #(rng/next-int rng 2)))
+        num-downsides (count (filter zero? (repeatedly 5 #(rng/next-int rng 2))))
+        num-upsides (- 5 num-downsides)
         new-discoverable (cond-> []
-                                 (pos? num-downsides) (into (r/sample-without-replacement num-downsides downsides))
-                                 (pos? num-upsides) (into (r/sample-without-replacement num-upsides upsides)))]
+                                 (pos? num-downsides) (into (r/sample-without-replacement rng num-downsides downsides))
+                                 (pos? num-upsides) (into (r/sample-without-replacement rng num-upsides upsides)))]
     (assoc legendary :discoverable
            (mapv
              (fn [mod] (assoc mod :metadata [(card-origin-meta card)]))
              new-discoverable))))
 
-(defmethod handle-card "Death" [legendary {:keys [legendaries]} {:keys [rng]} card]
+(defmethod handle-card "Death" [{:keys [name]
+                                 :as   legendary} {:keys [legendaries]} {:keys [rng]} card]
   (let [{other-name     :name
          other-inherent :inherent} (->> (filterv (comp not #{name} :name) legendaries)
                                         (r/sample rng))]
-    (update legendary :mods (fn [mods] (-> (filterv :affinities mods)
-                                           (into (comp (remove :affinities)
+    (update legendary :mods (fn [mods] (-> (filterv (complement downside-mod?) mods)
+                                           (into (comp (filter downside-mod?)
                                                        (map (fn [mod]
                                                               (assoc mod :metadata
                                                                      [(str "Downside from " other-name)
@@ -110,8 +115,9 @@
 
 (defmethod handle-card "The Hanging Man" [legendary _ _ card]
   (update legendary :mods conj
-          {:template "Cannot be targeted by Mythic Shrines of Revealed Potential"
-           :metadata [(card-origin-meta card)]}
+          {:template     "Cannot be targeted by Mythic Shrines of Revealed Potential"
+           :restriction? true
+           :metadata     [(card-origin-meta card)]}
           {:template   "Mythic Shrines of Discovered Potential targeting this item are cheaper by 15 tokens."
            :affinities #{:meta}
            :metadata   [(card-origin-meta card)]}))
@@ -125,19 +131,21 @@
 
 (defmethod handle-card "The Moon" [{:keys [discoverable]
                                     :as   legendary} _ {:keys [rng]} card]
-  (let [discoverable-amount-taken (rng/next-int 1 (inc (count discoverable)))
+  (let [discoverable-amount-taken (rng/next-int rng 1 (inc (count discoverable)))
         starts-with (->> (r/sample-without-replacement rng discoverable-amount-taken discoverable)
                          (mapv #(update % :metadata (fnil conj []) (card-origin-meta card))))]
     (-> (dissoc legendary :discoverable)
         (update :mods conj
-                {:template "This item cannot be targeted by Mythic Shrines."
-                 :metadata [(card-origin-meta card)]})
+                {:template     "This item cannot be targeted by Mythic Shrines."
+                 :restriction? true
+                 :metadata     [(card-origin-meta card)]})
         (update :mods into starts-with))))
 
 (defmethod handle-card "The Star" [{:keys [name]
-                                    :as   legendary} {:keys [legendaries]} _ card]
+                                    :as   legendary} {:keys [legendaries]} {:keys [rng]} card]
   (let [{other-name     :name
-         other-inherent :inherent} (filterv (comp not #{name} :name) legendaries)
+         other-inherent :inherent} (->> (filterv (comp not #{name} :name) legendaries)
+                                        (r/sample rng))
         signature-mod (some (fn [mod] (when (:signature? mod)
                                         (assoc mod :metadata [(card-origin-meta card)
                                                               (str "Signature mod of " other-name)])))
@@ -151,10 +159,10 @@
                :rings [{:name     "My fake ring"
                         :template "My fake ring effect"}] ;TODO pass in rings
                :trinkets (into []
-                               (mapcat (fn [{:keys [boons name]}]
+                               (mapcat (fn [{:keys [boons depiction]}]
                                          (eduction
                                            (map (fn [boon]
-                                                  (assoc boon :metadata (str "Trinket: " name))))
+                                                  (assoc boon :metadata [(str "Trinket depicting " depiction)])))
                                            boons)))
                                (:trinkets data)))
         mod (-> (r/sample rng mods)
