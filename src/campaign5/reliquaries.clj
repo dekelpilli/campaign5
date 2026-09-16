@@ -25,19 +25,14 @@
                        (mapv (fn [{:keys [label action]}]
                                {:action/label label
                                 :action/event [:loot/action {:id     id
-                                                             :action action}]})))
-   :loot/state    {:mods (mapv #(select-keys % [::origin]) reliquary)}})
+                                                             :action action}]})))})
 
-(defn- view-model->reliquary [reliquary-mods view-model]
-  (let [state (get-in view-model [:loot/state :mods] [])]
-    (into []
-          (map-indexed (fn [i {:item/keys [body vars metadata]}]
-                         (let [{::keys [origin]} (get state i)
-                               base (nth reliquary-mods origin)]
-                           (-> (assoc base ::origin origin :template body)
-                               (into (u/parse-metadata metadata))
-                               (cond-> (seq vars) (assoc :vars vars))))))
-          (get-in view-model [:loot/sections 0 :section/items]))))
+(defn- view-model->reliquary [view-model]
+  (into []
+        (map (fn [{:item/keys [body vars metadata]}]
+               (-> (assoc (u/parse-metadata metadata) :template body)
+                   (cond-> (seq vars) (assoc :vars vars)))))
+        (get-in view-model [:loot/sections 0 :section/items])))
 
 (defn- resolve-mod [rng mod]
   (update mod :vars #(vars/resolve-vars rng %)))
@@ -49,19 +44,16 @@
 
 (def ^:private new-reliquary (comp vector new-mod))
 
-(defn- handle-refinement-shrine [reliquary {:keys [rng] :as ctx} reliquary-mods]
+(defn- handle-refinement-shrine [reliquary {:keys [rng]} reliquary-mods]
   (let [idx (rng/next-int rng 0 (count reliquary))
-        replacement (new-mod reliquary-mods ctx)]
+        replacement (r/sample rng reliquary-mods)]
     (-> (subvec reliquary 0 idx)
         (conj replacement)
         (into (subvec reliquary (inc idx))))))
 
-(defn- handle-annexation-shrine
-  "Below three mods, annex another; otherwise rank up one of the vars across the
-   reliquary that can still take a rank, picked uniformly over all of them."
-  [reliquary {:keys [rng] :as ctx} reliquary-mods]
+(defn- handle-annexation-shrine [reliquary {:keys [rng]} reliquary-mods]
   (if (< (count reliquary) 3)
-    (conj reliquary (new-mod reliquary-mods ctx))
+    (conj reliquary (r/sample rng reliquary-mods))
     (if-let [choices (seq (into []
                                 (comp (map-indexed (fn [idx mod]
                                                      (map #(vector idx %) (rank/available (:vars mod) nil))))
@@ -96,15 +88,14 @@
          (reliquary->view-model id)))
   p/Action
   (handle-action [_ {:keys [view-model] :as ctx} action _params]
-    (let [reliquary (view-model->reliquary reliquary-mods view-model)
+    (let [reliquary (view-model->reliquary view-model)
           reliquary (case action
                       ::refinement (handle-refinement-shrine reliquary ctx reliquary-mods)
                       ::annexation (handle-annexation-shrine reliquary ctx reliquary-mods))]
       (reliquary->view-model id reliquary))))
 
 (defn -reliquary-generator [config]
-  (->> (u/read-edn-resource "data/reliquary-mods.edn")
-       (assoc config :reliquary-mods)
+  (->> (assoc config :reliquary-mods @u/reliquary-mods)
        map->ReliquaryGenerator))
 
 (comment

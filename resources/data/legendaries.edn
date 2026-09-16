@@ -1,15 +1,42 @@
-[{:name         "Aurifex' Crystal"
-  :inherent     [{:template   "Your main hand weapon gains the 'sweep' trait."
-                  :affinities #{:offence}}
-                 {:template   "Whenever at least one of your souls procs, this crystal flares, dealing {{level}}d10 damage to each enemy within 10 feet of you."
+[{:name         "Blank Slate"
+  :inherent     [{:template   "This signature modifier has no effect."
+                  :signature? true
+                  :affinities #{:meta}}
+                 {:template "This downside modifier has no effect."}]
+  :discoverable [{:template   "+{{strength}} Strength."
+                  :vars       {:strength 1}
+                  :affinities #{:offence :utility}}
+                 {:template   "+{{dexterity}} Dexterity."
+                  :vars       {:dexterity 1}
+                  :affinities #{:offence :utility}}
+                 {:template   "+{{wisdom}} Wisdom."
+                  :vars       {:wisdom 1}
+                  :affinities #{:offence :utility}}
+                 {:template   "+{{intelligence}} Intelligence."
+                  :vars       {:intelligence 1}
+                  :affinities #{:offence :utility}}
+                 {:template   "+{{charisma}} Charisma."
+                  :vars       {:charisma 1}
+                  :affinities #{:offence :utility}}]}
+ {:name         "Aurifex' Crystal"
+  :inherent     [{:template   "Whenever at least one of your souls procs, this crystal flares, dealing {{level}}d10 bludgeoning damage to each enemy within 10 feet of you."
                   :signature? true
                   :affinities #{:offence}}
-                 {:template   "{{#gt level 1}}When you use an action to heal a creature, it may immediately attempt to save out of any ongoing effects with passive saves on it.{{/gt}}"
-                  :affinities #{:support}}
+                 {:template   "Mythic Shrines of Annexation and Refinement are 10 tokens cheaper."
+                  :affinities #{:meta}}
                  {:template "The passive bonus of your first soul grants nothing."}]
   :discoverable [{:template   "+{{damage}} damage with souls."
                   :vars       {:damage 2}
-                  :affinities #{:offence}}]}
+                  :affinities #{:offence}}
+                 {:template   "+{{chance}}% proc chance for your souls for each active conditional modifier on your reliquary."
+                  :vars       {:chance 1}
+                  :affinities #{:meta}}
+                 {:template   "+{{chance}}% chance to find a 1-mod reliquary whenever you get a soul loot result."
+                  :vars       {:chance 10
+                               :step   5}
+                  :affinities #{:meta}}
+                 #_#_{} ;TODO
+                   {}]}
  {:name         "Lorg Mór"
   :inherent     [{:template   "Your main hand weapon gains the 'sweep' trait."
                   :affinities #{:offence}}
@@ -32,7 +59,9 @@
                   :affinities #{:survivability}}
                  {:template   "+{{healing}} outgoing healing with actions."
                   :vars       {:healing 2}
-                  :affinities #{:support}}]}
+                  :affinities #{:support}}
+                 {:template   "No more than once per long rest, when you heal a downed creature with a standard action, you regain your standard action for that turn, but must use it to make a melee attack."
+                  :affinities #{:tactical}}]}
  #_{:name         ""
     :inherent     [{:template   ""
                     :affinities #{}}

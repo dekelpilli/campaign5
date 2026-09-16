@@ -1,3 +1,6 @@
+;TODO move to JAR plugin
+;TODO add affinities
+;TODO rework points and content
 {:items    [{:name     "The Hardened"
              :synergy  true
              :template "+1 barrier for each distinct non-synergy ring worn."

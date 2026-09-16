@@ -6,6 +6,8 @@
     [sns.sdk.rank :as rank]
     [sns.sdk.vars :as vars]))
 
+;TODO add points cost handling/metadata (scales with var rank)
+
 (def ^:private mod-sections
   [[:passive "Passive"] [:proc "Proc"]])
 

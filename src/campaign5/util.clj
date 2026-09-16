@@ -15,24 +15,33 @@
       PushbackReader.
       edn/read))
 
+(def reliquary-mods (delay (read-edn-resource "data/reliquary-mods.edn")))
+(def trinkets (delay (read-edn-resource "data/trinkets.edn")))
+
+(def ^:private affinity-metadata-prefix "Affinities: ")
+
 (defn parse-metadata [metadata]
   {:affinities (into #{}
-                     (comp (keep #(when (str/starts-with? % "Affinities: ")
-                                    (subs % (count "Affinities: "))))
+                     (comp (keep #(when (str/starts-with? % affinity-metadata-prefix)
+                                    (subs % (count affinity-metadata-prefix))))
                            (mapcat #(str/split % #", "))
                            (map keyword))
-                     metadata)})
+                     metadata)
+   :metadata   (filterv
+                 #(not (or (str/starts-with? % affinity-metadata-prefix)
+                           (= % "Randomised")))
+                 metadata)})
 
 (defn- affinities->metadata [affinities]
   (->> (mapv name affinities)
        (str/join ", ")
-       (str "Affinities: ")))
+       (str affinity-metadata-prefix)))
 
 (defn mod-item
   ([mod] (mod-item mod {}))
-  ([mod item-vars]
-   (let [vars (:vars mod)
-         metadata (cond-> []
+  ([{:keys [metadata vars] :as mod} item-vars]
+   (let [metadata (cond-> (or metadata [])
+                          ;TODO metadata for ranks/points/etc
                           (seq (:affinities mod)) (conj (affinities->metadata (:affinities mod)))
                           (or (some :random (vals vars))
                               (some :random (vals item-vars))) (conj "Randomised"))]

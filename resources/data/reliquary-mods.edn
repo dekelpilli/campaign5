@@ -6,19 +6,19 @@
   :affinities #{:survivability}}
  {:vars       {:asi 1}
   :template   "+{{asi}} Charisma while at least one contained soul is from the unborn era."
-  :affinities #{:offence}}
+  :affinities #{:offence :utility}}
  {:vars       {:asi 1}
   :template   "+{{asi}} Dexterity while at least one contained soul is from the modern era."
-  :affinities #{:offence}}
+  :affinities #{:offence :utility}}
  {:vars       {:asi 1}
   :template   "+{{asi}} Intelligence while at least one contained soul is from the olden era."
-  :affinities #{:offence}}
+  :affinities #{:offence :utility}}
  {:vars       {:asi 1}
   :template   "+{{asi}} Strength while at least one contained soul is from the ancient era."
-  :affinities #{:offence}}
+  :affinities #{:offence :utility}}
  {:vars       {:asi 1}
   :template   "+{{asi}} Wisdom while at least one contained soul is from the prehistoric era."
-  :affinities #{:offence}}
+  :affinities #{:offence :utility}}
  {:vars       {:initiative 1}
   :template   "+{{initiative}} initiative for each contained soul with a non-unique era."
   :affinities #{:tactical}}
