@@ -193,9 +193,10 @@
 
 (defn- cards->view-model [id cards]
   {:loot/title    "Tarot Cards"
-   :loot/sections (mapv (fn [{:keys [name template]}]
+   :loot/sections (mapv (fn [{:keys [name template priority]}]
                           {:section/heading name
-                           :section/items   [{:item/body template}]})
+                           :section/items   [{:item/body     template
+                                              :item/metadata [(str "Priority: " (or priority 0))]}]})
                         cards)
    :loot/actions  (cond-> []
                           (= 3 (count cards)) (conj {:action/label "Turn in"
@@ -223,8 +224,10 @@
 (defn- view-model->cards [{:loot/keys [sections]}]
   (mapv
     (fn [{:section/keys [heading items]}]
-      {:name     heading
-       :template (-> items first :item/body)})
+      (let [{:item/keys [body metadata]} (first items)]
+        {:name     heading
+         :template body
+         :priority (some #(some-> (re-find #"^Priority: (-?\d+)$" %) second parse-long) metadata)}))
     sections))
 
 (defn- prepare-legendary [{:keys [inherent]
@@ -247,14 +250,11 @@
   (let [legendary (-> (r/sample rng legendaries)
                       (prepare-legendary cards))]
     ; TODO return error on The Fool
-    ; TODO if any cards need to be handled in a certain order, add (sort-by card-priority-fn cards)
-      ; The Hermit must be last
-      ; Moon must be after tower
     (reduce
       (fn [legendary {card-name :name}]
         (handle-card legendary data ctx card-name))
       legendary
-      cards)))
+      (sort-by :priority cards))))
 
 (defrecord TarotGenerator [id tarot-cards legendaries]
   p/Generator
