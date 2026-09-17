@@ -20,7 +20,7 @@
                :label     "Draw tarot cards"
                :generator {:hidden? true
                            :history :never}
-               :data      {:inline {:items    [{:instruction "Draw 3 tarot cards"}]
+               :data      {:inline {:items    [{:instruction "Draw 1 tarot card"}]
                                     :title    "Tarot cards"
                                     :sections [{:each :items
                                                 :item {:body "{{ instruction }}"}}]}}}

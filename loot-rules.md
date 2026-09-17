@@ -25,7 +25,7 @@ Loot can be obtained or improved in the following ways:
   - Improve the reliquary that holds the souls
 
 ## Legendary items
-[//]: # (- TODO should these come from tarot cards? If so, cards would influence the contents of the infusable mod pool, maybe including a starting mod, and influence the selection of legendary)
+- Legendary items are created by turning in two tarot cards
 - Players can have up to two legendary items
 - When found, legendary items are named and come with a pre-defined set of mods
 - Legendary items can be upgraded in two ways:

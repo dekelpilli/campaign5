@@ -125,9 +125,8 @@
 (defmethod handle-card "The Sun" [legendary _ _ card]
   (-> (assoc legendary :level 2)
       (update :mods conj
-              {:template   "This item started at level 2."
-               :affinities #{:meta}
-               :metadata   [(card-origin-meta card)]})))
+              {:template "This item started at level 2 and its sell price is reduced accordingly."
+               :metadata [(card-origin-meta card)]})))
 
 (defmethod handle-card "The Moon" [{:keys [discoverable]
                                     :as   legendary} _ {:keys [rng]} card]
@@ -199,7 +198,7 @@
                                               :item/metadata [(str "Priority: " (or priority 0))]}]})
                         cards)
    :loot/actions  (cond-> []
-                          (and (= 3 (count cards))
+                          (and (#{2 3} (count cards))
                                (not (some (comp #{"The Fool"} :name) cards)))
                           (conj {:action/label "Turn in"
                                  :action/event [:loot/action {:id     id

@@ -1,4 +1,91 @@
-[{:name         "Amenonuhoko"
+[{:name         "Bringer of Rain"
+  :inherent     [{:template   "As a major effect when you score a major success with a weapon attack, you may blind the target of your attack for one round."
+                  :signature? true
+                  :affinities #{:control :support}}
+                 {:template   "When you block an armour attack, gain +1 armour for one round. {{#eq level 1}}This cannot stack{{else}}This can stack twice{{/eq}}."
+                  :affinities #{:survivability}}
+                 {:template   "+1 armour while not wearing light, medium, or heavy armour."
+                  :affinities #{:survivability}}
+                 {:template   "{{#gt level 1}}This item inflicts a 1d6 ongoing physical harm against enemies you hit with a major success with a weapon.{{/gt}}"
+                  :affinities #{:offence}}
+                 {:template "You cannot wear light, medium, or heavy armour."}]
+  :discoverable [{:template   "Enemies blinded by you have -{{ab}} AB with non-armour attacks."
+                  :vars       {:ab {:ab     1
+                                    :points 3}}
+                  :affinities #{:control}}
+                 {:template   "+{{harm}} physical harm."
+                  :vars       {:harm {:value 2
+                                      :step  1}}
+                  :affinities #{:offence}}
+                 {:template   "Gain physical damage equal to your Armour."
+                  :affinities #{:offence}}
+                 {:template   "+{{dice}}d4 physical damage with weapon attacks while dual-wielding weapons of the same category."
+                  :vars       {:dice {:value  1
+                                      :points 2}}
+                  :affinities #{:offence}}
+                 {:template   "+{{dice}}d4 poison damage with weapon attacks while your main hand weapon is an axe."
+                  :vars       {:dice {:value  1
+                                      :points 2}}
+                  :affinities #{:offence}}]}
+ {:name         "Excalibur"
+  :inherent     [{:template   "Your offhand weapons grant all of their traits to the main hand weapon"
+                  :signature? true
+                  :affinities #{:meta}}
+                 {:template   "Instead of your Strength modifier, you may add {{#eq level 1}}half of {{/eq}}your Dexterity modifier to your weapon attacks."
+                  :affinities #{:offence}}
+                 {:template "our melee weapon attacks deal 1 less damage for each point your Dexterity score is below 26."}
+                 {:template "You cannot use Strength for weapon attacks."}
+                 {:template "You can only add your Dexterity score to melee attacks."}
+                 {:template   "{{#gt level 1}}If both of your weapons have the 'offhand' trait, your main hand weapon's damage die size increases by one for each trait on your offhand weapon.{{/gt}}"
+                  :affinities #{:offence}}]
+  :discoverable [{:template   "+{{damage}} melee damage with weapons if your Dexterity score is greater than the Dexterity score of the target."
+                  :vars       {:damage {:value 3
+                                        :step  2}}
+                  :affinities #{:offence}}
+                 {:template   "+{{dice}} expertise die with Charisma skill checks if the sum of your Dexterity and Charisma scores is at least 40."
+                  :vars       {:dice {:value  1
+                                      :points 2}}
+                  :affinities #{:utility}}
+                 {:template   "+{{charisma}} Charisma for each weapon you are wielding."
+                  :vars       {:charisma {:value  1
+                                          :points 2}}
+                  :affinities #{:offence :utility}}
+                 {:template   "+{{charisma}} Dexterity for each Charisma skill you are proficient in."
+                  :vars       {:charisma {:value  1
+                                          :points 2}}
+                  :affinities #{:offence :utility}}
+                 {:template   "Your main hand weapon gains the 'Responsive' trait."
+                  :affinities #{:offence}}]}
+ {:name         "Kintsugi"
+  :inherent     [{:template   "Regain {{#gt level 1}}hit points equal to your lowest defence{{else}}1 hit point{{/gt}} when you block an armour attack."
+                  :signature? true
+                  :affinities #{:survivability}}
+                 {:template   "Gain +1 resistance until the start of your next turn when you are hit by a melee attack."
+                  :affinities #{:survivability}}
+                 {:template   "At the end of a combat, if you have been critically hit during that combat, gain 5 gold."
+                  :affinities #{:meta}}
+                 {:template "You cannot wear heavy armour."}
+                 {:template "Your maximum temporary hit points is 1."}]
+  :discoverable [{:template   "You have +{{resistance}} resistance to physical damage."
+                  :vars       {:resistance {:value 2
+                                            :step  1}}
+                  :affinities #{:survivability}}
+                 {:template   "You have +{{resistance}} resistance to cold damage."
+                  :vars       {:resistance 2}
+                  :affinities #{:survivability}}
+                 {:template   "You have +{{armour}} armour if you have been hit by an armour attack since the start of your last turn."
+                  :vars       {:armour {:value  1
+                                        :points 3}}
+                  :affinities #{:survivability}}
+                 {:template   "You have +{{absorption}} fire absorption."
+                  :vars       {:absorption {:value 2
+                                            :step  1}}
+                  :affinities #{:survivability}}
+                 {:template   "This item inflicts {{dice}}d6 fire damage creatures who hit you with a melee attack."
+                  :vars       {:absorption {:value 2
+                                            :step  1}}
+                  :affinities #{:offence}}]}
+ {:name         "Amenonuhoko"
   :inherent     [{:template   "This item casts {{sns-spell \"Earth Tremor\"}} when you hit an adjacent enemy with a weapon attack. When cast in this way, it only hits enemies, and covers each space adjacent to you."
                   :signature? true
                   :affinities #{:offence :control}}
@@ -26,7 +113,7 @@
                   :vars       {:absorption {:value 2
                                             :step  1}}
                   :affinities #{:survivability}}]}
- {:name         "Blank Slate"
+ {:name         "Tabula Rasa"
   :inherent     [{:template   "This signature modifier has no effect."
                   :signature? true
                   :affinities #{:meta}}
