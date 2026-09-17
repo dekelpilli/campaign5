@@ -19,7 +19,6 @@
   (into (sorted-map)
         (keep (fn [[char-name souls]]
                 (when-let [procced (seq (filterv #(proc? rng %) souls))]
-                  ;TODO use map-indexed for case where player has multiple souls of the same trait
                   [char-name (mapv :soul procced)])))
         ledger))
 

@@ -3,7 +3,8 @@
     [clojure.edn :as edn]
     [clojure.java.io :as io]
     [clojure.string :as str]
-    [randy.core :as r])
+    [randy.core :as r] [sns.sdk.rank :as rank]
+    [sns.sdk.vars :as vars])
   (:import
     (java.io PushbackReader)))
 
@@ -19,6 +20,7 @@
 (def trinkets (delay (read-edn-resource "data/trinkets.edn")))
 
 (def ^:private affinity-metadata-prefix "Affinities: ")
+(def ^:private ranking-metadata-regex #"(?:[a-zA-Z ]+: )?\[(?:\d+/\d+)](?:\(\d+\))*")
 
 (defn parse-metadata [metadata]
   {:affinities (into #{}
@@ -29,6 +31,7 @@
                      metadata)
    :metadata   (filterv
                  #(not (or (str/starts-with? % affinity-metadata-prefix)
+                           (re-matches ranking-metadata-regex %)
                            (= % "Randomised")))
                  metadata)})
 
@@ -37,11 +40,21 @@
        (str/join ", ")
        (str affinity-metadata-prefix)))
 
+(defn- var->metadata [v]
+  (let [{:keys [step value points rank]} (if (map? v) v {:value v})]
+    (cond-> (format "[%s/%s]" (or step value) (or points 1))
+            (> (or rank 1) 1) (str "(" rank ")"))))
+
+(defn- vars->metadata [vars]
+  (let [vars (filterv (comp rank/upgradeable? val) vars)]
+    (if (= 1 (count vars))
+      [(-> vars first val var->metadata)]
+      (mapv #(format ["%s: %s"] (vars/humanise-label (key %)) (var->metadata (val %))) vars))))
+
 (defn mod-item
   ([mod] (mod-item mod {}))
   ([{:keys [metadata vars] :as mod} item-vars]
-   (let [metadata (cond-> (or metadata [])
-                          ;TODO metadata for ranks/points/etc
+   (let [metadata (cond-> (into (or metadata []) (vars->metadata vars))
                           (seq (:affinities mod)) (conj (affinities->metadata (:affinities mod)))
                           (or (some :random (vals vars))
                               (some :random (vals item-vars))) (conj "Randomised"))]

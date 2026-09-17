@@ -6,8 +6,6 @@
     [sns.sdk.rank :as rank]
     [sns.sdk.vars :as vars]))
 
-;TODO add points cost handling/metadata (scales with var rank)
-
 (def ^:private mod-sections
   [[:passive "Passive"] [:proc "Proc"]])
 
@@ -37,7 +35,10 @@
                                             :item/body  "{{ origin }}"}
                                            {:item/title "Era"
                                             :item/body  "{{ era }}"}]})
-   :loot/actions  (into [{:action/label "Mythic Shrine of Soul Transference"
+   :loot/actions  (into [{:action/label "Refresh"
+                          :action/event [:loot/action {:id     id
+                                                       :action ::refresh}]}
+                         {:action/label "Mythic Shrine of Soul Transference"
                           :action/event [:loot/action {:id     id
                                                        :action ::soul-transference}]}
                          {:action/label "Mythic Shrine of Temporal Shifting"
@@ -69,8 +70,19 @@
 (defn- add-soul-vars [soul]
   (update soul :vars (partial merge base-soul-vars)))
 
+(defn- resolve-soul-vars [rng var]
+  (let [resolved-vars (vars/resolve-vars rng var)]
+    (update-vals resolved-vars
+                 (fn [{:keys  [points rank]
+                       ::keys [original-points]
+                       :or    {rank 1 points 1}
+                       :as    var}]
+                   (assoc var
+                          ::original-points (or original-points points)
+                          :points (+ (or original-points 1) rank -1))))))
+
 (defn- resolve-mod-vars [rng soul]
-  (reduce (fn [soul [section _]] (update-in soul [section :vars] #(vars/resolve-vars rng %)))
+  (reduce (fn [soul [section _]] (update-in soul [section :vars] #(resolve-soul-vars rng %)))
           soul
           mod-sections))
 
@@ -90,10 +102,12 @@
   (handle-action [_ {:keys [rng view-model]} action {:keys [section option]}]
     (let [soul (view-model->soul souls view-model)
           soul (case action
+                 ::refresh soul
                  ::fulfilment (take-option soul section option)
                  ::soul-transference (update soul :vars #(vars/redraw-distinct rng % :origin))
                  ::temporal-shifting (update soul :vars #(vars/redraw-distinct rng % :era)))]
-      (soul->view-model id soul))))
+      (->> (resolve-mod-vars rng soul)
+           (soul->view-model id)))))
 
 (defn -soul-generator [config]
   (->> (u/read-edn-resource "data/souls.edn")

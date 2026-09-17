@@ -1,4 +1,32 @@
-[{:name         "Blank Slate"
+[{:name         "Amenonuhoko"
+  :inherent     [{:template   "This item casts {{sns-spell \"Earth Tremor\"}} when you hit an adjacent enemy with a weapon attack. When cast in this way, it only hits enemies, and covers each space adjacent to you."
+                  :signature? true
+                  :affinities #{:offence :control}}
+                 {:template   "When preparing spells, treat spells with 'earth' in their name as if they were on your class' spell list."
+                  :affinities #{:tactical}}
+                 {:template   "You cannot be knocked prone by the {{sns-spell \"Earth Tremor\"}} and {{sns-spell \"Earthquake\"}} spells."
+                  :affinities #{:survivability}}
+                 {:template "You treat all difficult terrain as a persistent zone (or multiple persistent zones if it is not contiguous) that deals 2 fire harm."}
+                 {:template   "{{#gt level 1}}While concentrating on a spell with 'earth' in the name, other such spells consume a spell slot one lower than their usual spell slot.{{/gt}}"
+                  :affinities #{:resource}}]
+  :discoverable [{:template   "+{{damage}} bludgeoning damage with spells for each spell with 'earth' in its name that you have prepared."
+                  :vars       {:damage {:value  1
+                                        :points 2}}
+                  :affinities #{:offence}}
+                 {:template   "Your weapons inflict 1 ongoing bludgeoning harm on hit. Creatures afflicted with this harm can't turn invisible or become incorporeal."
+                  :affinities #{:control :offence}}
+                 {:template   "When you land a killing blow with a weapon, the blood on its tip hardens into a gem worth {{gold}} gold."
+                  :vars       {:gold 5}
+                  :affinities #{:meta}}
+                 {:template   "+{{ab}} AB while at least one ally is standing on difficult terrain."
+                  :vars       {:ab {:value 1
+                                    :point 3}}
+                  :affinities #{:offence}}
+                 {:template   "You have +{{absorption}} bludgeoning absorption while standing in difficult terrain."
+                  :vars       {:absorption {:value 2
+                                            :step  1}}
+                  :affinities #{:survivability}}]}
+ {:name         "Blank Slate"
   :inherent     [{:template   "This signature modifier has no effect."
                   :signature? true
                   :affinities #{:meta}}
@@ -22,10 +50,12 @@
   :inherent     [{:template   "Whenever at least one of your souls procs, this crystal flares, dealing {{level}}d10 bludgeoning damage to each enemy within 10 feet of you."
                   :signature? true
                   :affinities #{:offence}}
-                 {:template   "Mythic Shrines of Annexation and Refinement are 10 tokens cheaper."
+                 {:template   "Mythic Shrines of Annexation and Refinement are {{#lt level 2}}10{{else}}15{{/lt}} tokens cheaper."
+                  :affinities #{:meta}}
+                 {:template   "{{#gt level 3}}+1 maximum number of souls contained in your reliquaries{{/gt}}."
                   :affinities #{:meta}}
                  {:template "The passive bonus of your first soul grants nothing."}]
-  :discoverable [{:template   "+{{damage}} damage with souls."
+  :discoverable [{:template   "Your souls deal +{{damage}} damage."
                   :vars       {:damage 2}
                   :affinities #{:offence}}
                  {:template   "+{{chance}}% proc chance for your souls for each active conditional modifier on your reliquary."
@@ -35,8 +65,10 @@
                   :vars       {:chance 10
                                :step   5}
                   :affinities #{:meta}}
-                 #_#_{} ;TODO
-                   {}]}
+                 {:template   "Your item damage ignores enemy resistances on rounds where at least one of your souls has procced."
+                  :affinities #{:offence}}
+                 {:template   "You may use any token type as if it were a Soul token."
+                  :affinities #{:meta}}]}
  {:name         "Lorg Mór"
   :inherent     [{:template   "Your main hand weapon gains the 'sweep' trait."
                   :affinities #{:offence}}

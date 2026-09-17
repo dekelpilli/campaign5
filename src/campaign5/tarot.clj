@@ -90,7 +90,7 @@
                                      (comp (remove (comp #{name} :name))
                                            (mapcat :inherent))
                                      legendaries))
-        num-downsides (count (filter zero? (repeatedly 5 #(rng/next-int rng 2))))
+        num-downsides (count (filterv zero? (repeatedly 5 #(rng/next-int rng 2))))
         num-upsides (- 5 num-downsides)
         new-discoverable (cond-> []
                                  (pos? num-downsides) (into (r/sample-without-replacement rng num-downsides downsides))
@@ -199,9 +199,11 @@
                                               :item/metadata [(str "Priority: " (or priority 0))]}]})
                         cards)
    :loot/actions  (cond-> []
-                          (= 3 (count cards)) (conj {:action/label "Turn in"
-                                                     :action/event [:loot/action {:id     id
-                                                                                  :action ::turn-in}]}))})
+                          (and (= 3 (count cards))
+                               (not (some (comp #{"The Fool"} :name) cards)))
+                          (conj {:action/label "Turn in"
+                                 :action/event [:loot/action {:id     id
+                                                              :action ::turn-in}]}))})
 
 (defn- legendary->view-model [id {:keys [level name mods discoverable
                                          revealed-discoverable?
@@ -249,7 +251,10 @@
                          cards]
   (let [legendary (-> (r/sample rng legendaries)
                       (prepare-legendary cards))]
-    ; TODO return error on The Fool
+    (when (some (comp #{"The Fool"} :name) cards)
+      (throw (ex-info "The Fool cannot be used for turn ins"
+                      {:view-model {:loot/title    "The Fool cannot be used for turn ins"
+                                    :loot/subtitle "Draw 3 cards and pass those in instead"}})))
     (reduce
       (fn [legendary {card-name :name}]
         (handle-card legendary data ctx card-name))
