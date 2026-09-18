@@ -59,8 +59,8 @@
             :template   "The base exertion cost of any non-basic maneuvers you use this round is reduced by {{reduction}}, to a minimum of 1."
             :affinities #{:resource}}}
  {:trait   "Toughness"
-  :passive {:vars       {:hit-points 4}
-            :template   "+{{hit-points}} maximum hit points."
+  :passive {:vars       {:hp 4}
+            :template   "+{{hp}} maximum hit points."
             :affinities #{:survivability}}
   :proc    {:template   "Regain hit points as if from the use of a hit die, but no hit die is consumed."
             :affinities #{:survivability}}}
@@ -182,5 +182,11 @@
             :affinities #{:offence :utility}}
   :proc    {:vars       {:dice 1}
             :template   "The soul deals {{dice}}d6 damage to each enemy you can see whose {{ability}} is lower than yours."
-            :affinities #{:offence}}}]
-;TODO add some wealth related mod(s)
+            :affinities #{:offence}}}
+ {:trait   "Scavenging"
+  :passive {:vars       {:gold 3}
+            :template   "When you find gold, find {{gold}} additional gold."
+            :affinities #{:meta}}
+  :proc    {:vars       {:token 1}
+            :template   "Gain {{token}} generic mythic token(s)."
+            :affinities #{:meta}}}]

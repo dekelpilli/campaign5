@@ -1,4 +1,121 @@
-[{:name         "Bringer of Rain"
+[{:name         "Manna"
+  :inherent     [{:template   "Your spells deal additional damage equal to the number of remaining spell slots you have below the spell slot used."
+                  :signature? true
+                  :affinities #{:offence}}
+                 {:template   "At the end of a combat in which you have consumed at least two spell slots, recover one spell slot of the lowest consumed spell slot."
+                  :affinities #{:resource}}
+                 {:template "Take necrotic harm equal to your level when you end a combat in which you didn't use any spell slots."}
+                 {:template "Take necrotic harm equal to your level when you roll for initiative without any spell slots."}
+                 {:template   "{{#gt level 1}}Once per day when you finish a short rest, you can choose expended spell slots to recover. The spell slots can have a combined level that is equal to or less than half your level (rounded up), and none of the slots can be 6th-level or higher.{{/gt}}"
+                  :affinities #{:resource}}]
+  :discoverable [{:template   "Recover {{hp}} hit points whenever you use a spell slot."
+                  :vars       {:hp 2}
+                  :affinities #{:resource :survivability}}
+                 {:template   "Recover a first level spell slot when you roll for initiative."
+                  :affinities #{:resource}}
+                 {:template   "+{{slots}} {{ordinalize slot-level}}-level spell slot(s)."
+                  :vars       {:slot-level {:value  1
+                                            :points 3
+                                            :max    5}
+                               :slots      {:value 1
+                                            :max   3}}
+                  :affinities #{:resource}}
+                 {:template   "You learn the {{sns-spell Goodberry}} spell."
+                  :affinities #{:utility :survivability :support}}]}
+ {:name         "Mjölnir"
+  :inherent     [{:template   "You may use Strength as your spellcasting ability."
+                  :signature? true
+                  :affinities #{:offence}}
+                 {:template   "Whenever you deal thunder or lightning damage, this weapon deals {{level}}d8 damage of that type to all enemies within 10ft of one creature you have damaged in this way."
+                  :affinities #{:offence}}
+                 {:template   "{{#gt level 1}}Gain lightning damage equal to your Strength modifier if you have taken melee damage since the end of your last turn.{{/gt}}"
+                  :affinities #{:offence}}
+                 {:template "You must have at least 22 Strength to wield this item."}
+                 {:template "-3 to your ability scores other than Strength while not wearing Megingjörð."}]
+  :discoverable [{:template   "+{{die-size lightning}} lightning damage with spells."
+                  :vars       {:lightning 1}
+                  :affinities #{:offence}}
+                 {:template   "+{{die-size thunder}} thunder damage with weapon attacks."
+                  :vars       {:thunder 1}
+                  :affinities #{:offence}}
+                 {:template   "Modifiers to Strength on your items also apply to Intelligence."
+                  :affinities #{:offence :utility :meta}}
+                 {:template   "When an item of yours deals thunder or lightning damage to an enemy, you may cause it to chain to another enemy within 15 feet of them. You can do this no more than {{times}} time(s) per long rest."
+                  :vars       {:times 1}
+                  :affinities #{:offence}}
+                 {:template   "You may increase the areas of your area effects that can deal lightning damage by {{feet}}ft."
+                  :vars       {:feet 5}
+                  :affinities #{:tactical :offence}}]}
+ {:name         "Megingjörð"
+  :inherent     [{:template   "When you add your Strength score to an attack you make, add it twice."
+                  :signature? true
+                  :affinities #{:offence}}
+                 {:template   "You may add half of your Strength score modifier to your skill checks with skills using abilities other than Strength."
+                  :affinities #{:utility}}
+                 {:template   "{{#gt level 1}}Gain maximum hit points equal to your Strength modifier.{{/gt}}"
+                  :affinities #{:survivability}}
+                 {:template "Your abilities other than Strength are capped at 10 below your Strength."}
+                 {:template "You cannot use weapons that add an ability modifier other than Strength to their damage."}
+                 {:template "You cannot cast spells with an ability modifier other than Strength."}]
+  :discoverable [{:template   "+{{strength}} Strength. If your Strength score is greater than 20, gain an additional +{{strength}} Strength."
+                  :vars       {:strength 1}
+                  :affinities #{:offence :utility}}
+                 {:template   "You have +{{expertise}} expertise die with Brawn."
+                  :vars       {:expertise 1}
+                  :affinities #{:utility}}
+                 {:template   "+{{lightning}} lightning damage for each Strength-related modifier on items other than this."
+                  :vars       {:lightning {:value  1
+                                           :points 3}}
+                  :affinities #{:meta :offence}}
+                 {:template   "When you receive healing, you have a percentage chance to double the amount gained equal to your Strength modifier."
+                  :affinities #{:survivability}}
+                 {:template   "You have +{{resistance}} resistance to thunder damage."
+                  :vars       {:resistance 2}
+                  :affinities #{:survivability}}]}
+ {:name         "Bloodbond"
+  :inherent     [{:template   "Whenever you are hurt, half of that hurt is taken by your minions before you. If this kills your minions, you receive the overflow hurt from that half in addition to your half."
+                  :signature? true
+                  :affinities #{:survivability}}
+                 {:template   "At the start of each of their turns, your minions gain 1 temporary hit point for each time they have shared hurt with you since the end of their last turn."
+                  :affinities #{:survivability}}
+                 {:template "Your minions cannot receive healing or temporary hit points from any source other than this item."}]
+  :discoverable [{:template   "Your minions' Fortitude is at least equal to yours."
+                  :affinities #{:survivability}}
+                 {:template   "You minions regain hit points equal to your level when they land a killing blow."
+                  :affinities #{:survivability}}
+                 {:template   "When you intercept, or when an ally intercepts for you, the interceptor then regains hit points equal to {{#gt multiplier 1}}{{multiplier}}x {{/gt}}your Fortitude if they survive."
+                  :vars       {:multiplier 1}
+                  :affinities #{:survivability :support}}
+                 {:template   "You and your minions have +{{hp}} hit points."
+                  :vars       {:hp {:value 3
+                                    :step  2}}
+                  :affinities #{:survivability}}
+                 {:template   "You have +{{resistance}} to spell damage while you have an active minion."
+                  :vars       {:resistance {:value 3
+                                            :step  1}}
+                  :affinities #{:survivability}}]}
+ {:name         "Stasis Prison"
+  :inherent     [{:template   "Gain an amount of temporary hit points at the start of your turns equal to a quarter of the net hit points you have lost since the end of your last turn."
+                  :signature? true
+                  :affinities #{:survivability}}
+                 {:template   "Whenever you are hit by an attack, heal one hit point for each {{#eq level 1}}previous {{/eq}}time you have been hit by an attack during the last round."
+                  :affinities #{:survivability}}
+                 {:template "Healing cannot restore your hit points to above {{#eq level 1}}50{{else}}75{{/eq}}%."}
+                 {:template "Lose 2 hit points when you use use a limited resource."}]
+  :discoverable [{:template   "You have advantage on saves against ongoing effects that you have already failed a saving throw against when trying to end them."
+                  :affinities #{:survivability}}
+                 {:template   "+{{healing}} healing from absorption."
+                  :vars       {:healing 1}
+                  :affinities #{:survivability}}
+                 {:template   "You can intercept attacks against any ally you have been adjacent to in the last minute."
+                  :affinities #{:support}}
+                 {:template   "You have +{{resistance}} resistance while you have temporary hit points."
+                  :vars       {:resistance {:value 2
+                                            :step  1}}
+                  :affinities #{:survivability}}
+                 {:template   "When targeted by an attack, an ally adjacent to you may choose to use a reaction to use your defences for that attack instead of their own."
+                  :affinities #{:support}}]}
+ {:name         "Bringer of Rain"
   :inherent     [{:template   "As a major effect when you score a major success with a weapon attack, you may blind the target of your attack for one round."
                   :signature? true
                   :affinities #{:control :support}}
@@ -28,12 +145,12 @@
                                       :points 2}}
                   :affinities #{:offence}}]}
  {:name         "Excalibur"
-  :inherent     [{:template   "Your offhand weapons grant all of their traits to the main hand weapon"
+  :inherent     [{:template   "Your offhand weapons grant all of their traits, other than 'offhand', to your main hand weapon."
                   :signature? true
                   :affinities #{:meta}}
                  {:template   "Instead of your Strength modifier, you may add {{#eq level 1}}half of {{/eq}}your Dexterity modifier to your weapon attacks."
                   :affinities #{:offence}}
-                 {:template "our melee weapon attacks deal 1 less damage for each point your Dexterity score is below 26."}
+                 {:template "our melee weapon attacks deal 1 less damage for each point your Dexterity score is below 24."}
                  {:template "You cannot use Strength for weapon attacks."}
                  {:template "You can only add your Dexterity score to melee attacks."}
                  {:template   "{{#gt level 1}}If both of your weapons have the 'offhand' trait, your main hand weapon's damage die size increases by one for each trait on your offhand weapon.{{/gt}}"
