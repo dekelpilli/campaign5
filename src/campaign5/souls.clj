@@ -28,7 +28,8 @@
                                       :context? true})
    :loot/sections (conj (mapv (fn [[section heading]]
                                 {:section/heading heading
-                                 :section/items   [(u/mod-item (get soul section) vars)]})
+                                 :section/items   [(u/mod-item (get soul section)
+                                                               (dissoc vars :era :origin))]})
                               mod-sections)
                         {:section/heading "Details"
                          :section/items   [{:item/title "Origin"
@@ -79,7 +80,7 @@
                        :as    var}]
                    (assoc var
                           ::original-points (or original-points points)
-                          :points (+ (or original-points 1) rank -1))))))
+                          :points (+ (or original-points points 1) rank -1))))))
 
 (defn- resolve-mod-vars [rng soul]
   (reduce (fn [soul [section _]] (update-in soul [section :vars] #(resolve-soul-vars rng %)))

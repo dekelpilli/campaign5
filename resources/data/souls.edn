@@ -79,8 +79,8 @@
                                   :points 5}}
             :template   "+{{armour}} armour."
             :affinities #{:survivability}}
-  :proc    {:template   "Your armour does not impose disadvantage on your stealth for the duration of this round"
-            :affinities #{:utility}}}
+  :proc    {:template   "You cannot become {{sns-condition \"brittle\"}} during this round, and you ignore the effects of the {{sns-condition \"brittle\"}} condition on you for the duration of this round."
+            :affinities #{:survivability}}}
  {:trait   "Durability"
   :passive {:vars       {:resistance {:value  1
                                       :points 2}}
