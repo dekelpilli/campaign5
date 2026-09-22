@@ -10,7 +10,7 @@
                :affinities #{:utility :meta}}
               {:template   "No more than once per conversation, when you make a Deception or Persuasion check, you may immediately learn the success of that check for one target of that check. This allows you to then immediately add to that statement, potentially salvaging the situation."
                :affinities #{:utility}}]}
- {:depiction "Caduceus"
+ {:depiction "a snake enwrapping a chalice"
   :info      "Improves healing you grant, including via spells"
   :boons     [{:template   "Downed allies you revive gain an additional 10% of their maximum hit points."
                :affinities #{:support}}
@@ -22,7 +22,7 @@
                :affinities #{:survivability}}
               {:template   "Modifiers to healing on your legendary items, tattoos, souls, reliquaries, and rings have their magnitudes doubled."
                :affinities #{:support :meta}}]}
- {:depiction "a tower shield"
+ {:depiction "the tortoise formation"
   :info      "Improves your longevity in combat through various avenues"
   :boons     [{:template   "You have +2 absorption against attacks targeting your lowest defence(s)."
                :affinities #{:survivability}}

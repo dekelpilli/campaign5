@@ -1,4 +1,29 @@
-[{:name         "Manna"
+[{:name         "Staff of Asclepius"
+  :inherent     [{:template   "You learn the {{sns-spell \"Venomous Succor\"}} spell, and may cast it once per short rest without consuming a spell slot.{{#gt level 1}} When you cast Venomous Succor via your snake, at the start of a target's turn, you may use a reaction to cause the healing to be increased by your bonuses to healing with actions.{{/gt}}"
+                  :affinities #{:support}}
+                 {:template   "You may summon a small snake minion as a bonus action, requiring concentration. It has 30ft of movement, 0 defences, is immune to hurt, but cannot take actions. When perform an action that restores hit points or alleviates conditions, you may choose for that spell to originate from this snake instead."
+                  :signature? true
+                  :affinities #{:tactical :support}}
+                 {:template "-5 outgoing healing with actions while you have no active snake minion."}]
+  :discoverable [{:template   "When you cast the {{sns-spell \"Venomous Succor\"}} spell, you may upcast it at {{slot-level}} spell slot above the spell slot level used."
+                  :vars       {:slot-level {:value  1
+                                            :points 2}}
+                  :affinities #{:support}}
+                 {:template   "While you are wielding a two-handed weapon, +{{magnitude}} to the magnitudes of modifiers that grant positive outgoing healing with actions."
+                  :vars       {:magnitude {:value  1
+                                           :points 4}}
+                  :affinities #{:support :meta}}
+                 {:template   "+{{healing}} outgoing healing with spells that also cause hurt or hit point loss (e.g. {{sns-spell \"Venomous Succor\"}}, {{sns-spell \"Vampiric Touch\"}}, {{sns-spell \"Life Transference\"}})."
+                  :vars       {:healing {:value 4
+                                         :step  2}}
+                  :affinities #{:support}}
+                 {:template   "When you cast {{sns-spell \"Lesser Restoration\"}} or {{sns-spell \"Greater Restoration\"}} via a minion, targeted creatures also becomes immune to the condition removed from it, including to gaining new levels of {{sns-condition \"strife\"}} and {{sns-condition \"fatigue\"}}, for 1 minute."
+                  :affinities #{:support}}
+                 {:template   "+{{healing}} outgoing healing with actions for each spell you know that is mentioned on this item."
+                  :vars       {:healing {:value  1
+                                         :points 3}}
+                  :affinities #{:support :meta}}]}
+ {:name         "Manna"
   :inherent     [{:template   "Your spells deal additional damage equal to the number of remaining spell slots you have below the spell slot used."
                   :signature? true
                   :affinities #{:offence}}
@@ -20,7 +45,7 @@
                                :slots      {:value 1
                                             :max   3}}
                   :affinities #{:resource}}
-                 {:template   "You learn the {{sns-spell Goodberry}} spell."
+                 {:template   "You learn the {{sns-spell \"Goodberry\"}} spell."
                   :affinities #{:utility :survivability :support}}]}
  {:name         "Mjölnir"
   :inherent     [{:template   "You may use Strength as your spellcasting ability."
