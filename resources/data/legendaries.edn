@@ -1,7 +1,7 @@
 [{:name         "Staff of Asclepius"
   :inherent     [{:template   "You learn the {{sns-spell \"Venomous Succor\"}} spell, and may cast it once per short rest without consuming a spell slot.{{#gt level 1}} When you cast Venomous Succor via your snake, at the start of a target's turn, you may use a reaction to cause the healing to be increased by your bonuses to healing with actions.{{/gt}}"
                   :affinities #{:support}}
-                 {:template   "You may summon a small snake minion as a bonus action, requiring concentration. It has 30ft of movement, 0 defences, is immune to hurt, but cannot take actions. When perform an action that restores hit points or alleviates conditions, you may choose for that spell to originate from this snake instead."
+                 {:template   "You may summon a small snake minion as a bonus action, requiring concentration. It has 30ft of movement, 0 defences, is immune to hurt, but cannot take actions. When performing an action that restores hit points or alleviates conditions, you may choose for that spell to originate from this snake instead."
                   :signature? true
                   :affinities #{:tactical :support}}
                  {:template "-5 outgoing healing with actions while you have no active snake minion."}]
@@ -169,11 +169,11 @@
                   :vars       {:dice {:value  1
                                       :points 2}}
                   :affinities #{:offence}}]}
- {:name         "Excalibur"
+ {:name         "Excalibur" ;TODO rework this to be more strongly themed around multiweapons and less about dex. Dex will need its own dedicated uniques (like STR)
   :inherent     [{:template   "Your offhand weapons grant all of their traits, other than 'offhand', to your main hand weapon."
                   :signature? true
                   :affinities #{:meta}}
-                 {:template   "Instead of your Strength modifier, you may add {{#eq level 1}}half of {{/eq}}your Dexterity modifier to your weapon attacks."
+                 {:template   "Add {{#eq level 1}}half of {{/eq}}your Dexterity modifier to your weapon attacks."
                   :affinities #{:offence}}
                  {:template "our melee weapon attacks deal 1 less damage for each point your Dexterity score is below 24."}
                  {:template "You cannot use Strength for weapon attacks."}
@@ -184,7 +184,7 @@
                   :vars       {:damage {:value 3
                                         :step  2}}
                   :affinities #{:offence}}
-                 {:template   "+{{dice}} expertise die with Charisma skill checks if the sum of your Dexterity and Charisma scores is at least 40."
+                 {:template   "+{{dice}} expertise die with Dexterity skill checks if you are wearing at least two unique items including the name 'Excalibur'."
                   :vars       {:dice {:value  1
                                       :points 2}}
                   :affinities #{:utility}}
@@ -192,9 +192,9 @@
                   :vars       {:charisma {:value  1
                                           :points 2}}
                   :affinities #{:offence :utility}}
-                 {:template   "+{{charisma}} Dexterity for each Charisma skill you are proficient in."
-                  :vars       {:charisma {:value  1
-                                          :points 2}}
+                 {:template   "+{{dexterity}} Dexterity for each Dexterity skill you are proficient in."
+                  :vars       {:dexterity {:value  1
+                                           :points 3}}
                   :affinities #{:offence :utility}}
                  {:template   "Your main hand weapon gains the 'Responsive' trait."
                   :affinities #{:offence}}]}

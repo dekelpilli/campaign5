@@ -30,6 +30,12 @@
                :generator {:history :button}
                :jar       {:path       "target/campaign5.jar"
                            :entrypoint campaign5.tarot/-tarot-generator}}
+              {:type  :jar
+               :id    :tattoos
+               :label "Tattoos"
+               :jar   {:path       "target/campaign5.jar"
+                       ;TODO replace with actual tattoo generation once implemented
+                       :entrypoint campaign5.mythic-shrines/-mythic-shrine-generator}}
               {:type      :jar
                :id        :trinkets
                :label     "Trinkets"
@@ -61,14 +67,14 @@
                :section "Utilities"}]
  :reporting  #include "reporting.edn"
  :loot-table [{:id     :rings
-               :weight 18}
+               :ranges [[1 18] [100 100]]}
               {:id     :souls
-               :weight 18}
+               :ranges [[19 36] [100 100]]}
               {:id     :tarot
-               :weight 18}
-              #_{:id     :tattoos
-                 :weight 19}
+               :ranges [[37 54] [100 100]]}
+              {:id     :tattoos
+               :ranges [[55 72] [100 100]]}
               {:id     :trinkets
-               :weight 18}
+               :ranges [[73 90] [100 100]]}
               {:id     :missions
-               :weight 10}]}
+               :ranges [[91 99]]}]}
