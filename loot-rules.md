@@ -68,3 +68,7 @@ Loot can be obtained or improved in the following ways:
 
 ## Specialisations
 Make these always apply to everyone? Maybe the individual's choice still impacts how often they find that thing 
+
+## Carnival games? Activities:
+- Codenames pass-and-play, one loot per word guessed (one turn)
+- Think about this more when doing journey activities

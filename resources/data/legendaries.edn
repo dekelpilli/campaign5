@@ -169,35 +169,63 @@
                   :vars       {:dice {:value  1
                                       :points 2}}
                   :affinities #{:offence}}]}
- {:name         "Excalibur" ;TODO rework this to be more strongly themed around multiweapons and less about dex. Dex will need its own dedicated uniques (like STR)
+ {:name         "Beagalltach"
   :inherent     [{:template   "Your offhand weapons grant all of their traits, other than 'offhand', to your main hand weapon."
                   :signature? true
                   :affinities #{:meta}}
-                 {:template   "Add {{#eq level 1}}half of {{/eq}}your Dexterity modifier to your weapon attacks."
+                 {:template   "+1 damage with weapon attacks for each trait naturally present on your {{#eq level 1}}main hand weapon{{else}}weapons{{/eq}}."
                   :affinities #{:offence}}
-                 {:template "our melee weapon attacks deal 1 less damage for each point your Dexterity score is below 24."}
-                 {:template "You cannot use Strength for weapon attacks."}
-                 {:template "You can only add your Dexterity score to melee attacks."}
-                 {:template   "{{#gt level 1}}If both of your weapons have the 'offhand' trait, your main hand weapon's damage die size increases by one for each trait on your offhand weapon.{{/gt}}"
+                 {:template "You cannot use shields or two-handed weapons."}
+                 {:template "You main hand weapon's natural damage die size cannot be higher than your offhand weapon's natural die size, if you are wielding one."}
+                 {:template "-1 resistance against damage from beasts."}
+                 {:template   "{{#gt level 1}}If both of your weapons have the 'offhand' trait, your main hand weapon's damage die size increases by 1 for each trait on your offhand weapon.{{/gt}}"
                   :affinities #{:offence}}]
-  :discoverable [{:template   "+{{damage}} melee damage with weapons if your Dexterity score is greater than the Dexterity score of the target."
+  :discoverable [{:template   "+{{damage}} damage for each of your weapons with the 'offhand' trait."
+                  :vars       {:damage {:value 2
+                                        :step  1}}
+                  :affinities #{:offence}}
+                 {:template   "Your offhand weapon's offhand trait also grants the 'parrying' trait."
+                  :affinities #{:survivability}}
+                 {:template   "Your weapon attacks gain damage equal to your offhand weapon's die (but not ability bonus)."
+                  :affinities #{:offence}}
+                 {:template   "+1 initiative for each trait granted by your offhand weapon's 'offhand' trait."
+                  :affinities #{:tactical}}
+                 {:template   "+{{bonus}} AB while dual wielding weapons with the same category. +{{bonus}} critical range while dual wielding weapon with different categories."
+                  :vars       {:bonus {:value  1
+                                       :points 4}}
+                  :affinities #{:offence}}]}
+ {:name         "Excalibur"
+  :inherent     [{:template   "Add your Dexterity modifier to your weapon attacks."
+                  :signature? true
+                  :affinities #{:offence}}
+                 {:template   "Effects that grant expertise die to your Dexterity skills instead grant double that amount (e.g. 1d4 -> 1d6)."
+                  :signature? true
+                  :affinities #{:utility :meta}}
+                 {:template "Your weapon attacks deal 1 less damage for each point your Dexterity score is below 24."}
+                 {:template "You cannot use Strength for weapon attacks."}
+                 {:template "You can only add your Dexterity score to attacks with piercing damage."}
+                 {:template   "{{#gt level 1}}+1 reflex for every 5 points of Dexterity you have above 15.{{/gt}}"
+                  :affinities #{:survivability}}]
+  :discoverable [{:template   "+{{damage}} melee damage with weapons if your Dexterity bonus is greater than the Dexterity bonus of the target."
                   :vars       {:damage {:value 3
                                         :step  2}}
                   :affinities #{:offence}}
-                 {:template   "+{{dice}} expertise die with Dexterity skill checks if you are wearing at least two unique items including the name 'Excalibur'."
+                 {:template   "+{{dice}} expertise die with Dexterity skill checks if you are wearing at least two legendary items with modifiers referencing Dexterity."
                   :vars       {:dice {:value  1
                                       :points 2}}
                   :affinities #{:utility}}
-                 {:template   "+{{charisma}} Charisma for each weapon you are wielding."
-                  :vars       {:charisma {:value  1
-                                          :points 2}}
+                 {:template   "+{{ab}} AB for each Dexterity skill with which your average bonus is at least 10."
+                  :vars       {:ab {:value  1
+                                    :points 5}}
                   :affinities #{:offence :utility}}
                  {:template   "+{{dexterity}} Dexterity for each Dexterity skill you are proficient in."
                   :vars       {:dexterity {:value  1
-                                           :points 3}}
+                                           :points 2}}
                   :affinities #{:offence :utility}}
-                 {:template   "Your main hand weapon gains the 'Responsive' trait."
-                  :affinities #{:offence}}]}
+                 {:template   "Gain +{{resistance}} resistance to physical damage. If your reflex is at least 4, this applies to all damage."
+                  :vars       {:resistance {:value 2
+                                            :step  1}}
+                  :affinities #{:survivability}}]}
  {:name         "Kintsugi"
   :inherent     [{:template   "Regain {{#gt level 1}}hit points equal to your lowest defence{{else}}1 hit point{{/gt}} when you block an armour attack."
                   :signature? true
