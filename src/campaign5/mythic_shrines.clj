@@ -18,7 +18,7 @@
               {:id      :tokens
                :label   "Tokens (optional)"
                :type    :enum
-               :options ["Dust" "Legendary" "Ring" "Soul" "Tattoo"]}]})
+               :options ["Trinket" "Legendary" "Ring" "Soul" "Tattoo"]}]})
   (generate [_ {:keys [inputs rng]}]
     (let [filtered-shrines (cond
                              (:name inputs) (filterv (comp #{(:name inputs)} :name) mythic-shrines)

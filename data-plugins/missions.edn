@@ -16,5 +16,5 @@
  :take     1
  :title    "Special result"
  :sections [{:each :items
-             :item {:title "Gain 1 loot roll, and 1 loot result when you finish the mission"
+             :item {:title "Gain 1 loot roll, and 1 loot result of a chosen regular type when you finish the mission"
                     :body  :mission}}]}
