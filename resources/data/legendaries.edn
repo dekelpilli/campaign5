@@ -1,4 +1,27 @@
-[{:name         "The Whispering Ice"
+[{:name         "Hand of Wisdom and Motion"
+  :inherent     [{:template   "Your weapons' base damage is replaced by 1d6 radiant damage for every 2 points of Wisdom modifier you have."
+                  :signature? true
+                  :affinities #{:offence}}
+                 {:template   "+1 critical hit range while you have at least 20 Wisdom."
+                  :affinities #{:offence}}
+                 {:template "You cannot deal physical damage."}
+                 {:template "Your Strength score is capped at 10 below your Wisdom score."}
+                 {:template   "{{#gt level 1}}Heal hit points equal to your Wisdom modifier whenever you deal radiant damage, to a maximum of once per turn.{{/gt}}"
+                  :affinities #{:survivability}}]
+  :discoverable [{:template   "+{{wisdom}} Wisdom. If your Wisdom score is greater than your next highest ability score by at least 8, gain an additional +{{wisdom}} Wisdom."
+                  :vars       {:wisdom 1}
+                  :affinities #{:offence :utility}}
+                 {:template   "Whenever you make an attack that's aided by a Melee-subschool spell, the attack's damage is increased by your Wisdom modifier."
+                  :affinities #{:offence}}
+                 {:template   "Whenever you spend exertion points, roll a d100. If the result is less than {{#gt multi 1}}{{multi}}x{{/gt}} your Wisdom modifier, the exertion points are refunded."
+                  :vars       {:multi {:value 1
+                                       :max   5}}
+                  :affinities #{:resource}}
+                 {:template   "Your critical damage bonus is increased by your Wisdom modifier."
+                  :affinities #{:offence}}
+                 {:template   "Your base walking speed is at least twice your Wisdom score."
+                  :affinities #{:tactical}}]}
+ {:name         "The Whispering Ice"
   :inherent     [{:template   "When you cast an instantaneous Storm (subschool or name) spell with a spell slot no higher than your spellcasting ability's bonus, you may choose for it to last for additional rounds equal to {{#eq level 1}}a tenth{{else}}an eighth{{/eq}} of your spellcasting ability's score. At the start of each of your subsequent turns for the duration, you may use a reaction to trigger the spell's effects again in the exact same area/space affected by the original casting."
                   :signature? true
                   :affinities #{:offence :tactical}}
