@@ -1,10 +1,36 @@
-[{:name         "Kestos Himas"
+[{:name         "The Whispering Ice"
+  :inherent     [{:template   "When you cast an instantaneous Storm (subschool or name) spell with a spell slot no higher than your spellcasting ability's bonus, you may choose for it to last for additional rounds equal to {{#eq level 1}}a tenth{{else}}an eighth{{/eq}} of your spellcasting ability's score. At the start of each of your subsequent turns for the duration, you may use a reaction to trigger the spell's effects again in the exact same area/space affected by the original casting."
+                  :signature? true
+                  :affinities #{:offence :tactical}}
+                 {:template   "When you land a killing blow with cold damage, you may use a reaction to cast {{sns-spell \"Dissonant Whispers\"}} on a targetable creature. When cast in this way, it deals cold damage instead of psychic damage."
+                  :affinities #{:offence :control}}
+                 {:template   "{{#gt level 1}}Gain cold spell damage equal to your spellcasting ability's modifier while you have an active Storm spell.{{/gt}}"
+                  :affinities #{:offence}}
+                 {:template "Your non-Storm damaging spells consume a spell slot one higher than usual if they cannot deal cold damage."}]
+  :discoverable [{:template   "You may choose to convert the damage of your Storm spells to Cold."
+                  :affinities #{:offence}}
+                 {:template   "+{{cold}} cold damage with spells."
+                  :vars       {:cold 2}
+                  :affinities #{:offence}}
+                 {:template   "+{{resistance}} against spell damage while you have at least one active Storm spell."
+                  :vars       {:resistance {:value 3
+                                            :step  2}}
+                  :affinities #{:survivability}}
+                 {:template   "You may increase the AoEs of your Area spells by up to {{aoe}} feet."
+                  :vars       {:aoe {:value  5
+                                     :points 2}}
+                  :affinities #{:tactical}}
+                 {:template   "You may increase the AoEs of your Area spells by up to {{aoe}} feet."
+                  :vars       {:aoe {:value  5
+                                     :points 2}}
+                  :affinities #{:tactical}}]}
+ {:name         "Kestos Himas"
   :inherent     [{:template   "When a non-charmed enemy that can see you targets you with an attack, you may use a reaction to make a Will attack against it. On a hit, the target becomes {{sns-condition \"charmed\"}}, or {{sns-condition \"dominated\"}} on a critical hit. The creature may attempt to save out of of the effect at the end of its subsequent turns, becoming immune to this effect once it has done so successfully."
                   :signature? true
                   :affinities #{:survivability :control}}
                  {:template   "Your Will attacks gain +1AB for every 5 points of Charisma you have above 15."
                   :affinities #{:offence}}
-                 {:template   "Your Charisma is increased by your Will."
+                 {:template   "Your Charisma is increased by am amount equal to your Will."
                   :affinities #{:offence :utility}}
                  {:template "Creatures that are no longer {{sns-condition \"charmed\"}} by you have additional damage equal to your Armour."}
                  {:template "-2 damage against creatures {{sns-condition \"charmed\"}} by you."}
