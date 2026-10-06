@@ -57,10 +57,10 @@
                   :affinities #{:offence :utility}}
                  {:template "Creatures that are no longer {{sns-condition \"charmed\"}} by you have additional damage equal to your Armour."}
                  {:template "-2 damage against creatures {{sns-condition \"charmed\"}} by you."}
-                 {:template "{{#gt level 1}}Creatures that are {{sns-condition \"charmed\"}}, or have been at any point during the current combat, become {{sns-condition \"rattled\"}} until the start of their next turns when you are hurt.{{/gt}}"
-                  :tags     #{:control}}
-                 {:template "{{#gt level 2}}Whenever you {{sns-condition \"charmed\" \"charm\"}} a creature, you may choose to also {{sns-condition \"fixated\" \"fixate\"}} them on you.{{/gt}}"
-                  :tags     #{:control}}]
+                 {:template   "{{#gt level 1}}Creatures that are {{sns-condition \"charmed\"}}, or have been at any point during the current combat, become {{sns-condition \"rattled\"}} until the start of their next turns when you are hurt.{{/gt}}"
+                  :affinities #{:control}}
+                 {:template   "{{#gt level 2}}Whenever you {{sns-condition \"charmed\" \"charm\"}} a creature, you may choose to also {{sns-condition \"fixated\" \"fixate\"}} them on you.{{/gt}}"
+                  :affinities #{:control}}]
   :discoverable [{:template   "+{{charisma}} Charisma while you are not wearing heavy armour."
                   :vars       {:charisma {:value 2
                                           :step  1}}
@@ -86,29 +86,29 @@
                   :affinities #{:offence}}
                  {:template "Minor successes deal full slashing damage to you while you are not in magical darkness."}
                  {:template "-1 Reflex against spell attacks."}
-                 {:template "{{#gt level 1}}You become shrouded in magical darkness when you attack while you are hidden and not already in magical darkness.{{/gt}}"
-                  :tags     #{:tactical}}
-                 {:template "{{#gt level 1}}No more than once per combat, when you become shrouded in magical darkness, you may cause on adjacent ally to also become shrouded in darkness.{{/gt}}"
-                  :tags     #{:support}}]
-  :discoverable [{:template "+{{damage}} slashing damage while in magical darkness."
-                  :vars     {:damage {:value 3
-                                      :step  2}}
-                  :tags     #{:offence}}
-                 {:template "When you make a melee attack against a creature while in magical darkness, they suffer -{{reflex}} to their Reflex for the rest of the combat."
-                  :vars     {:reflex {:value  1
-                                      :points 3}}
-                  :tags     #{:support}}
-                 {:template "When you make a thrown or ranged attack against a creature while in magical darkness, their spell AB is reduced by {{ab}} for the rest of the combat."
-                  :vars     {:ab {:value  1
-                                  :points 4}}
-                  :tags     #{:control}}
-                 {:template "+{{die-size stealth}} expertise dice with stealth while in darkness."
-                  :vars     {:stealth {:value 2
-                                       :step  1}}
-                  :tags     #{:utility}}
-                 {:template "Your knife weapons deal +{{die-size slashing}} slashing damage against creatures larger than you."
-                  :vars     {:slashing 1}
-                  :tags     #{:offence}}]}
+                 {:template   "{{#gt level 1}}You become shrouded in magical darkness when you attack while you are hidden and not already in magical darkness.{{/gt}}"
+                  :affinities #{:tactical}}
+                 {:template   "{{#gt level 1}}No more than once per combat, when you become shrouded in magical darkness, you may cause on adjacent ally to also become shrouded in darkness.{{/gt}}"
+                  :affinities #{:support}}]
+  :discoverable [{:template   "+{{damage}} slashing damage while in magical darkness."
+                  :vars       {:damage {:value 3
+                                        :step  2}}
+                  :affinities #{:offence}}
+                 {:template   "When you make a melee attack against a creature while in magical darkness, they suffer -{{reflex}} to their Reflex for the rest of the combat."
+                  :vars       {:reflex {:value  1
+                                        :points 3}}
+                  :affinities #{:support}}
+                 {:template   "When you make a thrown or ranged attack against a creature while in magical darkness, their spell AB is reduced by {{ab}} for the rest of the combat."
+                  :vars       {:ab {:value  1
+                                    :points 4}}
+                  :affinities #{:control}}
+                 {:template   "+{{die-size stealth}} expertise dice with stealth while in darkness."
+                  :vars       {:stealth {:value 2
+                                         :step  1}}
+                  :affinities #{:utility}}
+                 {:template   "Your knife weapons deal +{{die-size slashing}} slashing damage against creatures larger than you."
+                  :vars       {:slashing 1}
+                  :affinities #{:offence}}]}
  {:name         "Staff of Asclepius"
   :inherent     [{:template   "You learn the {{sns-spell \"Venomous Succor\"}} spell, and may cast it once per short rest without consuming a spell slot.{{#gt level 1}} When you cast Venomous Succor via your snake, at the start of a target's turn, you may use a reaction to cause the healing to be increased by your bonuses to healing with actions.{{/gt}}"
                   :affinities #{:support}}
@@ -147,7 +147,7 @@
   :discoverable [{:template   "Recover {{hp}} hit points whenever you use a spell slot."
                   :vars       {:hp 2}
                   :affinities #{:resource :survivability}}
-                 {:template   "Recover a first level spell slot when you roll for initiative."
+                 {:template   "Recover a first level spell slot when you roll for initiative." ;TODO come up with something else
                   :affinities #{:resource}}
                  {:template   "+{{slots}} {{ordinalize slot-level}}-level spell slot(s)."
                   :vars       {:slot-level {:value  1

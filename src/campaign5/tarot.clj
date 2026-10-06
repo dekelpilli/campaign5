@@ -1,6 +1,7 @@
 (ns campaign5.tarot
   (:require
     [campaign5.util :as u]
+    [clojure.string :as str]
     [randy.core :as r]
     [randy.rng :as rng]
     [sns.sdk.protocols :as p]))
@@ -156,7 +157,7 @@
         mods (case mod-origin
                :reliquary-mods (:reliquary-mods data)
                :rings [{:name     "My fake ring"
-                        :template "My fake ring effect"}] ;TODO pass in rings
+                        :template "My fake ring effect"}] ; TODO pass in rings
                :trinkets (into []
                                (mapcat (fn [{:keys [boons depiction]}]
                                          (eduction
@@ -188,23 +189,26 @@
                            (mapv (fn [mod] (update mod :metadata conj (card-origin-meta card)))))]
     (assoc legendary :discoverable selected-mods)))
 
-(defmethod handle-card "" [legendary {:keys [legendaries]} {:keys [rng]} card]) ;TODO implement courts and numerics
+(defmethod handle-card "The Fool" [legendary _ _ _] legendary)
+
+(defmethod handle-card "" [legendary {:keys [legendaries]} {:keys [rng]} card]) ; TODO implement courts and numerics
 
 (defn- cards->view-model [id cards]
   {:loot/title    "Tarot Cards"
-   :loot/sections (mapv (fn [{:keys [name template priority]}]
+   :loot/sections (mapv (fn [{:keys [name template vars priority]}]
                           {:section/heading name
                            :section/items   [{:item/body     template
+                                              :item/vars     (or vars {})
                                               :item/metadata [(str "Priority: " (or priority 0))]}]})
                         cards)
    :loot/actions  (cond-> []
-                          (and (#{2 3} (count cards))
-                               (not (some (comp #{"The Fool"} :name) cards)))
+                          (>= (count cards) 2)
                           (conj {:action/label "Turn in"
                                  :action/event [:loot/action {:id     id
                                                               :action ::turn-in}]}))})
 
-(defn- legendary->view-model [id {:keys [level name mods discoverable
+(defn- legendary->view-model [id {:keys [level name
+                                         mods discoverable notes
                                          revealed-discoverable?
                                          cards]}]
   {:loot/title    "{{name}} (level {{level}} Legendary Item)"
@@ -220,6 +224,7 @@
                     :section/secret? (not revealed-discoverable?)
                     :section/items   (mapv #(u/mod-item % {:level level}) discoverable)}]
    ; TODO add shrines
+   ; TODO add action to "refresh" the legendary, so that manually added levels/mod changes can be applied to saved history
    :loot/actions  []})
 
 (defn- view-model->cards [{:loot/keys [sections]}]
@@ -267,20 +272,41 @@
                :label   "Card name"
                :type    :enum
                :list?   true
-               :options (sort (mapv :name tarot-cards))}]})
+               :options (-> (into []
+                                  (comp (map :name)
+                                         ; only include main deck cards, non-page/non-ace suited cards can be typed manually
+                                        (remove #(re-find #"^(?:King|Queen|Knight)|\d" %))) tarot-cards)
+                            (sort))}]})
   (generate [_ {{selected-names :card-names} :inputs}]
     (->> (filterv (comp (set selected-names) :name) tarot-cards)
          (cards->view-model id)))
   p/Action
   (handle-action [this {:keys [view-model] :as ctx} action _]
     (let [legendary (case action
+                      ; TODO when https://github.com/spies-and-spiders/companion/issues/19 is done, allow forcing a specific legendary
                       ::turn-in (->> (view-model->cards view-model)
                                      (cards->legendary this ctx)))]
       (legendary->view-model id legendary))))
 
+(defn- expand-tarot-cards [cards]
+  (into []
+        (mapcat (fn [{:keys [name]
+                      :as   card}]
+                  (if (str/starts-with? name "%s")
+                    (into [{:name     (format name "Ace")
+                            :template (format "Draw a card from the %s numbers deck."
+                                              (subs name (str/last-index-of name " ")))}]
+                          (map (fn [n] (-> (update card :name format n)
+                                           (assoc :vars {:n {:value    n
+                                                             :context? true}}))))
+                          (range 2 10))
+                    [card])))
+        cards))
+
 (defn -tarot-generator [config]
   (->> (assoc config
-              :tarot-cards (u/read-edn-resource "data/tarot-cards.edn")
+              :tarot-cards (-> (u/read-edn-resource "data/tarot-cards.edn")
+                               expand-tarot-cards)
               :legendaries (u/read-edn-resource "data/legendaries.edn")
               :reliquary-mods @u/reliquary-mods
               :trinkets @u/trinkets)

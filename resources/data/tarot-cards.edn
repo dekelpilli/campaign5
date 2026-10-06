@@ -48,20 +48,39 @@
  {:name     "The Tower"
   :priority 2
   :template "The resulting legendary item's discoverable mods are replaced by signature mods of other legendary items."}
- ; <-- DONE ; TODO -->
+ ; <-- DONE ; TODO implement -->
+ {:name     "%s of Pentacles"
+  :template "Discovered Potential and Revealed Potential Shrines costs are reduced by {{n}} tokens on the resulting legendary item."}
+ {:name     "Page of Pentacles"
+  :template "Draw a card from the Pentacle Courts deck."}
+ {:name     "Knight of Pentacles"
+  :template "Discovered Potential and Revealed Potential Shrines costs are reduced by 5 tokens on the resulting legendary item, and this value can be ranked up."}
+ {:name     "Queen of Pentacles"
+  :template "Discovered Potential and Revealed Potential Shrines costs are reduced by 8 tokens on the resulting legendary item, and this value can be ranked up."}
+ {:name     "King of Pentacles"
+  :template "Discovered Potential and Revealed Potential Shrines costs are reduced by 10 tokens on the resulting legendary item, and this value can be ranked up."}
+ {:name     "%s of Cups"
+  :template "Generate the turn in of these cards {{n}} times. Based on name alone (and there may be duplicates for the same name), the player may choose which result to take."}
+ {:name     "Page of Cups"
+  :template "Draw a card from the Cups Courts deck."}
+ {:name     "Knight of Cups"
+  :template "Generate the turn in of these cards 2 times, and reveal each outcome. The player may choose which result to take."}
+ {:name     "Queen of Cups"
+  :template "Generate the turn in of these cards 3 times, and reveal each outcome. The player may choose which result to take."}
+ {:name     "King of Cups"
+  :template "Generate the turn in of these cards 4 times, and reveal each outcome. The player may choose which result to take."}
+ {:name     "%s of Wands"
+  :template "{{n}} non-signature inherent modifiers from other legendary items are picked at random. Based on metadata alone, the player chooses one of these for the resulting legendary item to start with."}
+ {:name     "Page of Wands"
+  :template "Draw a card from the Wands Courts deck."}
+ {:name     "Knight of Wands"
+  :template "3 non-signature inherent modifiers from other legendary items are picked at random. The player chooses one of these mods for the resulting legendary item to start with."}
+ {:name     "Queen of Wands"
+  :template "5 non-signature inherent modifiers from other legendary items are picked at random. The player chooses one of these mods for the resulting legendary item to start with."}
+ {:name     "King of Wands"
+  :template "7 non-signature inherent modifiers from other legendary items are picked at random. The player chooses one of these mods for the resulting legendary item to start with."}
+  ; TODO -->
  {:name     "X of Swords"
   :template "You gain {X} additional gold when turning in this set. Mods in the resulting relic's mod pool are advantaged towards 'damage' and 'accuracy' tagged modifiers."}
- {:name     "X of Wands"
-  :template "You gain {X} additional gold when turning in this set. Mods in the resulting relic's mod pool are advantaged towards 'resources' and 'critical' tagged modifiers."}
- {:name     "X of Cups"
-  :template "You gain {X} additional gold when turning in this set. Mods in the resulting relic's mod pool are advantaged towards 'survivability' and 'control' tagged modifiers."}
- {:name     "X of Pentacles"
-  :template "You gain {X} additional gold when turning in this set. Mods in the resulting relic's mod pool are advantaged towards 'utility' and 'wealth' tagged modifiers."}
  {:name     "Court of Swords"
-  :template "+1 to this relic's base modifier's point minimum (mod will be levelled if necessary). The mod is also advantaged towards 'damage' and 'accuracy' tagged modifiers."}
- {:name     "Court of Wands"
-  :template "+1 to this relic's base modifier's point minimum (mod will be levelled if necessary). The mod is also advantaged towards 'resources' and 'critical' tagged modifiers."}
- {:name     "Court of Cups"
-  :template "+1 to this relic's base modifier's point minimum (mod will be levelled if necessary). The mod is also advantaged towards 'survivability' and 'control' tagged modifiers."}
- {:name     "Court of Pentacles"
-  :template "+1 to this relic's base modifier's point minimum (mod will be levelled if necessary). The mod is also advantaged towards 'utility' and 'wealth' tagged modifiers."}]
+  :template "+1 to this relic's base modifier's point minimum (mod will be levelled if necessary). The mod is also advantaged towards 'damage' and 'accuracy' tagged modifiers."}]
