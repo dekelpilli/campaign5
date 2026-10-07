@@ -420,9 +420,9 @@
                   :affinities #{:offence}}
                  {:template   "Mythic Shrines of Annexation and Refinement are {{#lt level 2}}10{{else}}15{{/lt}} tokens cheaper."
                   :affinities #{:meta}}
-                 {:template   "{{#gt level 3}}+1 maximum number of souls contained in your reliquaries{{/gt}}."
-                  :affinities #{:meta}}
-                 {:template "The passive bonus of your first soul grants nothing."}]
+                 {:template "The passive bonus of your first soul grants nothing."}
+                 {:template   "{{#gt level 3}}+1 maximum number of souls contained in your reliquaries.{{/gt}}"
+                  :affinities #{:meta}}]
   :discoverable [{:template   "Your souls deal +{{damage}} damage."
                   :vars       {:damage 2}
                   :affinities #{:offence}}

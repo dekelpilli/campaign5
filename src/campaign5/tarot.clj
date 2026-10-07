@@ -4,9 +4,13 @@
     [clojure.string :as str]
     [randy.core :as r]
     [randy.rng :as rng]
-    [sns.sdk.protocols :as p]))
+    [sns.sdk.protocols :as p]
+    [sns.sdk.rank :as rank]))
 
-(defmulti handle-card (fn [_legendary _data _ctx card] card))
+(defmulti handle-card (fn [_legendary _data _ctx card]
+                        (if-let [[_ numeric-card-suffix] (re-matches #"^(?:\d{1,2})(.+)" card)]
+                          (str "n" numeric-card-suffix)
+                          card)))
 
 (defn- card-origin-meta [card]
   (str "Added by " card))
@@ -53,8 +57,7 @@
 (defmethod handle-card "Wheel of Fortune" [legendary data ctx card]
   (add-random-discoverable :meta legendary data ctx card))
 
-(defmethod handle-card "The Hierophant" [legendary _ _ _]
-  (assoc legendary :revealed-discoverable? true))
+(defmethod handle-card "The Hierophant" [legendary _ _ _]) ; TODO
 
 (defn- downside-mod? [{:keys [restriction? affinities]}]
   (and (not restriction?)
@@ -152,22 +155,24 @@
                             other-inherent)]
     (update legendary :mods conj signature-mod)))
 
-(defmethod handle-card "The World" [legendary data {:keys [rng]} card]
-  (let [mod-origin (r/sample rng [:reliquary-mods :rings :trinkets])
-        mods (case mod-origin
-               :reliquary-mods (:reliquary-mods data)
-               :rings [{:name     "My fake ring"
-                        :template "My fake ring effect"}] ; TODO pass in rings
-               :trinkets (into []
-                               (mapcat (fn [{:keys [boons depiction]}]
-                                         (eduction
-                                           (map (fn [boon]
-                                                  (assoc boon :metadata [(str "Trinket depicting " depiction)])))
-                                           boons)))
-                               (:trinkets data)))
-        mod (-> (r/sample rng mods)
-                (update :metadata (fnil conj []) (card-origin-meta card)))]
-    (update legendary :mods conj mod)))
+(defmethod handle-card "The World" [legendary _ {:keys [rng registry] :as ctx} card]
+  (let [generator-type (r/sample rng [:reliquaries :rings :trinkets])
+        generated (p/generate
+                    (get registry generator-type)
+                    ctx)
+        items (-> generated :loot/sections first :section/items)
+        mod (case generator-type
+              :reliquaries (let [reliquary-mod (first items)]
+                             (update reliquary-mod :item/metadata (fnil conj []) "Reliquary modifier"))
+              :rings (let [ring (first items)]
+                       (-> (dissoc ring :item/title)
+                           (update :item/metadata (fnil conj []) (str "From " (:item/title ring)))))
+              :trinkets (-> (r/sample rng items)
+                            (update :item/metadata (fnil conj []) (str "Trinket depicting "
+                                                                       (-> generated :loot/vars :depiction :value)))
+                            (update :item/vars {:tier 6})))]
+    (->> (update mod :item/metadata (fnil conj []) (card-origin-meta card))
+         (update legendary :mods conj))))
 
 (defmethod handle-card "Justice" [legendary _ _ card]
   (update legendary :mods conj
@@ -189,9 +194,127 @@
                            (mapv (fn [mod] (update mod :metadata conj (card-origin-meta card)))))]
     (assoc legendary :discoverable selected-mods)))
 
-(defmethod handle-card "The Fool" [legendary _ _ _] legendary)
+(defmethod handle-card "The Fool" [legendary _ _ card]
+  (update legendary :mods conj
+          {:template "The sell price of legendary item should be calculated as if only 2 cards were used for its turn in."
+           :metadata [(card-origin-meta card)]}))
 
-(defmethod handle-card "" [legendary {:keys [legendaries]} {:keys [rng]} card]) ; TODO implement courts and numerics
+(defn- numeric-card-n [card]
+  (-> (re-find #"^(\d{1,2})" card)
+      first
+      parse-long))
+
+(defmethod handle-card "n of Cups" [legendary _ _ card]
+  (let [n (numeric-card-n card)]
+    (update legendary :notes (fnil conj [])
+            {:template (format "Based on name alone, the player should choose the result based on %s turn ins of this set." n)
+             :metadata [(card-origin-meta card)]})))
+
+(defn- handle-court-of-cups [n legendary card]
+  (update legendary :notes (fnil conj [])
+          {:template (format "The player should choose uniques based on %s turn ins of this set." n)
+           :metadata [(card-origin-meta card)]}))
+
+(defmethod handle-card "Knight of Cups" [legendary _ _ card]
+  (handle-court-of-cups 2 legendary card))
+(defmethod handle-card "Queen of Cups" [legendary _ _ card]
+  (handle-court-of-cups 3 legendary card))
+(defmethod handle-card "King of Cups" [legendary _ _ card]
+  (handle-court-of-cups 4 legendary card))
+
+(defmethod handle-card "n of Pentacles" [legendary _ _ card]
+  (let [n (numeric-card-n card)]
+    (update legendary :mods conj
+            {:template   (format "Mythic Shrines of Revealed Potential and of Discovered Potential targeting this item are cheaper by %s tokens."
+                                 n)
+             :affinities #{:meta}
+             :metadata   [(card-origin-meta card)]})))
+
+(defn- handle-court-of-pentacles [n legendary card]
+  (update legendary :mods conj
+          {:template   "Mythic Shrines of Revealed Potential and of Discovered Potential targeting this item are cheaper by {{discount}} tokens."
+           :vars       {:discount {:value n
+                                   :step  5}}
+           :affinities #{:meta}
+           :metadata   [(card-origin-meta card)]}))
+
+(defmethod handle-card "Knight of Pentacles" [legendary _ _ card]
+  (handle-court-of-pentacles 5 legendary card))
+(defmethod handle-card "Queen of Pentacles" [legendary _ _ card]
+  (handle-court-of-pentacles 8 legendary card))
+(defmethod handle-card "King of Pentacles" [legendary _ _ card]
+  (handle-court-of-pentacles 10 legendary card))
+
+(defmethod handle-card "n of Swords" [legendary _ {:keys [rng]} card]
+  (let [chance (* 0.07 (numeric-card-n card))]
+    (update legendary :discoverable
+            #(mapv (fn [{:keys [vars] :as mod}]
+                     (if-let [upgradeable-keys (->  (reduce-kv (fn [acc k v]
+                                                                 (cond-> acc
+                                                                         (rank/upgradeable? v) (conj k)))
+                                                               []
+                                                               vars)
+                                                    not-empty)]
+                       (if (< (rng/next-double rng 0 1) chance)
+                         (-> (update mod :vars rank/rank-up (r/sample rng upgradeable-keys))
+                             (update :metadata (fnil conj []) (str "Upgraded by " card)))
+                         mod)
+                       mod))
+                   %))))
+
+(defn- handle-court-of-swords [n legendary card]
+  (-> (assoc legendary :revealed-discoverable? true)
+      (update :notes (fnil conj [])
+              {:template (format "The player should choose up to %s of the discoverable mods to upgrade once." n)
+               :metadata [(card-origin-meta card)]})))
+
+(defmethod handle-card "Knight of Swords" [legendary _ _ card]
+  (handle-court-of-swords 1 legendary card))
+(defmethod handle-card "Queen of Swords" [legendary _ _ card]
+  (handle-court-of-swords 2 legendary card))
+(defmethod handle-card "King of Swords" [legendary _ _ card]
+  (handle-court-of-swords 3 legendary card))
+
+(defn- wands-mods [n {legendary-name :name} {:keys [legendaries]} {:keys [rng]} card]
+  (let [all-mods (into [] (mapcat
+                            (fn [{:keys [name inherent]}]
+                              (when-not (= name legendary-name)
+                                (into []
+                                      (comp (remove :signature?)
+                                            (map (fn [mod] (update mod :metadata (fnil conj [])
+                                                                   (str "Inherent mod of " name)
+                                                                   (str "Option granted by " card)))))
+                                      inherent)))
+                            legendaries))]
+    (into []
+          (map-indexed (fn [i v]
+                         (update v :template #(format "Option %s: %s" i %))))
+          (r/sample-without-replacement rng n all-mods))))
+
+(defn- handle-wands [n legendary data ctx card instruction]
+  (let [mods (wands-mods n legendary data ctx card)
+        notes (into [{:template   (format instruction n)
+                      :title      card
+                      :affinities #{:meta}
+                      :metadata   [(card-origin-meta card)]}]
+                    mods)]
+    (update legendary :notes into notes)))
+
+(defmethod handle-card "n of Wands" [legendary data ctx card]
+  (-> (numeric-card-n card)
+      (handle-wands legendary data ctx card
+                    "Player must choose from the %s following mods based on metadata alone.")))
+
+(defn- handle-court-of-wands [n legendary data ctx card]
+  (handle-wands n legendary data ctx card
+                "Player must choose from the %s following mods."))
+
+(defmethod handle-card "Knight of Wands" [legendary data ctx card]
+  (handle-court-of-wands 3 legendary data ctx card))
+(defmethod handle-card "Queen of Wands" [legendary data ctx card]
+  (handle-court-of-wands 5 legendary data ctx card))
+(defmethod handle-card "King of Wands" [legendary data ctx card]
+  (handle-court-of-wands 7 legendary data ctx card))
 
 (defn- cards->view-model [id cards]
   {:loot/title    "Tarot Cards"
@@ -222,7 +345,10 @@
                     :section/items   (mapv #(u/mod-item % {:level level}) mods)}
                    {:section/heading "Discoverable mods"
                     :section/secret? (not revealed-discoverable?)
-                    :section/items   (mapv #(u/mod-item % {:level level}) discoverable)}]
+                    :section/items   (mapv #(u/mod-item % {:level level}) discoverable)}
+                   {:section/heading "Notes"
+                    :section/secret? true
+                    :section/items   (mapv #(u/mod-item % {:level level}) notes)}]
    ; TODO add shrines
    ; TODO add action to "refresh" the legendary, so that manually added levels/mod changes can be applied to saved history
    :loot/actions  []})
@@ -255,10 +381,6 @@
                          cards]
   (let [legendary (-> (r/sample rng legendaries)
                       (prepare-legendary cards))]
-    (when (some (comp #{"The Fool"} :name) cards)
-      (throw (ex-info "The Fool cannot be used for turn ins"
-                      {:view-model {:loot/title    "The Fool cannot be used for turn ins"
-                                    :loot/subtitle "Draw 3 cards and pass those in instead"}})))
     (reduce
       (fn [legendary {card-name :name}]
         (handle-card legendary data ctx card-name))
@@ -307,7 +429,5 @@
   (->> (assoc config
               :tarot-cards (-> (u/read-edn-resource "data/tarot-cards.edn")
                                expand-tarot-cards)
-              :legendaries (u/read-edn-resource "data/legendaries.edn")
-              :reliquary-mods @u/reliquary-mods
-              :trinkets @u/trinkets)
+              :legendaries (u/read-edn-resource "data/legendaries.edn"))
        map->TarotGenerator))

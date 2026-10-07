@@ -53,14 +53,17 @@
 
 (defn mod-item
   ([mod] (mod-item mod {}))
-  ([{:keys [metadata vars] :as mod} item-vars]
-   (let [metadata (cond-> (into (or metadata []) (vars->metadata vars))
-                          (seq (:affinities mod)) (conj (affinities->metadata (:affinities mod)))
-                          (or (some :random (vals vars))
-                              (some :random (vals item-vars))) (conj "Randomised"))]
-     (cond-> {:item/body (:template mod)}
-             (seq metadata) (assoc :item/metadata metadata)
-             (seq vars) (assoc :item/vars vars)))))
+  ([{:keys [metadata vars title] :as mod} item-vars]
+   (if-not (contains? mod :item/body)
+     (let [metadata (cond-> (into (or metadata []) (vars->metadata vars))
+                            (seq (:affinities mod)) (conj (affinities->metadata (:affinities mod)))
+                            (or (some :random (vals vars))
+                                (some :random (vals item-vars))) (conj "Randomised"))]
+       (cond-> {:item/body (:template mod)}
+               title (assoc :item/title title)
+               (seq metadata) (assoc :item/metadata metadata)
+               (seq vars) (assoc :item/vars vars)))
+     mod)))
 
 (defn choose-by-input [k {:keys [inputs rng]} coll]
   (if (k inputs)

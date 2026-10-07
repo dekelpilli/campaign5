@@ -16,8 +16,6 @@
   :template "The resulting legendary item will start with a 'offence' affinity modifier from another legendary item's discoverable mods."}
  {:name     "Wheel of Fortune"
   :template "The resulting legendary item will start with a 'meta' affinity modifier from another legendary item's discoverable mods."}
- {:name     "The Hierophant"
-  :template "The resulting legendary item's discoverable mods are revealed."}
  {:name     "Temperance"
   :priority 5
   :template "A random downside modifier on the resulting legendary item is disabled."}
@@ -48,17 +46,6 @@
  {:name     "The Tower"
   :priority 2
   :template "The resulting legendary item's discoverable mods are replaced by signature mods of other legendary items."}
- ; <-- DONE ; TODO implement -->
- {:name     "%s of Pentacles"
-  :template "Discovered Potential and Revealed Potential Shrines costs are reduced by {{n}} tokens on the resulting legendary item."}
- {:name     "Page of Pentacles"
-  :template "Draw a card from the Pentacle Courts deck."}
- {:name     "Knight of Pentacles"
-  :template "Discovered Potential and Revealed Potential Shrines costs are reduced by 5 tokens on the resulting legendary item, and this value can be ranked up."}
- {:name     "Queen of Pentacles"
-  :template "Discovered Potential and Revealed Potential Shrines costs are reduced by 8 tokens on the resulting legendary item, and this value can be ranked up."}
- {:name     "King of Pentacles"
-  :template "Discovered Potential and Revealed Potential Shrines costs are reduced by 10 tokens on the resulting legendary item, and this value can be ranked up."}
  {:name     "%s of Cups"
   :template "Generate the turn in of these cards {{n}} times. Based on name alone (and there may be duplicates for the same name), the player may choose which result to take."}
  {:name     "Page of Cups"
@@ -69,6 +56,27 @@
   :template "Generate the turn in of these cards 3 times, and reveal each outcome. The player may choose which result to take."}
  {:name     "King of Cups"
   :template "Generate the turn in of these cards 4 times, and reveal each outcome. The player may choose which result to take."}
+ {:name     "%s of Pentacles"
+  :template "Discovered Potential and Revealed Potential Shrines costs are reduced by {{n}} tokens on the resulting legendary item."}
+ {:name     "Page of Pentacles"
+  :template "Draw a card from the Pentacle Courts deck."}
+ {:name     "Knight of Pentacles"
+  :template "Discovered Potential and Revealed Potential Shrines costs are reduced by 5 tokens on the resulting legendary item, and this value can be ranked up."}
+ {:name     "Queen of Pentacles"
+  :template "Discovered Potential and Revealed Potential Shrines costs are reduced by 8 tokens on the resulting legendary item, and this value can be ranked up."}
+ {:name     "King of Pentacles"
+  :template "Discovered Potential and Revealed Potential Shrines costs are reduced by 10 tokens on the resulting legendary item, and this value can be ranked up."}
+ {:name     "%s of Swords"
+  :template "Each discoverable mod has a {{times 7 n}}% to be randomly upgraded once. Once a mod is discovered, you might learn that it starts already upranked."}
+ {:name     "Page of Swords"
+  :template "Draw a card from the Swords Courts deck."}
+ {:name     "Knight of Swords"
+  :template "The resulting legendary item's discoverable mods are revealed. The player chooses one of these mods to upgrade."}
+ {:name     "Queen of Swords"
+  :template "The resulting legendary item's discoverable mods are revealed. The player chooses two of these mods to upgrade."}
+ {:name     "King of Swords"
+  :template "The resulting legendary item's discoverable mods are revealed. The player chooses three of these mods to upgrade."}
+ ; <-- DONE ; TODO implement -->
  {:name     "%s of Wands"
   :template "{{n}} non-signature inherent modifiers from other legendary items are picked at random. Based on metadata alone, the player chooses one of these for the resulting legendary item to start with."}
  {:name     "Page of Wands"
@@ -79,8 +87,6 @@
   :template "5 non-signature inherent modifiers from other legendary items are picked at random. The player chooses one of these mods for the resulting legendary item to start with."}
  {:name     "King of Wands"
   :template "7 non-signature inherent modifiers from other legendary items are picked at random. The player chooses one of these mods for the resulting legendary item to start with."}
-  ; TODO -->
- {:name     "X of Swords"
-  :template "You gain {X} additional gold when turning in this set. Mods in the resulting relic's mod pool are advantaged towards 'damage' and 'accuracy' tagged modifiers."}
- {:name     "Court of Swords"
-  :template "+1 to this relic's base modifier's point minimum (mod will be levelled if necessary). The mod is also advantaged towards 'damage' and 'accuracy' tagged modifiers."}]
+ ;TODO
+ {:name     "The Hierophant"
+  :template ""}]
