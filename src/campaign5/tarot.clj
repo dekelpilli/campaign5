@@ -5,12 +5,18 @@
     [randy.core :as r]
     [randy.rng :as rng]
     [sns.sdk.protocols :as p]
-    [sns.sdk.rank :as rank]))
+    [sns.sdk.rank :as rank]
+    [sns.sdk.vars :as vars]))
 
 (defmulti handle-card (fn [_legendary _data _ctx card]
                         (if-let [[_ numeric-card-suffix] (re-matches #"^(?:\d{1,2})(.+)" card)]
                           (str "n" numeric-card-suffix)
                           card)))
+
+(defmethod handle-card :default [_ _ _ card]
+  (throw (ex-info (str "No turn in behaviour for " card)
+                  {:view-model {:loot/title    (str card " cannot be used for turn ins")
+                                :loot/subtitle "Replace it with the card it tells you to draw, then turn in again"}})))
 
 (defn- card-origin-meta [card]
   (str "Added by " card))
@@ -170,7 +176,8 @@
               :trinkets (-> (r/sample rng items)
                             (update :item/metadata (fnil conj []) (str "Trinket depicting "
                                                                        (-> generated :loot/vars :depiction :value)))
-                            (update :item/vars {:tier 6})))]
+                            (update :item/vars assoc :tier {:value    6
+                                                            :context? true})))]
     (->> (update mod :item/metadata (fnil conj []) (card-origin-meta card))
          (update legendary :mods conj))))
 
@@ -212,7 +219,7 @@
 
 (defn- handle-court-of-cups [n legendary card]
   (update legendary :notes (fnil conj [])
-          {:template (format "The player should choose uniques based on %s turn ins of this set." n)
+          {:template (format "The player should choose the result from %s revealed turn ins of this set." n)
            :metadata [(card-origin-meta card)]}))
 
 (defmethod handle-card "Knight of Cups" [legendary _ _ card]
@@ -248,18 +255,14 @@
 (defmethod handle-card "n of Swords" [legendary _ {:keys [rng]} card]
   (let [chance (* 0.07 (numeric-card-n card))]
     (update legendary :discoverable
-            #(mapv (fn [{:keys [vars] :as mod}]
-                     (if-let [upgradeable-keys (->  (reduce-kv (fn [acc k v]
-                                                                 (cond-> acc
-                                                                         (rank/upgradeable? v) (conj k)))
-                                                               []
-                                                               vars)
-                                                    not-empty)]
-                       (if (< (rng/next-double rng 0 1) chance)
-                         (-> (update mod :vars rank/rank-up (r/sample rng upgradeable-keys))
-                             (update :metadata (fnil conj []) (str "Upgraded by " card)))
-                         mod)
-                       mod))
+            #(mapv (fn [mod]
+                     (let [resolved-vars (vars/resolve-vars rng (:vars mod))]
+                       (if-let [upgradeable-keys (rank/available resolved-vars nil)]
+                         (if (< (rng/next-double rng 0 1) chance)
+                           (-> (assoc mod :vars (rank/rank-up resolved-vars (r/sample rng upgradeable-keys)))
+                               (update :metadata (fnil conj []) (str "Upgraded by " card)))
+                           mod)
+                         mod)))
                    %))))
 
 (defn- handle-court-of-swords [n legendary card]
@@ -417,11 +420,11 @@
                   (if (str/starts-with? name "%s")
                     (into [{:name     (format name "Ace")
                             :template (format "Draw a card from the %s numbers deck."
-                                              (subs name (str/last-index-of name " ")))}]
+                                              (subs name (inc (str/last-index-of name " "))))}]
                           (map (fn [n] (-> (update card :name format n)
                                            (assoc :vars {:n {:value    n
                                                              :context? true}}))))
-                          (range 2 10))
+                          (range 2 11))
                     [card])))
         cards))
 

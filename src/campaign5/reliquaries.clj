@@ -95,7 +95,7 @@
       (reliquary->view-model id reliquary))))
 
 (defn -reliquary-generator [config]
-  (->> (assoc config :reliquary-mods @u/reliquary-mods)
+  (->> (assoc config :reliquary-mods (u/read-edn-resource "data/reliquary-mods.edn"))
        map->ReliquaryGenerator))
 
 (comment

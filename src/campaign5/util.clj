@@ -16,9 +16,6 @@
       PushbackReader.
       edn/read))
 
-(def reliquary-mods (delay (read-edn-resource "data/reliquary-mods.edn")))
-(def trinkets (delay (read-edn-resource "data/trinkets.edn")))
-
 (def ^:private affinity-metadata-prefix "Affinities: ")
 (def ^:private ranking-metadata-regex #"(?:[a-zA-Z ]+: )?\[(?:\d+/\d+)](?:\(\d+\))*")
 
