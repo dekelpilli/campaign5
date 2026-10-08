@@ -46,6 +46,8 @@
  {:name     "The Tower"
   :priority 2
   :template "The resulting legendary item's discoverable mods are replaced by signature mods of other legendary items."}
+ {:name     "The Hierophant"
+  :template "Mythic Shrines targeting the resulting legendary item accept any token type."}
  {:name     "%s of Cups"
   :template "Generate the turn in of these cards {{n}} times. Based on name alone (and there may be duplicates for the same name), the player may choose which result to take."}
  {:name     "Page of Cups"
@@ -75,9 +77,9 @@
   :template "The resulting legendary item's discoverable mods are revealed. The player chooses one of these mods to upgrade."}
  {:name     "Queen of Swords"
   :template "The resulting legendary item's discoverable mods are revealed. The player chooses two of these mods to upgrade."}
+ ; <-- DONE ; TODO implement -->
  {:name     "King of Swords"
   :template "The resulting legendary item's discoverable mods are revealed. The player chooses three of these mods to upgrade."}
- ; <-- DONE ; TODO implement -->
  {:name     "%s of Wands"
   :template "{{n}} non-signature inherent modifiers from other legendary items are picked at random. Based on metadata alone, the player chooses one of these for the resulting legendary item to start with."}
  {:name     "Page of Wands"
@@ -87,7 +89,4 @@
  {:name     "Queen of Wands"
   :template "5 non-signature inherent modifiers from other legendary items are picked at random. The player chooses one of these mods for the resulting legendary item to start with."}
  {:name     "King of Wands"
-  :template "7 non-signature inherent modifiers from other legendary items are picked at random. The player chooses one of these mods for the resulting legendary item to start with."}
- ;TODO
- {:name     "The Hierophant"
-  :template ""}]
+  :template "7 non-signature inherent modifiers from other legendary items are picked at random. The player chooses one of these mods for the resulting legendary item to start with."}]

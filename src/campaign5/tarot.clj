@@ -63,7 +63,11 @@
 (defmethod handle-card "Wheel of Fortune" [legendary data ctx card]
   (add-random-discoverable :meta legendary data ctx card))
 
-(defmethod handle-card "The Hierophant" [legendary _ _ _]) ; TODO
+(defmethod handle-card "The Hierophant" [legendary _ _ card]
+  (update legendary :mods conj
+          {:template   "Mythic Shrines targeting this item accept any token type."
+           :affinities #{:meta}
+           :metadata   [(card-origin-meta card)]}))
 
 (defn- downside-mod? [{:keys [restriction? affinities]}]
   (and (not restriction?)
@@ -87,7 +91,7 @@
                :metadata   [(card-origin-meta card)]})))
 
 (defmethod handle-card "Judgement" [legendary _ _ card]
-  (update legendary :mods conj
+  (update legendary :notes (fnil conj [])
           {:template   "Draw 3 tarot cards after creating this item. Then, either discard this item, or 3 tarot cards."
            :affinities #{:meta}
            :metadata   [(card-origin-meta card)]}))
