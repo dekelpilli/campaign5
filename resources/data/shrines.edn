@@ -1,7 +1,11 @@
-[{:name   "Adjustment"
-  :effect "Access a random minor shrine that takes a loot type matching the tokens used."
+[{:name   "Entropy"
+  :effect "Choose a mod with any kind of randomisation on it, and reroll that mod's randomisation."
   :cost   10
-  :tokens ["trinket" "legendary" "ring" "soul" "tattoo"]}
+  :tokens ["legendary" "soul" "reliquary" "ring"]}
+ {:name   "Manifestation"
+  :effect "Increase a soul's proc chance by 1 percentage point."
+  :cost   10
+  :tokens ["soul"]}
  {:name   "Fulfilment"
   :effect "Progress the passive or proc mod of a soul (player choice)."
   :cost   75
@@ -37,4 +41,12 @@
  {:name   "Discovered Potential"
   :effect "Add a new random discovery modifier on a legendary item, or upgrade an already discovered modifier."
   :cost   75
+  :tokens ["legendary"]}
+ {:name   "Rewriting"
+  :effect "Choose a non-physical hurt type. All mods on the item that reference this hurt type instead refer to another non-physical hurt type of your choice. An item can only be affected by one instance of this shrine."
+  :cost   10
+  :tokens ["legendary"]}
+ {:name   "Alteration"
+  :effect "Choose a physical hurt type. All mods on the item that reference this hurt type instead refer to another physical hurt type of your choice. An item can only be affected by one instance of this shrine."
+  :cost   5
   :tokens ["legendary"]}]

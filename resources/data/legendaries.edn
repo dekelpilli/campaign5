@@ -276,7 +276,7 @@
                   :vars       {:dice {:value  1
                                       :points 2}}
                   :affinities #{:offence}}
-                 {:template   "+{{dice}}d4 poison damage with weapon attacks while your main hand weapon is an axe."
+                 {:template   "+{{dice}}d4 acid damage with weapon attacks while your main hand weapon is an axe."
                   :vars       {:dice {:value  1
                                       :points 2}}
                   :affinities #{:offence}}]}
@@ -418,7 +418,7 @@
   :inherent     [{:template   "Whenever at least one of your souls procs, this crystal flares, dealing {{level}}d10 bludgeoning damage to each enemy within 10 feet of you."
                   :signature? true
                   :affinities #{:offence}}
-                 {:template   "Mythic Shrines of Annexation and Refinement are {{#lt level 2}}10{{else}}15{{/lt}} tokens cheaper."
+                 {:template   "Shrines of Annexation and Refinement are {{#lt level 2}}10{{else}}15{{/lt}} tokens cheaper."
                   :affinities #{:meta}}
                  {:template "The passive bonus of your first soul grants nothing."}
                  {:template   "{{#gt level 3}}+1 maximum number of souls contained in your reliquaries.{{/gt}}"

@@ -108,7 +108,7 @@
                :affinities #{:tactical}}]}
  {:depiction "a banner"
   :info      "Grants benefits relating to minions"
-  :boons     [{:template   "You gain access to the Mythic Shrine of Generosity, which allows you to cause a loot modifier to apply to your minions instead of to you, for a cost of 10 mythic tokens of any type."
+  :boons     [{:template   "You gain access to the Shrine of Generosity, which allows you to cause a loot modifier to apply to your minions instead of to you, for a cost of 10 shrine tokens of any type."
                :affinities #{:meta}}
               {:template   "Gain temporary hit points equal to your level at the start of your minions' turns. When you summon a minion, they are summoned with temporary hit points equal to yours."
                :affinities #{:survivability}}

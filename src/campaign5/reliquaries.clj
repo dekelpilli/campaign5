@@ -10,11 +10,11 @@
 
 (defn- reliquary-actions [reliquary]
   (cond-> []
-          (seq reliquary) (conj {:label  "Mythic Shrine of Refinement"
+          (seq reliquary) (conj {:label  "Shrine of Refinement"
                                  :action ::refinement})
           (or (< (count reliquary) 3)
               (some #(rank/available (:vars %) nil) reliquary))
-          (conj {:label  "Mythic Shrine of Annexation"
+          (conj {:label  "Shrine of Annexation"
                  :action ::annexation})))
 
 (defn- reliquary->view-model [id reliquary]

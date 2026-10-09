@@ -65,7 +65,7 @@
 
 (defmethod handle-card "The Hierophant" [legendary _ _ card]
   (update legendary :mods conj
-          {:template   "Mythic Shrines targeting this item accept any token type."
+          {:template   "Shrines targeting this item accept any token type."
            :affinities #{:meta}
            :metadata   [(card-origin-meta card)]}))
 
@@ -83,10 +83,10 @@
 (defmethod handle-card "The Hermit" [legendary _ _ card]
   (-> (dissoc legendary :discoverable)
       (update :mods conj
-              {:template     "Cannot be targeted by Mythic Shrines of Discovered Potential"
+              {:template     "Cannot be targeted by Shrines of Discovered Potential"
                :restriction? true
                :metadata     [(card-origin-meta card)]}
-              {:template   "Mythic Shrines of Revealed Potential targeting this item are cheaper by 20 tokens."
+              {:template   "Shrines of Revealed Potential targeting this item are cheaper by 20 tokens."
                :affinities #{:meta}
                :metadata   [(card-origin-meta card)]})))
 
@@ -129,10 +129,10 @@
 
 (defmethod handle-card "The Hanging Man" [legendary _ _ card]
   (update legendary :mods conj
-          {:template     "Cannot be targeted by Mythic Shrines of Revealed Potential"
+          {:template     "Cannot be targeted by Shrines of Revealed Potential"
            :restriction? true
            :metadata     [(card-origin-meta card)]}
-          {:template   "Mythic Shrines of Discovered Potential targeting this item are cheaper by 15 tokens."
+          {:template   "Shrines of Discovered Potential targeting this item are cheaper by 15 tokens."
            :affinities #{:meta}
            :metadata   [(card-origin-meta card)]}))
 
@@ -149,7 +149,7 @@
                          (mapv #(update % :metadata (fnil conj []) (card-origin-meta card))))]
     (-> (dissoc legendary :discoverable)
         (update :mods conj
-                {:template     "This item cannot be targeted by Mythic Shrines."
+                {:template     "This item cannot be targeted by Shrines."
                  :restriction? true
                  :metadata     [(card-origin-meta card)]})
         (update :mods into starts-with))))
@@ -236,14 +236,14 @@
 (defmethod handle-card "n of Pentacles" [legendary _ _ card]
   (let [n (numeric-card-n card)]
     (update legendary :mods conj
-            {:template   (format "Mythic Shrines of Revealed Potential and of Discovered Potential targeting this item are cheaper by %s tokens."
+            {:template   (format "Shrines of Revealed Potential and of Discovered Potential targeting this item are cheaper by %s tokens."
                                  n)
              :affinities #{:meta}
              :metadata   [(card-origin-meta card)]})))
 
 (defn- handle-court-of-pentacles [n legendary card]
   (update legendary :mods conj
-          {:template   "Mythic Shrines of Revealed Potential and of Discovered Potential targeting this item are cheaper by {{discount}} tokens."
+          {:template   "Shrines of Revealed Potential and of Discovered Potential targeting this item are cheaper by {{discount}} tokens."
            :vars       {:discount {:value n
                                    :step  5}}
            :affinities #{:meta}

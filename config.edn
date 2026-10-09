@@ -35,7 +35,7 @@
                :label "Tattoos"
                :jar   {:path       "target/campaign5.jar"
                        ;TODO replace with actual tattoo generation once implemented
-                       :entrypoint campaign5.mythic-shrines/-mythic-shrine-generator}}
+                       :entrypoint campaign5.shrines/-shrine-generator}}
               {:type      :jar
                :id        :trinkets
                :label     "Trinkets"
@@ -46,15 +46,11 @@
                :id    :missions
                :label "Missions"
                :data  {:source "data-plugins/missions.edn"}}
-              {:type  :data
-               :id    :minor-shrines
-               :label "Minor Shrines"
-               :data  {:source "data-plugins/minor-shrines.edn"}}
               {:type  :jar
-               :id    :mythic-shrines
-               :label "Mythic Shrines"
+               :id    :shrines
+               :label "Shrines"
                :jar   {:path       "target/campaign5.jar"
-                       :entrypoint campaign5.mythic-shrines/-mythic-shrine-generator}}
+                       :entrypoint campaign5.shrines/-shrine-generator}}
               {:type    :jar
                :id      :soul-procs
                :label   "Soul Procs"

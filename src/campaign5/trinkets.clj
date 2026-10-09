@@ -15,7 +15,7 @@
    :loot/sections [{:section/heading "Boons"
                     :section/items   (mapv u/mod-item boons)}]
    :loot/actions  (cond-> []
-                          (rank/available {:tier tier} nil) (conj {:action/label "Mythic Shrine of Bestowing"
+                          (rank/available {:tier tier} nil) (conj {:action/label "Shrine of Bestowing"
                                                                    :action/event [:loot/action {:id     id
                                                                                                 :action ::bestowing}]}))})
 

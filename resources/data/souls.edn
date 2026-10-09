@@ -188,5 +188,5 @@
             :template   "When you find gold, find {{gold}} additional gold."
             :affinities #{:meta}}
   :proc    {:vars       {:token 1}
-            :template   "Gain {{token}} generic mythic token(s)."
+            :template   "Gain {{token}} generic shrine token(s)."
             :affinities #{:meta}}}]

@@ -43,7 +43,7 @@
   :template   "When a contained soul of celestial origin procs, gain the benefits of the Bless spell for {{rounds}} round(s)."
   :affinities #{:offence :survivability}}
  {:vars       {:tokens 5}
-  :template   "While at least one contained soul is of draconic origin, selling items grants {{tokens}} additional generic mythic tokens."
+  :template   "While at least one contained soul is of draconic origin, selling items grants {{tokens}} additional generic shrine tokens."
   :affinities #{:meta}}
  {:vars       {:damage 2}
   :template   "While at least one contained soul is of elemental origin, +{{damage}} non-physical damage."

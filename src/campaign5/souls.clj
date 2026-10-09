@@ -15,7 +15,7 @@
 
 (defn- mod-actions [id soul [section heading]]
   (mapv (fn [var-id]
-          {:action/label (str "Mythic Shrine of Fulfilment (" heading ": " (vars/humanise-label var-id) ")")
+          {:action/label (str "Shrine of Fulfilment (" heading ": " (vars/humanise-label var-id) ")")
            :action/event [:loot/action {:id     id
                                         :action ::fulfilment
                                         :params {:section section
@@ -39,10 +39,10 @@
    :loot/actions  (into [{:action/label "Refresh"
                           :action/event [:loot/action {:id     id
                                                        :action ::refresh}]}
-                         {:action/label "Mythic Shrine of Soul Transference"
+                         {:action/label "Shrine of Soul Transference"
                           :action/event [:loot/action {:id     id
                                                        :action ::soul-transference}]}
-                         {:action/label "Mythic Shrine of Temporal Shifting"
+                         {:action/label "Shrine of Temporal Shifting"
                           :action/event [:loot/action {:id     id
                                                        :action ::temporal-shifting}]}]
                         (mapcat #(mod-actions id soul %))

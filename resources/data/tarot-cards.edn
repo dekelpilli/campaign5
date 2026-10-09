@@ -36,7 +36,7 @@
   :template "The resulting legendary item starts at level 2."}
  {:name     "The Moon"
   :priority 4
-  :template "The resulting legendary cannot be targeted by Mythic shrines, but it starts with a random amount of its discoverable mods (min 1)."}
+  :template "The resulting legendary cannot be targeted by Shrines, but it starts with a random amount of its discoverable mods (min 1)."}
  {:name     "The Star"
   :template "The resulting legendary item starts with a signature modifier from a random other legendary item."}
  {:name     "The World"
@@ -47,7 +47,7 @@
   :priority 2
   :template "The resulting legendary item's discoverable mods are replaced by signature mods of other legendary items."}
  {:name     "The Hierophant"
-  :template "Mythic Shrines targeting the resulting legendary item accept any token type."}
+  :template "Shrines targeting the resulting legendary item accept any token type."}
  {:name     "%s of Cups"
   :template "Generate the turn in of these cards {{n}} times. Based on name alone (and there may be duplicates for the same name), the player may choose which result to take."}
  {:name     "Page of Cups"
@@ -77,7 +77,6 @@
   :template "The resulting legendary item's discoverable mods are revealed. The player chooses one of these mods to upgrade."}
  {:name     "Queen of Swords"
   :template "The resulting legendary item's discoverable mods are revealed. The player chooses two of these mods to upgrade."}
- ; <-- DONE ; TODO implement -->
  {:name     "King of Swords"
   :template "The resulting legendary item's discoverable mods are revealed. The player chooses three of these mods to upgrade."}
  {:name     "%s of Wands"

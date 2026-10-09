@@ -1,12 +1,11 @@
 # Finding an upgrading
 Loot can be obtained or improved in the following ways:
 - Loot rolls that grant loot of a random type can be found or bought for 100 gold
-- Minor shrines can be found throughout the campaign. These grant minor random improvements to items. A player may choose to reject a shrine's offering.
-- While in town, players can buy access to specific mythic shrines for a cost that depends on the shrine effect itself
-- Mythic shrines substantially upgrade items, with different effects available for each loot type
-- Loot of any type can be sold for 40 generic mythic tokens and 10 mythic tokens of that type (numbers TBC)
-  - in cases where a loot roll grants multiple things, the total is 50 mythic tokens. A player may choose to reject a shrine's offered result.
-  - Items that have been upgraded can generally sell for more mythic tokens, but won't necessarily be 100% refunded
+- Players can buy access to specific shrines for a cost that depends on the shrine effect itself
+- Shrines upgrade items, with different effects available for each loot type
+- Loot of any type can be sold for 40 generic shrine tokens and 10 shrine tokens of that type (numbers TBC)
+  - in cases where a loot roll grants multiple things, the total is 50 shrine tokens. A player may choose to reject a shrine's offered result.
+  - Items that have been upgraded can generally sell for more shrine tokens, but won't necessarily be 100% refunded
 
 # Loot types
 
@@ -31,7 +30,7 @@ Loot can be obtained or improved in the following ways:
 - Legendary items can be upgraded in two ways:
   1. Levelling up the legendary item, giving it a stronger set of pre-defined mods
   2. Discovering a modifier, granting it a discovered modifier from its unique set of discoverable modifiers, or upgrading one of its already discovered modifiers
-- Legendary items have their legendary levels and discovered modifiers soft-capped, requiring a more expensive mythic shrine to upgrade them beyond that level 
+- Legendary items have their legendary levels and discovered modifiers soft-capped, requiring a more expensive shrine to upgrade them beyond that level 
 
 ## Rings
 [//]: # (- TODO decide on actual ring points limit alongside creation of ring content)
@@ -44,8 +43,8 @@ Loot can be obtained or improved in the following ways:
 [//]: # (- replaces divine paths)
 - Players find otherworldly trinkets, each loaded with the first level of a set of upgrades (5 tiers? 6?)
 - Maybe each tier has multiple mods? Not sure
-  - If so, there will be a mythic shrine for rerolling a tier
-- Mythic shrine effects:
+  - If so, there will be a shrine for rerolling a tier
+- Shrine effects:
   - Unlock new tier
 
 ## Runic tattoos
