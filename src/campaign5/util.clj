@@ -62,7 +62,8 @@
                (seq vars) (assoc :item/vars vars)))
      mod)))
 
-(defn choose-by-input [k {:keys [inputs rng]} coll]
-  (if (k inputs)
-    (some #(when (= (k %) (k inputs)) %) coll)
-    (r/sample rng coll)))
+(defn choose-by-input [k ctx coll]
+  (if-let [kinputs (or (k (:inputs ctx))
+                       (k (:action/inputs ctx)))]
+    (some #(when (= (k %) kinputs) %) coll)
+    (r/sample (:rng ctx) coll)))
