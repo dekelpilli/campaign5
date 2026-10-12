@@ -1,4 +1,35 @@
-[{:name         "Hand of Wisdom and Motion"
+[{:name         "Huginn and Muninn"
+  :inherent     [{:template   "When you roll for initiative, or as an action, you may summon two tiny raven minions{{#eq level 1}}, requiring concentration{{/eq}}. They have 60ft flying speed, 0 defences, hit points equal to {{level}}x your intelligence score, and cannot take actions. You can see and hear through either raven at will. If you already have active ravens, summoning them again will recreate them in a space adjacent to you."
+                  :signature? true
+                  :affinities #{:tactical}}
+                 {:template   "Your History and Perception checks are made with advantage if your ravens have witnessed a combat death since your last long rest."
+                  :affinities #{:utility}}
+                 {:template   "+2 Intelligence for each of your ravens that is alive."
+                  :affinities #{:offence :utility}}
+                 {:template   "{{#gt level 1}}Your ravens' movement does not provoke opportunity attacks.{{/gt}}"
+                  :affinities #{:offence}}
+                 {:template   "{{#gt level 2}}Your ravens gain darkvision with a range of 60ft.{{/gt}}"
+                  :affinities #{:offence}}
+                 {:template "You are {{sns-condition \"dazed\"}} until the end of your next turn when one of your minions dies."}]
+  :discoverable [{:template   "Enemies adjacent to one of your minions have -{{reflex}} Reflex."
+                  :vars       {:reflex {:value  1
+                                        :points 3}}
+                  :affinities #{:support}}
+                 {:template   "Your minions gain hit points equal to 1{{multiplier}} your intelligence score."
+                  :vars       {:multiplier {:value  1
+                                            :points 2}}
+                  :affinities #{:survivability}}
+                 {:template   "+{{ab}}AB against creatures adjacent to one of your minions."
+                  :vars       {:ab {:value  1
+                                    :points 4}}
+                  :affinities #{:offence}}
+                 {:template   "You and allies adjacent to one of your minions have +{{will}} Will."
+                  :vars       {:will {:value  1
+                                      :points 4}}
+                  :affinities #{:support :survivability}}
+                 {:template   "You learn the {{sns-spell \"Animal Messenger\"}} spell."
+                  :affinities #{:utility}}]}
+ {:name         "Hand of Wisdom and Motion"
   :inherent     [{:template   "Your weapons' base damage is replaced by 1d6 radiant damage for every 2 points of Wisdom modifier you have."
                   :signature? true
                   :affinities #{:offence}}

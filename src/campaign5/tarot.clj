@@ -1,5 +1,6 @@
 (ns campaign5.tarot
   (:require
+    [campaign5.legendaries :as leg]
     [campaign5.util :as u]
     [clojure.string :as str]
     [randy.core :as r]
@@ -83,7 +84,7 @@
 (defmethod handle-card "The Hermit" [legendary _ _ card]
   (-> (dissoc legendary :discoverable)
       (update :mods conj
-              {:template     "Cannot be targeted by Shrines of Discovered Potential"
+              {:template     "Cannot be targeted by Shrines of Discovered Potential."
                :restriction? true
                :metadata     [(card-origin-meta card)]}
               {:template   "Shrines of Revealed Potential targeting this item are cheaper by 20 tokens."
@@ -129,7 +130,7 @@
 
 (defmethod handle-card "The Hanging Man" [legendary _ _ card]
   (update legendary :mods conj
-          {:template     "Cannot be targeted by Shrines of Revealed Potential"
+          {:template     "Cannot be targeted by Shrines of Revealed Potential."
            :restriction? true
            :metadata     [(card-origin-meta card)]}
           {:template   "Shrines of Discovered Potential targeting this item are cheaper by 15 tokens."
@@ -323,7 +324,7 @@
 (defmethod handle-card "King of Wands" [legendary data ctx card]
   (handle-court-of-wands 7 legendary data ctx card))
 
-(defn- cards->view-model [id cards]
+(defn- cards->view-model [id legendaries cards]
   {:loot/title    "Tarot Cards"
    :loot/sections (mapv (fn [{:keys [name template vars priority]}]
                           {:section/heading name
@@ -333,32 +334,13 @@
                         cards)
    :loot/actions  (cond-> []
                           (>= (count cards) 2)
-                          (conj {:action/label "Turn in"
-                                 :action/event [:loot/action {:id     id
-                                                              :action ::turn-in}]}))})
-
-(defn- legendary->view-model [id {:keys [level name
-                                         mods discoverable notes
-                                         revealed-discoverable?
-                                         cards]}]
-  {:loot/title    "{{name}} (level {{level}} Legendary Item)"
-   :loot/vars     {:name  {:value    name
-                           :context? true}
-                   :cards {:value    cards
-                           :context? true}
-                   :level level}
-   :loot/subtitle "Made with: {{join (pluck cards \"name\") \", \"}}"
-   :loot/sections [{:section/heading "Mods"
-                    :section/items   (mapv #(u/mod-item % {:level level}) mods)}
-                   {:section/heading "Discoverable mods"
-                    :section/secret? (not revealed-discoverable?)
-                    :section/items   (mapv #(u/mod-item % {:level level}) discoverable)}
-                   {:section/heading "Notes"
-                    :section/secret? true
-                    :section/items   (mapv #(u/mod-item % {:level level}) notes)}]
-   ; TODO add shrines
-   ; TODO add action to "refresh" the legendary, so that manually added levels/mod changes can be applied to saved history
-   :loot/actions  []})
+                          (conj {:action/label  "Turn in"
+                                 :action/event  [:loot/action {:id     id
+                                                               :action ::turn-in}]
+                                 :action/inputs [{:id      :name
+                                                  :label   "Legendary name"
+                                                  :type    :enum
+                                                  :options (sort (mapv :name legendaries))}]}))})
 
 (defn- view-model->cards [{:loot/keys [sections]}]
   (mapv
@@ -383,10 +365,9 @@
 
 (defn- cards->legendary [{:keys [legendaries]
                           :as   data}
-                         {:keys [rng]
-                          :as   ctx}
+                         ctx
                          cards]
-  (let [legendary (-> (r/sample rng legendaries)
+  (let [legendary (-> (u/choose-by-input :name ctx legendaries)
                       (prepare-legendary cards))]
     (reduce
       (fn [legendary {card-name :name}]
@@ -408,14 +389,17 @@
                             (sort))}]})
   (generate [_ {{selected-names :card-names} :inputs}]
     (->> (filterv (comp (set selected-names) :name) tarot-cards)
-         (cards->view-model id)))
+         (cards->view-model id legendaries)))
   p/Action
   (handle-action [this {:keys [view-model] :as ctx} action _]
     (let [legendary (case action
-                      ; TODO when https://github.com/spies-and-spiders/companion/issues/19 is done, allow forcing a specific legendary
                       ::turn-in (->> (view-model->cards view-model)
-                                     (cards->legendary this ctx)))]
-      (legendary->view-model id legendary))))
+                                     (cards->legendary this ctx))
+                      ::leg/discovered-potential (->> (leg/view-model->legendary view-model)
+                                                      (leg/handle-discovered-potential))
+                      ::leg/revealed-potential (->> (leg/view-model->legendary view-model)
+                                                    (leg/handle-revealed-potential ctx)))]
+      (leg/legendary->view-model id legendary))))
 
 (defn- expand-tarot-cards [cards]
   (into []

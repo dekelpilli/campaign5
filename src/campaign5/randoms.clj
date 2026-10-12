@@ -40,7 +40,7 @@
   ["Axe" "Bow" "Brawling" "Caster" "Club" "Dart" "Flail" "Hammer" "Knife" "Pick" "Polearm" "Sling" "Spear" "Sword" "Targe" "Trap"])
 
 (defmethod randoms/preset :defences [_ {:keys [type]}]
-  (cond-> ["Fortitude" "Reflexes" "Will"]
+  (cond-> ["Fortitude" "Reflex" "Will"]
           (not= "non-armour" type) (conj "Armour")))
 
 (defmethod randoms/preset :conditions [_ _]

@@ -39,21 +39,21 @@
 
 (defn- new-mod [reliquary-mods {:keys [rng]}]
   (let [idx (rng/next-int rng 0 (count reliquary-mods))]
-    (->> (assoc (nth reliquary-mods idx) ::origin idx)
+    (->> (nth reliquary-mods idx)
          (resolve-mod rng))))
 
 (def ^:private new-reliquary (comp vector new-mod))
 
-(defn- handle-refinement-shrine [reliquary {:keys [rng]} reliquary-mods]
+(defn- handle-refinement-shrine [reliquary {:keys [rng] :as ctx} reliquary-mods]
   (let [idx (rng/next-int rng 0 (count reliquary))
-        replacement (r/sample rng reliquary-mods)]
+        replacement (new-mod reliquary-mods ctx)]
     (-> (subvec reliquary 0 idx)
         (conj replacement)
         (into (subvec reliquary (inc idx))))))
 
-(defn- handle-annexation-shrine [reliquary {:keys [rng]} reliquary-mods]
+(defn- handle-annexation-shrine [reliquary {:keys [rng] :as ctx} reliquary-mods]
   (if (< (count reliquary) 3)
-    (conj reliquary (r/sample rng reliquary-mods))
+    (conj reliquary (new-mod reliquary-mods ctx))
     (if-let [choices (seq (into []
                                 (comp (map-indexed (fn [idx mod]
                                                      (map #(vector idx %) (rank/available (:vars mod) nil))))
@@ -65,8 +65,7 @@
 
 (defn- mod-inputs->reliquary [reliquary-mods rng mods]
   (let [by-template (into {}
-                          (map-indexed (fn [idx mod]
-                                         [(:template mod) (assoc mod ::origin idx)]))
+                          (map (juxt :template identity))
                           reliquary-mods)]
     (into [] (comp (keep by-template) (map #(resolve-mod rng %))) mods)))
 
