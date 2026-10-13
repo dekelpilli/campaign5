@@ -16,7 +16,7 @@
               {:id      :tokens
                :label   "Tokens (optional)"
                :type    :enum
-               :options ["Trinket" "Legendary" "Ring" "Soul" "Tattoo"]}]})
+               :options ["Vestige" "Legendary" "Ring" "Soul" "Tattoo"]}]})
   (generate [_ {:keys [inputs rng]}]
     (let [filtered-shrines (cond
                              (:name inputs) (filterv (comp #{(:name inputs)} :name) shrines)

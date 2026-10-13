@@ -167,7 +167,7 @@
     (update legendary :mods conj signature-mod)))
 
 (defmethod handle-card "The World" [legendary _ {:keys [rng registry] :as ctx} card]
-  (let [generator-type (r/sample rng [:reliquaries :rings :trinkets])
+  (let [generator-type (r/sample rng [:reliquaries :rings :vestiges])
         generated (p/generate
                     (get registry generator-type)
                     ctx)
@@ -178,8 +178,8 @@
               :rings (let [ring (first items)]
                        (-> (dissoc ring :item/title)
                            (update :item/metadata (fnil conj []) (str "From " (:item/title ring)))))
-              :trinkets (-> (r/sample rng items)
-                            (update :item/metadata (fnil conj []) (str "Trinket depicting "
+              :vestiges (-> (r/sample rng items)
+                            (update :item/metadata (fnil conj []) (str "Vestige depicting "
                                                                        (-> generated :loot/vars :depiction :value)))
                             (update :item/vars assoc :tier {:value    6
                                                             :context? true})))]

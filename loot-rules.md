@@ -39,9 +39,9 @@ Loot can be obtained or improved in the following ways:
 - The ring points limit is 50
 - Rings can either have standalone bonuses, or bonuses that scale based on other rings (synergy rings)
 
-## Otherworldly Trinkets
+## Vestiges
 [//]: # (- replaces divine paths)
-- Players find otherworldly trinkets, each loaded with the first level of a set of upgrades (5 tiers? 6?)
+- Players find vestiges, each loaded with the first level of a set of upgrades (5 tiers? 6?)
 - Maybe each tier has multiple mods? Not sure
   - If so, there will be a shrine for rerolling a tier
 - Shrine effects:

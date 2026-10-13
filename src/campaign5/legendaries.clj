@@ -1,6 +1,8 @@
 (ns campaign5.legendaries
   (:require
-    [campaign5.util :as u]))
+    [campaign5.util :as u] [randy.core :as r]
+    [randy.rng :as rng]
+    [sns.sdk.rank :as rank]))
 
 (defn- actions [mods]
   (let [restrictions (into [] (comp (filter :restriction?)
@@ -40,9 +42,51 @@
                                 :action/event [:loot/action {:id     id
                                                              :action action}]})))})
 
-(defn view-model->legendary [vm]) ;TODO
+(def ^:private restriction-templates
+  #{"This item cannot be targeted by Shrines."
+    "Cannot be targeted by Shrines of Revealed Potential."
+    "Cannot be targeted by Shrines of Discovered Potential."})
+
+(defn- item->mod [{:item/keys [title body vars metadata]}]
+  (cond-> (assoc (u/parse-metadata metadata) :template body)
+          title (assoc :title title)
+          (seq vars) (assoc :vars vars)
+          (restriction-templates body) (assoc :restriction? true)))
+
+(defn view-model->legendary [{:loot/keys [vars sections]}]
+  (let [by-heading (into {} (map (juxt :section/heading identity)) sections)
+        mods (fn [heading] (mapv item->mod (get-in by-heading [heading :section/items])))]
+    {:level                  (get-in vars [:level :value])
+     :name                   (get-in vars [:name :value])
+     :cards                  (get-in vars [:cards :value])
+     :mods                   (mods "Mods")
+     :discoverable           (mods "Discoverable mods")
+     :notes                  (mods "Notes")
+     :revealed-discoverable? (not (get-in by-heading ["Discoverable mods" :section/secret?]))}))
 
 (defn handle-revealed-potential [leg]
   (update leg :level inc))
 
-(defn handle-discovered-potential [ctx leg]) ;TODO decide on how decision is made to level up vs to add new mod, then implement
+(defn handle-discovered-potential [{:keys [rng]} {:keys [mods discoverable]
+                                                  :as   legendary}]
+  (let [upgradeable-mods (into []
+                               (map-indexed
+                                 (fn [idx mod]
+                                   (when-let [vars (rank/available mod nil)]
+                                     {:mod-idx idx
+                                      :type    :upgrade
+                                      :vars    vars})))
+                               mods)
+        {:keys [type mod-idx]
+         :as   upgrade} (->> (into upgradeable-mods
+                                   (map-indexed (fn [idx _] {:type    :discover
+                                                             :mod-idx idx}))
+                                   discoverable)
+                             (r/sample rng))]
+    (case type
+      :upgrade (update-in legendary [:mods mod-idx :vars]
+                          rank/rank-up
+                          (r/sample rng (:vars upgrade)))
+      :discover (-> (update legendary :mods conj (nth discoverable mod-idx))
+                    (assoc :discoverable (into (subvec discoverable 0 mod-idx)
+                                               (subvec discoverable (inc mod-idx))))))))

@@ -40,7 +40,7 @@
  {:name     "The Star"
   :template "The resulting legendary item starts with a signature modifier from a random other legendary item."}
  {:name     "The World"
-  :template "The resulting legendary item will start with a random modifier from a ring, trinket, or reliquary."}
+  :template "The resulting legendary item will start with a random modifier from a ring, vestige, or reliquary."}
  {:name     "Justice"
   :template "If the resulting legendary item is sold, take one of the other cards used in this turn in from the deck."}
  {:name     "The Tower"

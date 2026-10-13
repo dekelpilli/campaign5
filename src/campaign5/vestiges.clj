@@ -1,14 +1,14 @@
-(ns campaign5.trinkets
+(ns campaign5.vestiges
   (:require
     [campaign5.randoms]
     [campaign5.util :as u]
     [sns.sdk.protocols :as p]
     [sns.sdk.rank :as rank]))
 
-(defn- trinket->view-model [id {:keys [boons tier] :as trinket}]
-  {:loot/title    "Trinket depicting {{depiction}}"
+(defn- vestige->view-model [id {:keys [boons tier] :as vestige}]
+  {:loot/title    "Vestige depicting {{depiction}}"
    :loot/subtitle "{{info}}"
-   :loot/vars     (-> (select-keys trinket [:depiction :info])
+   :loot/vars     (-> (select-keys vestige [:depiction :info])
                       (update-vals (fn [s] {:value    s
                                             :context? true}))
                       (assoc :tier tier))
@@ -19,7 +19,7 @@
                                                                    :action/event [:loot/action {:id     id
                                                                                                 :action ::bestowing}]}))})
 
-(defn- view-model->trinket [{:loot/keys [vars sections]}]
+(defn- view-model->vestige [{:loot/keys [vars sections]}]
   (let [boons (into []
                     (comp (filter (comp #{"Boons"} :section/heading))
                           (mapcat :section/items)
@@ -34,36 +34,36 @@
           :tier (:tier vars)
           :boons boons))))
 
-(defrecord TrinketGenerator [id trinkets]
+(defrecord VestigeGenerator [id vestiges]
   p/Generator
   (loot-spec [_]
     {:inputs [{:id      :depiction
                :label   "Depiction (optional)"
                :type    :enum
-               :options (sort (mapv :depiction trinkets))}]})
+               :options (sort (mapv :depiction vestiges))}]})
   (generate [_ ctx]
-    (trinket->view-model id (u/choose-by-input :depiction ctx trinkets)))
+    (vestige->view-model id (u/choose-by-input :depiction ctx vestiges)))
   p/Action
   (handle-action [_ {:keys [view-model]} action _]
-    (let [trinket (view-model->trinket view-model)]
-      (trinket->view-model
+    (let [vestige (view-model->vestige view-model)]
+      (vestige->view-model
         id
         (case action
-          ::bestowing (rank/rank-up trinket :tier))))))
+          ::bestowing (rank/rank-up vestige :tier))))))
 
-(defn- prepare-trinket [trinket]
-  (-> (assoc trinket :tier {:value 1
+(defn- prepare-vestige [vestige]
+  (-> (assoc vestige :tier {:value 1
                             :rank  1
                             :max   5})
       (update :boons #(into [] (map-indexed (fn [idx boon]
                                               (update boon :template (fn [tpl] (format "{{#gt tier %s}}%s{{/gt}}" idx tpl))))) %))))
 
-(defn -trinket-generator [{:keys [id]}]
-  (->> (u/read-edn-resource "data/trinkets.edn")
-       (mapv prepare-trinket)
-       (->TrinketGenerator id)))
+(defn -vestige-generator [{:keys [id]}]
+  (->> (u/read-edn-resource "data/vestiges.edn")
+       (mapv prepare-vestige)
+       (->VestigeGenerator id)))
 
 (comment
-  (-> (-trinket-generator {:id :local/test})
+  (-> (-vestige-generator {:id :local/test})
       (p/generate {:rng (java.util.Random.)})
-      view-model->trinket))
+      view-model->vestige))

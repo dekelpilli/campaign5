@@ -37,11 +37,11 @@
                        ;TODO replace with actual tattoo generation once implemented
                        :entrypoint campaign5.shrines/-shrine-generator}}
               {:type      :jar
-               :id        :trinkets
-               :label     "Trinkets"
+               :id        :vestiges
+               :label     "Vestiges"
                :generator {:history :button}
                :jar       {:path       "target/campaign5.jar"
-                           :entrypoint campaign5.trinkets/-trinket-generator}}
+                           :entrypoint campaign5.vestiges/-vestige-generator}}
               {:type  :data
                :id    :missions
                :label "Missions"
@@ -70,7 +70,7 @@
                :ranges [[37 54] [100 100]]}
               {:id     :tattoos
                :ranges [[55 72] [100 100]]}
-              {:id     :trinkets
+              {:id     :vestiges
                :ranges [[73 90] [100 100]]}
               {:id     :missions
                :ranges [[91 99]]}]}

@@ -80,7 +80,9 @@
                        :as    var}]
                    (assoc var
                           ::original-points (or original-points points)
-                          :points (+ (or original-points points 1) rank -1))))))
+                          :points (+ (or original-points points 1)
+                                     (min rank 3)
+                                     -1))))))
 
 (defn- resolve-mod-vars [rng soul]
   (reduce (fn [soul [section _]] (update-in soul [section :vars] #(resolve-soul-vars rng %)))

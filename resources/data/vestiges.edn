@@ -32,7 +32,7 @@
                :affinities #{:survivability}}
               {:template   "The threshold for armour attacks against you to score a minor success is increased by 2."
                :affinities #{:survivability}}
-              {:template   "Each 'survivability' mod on you (from trinkets, souls, reliquaries, rings, and tattoos) also increases your maximum hit points by 1."
+              {:template   "Each 'survivability' mod on you (from vestiges, souls, reliquaries, rings, and tattoos) also increases your maximum hit points by 1."
                :affinities #{:survivability}}]}
  {:depiction "an eye"
   :info      "Improves your ability to acquire knowledge through skill checks, and improves Divination spellcasting"
