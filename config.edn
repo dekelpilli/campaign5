@@ -20,10 +20,8 @@
                :label     "Draw tarot cards"
                :generator {:hidden? true
                            :history :never}
-               :data      {:inline {:items    [{:instruction "Draw 1 tarot card"}]
-                                    :title    "Tarot cards"
-                                    :sections [{:each :items
-                                                :item {:body "{{ instruction }}"}}]}}}
+               :data      {:inline {:view-model {:loot/title    "Tarot cards"
+                                                 :loot/sections [{:section/items [{:item/body "Draw 1 tarot card"}]}]}}}}
               {:type      :jar
                :id        :tarot
                :label     "Tarot cards"
