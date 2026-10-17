@@ -2,7 +2,7 @@
   :passive {:vars       {:crit-damage 2}
             :template   "+{{crit-damage}} critical damage bonus."
             :affinities #{:offence}}
-  :proc    {:template   "For the duration of the round, your proficiency bonus is doubled for the purpose of calculating your critical damage bonus"
+  :proc    {:template   "For the duration of the round, your proficiency bonus is doubled for the purpose of calculating your critical damage bonus."
             :affinities #{:offence}}}
  {:trait   "Precision"
   :passive {:vars       {:crit-range {:value  1
@@ -86,13 +86,13 @@
                                       :points 2}}
             :template   "+{{resistance}} damage resistance."
             :affinities #{:survivability}}
-  :proc    {:template   "For the duration of this round, your barriers and resistances also apply to damage from major successes"
+  :proc    {:template   "For the duration of this round, your barriers and resistances also apply to damage from major successes."
             :affinities #{:survivability}}}
  {:trait   "Restoration"
   :passive {:vars       {:recovery 1}
-            :template   "While up, recover {{recovery}} hit points at the start of each turn."
+            :template   "While up, recover {{recovery}} hit point(s) at the start of each turn."
             :affinities #{:survivability}}
-  :proc    {:template   "Recover 1 wound"
+  :proc    {:template   "Recover 1 wound."
             :affinities #{:survivability}}}
  {:trait   "Strategy"
   :passive {:vars       {:initiative 1}
@@ -104,7 +104,7 @@
   :passive {:vars       {:speed 5}
             :template   "+{{speed}}ft of walking speed."
             :affinities #{:tactical}}
-  :proc    {:template   "You may dash as a bonus action during this round"
+  :proc    {:template   "You may dash as a bonus action during this round."
             :affinities #{:tactical}}}
  {:trait   "Arcana"
   :passive {:vars       {:threshold 1}
@@ -117,7 +117,7 @@
   :passive {:vars       {:skill 2}
             :template   "+{{skill}} {{improved-skill}}."
             :affinities #{:utility}}
-  :proc    {:template   "Your next use of {{improved-skill}} is made with advantage"
+  :proc    {:template   "Your next use of {{improved-skill}} is made with advantage."
             :affinities #{:utility}}}
  {:trait   "Malice"
   :passive {:vars       {:penalty {:value  1
