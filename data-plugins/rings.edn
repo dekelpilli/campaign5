@@ -1,10 +1,11 @@
 ;TODO move to JAR plugin
 ;TODO add affinities
 ;TODO rework points and content
-{:tables     {:rings [{:name     "The Hardened"
-                       :synergy  true
-                       :template "+1 barrier for each distinct non-synergy ring worn."
-                       :points   5}
+{:tables     {:rings [{:name       "The Hardened"
+                       :synergy    true
+                       :template   "+1 barrier for each distinct non-synergy ring worn."
+                       :affinities #{:survivability}
+                       :points     5}
                       {:name     "The Soldier"
                        :synergy  true
                        :template "+1 damage for each distinct synergy ring you are wearing."
@@ -87,4 +88,5 @@
                                :section/items   {:data/each :rings
                                                  :data/as   {:item/title    "{{#if synergy}}Synergy {{/if}}Ring: {{ name }}"
                                                              :item/body     {:data/field :template}
-                                                             :item/metadata ["Points: {{ points }}"]}}}]}}
+                                                             :item/metadata ["Points: {{points}}",
+                                                                             "Affinities: {{join affinities}}"]}}}]}}

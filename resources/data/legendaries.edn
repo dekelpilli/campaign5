@@ -1,4 +1,39 @@
-[{:name         "Huginn and Muninn"
+[{:name         "Maw of Mischief"
+  :inherent     [{:template   "As an action, you may cause one of your minions to explode, immediately killing them. Make a fortitude spell attack against creatures within 5 feet of the minion, dealing necrotic damage equal to half of the minion's hit points at the time."
+                  :signature? true
+                  :affinities #{:offence}}
+                 {:template   "Your minions take their turns are immediately before you, instead of immediately after."
+                  :affinities #{:tactical}}
+                 {:template   "Minions you cause to explode resurrect in a space adjacent to you at the start of their next turn. If the minion came from an effect with a limited duration, this only happens the duration did not expire (including due to losing concentration). They resurrect with hit points equal to those they had at the time of their death."
+                  :affinities #{:resource}}
+                 {:template "Your minions' damage is halved."}
+                 {:template   "{{#gt level 1}}Bonuses to your minion damage also apply to the explosion ability granted by this item.{{/gt}}"
+                  :affinities #{:offence}}
+                 {:template   "{{#gt level 2}}You may cause your exploding minions to explode in a radius of 10ft, instead of 5ft. Furthermore, if a creature is killed by the explosion, you may cause them to explode as well, dealing harm equivalent to the damage they took, in a radius of 5-10ft (your choice).{{/gt}}"
+                  :affinities #{:offence}}]
+  :discoverable [{:template   "Your minions have +{{speed}}ft of walking speed."
+                  :vars       {:speed {:value 10
+                                       :step  5}}
+                  :affinities #{:tactical}}
+                 {:template   "+{{damage}} with AoEs if you have caused one of your minions to explode since the start of your last turn."
+                  :vars       {:damage {:value 3
+                                        :step  2}}
+                  :affinities #{:offence}}
+                 {:template   "Your minions have +{{hp}} hit points."
+                  :vars       {:hp {:value 5
+                                    :step  3}}
+                  :affinities #{:survivability}}
+                 {:template   "You and your minions deal +{{damage}} damage against cursed creatures."
+                  :vars       {:damage {:value 3
+                                        :step  2}}
+                  :affinities #{:offence}}
+                 {:template   "When you use a spell slot to summon a minion, you may recover one spell slot at least {{levels}} spell slots lower."
+                  :vars       {:levels {:value  2
+                                        :step   -1
+                                        :points 2
+                                        :max    2}}
+                  :affinities #{:resource}}]}
+ {:name         "Huginn and Muninn"
   :inherent     [{:template   "When you roll for initiative, or as an action, you may summon two tiny raven minions{{#eq level 1}}, requiring concentration{{/eq}}. They have 60ft flying speed, 0 defences, hit points equal to {{level}}x your intelligence score, and cannot take actions. You can see and hear through either raven at will. If you already have active ravens, summoning them again will recreate them in a space adjacent to you."
                   :signature? true
                   :affinities #{:tactical}}
