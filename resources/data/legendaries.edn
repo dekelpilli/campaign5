@@ -1,5 +1,32 @@
-[{:name         "Maw of Mischief"
-  :inherent     [{:template   "As an action, you may cause one of your minions to explode, immediately killing them. Make a fortitude spell attack against creatures within 5 feet of the minion, dealing necrotic damage equal to half of the minion's hit points at the time."
+[{:name         "Bubonic Trail"
+  :inherent     [{:template   "Whenever you walk 5 feet, this item deals {{plus level 1}} poison harm to creatures of your choice within 5 feet of you."
+                  :signature? true
+                  :affinities #{:offence}}
+                 {:template   "{{#eq level 1}}No more than once per turn, when{{else}}When{{/eq}} you move at least 20ft in a straight line, regain 10ft of movement."
+                  :affinities #{:tactical}}
+                 {:template   "{{#gt level 1}}Whenever you leave a space, this item leaves a persistent zone that deals {{plus level 1}} poison harm to creatures of your choice, and lasts until the start of your next turn.{{/gt}}"
+                  :affinities #{:tactical}}
+                 {:template "You cannot use non-walking movement in combat."}
+                 {:template "You cannot become invisible."}]
+  :discoverable [{:template   "Creatures that have been hurt by your items at least 3 times in a turn become rattled until the end of their next turn."
+                  :affinities #{:tactical}}
+                 {:template   "Enemies in persistent zones created by you or your items have -{{resistance}} resistance."
+                  :vars       {:resistance {:value  1
+                                            :points 2}}
+                  :affinities #{:offence :support}}
+                 {:template   "You have +{{speed}}ft of walking speed."
+                  :vars       {:speed {:value 10
+                                       :step  5}}
+                  :affinities #{:tactical}}
+                 {:template   "Hurt from persistent zones created by your items lingers for {{rounds}} round(s) after creatures leave the zones."
+                  :vars       {:rounds {:value 1
+                                        :step  1}}
+                  :affinities #{:offence}}
+                 {:template   "You learn the {{sns-maneuver \"Charge\"}} maneuver. No more than {{times}} per long rest, you may use it without consuming exertion."
+                  :vars       {:times 1}
+                  :affinities #{:tactical :offence}}]}
+ {:name         "Maw of Mischief"
+  :inherent     [{:template   "As an action, you may cause one of your minions to explode, immediately killing them. Make a fortitude spell attack against creatures within 5 feet of the minion, dealing piercing damage equal to half of the minion's hit points at the time."
                   :signature? true
                   :affinities #{:offence}}
                  {:template   "Your minions take their turns are immediately before you, instead of immediately after."
