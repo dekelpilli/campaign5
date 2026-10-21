@@ -1,4 +1,35 @@
-[{:name         "Bubonic Trail"
+[{:name         "Maleficarum"
+  :inherent     [{:template   "If you cast a Concentration Curse while you are already concentrating on a Curse, the spell shares concentration with your existing concentration. You can concentrate on {{#lt level 3}}2{{else}}3{{/lt}} such Curses at a time."
+                  :signature? true
+                  :metadata   ["A Curse is a non-damaging necrotic spell that causes a condition, mark, or other negative effect on a target."]
+                  :affinities #{:support :control}}
+                 {:template   "You may learn any Curse, regardless if it is available on your class' spell list."
+                  :metadata   ["A Curse is a non-damaging necrotic spell that causes a condition, mark, or other negative effect on a target."]
+                  :affinities #{:tactical :support :control}}
+                 {:template "After you cast a non-necromancy spell, you have a 1/8 chance to lose an additional equivalent spell slot, if available."}
+                 {:template   "{{#gt level 1}}+1 AB with necromancy spells while you are concentrating on multiple spells.{{/gt}}"
+                  :affinities #{:offence}}]
+  :discoverable [{:template   "Replenish a spell slot of up to {{ordinalize slot-level}}-level when you expend a spell slot at least one higher than that to cast a Curse."
+                  :vars       {:slot-level {:value  1
+                                            :points 3
+                                            :max    5}}
+                  :metadata   ["A Curse is a non-damaging necrotic spell that causes a condition, mark, or other negative effect on a target."]
+                  :affinities #{:resource}}
+                 {:template   "Enemies marked by a Curse of yours take {{mark}} additional necrotic damage from attacks."
+                  :vars       {:mark 1}
+                  :metadata   ["A Curse is a non-damaging necrotic spell that causes a condition, mark, or other negative effect on a target."]
+                  :affinities #{:offence :support}}
+                 {:template   "For every two Curses you know, you may learn one necrotic spell beyond your spells known limit."
+                  :metadata   ["A Curse is a non-damaging necrotic spell that causes a condition, mark, or other negative effect on a target."]
+                  :affinities #{:tactical}}
+                 {:template   "You may choose to immediately cast a Curse with a casting time of no more than an action when you roll for initiative. When you do so, your turn is skipped during the first round of the combat."
+                  :metadata   ["A Curse is a non-damaging necrotic spell that causes a condition, mark, or other negative effect on a target."]
+                  :affinities #{:tactical :support :control}}
+                 {:template   "+{{resistance}} to necrotic damage."
+                  :vars       {:resistance {:value 4
+                                            :step  2}}
+                  :affinities #{:survival}}]}
+ {:name         "Bubonic Trail"
   :inherent     [{:template   "Whenever you walk 5 feet, this item deals {{plus level 1}} poison harm to creatures of your choice within 5 feet of you."
                   :signature? true
                   :affinities #{:offence}}
