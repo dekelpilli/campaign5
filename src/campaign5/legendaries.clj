@@ -47,10 +47,8 @@
     "Cannot be targeted by Shrines of Revealed Potential."
     "Cannot be targeted by Shrines of Discovered Potential."})
 
-(defn- item->mod [{:item/keys [title body vars metadata]}]
-  (cond-> (assoc (u/parse-metadata metadata) :template body)
-          title (assoc :title title)
-          (seq vars) (assoc :vars vars)
+(defn- item->mod [{:item/keys [body] :as item}]
+  (cond-> (u/item->mod item)
           (restriction-templates body) (assoc :restriction? true)))
 
 (defn view-model->legendary [{:loot/keys [vars sections]}]

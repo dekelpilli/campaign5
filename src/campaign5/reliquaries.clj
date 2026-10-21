@@ -29,9 +29,7 @@
 
 (defn- view-model->reliquary [view-model]
   (into []
-        (map (fn [{:item/keys [body vars metadata]}]
-               (-> (assoc (u/parse-metadata metadata) :template body)
-                   (cond-> (seq vars) (assoc :vars vars)))))
+        (map u/item->mod)
         (get-in view-model [:loot/sections 0 :section/items])))
 
 (defn- resolve-mod [rng mod]

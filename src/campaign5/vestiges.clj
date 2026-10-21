@@ -23,10 +23,7 @@
   (let [boons (into []
                     (comp (filter (comp #{"Boons"} :section/heading))
                           (mapcat :section/items)
-                          (map (fn [{:item/keys [body metadata]}]
-                                 (assoc
-                                   (u/parse-metadata metadata)
-                                   :template body))))
+                          (map u/item->mod))
                     sections)]
     (-> (select-keys vars [:depiction :info])
         (update-vals :value)

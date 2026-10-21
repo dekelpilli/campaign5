@@ -54,10 +54,8 @@
         base      (or (some #(when (= trait (:trait %)) %) souls)
                       (throw (ex-info "Unknown soul" {:trait trait})))
         adopt     (fn [soul [idx [section _]]]
-                    (let [{:item/keys [body vars metadata]} (get-in view-model [:loot/sections idx :section/items 0])
-                          section-data (-> (get base section)
-                                           (assoc :template body :vars vars)
-                                           (into (u/parse-metadata metadata)))]
+                    (let [item         (get-in view-model [:loot/sections idx :section/items 0])
+                          section-data (into (get base section) (u/item->mod item))]
                       (assoc soul section section-data)))]
     (-> (reduce adopt base (map-indexed vector mod-sections))
         (assoc :trait trait

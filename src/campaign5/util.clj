@@ -2,7 +2,6 @@
   (:require
     [clojure.edn :as edn]
     [clojure.java.io :as io]
-    [clojure.string :as str]
     [randy.core :as r] [sns.sdk.rank :as rank]
     [sns.sdk.vars :as vars])
   (:import
@@ -16,51 +15,45 @@
       PushbackReader.
       edn/read))
 
-(def ^:private affinity-metadata-prefix "Affinities: ")
-(def ^:private ranking-metadata-regex #"(?:[a-zA-Z ]+: )?\[(?:\d+/\d+)](?:\(\d+\))*")
+(def ^:private affinities-metadata "Affinities: {{join affinities \", \"}}")
 
-(defn parse-metadata [metadata]
-  {:affinities (into #{}
-                     (comp (keep #(when (str/starts-with? % affinity-metadata-prefix)
-                                    (subs % (count affinity-metadata-prefix))))
-                           (mapcat #(str/split % #", "))
-                           (map keyword))
-                     metadata)
-   :metadata   (filterv
-                 #(not (or (str/starts-with? % affinity-metadata-prefix)
-                           (re-matches ranking-metadata-regex %)
-                           (= % "Randomised")))
-                 metadata)})
-
-(defn- affinities->metadata [affinities]
-  (->> (mapv name affinities)
-       (str/join ", ")
-       (str affinity-metadata-prefix)))
-
-(defn- var->metadata [v]
-  (let [{:keys [step value points rank]} (if (map? v) v {:value v})]
-    (cond-> (format "[%s/%s]" (or step value) (or points 1))
-            (> (or rank 1) 1) (str "(" rank ")"))))
+(defn- rank-metadata
+  "`[step/points]`, then the var's rank once above 1, read off its ranked value."
+  [id {:keys [value step points]}]
+  (let [id   (name id)
+        step (or step value)]
+    (format "[%s/%s]{{#gt %s %s}}({{add (divide (subtract %s %s) %s) 1}}){{/gt}}"
+            step (or points 1) id value id value step)))
 
 (defn- vars->metadata [vars]
   (let [vars (filterv (comp rank/upgradeable? val) vars)]
     (if (= 1 (count vars))
-      [(-> vars first val var->metadata)]
-      (mapv #(format ["%s: %s"] (vars/humanise-label (key %)) (var->metadata (val %))) vars))))
+      [(rank-metadata (ffirst vars) (val (first vars)))]
+      (mapv (fn [[id v]] (str (vars/humanise-label id) ": " (rank-metadata id v))) vars))))
 
 (defn mod-item
   ([mod] (mod-item mod {}))
-  ([{:keys [metadata vars title] :as mod} item-vars]
+  ([{:keys [metadata vars title affinities] :as mod} item-vars]
    (if-not (contains? mod :item/body)
      (let [metadata (cond-> (into (or metadata []) (vars->metadata vars))
-                            (seq (:affinities mod)) (conj (affinities->metadata (:affinities mod)))
+                            (seq affinities) (conj affinities-metadata)
                             (or (some :random (vals vars))
-                                (some :random (vals item-vars))) (conj "Randomised"))]
+                                (some :random (vals item-vars))) (conj "Randomised"))
+           vars     (cond-> vars
+                            (seq affinities) (assoc :affinities {:value    (mapv name affinities)
+                                                                 :context? true}))]
        (cond-> {:item/body (:template mod)}
                title (assoc :item/title title)
-               (seq metadata) (assoc :item/metadata metadata)
+               (seq metadata) (assoc :item/metadata (into [] (distinct) metadata))
                (seq vars) (assoc :item/vars vars)))
      mod)))
+
+(defn item->mod [{:item/keys [title body vars metadata]}]
+  (cond-> {:template   body
+           :metadata   (or metadata [])
+           :affinities (into #{} (map keyword) (get-in vars [:affinities :value]))
+           :vars       (not-empty (dissoc vars :affinities))}
+          title (assoc :title title)))
 
 (defn choose-by-input [k ctx coll]
   (if-let [kinputs (or (k (:inputs ctx))

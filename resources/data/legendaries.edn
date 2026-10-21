@@ -2,11 +2,11 @@
   :inherent     [{:template   "Whenever you walk 5 feet, this item deals {{plus level 1}} poison harm to creatures of your choice within 5 feet of you."
                   :signature? true
                   :affinities #{:offence}}
-                 {:template   "{{#eq level 1}}No more than once per turn, when{{else}}When{{/eq}} you move at least 20ft in a straight line, regain 10ft of movement."
+                 {:template   "{{#gt level 2}}Whenever{{else}}No more than once per turn, when{{/eq}} you move at least 20ft in a straight line, regain 10ft of movement."
                   :affinities #{:tactical}}
                  {:template   "{{#gt level 1}}Whenever you leave a space, this item leaves a persistent zone that deals {{plus level 1}} poison harm to creatures of your choice, and lasts until the start of your next turn.{{/gt}}"
                   :affinities #{:tactical}}
-                 {:template "You cannot use non-walking movement in combat."}
+                 {:template "You cannot use non-walking movement in combat, including jumping."}
                  {:template "You cannot become invisible."}]
   :discoverable [{:template   "Creatures that have been hurt by your items at least 3 times in a turn become rattled until the end of their next turn."
                   :affinities #{:tactical}}
@@ -26,14 +26,14 @@
                   :vars       {:times 1}
                   :affinities #{:tactical :offence}}]}
  {:name         "Maw of Mischief"
-  :inherent     [{:template   "As an action, you may cause one of your minions to explode, immediately killing them. Make a fortitude spell attack against creatures within 5 feet of the minion, dealing piercing damage equal to half of the minion's hit points at the time."
+  :inherent     [{:template   "As an action, you may cause one of your minions to explode, immediately killing them. Make a fortitude spell attack against creatures within 5 feet of the minion, dealing acid damage equal to half of the minion's hit points at the time."
                   :signature? true
                   :affinities #{:offence}}
                  {:template   "Your minions take their turns are immediately before you, instead of immediately after."
                   :affinities #{:tactical}}
                  {:template   "Minions you cause to explode resurrect in a space adjacent to you at the start of their next turn. If the minion came from an effect with a limited duration, this only happens the duration did not expire (including due to losing concentration). They resurrect with hit points equal to those they had at the time of their death."
                   :affinities #{:resource}}
-                 {:template "Your minions' damage is halved."}
+                 {:template "Your minions have -2 AB if none of your minions died in the previous round of combat. This has no effect during the first round of combat."}
                  {:template   "{{#gt level 1}}Bonuses to your minion damage also apply to the explosion ability granted by this item.{{/gt}}"
                   :affinities #{:offence}}
                  {:template   "{{#gt level 2}}You may cause your exploding minions to explode in a radius of 10ft, instead of 5ft. Furthermore, if a creature is killed by the explosion, you may cause them to explode as well, dealing harm equivalent to the damage they took, in a radius of 5-10ft (your choice).{{/gt}}"
@@ -42,13 +42,11 @@
                   :vars       {:speed {:value 10
                                        :step  5}}
                   :affinities #{:tactical}}
-                 {:template   "+{{damage}} with AoEs if you have caused one of your minions to explode since the start of your last turn."
-                  :vars       {:damage {:value 3
-                                        :step  2}}
+                 {:template   "+{{damage}} damage with AoEs."
+                  :vars       {:damage {:value 2}}
                   :affinities #{:offence}}
                  {:template   "Your minions have +{{hp}} hit points."
-                  :vars       {:hp {:value 5
-                                    :step  3}}
+                  :vars       {:hp {:value 3}}
                   :affinities #{:survivability}}
                  {:template   "You and your minions deal +{{damage}} damage against cursed creatures."
                   :vars       {:damage {:value 3
