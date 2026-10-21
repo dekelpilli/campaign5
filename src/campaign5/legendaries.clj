@@ -1,9 +1,9 @@
 (ns campaign5.legendaries
   (:require
-    [campaign5.util :as u] [randy.core :as r]
-    [randy.rng :as rng]
+    [campaign5.util :as u]
+    [randy.core :as r]
     [sns.sdk.rank :as rank]))
-
+;TODO ensure all legendaries are prepared for at least level 3
 (defn- actions [mods]
   (let [restrictions (into [] (comp (filter :restriction?)
                                     (map :template))

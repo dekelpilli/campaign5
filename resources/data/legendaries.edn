@@ -1,4 +1,31 @@
-[{:name         "Maleficarum"
+[{:name         "Extended Demise"
+  :inherent     [{:template   "Ongoing harms you inflict {{#gt level 1}}have a 50% chance to{{/gt}} deal harm for one round after they end (including being ended with a save, or moving out of their area)."
+                  :signature? true
+                  :affinities #{:offence}}
+                 {:template   "Enemies under the effect of your ongoing harms cannot resist{{#gt level 1}} or be immune to{{/gt}} any of the damage types of those harms."
+                  :affinities #{:offence :support}}
+                 {:template "Damage from your hits is delayed by one round."}
+                 {:template   "{{#gt level 2}}You do not take harm from persistent zones created by you or your allies.{{/gt}}"
+                  :affinities #{:survivability}}]
+  :discoverable [{:template   "+{{harm}} harm with ongoing effects."
+                  :vars       {:harm {:value 2
+                                      :step  1}}
+                  :affinities #{:offence}}
+                 {:template   "+{{harm}} harm against creatures already under the effect of at least one instance of harm."
+                  :vars       {:harm {:value 3
+                                      :step  1}}
+                  :affinities #{:offence}}
+                 {:template   "Enemies taking harm from your ongoing effects have -{{penalty}} to saving throws."
+                  :vars       {:penalty {:value  1
+                                         :points 3}}
+                  :affinities #{:offence :support}}
+                 {:template   "You have +{{ab}} AB against enemies taking harm from ongoing effects have."
+                  :vars       {:ab {:value  1
+                                    :points 4}}
+                  :affinities #{:offence}}
+                 {:template   "Enemies taking ongoing harm from your effects are {{sns-condition \"sluggish\"}}."
+                  :affinities #{:control}}]}
+ {:name         "Maleficarum"
   :inherent     [{:template   "If you cast a Concentration Curse while you are already concentrating on a Curse, the spell shares concentration with your existing concentration. You can concentrate on {{#lt level 3}}2{{else}}3{{/lt}} such Curses at a time."
                   :signature? true
                   :metadata   ["A Curse is a non-damaging necrotic spell that causes a condition, mark, or other negative effect on a target."]
