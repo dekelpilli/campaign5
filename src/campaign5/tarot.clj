@@ -351,16 +351,18 @@
          :priority (some #(some-> (re-find #"^Priority: (-?\d+)$" %) second parse-long) metadata)}))
     sections))
 
-(defn- prepare-legendary [{:keys [inherent]
+(defn- prepare-legendary [{:keys [inherent discoverable]
                            :as   legendary} cards]
   (-> (assoc legendary
              :level 1
              :cards cards
              :mods (mapv (fn [mod]
-                           (->> (cond-> ["Native"]
-                                        (:signature? mod) (conj "Signature"))
-                                (assoc mod :metadata)))
-                         inherent))
+                           (cond-> (update mod :metadata (fnil conj []) "Native (inherent)")
+                                   (:signature? mod) (update :metadata conj "Signature")))
+                         inherent)
+             :discoverable (mapv (fn [mod]
+                                   (update mod :metadata (fnil conj []) "Native (discoverable)"))
+                                 discoverable))
       (dissoc :inherent)))
 
 (defn- cards->legendary [{:keys [legendaries]
