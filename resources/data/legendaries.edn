@@ -378,6 +378,10 @@
                   :affinities #{:survivability}}
                  {:template   "At the start of each of their turns, your minions gain 1 temporary hit point for each time they have shared hurt with you since the end of their last turn."
                   :affinities #{:survivability}}
+                 {:template   "{{#gt level 1}}Your minions have +1 resistance for each time they have shared hurt with you since the end of their last turn.{{/gt}}"
+                  :affinities #{:survivability}}
+                 {:template   "{{#gt level 2}}Your minions have +1 to their defences while they are bloodied.{{/gt}}"
+                  :affinities #{:survivability}}
                  {:template "Your minions cannot receive healing or temporary hit points from any source other than this item."}]
   :discoverable [{:template   "Your minions' Fortitude is at least equal to yours."
                   :affinities #{:survivability}}
