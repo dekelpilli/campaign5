@@ -239,16 +239,18 @@
                  {:template   "{{#gt level 1}}You become shrouded in magical darkness when you attack while you are hidden and not already in magical darkness.{{/gt}}"
                   :affinities #{:tactical}}
                  {:template   "{{#gt level 1}}No more than once per combat, when you become shrouded in magical darkness, you may cause on adjacent ally to also become shrouded in darkness.{{/gt}}"
-                  :affinities #{:support}}]
+                  :affinities #{:support}}
+                 {:template   "{{#gt level 2}}+{{level}} resistance to physical damage while in darkness.{{/gt}}"
+                  :affinities #{:survivability}}]
   :discoverable [{:template   "+{{damage}} slashing damage while in magical darkness."
                   :vars       {:damage {:value 3
                                         :step  2}}
                   :affinities #{:offence}}
-                 {:template   "When you make a melee attack against a creature while in magical darkness, they suffer -{{reflex}} to their Reflex for the rest of the combat."
+                 {:template   "When you make a melee attack against a creature while in magical darkness, they suffer -{{reflex}} to their Reflex for the rest of the combat. This does not stack."
                   :vars       {:reflex {:value  1
                                         :points 3}}
                   :affinities #{:support}}
-                 {:template   "When you make a thrown or ranged attack against a creature while in magical darkness, their spell AB is reduced by {{ab}} for the rest of the combat."
+                 {:template   "When you make a thrown or ranged attack against a creature while in magical darkness, their spell AB is reduced by {{ab}} for the rest of the combat. This does not stack."
                   :vars       {:ab {:value  1
                                     :points 4}}
                   :affinities #{:control}}
@@ -260,11 +262,11 @@
                   :vars       {:slashing 1}
                   :affinities #{:offence}}]}
  {:name         "Staff of Asclepius"
-  :inherent     [{:template   "You learn the {{sns-spell \"Venomous Succor\"}} spell, and may cast it once per short rest without consuming a spell slot.{{#gt level 1}} When you cast Venomous Succor via your snake, at the start of a target's turn, you may use a tarot action to cause the healing to be increased by your bonuses to healing with actions.{{/gt}}"
-                  :affinities #{:support}}
-                 {:template   "You may summon a small snake minion as a bonus action, requiring concentration. It has 30ft of movement, 0 defences, is immune to hurt, but cannot take actions. When performing an action that restores hit points or alleviates conditions, you may choose for that spell to originate from this snake instead."
+  :inherent     [{:template   "You may summon a small snake minion as a tarot action{{#lt level 3}}, requiring concentration{{/lt}}. It has 30ft of movement, 0 defences, is immune to hurt, but cannot take actions. When performing an action that restores hit points or alleviates conditions, you may choose for that spell to originate from this snake instead."
                   :signature? true
                   :affinities #{:tactical :support}}
+                 {:template   "You learn the {{sns-spell \"Venomous Succor\"}} spell, and may cast it once per short rest without consuming a spell slot.{{#gt level 1}} When you cast Venomous Succor via your snake, at the start of a target's turn, you may use a tarot action to cause the healing to be increased by your bonuses to healing with actions.{{/gt}}"
+                  :affinities #{:support}}
                  {:template "-5 outgoing healing with actions while you have no active snake minion."}]
   :discoverable [{:template   "When you cast the {{sns-spell \"Venomous Succor\"}} spell, you may upcast it at {{slot-level}} spell slot above the spell slot level used."
                   :vars       {:slot-level {:value  1
@@ -288,7 +290,7 @@
   :inherent     [{:template   "Your spells deal additional damage equal to the number of remaining spell slots you have below the spell slot used."
                   :signature? true
                   :affinities #{:offence}}
-                 {:template   "At the end of a combat in which you have consumed at least two spell slots, recover one spell slot of the lowest consumed spell slot."
+                 {:template   "At the end of a combat in which you have consumed at least two spell slots, recover one spell slot of the {{#lt level 3}}lowest {{/lt}}consumed spell slots."
                   :affinities #{:resource}}
                  {:template "Take necrotic harm equal to your level when you end a combat in which you didn't use any spell slots."}
                  {:template "Take necrotic harm equal to your level when you roll for initiative without any spell slots."}
@@ -297,7 +299,9 @@
   :discoverable [{:template   "Recover {{hp}} hit points whenever you use a spell slot."
                   :vars       {:hp 2}
                   :affinities #{:resource :survivability}}
-                 {:template   "Recover a first level spell slot when you roll for initiative." ;TODO come up with something else
+                 {:template   "Whenever you use a resource for the first time in combat, +{{chance}}% for it to not be consumed."
+                  :vars       {:chance {:value 10
+                                        :max   4}}
                   :affinities #{:resource}}
                  {:template   "+{{slots}} {{ordinalize slot-level}}-level spell slot(s)."
                   :vars       {:slot-level {:value  1
@@ -307,7 +311,11 @@
                                             :max   3}}
                   :affinities #{:resource}}
                  {:template   "You learn the {{sns-spell \"Goodberry\"}} spell."
-                  :affinities #{:utility :survivability :support}}]}
+                  :affinities #{:utility :survivability :support}}
+                 {:template   "+{{healing}} incoming healing while bloodied."
+                  :vars       {:healing {:value 4
+                                         :step  2}}
+                  :affinities #{:survivability}}]}
  {:name         "Mjölnir"
   :inherent     [{:template   "You may use Strength as your spellcasting ability."
                   :signature? true
@@ -333,13 +341,19 @@
                   :vars       {:feet 5}
                   :affinities #{:tactical :offence}}]}
  {:name         "Megingjörð"
-  :inherent     [{:template   "When you add your Strength score to an attack you make, add it twice."
+  :inherent     [{:template   "When you add your Strength modifier to an attack you make, add it twice."
                   :signature? true
                   :affinities #{:offence}}
                  {:template   "You may add half of your Strength score modifier to your skill checks with skills using abilities other than Strength."
                   :affinities #{:utility}}
                  {:template   "{{#gt level 1}}Gain maximum hit points equal to your Strength modifier.{{/gt}}"
                   :affinities #{:survivability}}
+                 {:template   "{{#gt level 1}}Add your Strength modifier to the push distance of the {{sns-maneuver \"shove\"}} maneuver.{{/gt}}"
+                  :affinities #{:offence :control}}
+                 {:template   "{{#gt level 2}}You ignore size restrictions when {{sns-maneuver \"shove\" \"shoving\"}} or {{sns-condition \"grapple\" \"grappling\"}} creatures.{{/gt}}"
+                  :affinities #{:control}}
+                 {:template   "{{#gt level 2}}Add your Strength modifier to all damage from your maneuvers.{{/gt}}"
+                  :affinities #{:offence}}
                  {:template "Your abilities other than Strength are capped at 10 below your Strength."}
                  {:template "You cannot use weapons that add an ability modifier other than Strength to their damage."}
                  {:template "You cannot cast spells with an ability modifier other than Strength."}]
