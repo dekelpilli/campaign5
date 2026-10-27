@@ -402,8 +402,10 @@
   :inherent     [{:template   "Gain an amount of temporary hit points at the start of your turns equal to a quarter of the net hit points you have lost since the end of your last turn."
                   :signature? true
                   :affinities #{:survivability}}
-                 {:template   "Whenever you are hit by an attack, heal one hit point for each {{#eq level 1}}previous {{/eq}}time you have been hit by an attack during the last round."
+                 {:template   "Whenever you are hit by an attack and survive, absorb one hit point for each {{#eq level 1}}previous {{/eq}}time you have been hit by an attack since the start of your last turn."
                   :affinities #{:survivability}}
+                 {:template   "{{#gt level 2}}+1 to the magnitudes of absorption modifiers on your items.{{/gt}}"
+                  :affinities #{:survivability :meta}}
                  {:template "Healing cannot restore your hit points to above {{#eq level 1}}50{{else}}75{{/eq}}%."}
                  {:template "Lose 2 hit points when you use use a limited resource."}]
   :discoverable [{:template   "You have advantage on saves against ongoing effects that you have already failed a saving throw against when trying to end them."
@@ -423,11 +425,13 @@
   :inherent     [{:template   "As a major effect when you score a major success with a weapon attack, you may blind the target of your attack for one round."
                   :signature? true
                   :affinities #{:control :support}}
-                 {:template   "When you block an armour attack, gain +1 armour for one round. {{#eq level 1}}This cannot stack{{else}}This can stack twice{{/eq}}."
+                 {:template   "When you block an armour attack, gain +1 armour for one round.{{#eq level 1}} This cannot stack{{else}}This can apply twice at one time.{{/eq}}"
                   :affinities #{:survivability}}
                  {:template   "+1 armour while not wearing light, medium, or heavy armour."
                   :affinities #{:survivability}}
-                 {:template   "{{#gt level 1}}This item inflicts a 1d6 ongoing physical harm against enemies you hit with a major success with a weapon.{{/gt}}"
+                 {:template   "{{#gt level 2}}Gain maximum hit points equal to your highest defence.{{/gt}}"
+                  :affinities #{:survivability}}
+                 {:template   "{{#gt level 1}}This item applies ongoing piercing harm, equal to your proficiency bonus, against enemies you hit with a major success with a weapon.{{/gt}}"
                   :affinities #{:offence}}
                  {:template "You cannot wear light, medium, or heavy armour."}]
   :discoverable [{:template   "Enemies blinded by you have -{{ab}} AB with non-armour attacks."
@@ -452,10 +456,12 @@
   :inherent     [{:template   "Your offhand weapons grant all of their traits, other than 'offhand', to your main hand weapon."
                   :signature? true
                   :affinities #{:meta}}
-                 {:template   "+1 damage with weapon attacks for each trait naturally present on your {{#eq level 1}}main hand weapon{{else}}weapons{{/eq}}."
+                 {:template   "+1 damage with weapon attacks for each distinct trait naturally present on your {{#eq level 1}}main hand weapon{{else}}weapons{{/eq}}."
                   :affinities #{:offence}}
                  {:template "You cannot use shields or two-handed weapons."}
-                 {:template "You main hand weapon's natural damage die size cannot be higher than your offhand weapon's natural die size, if you are wielding one."}
+                 {:template   "{{#gt level 2}}You have proficiency with melee weapons.{{/gt}}"
+                  :affinities #{:meta}}
+                 {:template "{{#lt level 3}}You main hand weapon's natural damage die size cannot be higher than your offhand weapon's natural die size, if you are wielding one.{{/lt}}"}
                  {:template "-1 resistance against damage from beasts."}
                  {:template   "{{#gt level 1}}If both of your weapons have the 'offhand' trait, your main hand weapon's damage die size increases by 1 for each trait on your offhand weapon.{{/gt}}"
                   :affinities #{:offence}}]
@@ -480,10 +486,12 @@
                  {:template   "Effects that grant expertise die to your Dexterity skills instead grant double that amount (e.g. 1d4 -> 1d6)."
                   :signature? true
                   :affinities #{:utility :meta}}
-                 {:template "Your weapon attacks deal 1 less damage for each point your Dexterity score is below 24."}
+                 {:template "Your weapon attacks deal 1 less damage for each point your Dexterity score is below {{#lt level 3}}24{{else}}22{{/lt}}."}
                  {:template "You cannot use Strength for weapon attacks."}
                  {:template "You can only add your Dexterity score to attacks with piercing damage."}
                  {:template   "{{#gt level 1}}+1 Reflex for every 5 points of Dexterity you have above 15.{{/gt}}"
+                  :affinities #{:survivability}}
+                 {:template   "{{#gt level 2}}You are immune to ongoing physical harm.{{/gt}}"
                   :affinities #{:survivability}}]
   :discoverable [{:template   "+{{damage}} melee damage with weapons if your Dexterity bonus is greater than the Dexterity bonus of the target."
                   :vars       {:damage {:value 3
@@ -506,12 +514,12 @@
                                             :step  1}}
                   :affinities #{:survivability}}]}
  {:name         "Kintsugi"
-  :inherent     [{:template   "Regain {{#gt level 1}}hit points equal to your lowest defence{{else}}1 hit point{{/gt}} when you block an armour attack."
+  :inherent     [{:template   "Regain {{#gt level 1}}hit points equal to your lowest defence, to a minimum of 1,{{else}}1 hit point{{/gt}} when you block an armour attack."
                   :signature? true
                   :affinities #{:survivability}}
                  {:template   "Gain +1 resistance until the start of your next turn when you are hit by a melee attack."
                   :affinities #{:survivability}}
-                 {:template   "At the end of a combat, if you have been critically hit during that combat, gain 5 gold."
+                 {:template   "At the end of a combat, {{#lt level 3}}if you have been critically hit{{else}}if you have been hit with a major success or a critical hit{{/lt}} during that combat, gain 5 gold."
                   :affinities #{:meta}}
                  {:template "You cannot wear heavy armour."}
                  {:template "Your maximum temporary hit points is 1."}]
