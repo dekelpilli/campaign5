@@ -13,26 +13,26 @@
                :label   "Name (optional)"
                :type    :enum
                :options (mapv :name shrines)}
-              {:id      :tokens
-               :label   "Tokens (optional)"
+              {:id      :targets
+               :label   "Targets (optional)"
                :type    :enum
                :options ["Vestige" "Legendary" "Ring" "Soul" "Tattoo"]}]})
   (generate [_ {:keys [inputs rng]}]
     (let [filtered-shrines (cond
                              (:name inputs) (filterv (comp #{(:name inputs)} :name) shrines)
-                             (:tokens inputs) (filterv (fn [{:keys [tokens]}]
-                                                         (some #{(str/lower-case (:tokens inputs))} tokens))
-                                                       shrines)
+                             (:targets inputs) (filterv (fn [{:keys [targets]}]
+                                                          (some #{(str/lower-case (:targets inputs))} targets))
+                                                        shrines)
                              :else shrines)
           _ (when (empty? filtered-shrines)
               (throw (ex-info "No shrines match filters" inputs)))
-          {:keys [name effect cost tokens]} (r/sample rng filtered-shrines)]
+          {:keys [name effect cost targets]} (r/sample rng filtered-shrines)]
       {:loot/title    (str "Shrine of " name)
        :loot/sections [{:section/heading "Effect"
                         :section/items   [{:item/body effect}]}
                        {:section/heading "Cost"
                         :section/items   [{:item/body     (str cost)
-                                           :item/metadata tokens}]}]})))
+                                           :item/metadata targets}]}]})))
 
 (defn -shrine-generator [_config]
   (->ShrineGenerator (u/read-edn-resource "data/shrines.edn")))

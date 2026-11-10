@@ -1,5 +1,5 @@
 {:paths   ["src" "resources"]
- :deps    {org.clojure/clojure           {:mvn/version "1.12.5"}
+ :deps    {org.clojure/clojure           {:mvn/version "1.12.6"}
            tools.spies/sns-companion-sdk {:local/root "libs/sns-companion-sdk"}}
  :aliases {:dev      {:extra-paths ["dev"]
                       :extra-deps  {org.clojure/tools.namespace {:mvn/version "1.5.1"}}}

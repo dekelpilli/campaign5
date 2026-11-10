@@ -1,52 +1,52 @@
-[{:name   "Entropy"
-  :effect "Choose a mod with any kind of randomisation on it, and reroll that mod's randomisation."
-  :cost   10
-  :tokens ["legendary" "soul" "reliquary" "ring"]}
- {:name   "Manifestation"
-  :effect "Increase a soul's proc chance by 1 percentage point."
-  :cost   10
-  :tokens ["soul"]}
- {:name   "Fulfilment"
-  :effect "Progress the passive or proc mod of a soul (player choice)."
-  :cost   75
-  :tokens ["soul"]}
- {:name   "Temporal Shifting"
-  :effect "Reroll the era of a soul into a different era."
-  :cost   10
-  :tokens ["soul"]}
- {:name   "Soul Transference"
-  :effect "Reroll the origin of a soul into a different origin."
-  :cost   5
-  :tokens ["soul"]}
- {:name   "Annexation"
-  :effect "Add a random mod to a reliquary that doesn't have three mods. Otherwise, progress a random mod on a reliquary."
-  :cost   50
-  :tokens ["soul"]}
- {:name   "Refinement"
-  :effect "Replace a mod on a reliquary with another random mod. If possible, that mod will be upgraded until it is of at least equal value."
-  :cost   75
-  :tokens ["soul"]}
- {:name   "Bestowing"
-  :effect "Unlock the next tier of boons granted by a vestige."
-  :cost   100
-  :tokens ["vestige"]}
- {:name   "Delegation"
-  :effect "Cause one of your missions to only be considered done when its condition is completed by another character of your choice."
-  :cost   10
-  :tokens ["vestige" "legendary" "ring" "soul" "tattoo"]}
- {:name   "Revealed Potential"
-  :effect "Level up a legendary item."
-  :cost   100
-  :tokens ["legendary"]}
- {:name   "Discovered Potential"
-  :effect "Add a new random discovery modifier on a legendary item, or upgrade an already discovered modifier."
-  :cost   75
-  :tokens ["legendary"]}
- {:name   "Rewriting"
-  :effect "Choose a non-physical hurt type. All mods on the item that reference this hurt type instead refer to another non-physical hurt type of your choice. An item can only be affected by one instance of this shrine."
-  :cost   10
-  :tokens ["legendary"]}
- {:name   "Alteration"
-  :effect "Choose a physical hurt type. All mods on the item that reference this hurt type instead refer to another physical hurt type of your choice. An item can only be affected by one instance of this shrine."
-  :cost   5
-  :tokens ["legendary"]}]
+[{:name    "Entropy"
+  :effect  "Choose a mod with any kind of randomisation on it, and reroll that mod's randomisation."
+  :cost    10
+  :targets ["legendary" "soul" "reliquary" "ring"]}
+ {:name    "Manifestation"
+  :effect  "Increase a soul's proc chance by 1 percentage point."
+  :cost    10
+  :targets ["soul"]}
+ {:name    "Fulfilment"
+  :effect  "Progress the passive or proc mod of a soul (player choice)."
+  :cost    75
+  :targets ["soul"]}
+ {:name    "Temporal Shifting"
+  :effect  "Reroll the era of a soul into a different era."
+  :cost    10
+  :targets ["soul"]}
+ {:name    "Soul Transference"
+  :effect  "Reroll the origin of a soul into a different origin."
+  :cost    5
+  :targets ["soul"]}
+ {:name    "Annexation"
+  :effect  "Add a random mod to a reliquary that doesn't have three mods. Otherwise, progress a random mod on a reliquary."
+  :cost    50
+  :targets ["soul"]}
+ {:name    "Refinement"
+  :effect  "Replace a mod on a reliquary with another random mod. If possible, that mod will be upgraded until it is of at least equal value."
+  :cost    75
+  :targets ["soul"]}
+ {:name    "Bestowing"
+  :effect  "Unlock the next tier of boons granted by a vestige."
+  :cost    100
+  :targets ["vestige"]}
+ {:name    "Delegation"
+  :effect  "Cause one of your missions to only be considered done when its condition is completed by another character of your choice."
+  :cost    10
+  :targets ["vestige" "legendary" "ring" "soul" "tattoo"]}
+ {:name    "Revealed Potential"
+  :effect  "Level up a legendary item."
+  :cost    100
+  :targets ["legendary"]}
+ {:name    "Discovered Potential"
+  :effect  "Add a new random discovery modifier on a legendary item, or upgrade an already discovered modifier."
+  :cost    75
+  :targets ["legendary"]}
+ {:name    "Rewriting"
+  :effect  "Choose a non-physical hurt type. All mods on the item that reference this hurt type instead refer to another non-physical hurt type of your choice. An item can only be affected by one instance of this shrine."
+  :cost    10
+  :targets ["legendary"]}
+ {:name    "Alteration"
+  :effect  "Choose a physical hurt type. All mods on the item that reference this hurt type instead refer to another physical hurt type of your choice. An item can only be affected by one instance of this shrine."
+  :cost    5
+  :targets ["legendary"]}]

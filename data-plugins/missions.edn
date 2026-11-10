@@ -2,7 +2,7 @@
                          {:mission "Score a natural 20 on any attack or skill check without advantage"}
                          {:mission "Complete a mission"}
                          {:mission "Obtain a mission"}
-                         {:mission "Have this be the only mission in the party"}
+                         {:mission "Have this (or other missions of this type) be the only mission(s) in the party"}
                          {:mission "Empty yourself of spell slots or exertion"}
                          {:mission "Score a major success with a disadvantaged attack, or a minor success with an advantaged attack"}
                          {:mission "Consume at least 150 tokens in one day"}
@@ -12,8 +12,16 @@
                          {:mission "Sell an item for at least 100 tokens"}
                          {:mission "Finish a round in which you've used an action, bonus action, reaction, and all of your movement"}
                          {:mission "Level up"}
-                         {:mission "Be the only present party member to not receive a loot roll after an encounter"}]}
- :let        {:mission {:choose :missions}}
+                         {:mission "Be the only present party member to not receive a loot roll after an encounter"}]
+              :rewards  [{:reward "one loot result of a chosen non-special type"}
+                         {:reward "100 shrine tokens"}
+                         {:reward "10 XP"}
+                         {:reward "another special loot result"}
+                         {:reward "one free use of each of two random shrines"}]}
+ :let        {:mission {:choose :missions}
+              :reward  {:choose :rewards}}
  :view-model {:loot/title    "Special result"
-              :loot/sections [{:section/items [{:item/title "Gain 1 loot roll, and 1 loot result of a chosen regular type when you finish the mission"
-                                                :item/body  "{{ mission.mission }}"}]}]}}
+              :loot/sections [{:section/items [{:item/title "Mission: {{ mission.mission }}"
+                                                :item/body  "Upon completing this mission, gain {{ reward.reward }}."}
+                                               {:item/title "Loot roll"
+                                                :item/body  "Gain 1 loot roll."}]}]}}

@@ -3,8 +3,8 @@ Loot can be obtained or improved in the following ways:
 - Loot rolls that grant loot of a random type can be found or bought for 100 gold
 - Players can buy access to specific shrines for a cost that depends on the shrine effect itself
 - Shrines upgrade items, with different effects available for each loot type
-- Loot of any type can be sold for 40 generic shrine tokens and 10 shrine tokens of that type (numbers TBC)
-  - in cases where a loot roll grants multiple things, the total is 50 shrine tokens. A player may choose to reject a shrine's offered result.
+- Loot of any type can be sold for 50 shrine tokens
+  - in cases where a loot roll grants multiple things, the total value is 50 shrine tokens. A player may choose to reject a shrine's offered result.
   - Items that have been upgraded can generally sell for more shrine tokens, but won't necessarily be 100% refunded
 
 # Loot types

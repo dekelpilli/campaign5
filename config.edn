@@ -41,8 +41,8 @@
                :jar       {:path       "target/campaign5.jar"
                            :entrypoint campaign5.vestiges/-vestige-generator}}
               {:type  :data
-               :id    :missions
-               :label "Missions"
+               :id    :special-result
+               :label "Special results"
                :data  {:source "data-plugins/missions.edn"}}
               {:type  :jar
                :id    :shrines
