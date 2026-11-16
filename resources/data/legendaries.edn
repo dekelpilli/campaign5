@@ -1,3 +1,4 @@
+;TODO make a legendary similar Manna, but replenishing exertion points
 [{:name         "Extended Demise"
   :inherent     [{:template   "Ongoing harms you inflict {{#gt level 1}}have a 50% chance to{{/gt}} deal harm for one round after they end (including being ended with a save, or moving out of their area)."
                   :signature? true
