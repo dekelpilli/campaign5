@@ -28,12 +28,11 @@
                :generator {:history :button}
                :jar       {:path       "target/campaign5.jar"
                            :entrypoint campaign5.tarot/-tarot-generator}}
-              {:type  :jar
+              {:type  :data
                :id    :tattoos
                :label "Tattoos"
-               :jar   {:path       "target/campaign5.jar"
-                       ;TODO replace with actual tattoo generation once implemented
-                       :entrypoint campaign5.shrines/-shrine-generator}}
+               ;TODO replace with actual tattoo generation once implemented
+               :data  {:source "data-plugins/shrines.edn"}}
               {:type      :jar
                :id        :vestiges
                :label     "Vestiges"
@@ -44,11 +43,10 @@
                :id    :special-result
                :label "Special results"
                :data  {:source "data-plugins/missions.edn"}}
-              {:type  :jar
+              {:type  :data
                :id    :shrines
                :label "Shrines"
-               :jar   {:path       "target/campaign5.jar"
-                       :entrypoint campaign5.shrines/-shrine-generator}}
+               :data  {:source "data-plugins/shrines.edn"}}
               {:type    :jar
                :id      :soul-procs
                :label   "Soul Procs"
