@@ -1,89 +1,124 @@
 ;TODO points balance pass, including potentially reducing max ring points?
 {:tables     {:rings [;Diamond rings: powerful and exclusive
                       {:name       "Jaguar's"
-                       :type       "Diamond"
-                       :template   "+1 critical hit range while not wearing any other Diamond rings."
+                       :material   "Diamond"
+                       :template   "+1 critical success range while you have no other equipped Diamond rings."
                        :affinities #{:offence}
                        :points     12}
                       {:name       "Falcon's"
-                       :type       "Diamond"
-                       :template   "+1 AB while not wearing any other Diamond rings."
+                       :material   "Diamond"
+                       :template   "+1 AB while you have no other equipped Diamond rings."
                        :affinities #{:offence}
                        :points     12}
                       {:name       "Armadillo's"
-                       :type       "Diamond"
-                       :template   "+1 Armour while not wearing any other Diamond rings."
+                       :material   "Diamond"
+                       :template   "+1 Armour while you have no other equipped Diamond rings."
                        :affinities #{:survivability}
-                       :points     14}
+                       :points     15}
                       {:name       "Honey Badger's"
-                       :type       "Diamond"
+                       :material   "Diamond"
                        :data/vars  {:defence {:random :defences}}
-                       :template   "+1 {{defence}} while not wearing any other Diamond rings."
+                       :template   "+1 {{defence}} while you have no other equipped Diamond rings."
                        :affinities #{:survivability}
                        :points     12}
+                      {:name       "Ibis'"
+                       :material   "Diamond"
+                       :template   "+1 to death saves while you have no other equipped Diamond rings."
+                       :affinities #{:survivability}
+                       :points     12}
+                      {:name       "Sunfish's"
+                       :material   "Diamond"
+                       :template   "+1 experience gained while you have no other equipped Diamond rings."
+                       :affinities #{:meta}
+                       :points     10}
                       ;Gold rings: self-synergistic/referencing
                       {:name       "Peacock's"
-                       :type       "Gold"
+                       :material   "Gold"
                        :data/vars  {:feat {:random :feats}}
-                       :template   "For every 3 Peacock's rings you wear, you may choose one to gain one feat from those specified on your Peacock's rings. This ring grants the option of the {{feat}} feat."
+                       :template   "For every 3 Peacock's rings you have equipped, you may choose one to gain one feat from those specified on your Peacock's rings. This ring grants the option of the {{feat}} feat."
                        :affinities #{:control :meta :offence :support :resource :survivability :tactical :utility}
                        :points     10}
                       {:name       "Dragon's"
-                       :type       "Gold"
-                       :template   "Gain 1 gold for each Dragon's ring worn whenever you personally find at least one loot roll, to a maximum of 50 gold."
+                       :material   "Gold"
+                       :template   "Gain 1 gold for each equipped Dragon's ring whenever you personally find at least one loot roll, to a maximum of 50 gold."
                        :affinities #{:meta}
                        :points     5}
                       {:name       "Cheetah's"
-                       :type       "Gold"
-                       :template   "+5 feet to all of your speed types for each Cheetah's ring worn."
+                       :material   "Gold"
+                       :template   "+5 feet to all of your speed types for each equipped Cheetah's ring."
                        :affinities #{:tactical}
                        :points     8}
-                      ;Silver rings: conditions based on other rings' types
+                      ;Silver rings: conditions based on other rings
                       {:name       "Anglerfish's"
-                       :type       "Silver"
+                       :material   "Silver"
                        :affinities #{:tactical}
-                       :template   "You emit bright light in a radius of 5 feet from you for each non-Silver ring worn."
+                       :template   "You emit bright light in a radius of 5 feet from you for each equipped non-Silver ring."
                        :points     5}
                       {:name       "Horse's"
-                       :type       "Silver"
+                       :material   "Silver"
                        :affinities #{:utility}
-                       :template   "Your long rests can be 1 hour shorter for each worn Opal ring, to a minimum of 2 hours."
-                       :points     4}
-                      {:name       "Horse's"
-                       :type       "Silver"
-                       :affinities #{:utility}
-                       :template   "Your long rests can be 1 hour shorter for each worn Opal ring, to a minimum of 2 hours."
+                       :template   "Your long rests can be 1 hour shorter for each equipped Opal ring, to a minimum of 2 hours."
                        :points     4}
                       {:name       "Octopus'"
+                       :material   "Silver"
                        :data/vars  {:ability {:random :ability-scores}}
                        :affinities #{:offence :utility}
-                       :template   "+1 {{ ability }} while you have no rings you are wearing more copies of than Octopus' rings."
+                       :template   "+1 {{ ability }} while you have no rings with more equipped copies than Octopus' rings."
                        :points     4}
-                      ;Opal rings: purely used to benefit/modify other rings. Useless if worn without other rings.
+                      {:name       "Kangaroo's"
+                       :material   "Silver"
+                       :affinities #{:tactical}
+                       :template   "+5ft maximum jump distance/height for each distinct equipped ring material."
+                       :points     4}
+                      {:name       "Goat's"
+                       :material   "Silver"
+                       :affinities #{:support}
+                       :template   "+1 Scapegoating for each other equipped ring. Whenever a creature adjacent to you takes damage, you can reduce its damage taken by an amount up your Scapegoating, then take an equal amount of true damage."
+                       :points     8}
+                      {:name       "Dolphin's"
+                       :material   "Silver"
+                       :affinities #{:tactical}
+                       :template   "-1 major effect threshold for each equipped Diamond ring. Note that this does not change your major success threshold."
+                       :points     11}
+                      {:name       "Porcupine's"
+                       :material   "Silver"
+                       :affinities #{:offence}
+                       :template   "This ring deals +1d4 piecing harm to creatures that hit you with an attack for each equipped Gold ring."
+                       :points     7}
+                      ;Opal rings: purely used to benefit/modify other rings. Useless if equipped without other rings.
                       {:name       "Chameleon's"
-                       :type       "Opal"
-                       :template   "This ring may count as if it was of any name, and of any gem type (even if the ring of the chosen name is not usually of the chosen type). The ring itself has no effect."
+                       :material   "Opal"
+                       :template   "This ring may count as if it was of any name, and of any material (even if the ring of the chosen name is not usually of the chosen material). The ring itself has no effect."
                        :affinities #{:meta}
                        :points     4}
                       {:name       "Crow's"
-                       :type       "Opal"
-                       :template   "Up to two diamond rings you are wearing grant their effects regardless of their condition. This does not stack."
+                       :material   "Opal"
+                       :template   "Up to two equipped Diamond rings grant their effects regardless of their condition. This does not stack."
                        :affinities #{:meta}
                        :points     6}
                       {:name       "Elephant's"
-                       :type       "Opal"
+                       :material   "Opal"
                        :template   "Your highest point-cost ring(s) apply their effects twice. This has no effect if an Elephant's ring is among your highest point-cost rings."
                        :affinities #{:meta}
                        :points     13}
                       {:name       "Dalmation's"
-                       :type       "Opal"
-                       :template   "Your maximum worn ring points is increased by 10."
+                       :material   "Opal"
+                       :template   "Your maximum ring points is increased by 10."
                        :affinities #{:meta}
-                       :points     10}]
+                       :points     10}
+                      {:name       "Aardvark's"
+                       :material   "Opal"
+                       :template   "Your rings' costs are always at least one point lower than their base costs."
+                       :affinities #{:meta}
+                       :points     5}
+                      {:name       "Mole's"
+                       :material   "Opal"
+                       :template   "Equipped rings whose base point cost is greater than 10 always cost exactly 10 points."
+                       :affinities #{:meta}
+                       :points     2}]
               ;incoming healing/regen - Axolotl
 
               #_[{:name       "The Hardened"
-                  :type       true
                   :template   "+1 barrier for each distinct non-synergy ring worn."
                   :affinities #{:survivability}
                   :points     5}
@@ -91,50 +126,24 @@
                   :synergy  true
                   :template "+1 damage for each distinct synergy ring you are wearing."
                   :points   5}
-                 {:name     "The Simpleton"
-                  :synergy  true
-                  :template "Your non-synergy rings' cost decreases by 1 point. Your synergy rings' cost increases by 2 points."
-                  :points   0} ;2 if you include the ring's effect once
-                 {:name     "Vengeful"
-                  :template "Once per short rest, as a reaction to being damaged, you may cast Hellish Rebuke on the creature that damaged you, ignoring range restrictions."
-                  :points   3}
                  {:name     "Jack of All Trades"
                   :template "Any of your ability scores that are below 10 are considered to be 10 instead."
                   :points   1}
-                 {:name      "Divergent"
-                  :data/vars {:damage-types {:random :without-replacement
-                                             :amount 2
-                                             :preset :damage-types
-                                             :type   "non-physical"}}
-                  :template  "You take {{ damage-types.[0] }} damage as {{ damage-types.[1] }} damage instead."
-                  :points    1}
-                 #_{:name      "Multilingual"
-                    :data/vars {:language {:random :languages}}
-                    :template  "You can speak, read, and write {{ language }} if worn for at least 24 hours."
-                    :points    1}
                  {:name     "Prepared"
                   :template "When you would normally be able to make an opportunity attack, you may use a touch spell or melee maneuver with a usage time of no more than 1 action instead."
                   :points   4}
                  {:name     "Dabbler"
                   :template "For each ability score type, if you have no proficiencies in skills from that ability score, gain proficiency in one such skill of your choice."
                   :points   3}
-                 {:name     "Acrobat"
-                  :template "You may take high and long jumps without a run-up."
-                  :points   1}
-                 {:name     "Scapegoat"
-                  :template "When a creature within 5 feet of you takes damage, you may choose for them to take no damage instead. You then take an equal amount of true damage."
-                  :points   2}
                  {:name     "Jeweller"
                   :template "Whenever you obtain a loot roll, you may roll a d4. On a roll of 4, gain a ring result instead."
-                  :points   3}
-                 {:name     "Impactful"
-                  :template "You trigger major effects on attacks with a score of 13+ (after defences), although the attack is still considered a standard success for other purposes."
-                  :points   4}]}
- :let        {:rings {:draw :rings :n 2}}
+                  :points   3}]}
+ :let        {:rings {:draw :rings
+                      :n    2}}
  :view-model {:loot/title    "Rings"
               :loot/sections [{:section/heading "Rings"
                                :section/items   {:data/each :rings
-                                                 :data/as   {:item/title    "{{name}} {{type}} Ring"
+                                                 :data/as   {:item/title    "{{name}} {{material}} Ring"
                                                              :item/body     {:data/field :template}
                                                              :item/metadata ["Points: {{points}}",
                                                                              "Affinities: {{join affinities}}"]}}}]}}

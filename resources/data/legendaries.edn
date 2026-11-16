@@ -151,7 +151,7 @@
   :inherent     [{:template   "Your weapons' base damage is replaced by 1d{{#lt level 3}}6{{else}}8{{/lt}} radiant damage for every 2 points of Wisdom modifier you have."
                   :signature? true
                   :affinities #{:offence}}
-                 {:template   "+1 critical hit range while you have at least 20 Wisdom."
+                 {:template   "+1 critical success range while you have at least 20 Wisdom."
                   :affinities #{:offence}}
                  {:template "You cannot deal physical damage."}
                  {:template "Your Strength score is capped at 10 below your Wisdom score."}
@@ -232,7 +232,7 @@
   :inherent     [{:template   "When you roll initiative, you become shrouded in a magical darkness that engulfs you until you make an attack, or until the end of the combat. You can see through this darkness, but other creatures need magical darkvision or truesight to do so."
                   :signature? true
                   :affinities #{:tactical :offence :defence}}
-                 {:template   "+1 critical hit range with attacks while in magical darkness."
+                 {:template   "+1 critical success range with attacks while in magical darkness."
                   :affinities #{:offence}}
                  {:template "Minor successes deal full slashing damage to you while you are not in magical darkness."}
                  {:template "-1 Reflex against spell attacks."}
@@ -597,7 +597,7 @@
                   :vars       {:charisma 1}
                   :affinities #{:offence :utility}}]}
  {:name         "Aurifex' Crystal"
-  :inherent     [{:template   "Whenever at least one of your souls procs, this crystal flares, dealing {{level}}d10 bludgeoning damage to each enemy within 10 feet of you."
+  :inherent     [{:template   "Whenever at least one of your souls procs, this crystal flares, dealing {{level}}d10 bludgeoning harm to each enemy within 10 feet of you."
                   :signature? true
                   :affinities #{:offence}}
                  {:template   "Shrines of Annexation and Refinement are {{#lt level 2}}10{{else}}15{{/lt}} tokens cheaper."
@@ -605,7 +605,7 @@
                  {:template "The passive bonus of your first soul grants nothing."}
                  {:template   "{{#gt level 2}}+1 maximum number of souls contained in your reliquaries.{{/gt}}"
                   :affinities #{:meta}}]
-  :discoverable [{:template   "Your souls deal +{{damage}} damage."
+  :discoverable [{:template   "Your souls deal +{{damage}} harm."
                   :vars       {:damage 2}
                   :affinities #{:offence}}
                  {:template   "+{{chance}}% proc chance for your souls for each active conditional modifier on your reliquary."
@@ -615,7 +615,7 @@
                   :vars       {:chance 10
                                :step   5}
                   :affinities #{:meta}}
-                 {:template   "Your item damage ignores enemy resistances on rounds where at least one of your souls has procced."
+                 {:template   "Your item harm ignores enemy resistances on rounds where at least one of your souls has procced."
                   :affinities #{:offence}}
                  {:template   "You may use any token type as if it were a Soul token."
                   :affinities #{:meta}}]}

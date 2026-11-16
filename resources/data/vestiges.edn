@@ -126,7 +126,7 @@
                :affinities #{:tactical :support}}
               {:template   "Creatures marked by you have -1 resistance for each distinct mark on them."
                :affinities #{:support}}
-              {:template   "When you roll for initiative, choose yourself or an ally. Attacks against an enemy that has damaged the chosen ally have +1 critical hit range."
+              {:template   "When you roll for initiative, choose yourself or an ally. Attacks against an enemy that has damaged the chosen ally have +1 critical success range."
                :affinities #{:support}}
               {:template   "Whenever you mark an enemy, lower one of their non-armour defences by 1. If that enemy was already marked with a different mark, also lower their armour by 1. Each of a creature's defences cannot be lowered more than once in this way."
                :affinities #{:support}}]}]
