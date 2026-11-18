@@ -2,29 +2,69 @@
                          :effect  "Choose a mod with any kind of randomisation on it, and reroll that mod's randomisation."
                          :cost    10
                          :targets ["legendary" "soul" "reliquary" "ring"]}
-                        {:name    "Delegation"
-                         :effect  "Cause one of your missions to only be considered done when its condition is completed by another character of your choice."
-                         :cost    10
-                         :targets ["mission"]}
                         {:name    "Searching"
                          :effect  "Turn in two rings, a rune, a tarot card, a soul, or a vestige to generate equivalent new items."
                          :cost    30
                          :targets ["ring" "rune" "soul" "tarot" "vestige"]}
-                        {:name    "Manifestation"
-                         :effect  "Increase a soul's proc chance by 1 percentage point."
+                        {:name    "Alteration"
+                         :effect  "Choose a physical hurt type. All current and future mods on the item that reference this hurt type instead refer to another physical hurt type of your choice. An item can only be affected by one instance of this shrine."
+                         :cost    5
+                         :targets ["legendary"]}
+                        {:name    "Discovered Potential"
+                         :effect  "Add a new random discovery modifier on a legendary item, or progress an already discovered modifier. If there is already one progressed modifier, you may continue its progress instead of taking the offered outcome."
+                         :cost    75
+                         :targets ["legendary"]}
+                        {:name    "Revealed Potential"
+                         :effect  "Level up a legendary item."
+                         :cost    100
+                         :targets ["legendary"]}
+                        {:name    "Rewriting"
+                         :effect  "Choose a non-physical hurt type. All current and future mods on the item that reference this hurt type instead refer to another non-physical hurt type of your choice. An item can only be affected by one instance of this shrine."
                          :cost    10
-                         :targets ["soul"]}
+                         :targets ["legendary"]}
+                        {:name    "Delegation"
+                         :effect  "Cause one of your missions to only be considered done when its condition is completed by another character of your choice."
+                         :cost    10
+                         :targets ["mission"]}
+                        {:name    "Forging"
+                         :effect  "Reduce the point cost of a ring by 1, to no less than half of its original point cost."
+                         :cost    50
+                         :targets ["ring"]}
+                        {:name    "Honing"
+                         :effect  "Upgrade a random upgradeable mod on a rune with 4 or more mods."
+                         :cost    50
+                         :targets ["rune"]}
+                        {:name    "Inspiration"
+                         :effect  "Choose a new inspiration for your runes. If you already have 3 inspirations, choose an old one to replace. All runes belonging to the removed inspiration will be automatically replaced with a random one-mod rune from the new inspiration, and the difference in value will be refunded."
+                         :cost    10
+                         :targets ["rune"]}
+                        {:name    "Merging"
+                         :effect  "Add a mod from a one-point un-upgraded rune onto another rune with the same inspiration."
+                         :cost    0
+                         :targets ["rune"]}
+                        {:name    "Reimagining"
+                         :effect  "Mark a runic mod for removal, and ensure it can never be found again. It will be replaced (on all runes) with a new mod for the same source of inspiration once it is available."
+                         :cost    10
+                         :targets ["rune"]}
+                        {:name    "Weaving"
+                         :effect  "Add a random mod to a rune with fewer than 4 mods. The rune will be from the same inspiration, and will not be the same as any of the existing mods."
+                         :cost    50
+                         :targets ["rune"]}
                         {:name    "Fulfilment"
                          :effect  "Progress the passive or proc mod of a soul (player choice)."
                          :cost    75
                          :targets ["soul"]}
-                        {:name    "Temporal Shifting"
-                         :effect  "Reroll the era of a soul into a random different era."
+                        {:name    "Manifestation"
+                         :effect  "Increase a soul's proc chance by 1 percentage point."
                          :cost    10
                          :targets ["soul"]}
                         {:name    "Soul Transference"
                          :effect  "Reroll the origin of a soul into a random different origin."
                          :cost    5
+                         :targets ["soul"]}
+                        {:name    "Temporal Shifting"
+                         :effect  "Reroll the era of a soul into a random different era."
+                         :cost    10
                          :targets ["soul"]}
                         {:name    "Annexation"
                          :effect  "Add a random mod to a reliquary that has fewer than three mods. Otherwise, progress a random mod on the reliquary."
@@ -37,47 +77,7 @@
                         {:name    "Bestowing"
                          :effect  "Unlock the next tier of boons granted by a vestige."
                          :cost    100
-                         :targets ["vestige"]}
-                        {:name    "Revealed Potential"
-                         :effect  "Level up a legendary item."
-                         :cost    100
-                         :targets ["legendary"]}
-                        {:name    "Discovered Potential"
-                         :effect  "Add a new random discovery modifier on a legendary item, or progress an already discovered modifier. If there is already one progressed modifier, you may continue its progress instead of taking the offered outcome."
-                         :cost    75
-                         :targets ["legendary"]}
-                        {:name    "Rewriting"
-                         :effect  "Choose a non-physical hurt type. All current and future mods on the item that reference this hurt type instead refer to another non-physical hurt type of your choice. An item can only be affected by one instance of this shrine."
-                         :cost    10
-                         :targets ["legendary"]}
-                        {:name    "Alteration"
-                         :effect  "Choose a physical hurt type. All current and future mods on the item that reference this hurt type instead refer to another physical hurt type of your choice. An item can only be affected by one instance of this shrine."
-                         :cost    5
-                         :targets ["legendary"]}
-                        {:name    "Forging"
-                         :effect  "Reduce the point cost of a ring by 1, to no less than half of its original point cost."
-                         :cost    50
-                         :targets ["ring"]}
-                        {:name    "Reimagining"
-                         :effect  "Mark a runic mod for removal, and ensure it can never be found again. It will be replaced (on all runes) with a new mod for the same source of inspiration once it is available."
-                         :cost    10
-                         :targets ["rune"]}
-                        {:name    "Merging"
-                         :effect  "Add a mod from a one-point un-upgraded rune onto another rune with the same inspiration."
-                         :cost    0
-                         :targets ["rune"]}
-                        {:name    "Weaving"
-                         :effect  "Add a random mod to a rune with fewer than 4 mods. The rune will be from the same inspiration, and will not be the same as any of the existing mods."
-                         :cost    50
-                         :targets ["rune"]}
-                        {:name    "Inspiration"
-                         :effect  "Choose a new inspiration for your runes. If you already have 3 inspirations, choose an old one to replace. All runes belonging to the removed inspiration will be automatically replaced with a random one-mod rune from the new inspiration, and the difference in value will be refunded."
-                         :cost    10
-                         :targets ["rune"]}
-                        {:name    "Honing"
-                         :effect  "Upgrade a random upgradeable mod on a rune with 4 or more mods."
-                         :cost    50
-                         :targets ["rune"]}]}
+                         :targets ["vestige"]}]}
  :let        {:shrine {:choose :shrines}}
  :view-model {:loot/title    "Shrine of {{ shrine.name }}"
               :loot/sections [{:section/heading "Effect"
