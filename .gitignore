@@ -14,3 +14,6 @@ resources/config.edn
 reporting.edn
 *.jar
 libs/
+
+# should be checked in once campaign starts
+history.edn

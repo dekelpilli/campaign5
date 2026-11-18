@@ -28,11 +28,19 @@
                :generator {:history :button}
                :jar       {:path       "target/campaign5.jar"
                            :entrypoint campaign5.tarot/-tarot-generator}}
-              {:type  :data
-               :id    :tattoos
-               :label "Tattoos"
-               ;TODO replace with actual tattoo generation once implemented
-               :data  {:source "data-plugins/shrines.edn"}}
+              {:type      :data
+               :id        :rune-loot
+               :label     "Find rune"
+               :generator {:hidden? true
+                           :history :never}
+               :data      {:inline {:view-model {:loot/title    "Rune"
+                                                 :loot/sections [{:section/items [{:item/body "Find 1 rune for your character"}]}]}}}}
+              {:type      :jar
+               :id        :runes
+               :label     "Runes"
+               :generator {:history :button}
+               :jar       {:path       "target/campaign5.jar"
+                           :entrypoint campaign5.runes/-rune-generator}}
               {:type      :jar
                :id        :vestiges
                :label     "Vestiges"
@@ -64,7 +72,7 @@
                :ranges [[19 36] [100 100]]}
               {:id     :tarot
                :ranges [[37 54] [100 100]]}
-              {:id     :tattoos
+              {:id     :rune-loot
                :ranges [[55 72] [100 100]]}
               {:id     :vestiges
                :ranges [[73 90] [100 100]]}

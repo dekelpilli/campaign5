@@ -1,0 +1,36 @@
+;alfa, bravo, charlie, delta, echo, foxtrot, golf, hotel, india, juliett, kilo, lima, mike, november, oscar, papa, quebec, romeo, sierra, tango, uniform, victor, whiskey, x-ray, yankee, zulu
+{"alice" [{:inspiration "Scaffolding"
+           :mods        [{:id         "alfa"
+                          :vars       {:levelled false}
+                          :template   "Climbing atop a scaffold while you build it does not consume movement.{{#if levelled}} Additionally, this movement does not provoke opportunity attacks.{{/if}}"
+                          :affinities #{:tactical}}
+                         {:id         "bravo"
+                          :vars       {:damage 2}
+                          :template   "You have +{{damage}} damage while perched."
+                          :affinities #{:offence}}
+                         {:id         "charlie"
+                          :vars       {:magiscience 2}
+                          :template   "+{{magiscience}} Magiscience when using it with Dexterity."
+                          :affinities #{:utility}}
+                         {:id         "delta"
+                          :template   "Your scaffolds provide full cover."
+                          :affinities #{:tactical}}]}
+          {:inspiration "Sharpshooter"
+           :mods        [{:id         "alfa"
+                          :template   "Being prone does not impose disadvantage on your ranged attacks."
+                          :affinities #{:offence :tactical}}
+                         {:id         "bravo"
+                          :vars       {:damage {:value 4
+                                                :step  2}}
+                          :template   "Your critical hits with ranged attacks have +{{damage}} damage."
+                          :affinities #{:offence}}
+                         {:id         "charlie"
+                          :vars       {:ab {:value  1
+                                            :points 3}}
+                          :template   "+{{ab}} AB with attacks made with height advantage."
+                          :affinities #{:offence}}
+                         {:id         "delta"
+                          :vars       {:damage {:value 4
+                                                :step  2}}
+                          :template   "Your ranged spell attacks have +{{damage}} when against targets further away than the spell's natural range, and +{{damage}} damage with ranged weapon attacks made at long range."
+                          :affinities #{:offence}}]}]}

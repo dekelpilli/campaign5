@@ -47,26 +47,27 @@ Loot can be obtained or improved in the following ways:
 - Shrine effects:
   - Unlock new tier
 
-## Runic tattoos
+## Runes
 [//]: # (- replacing helmets. Goal: improve upgradeability, customisability from players, make it easier/more natural/fluid to introduce new mods over the course of the campaign)
-- Players can find tattoo ink that they can use to tattoo a rune onto themselves
-- Players can choose a feature from their class/subclass, a feat they have, a knack they have, or one of their spells or maneuvers as inspiration for the effect of the runic tattoo, and the runic tattoo will grant a bonus for that thing
-- A player can no more than 4 active runic tattoos at a time. On a long rest, a player may choose which of their runes is active
-- A player can have no more than one runic tattoo per source of inspiration
-- Shrines can be used to level up a tattoo, or to cause the effect of the tattoo to change (keeping any levels it has gained)
+- Players find runes from a random inspiration for their character
+- Players can have up to 3 runic inspirations at a time, and can wear (up to) one rune for each inspiration
+- Players can change existing chosen inspirations, or opt out of a mod on inspirations they have chosen
 
 ## Affinities
 - Control (lower enemy Offence/Tactics)
 - Support (outgoing healing, allies/area benefits, lowering enemy Survivability)
 - Tactical (avoiding control conditions, initiative, movement, improved uptime/usability of abilities (range, reach, etc), disengage)
 - Resource (reduce resource usage/improve resource recovery)
-- Offence (damage, harm, AB)
+- Offence (damage, harm, crit, accuracy)
 - Survivability (defence/hp/regen/incoming healing)
 - Meta (gold/token improvements, xp, impact on other loot)
 - Utility (skills, out of combat benefits)
 
 ## Specialisations
-Make these always apply to everyone? Maybe the individual's choice still impacts how often they find that thing 
+- When the party gains specialisations, the players roll to see who gets to pick one first
+- Then, over the course of a short period of time, the rest of the players will get to choose their specialisations
+- When a player picks a specialisation, it applies to the entire party. As such, specialisations have no downsides. If one somehow has an unintended downside, we will attempt to work around it, or allow players to opt out
+- When a player picks a specialisation, they immediately gain the related loot result (or a loot roll for misc specialisations)
 
 ## Carnival games? Activities:
 - Codenames pass-and-play, one loot per word guessed (one turn)

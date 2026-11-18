@@ -67,7 +67,7 @@
                        :label   "Combat rounds"
                        :type    :int
                        :default 5}]})
-  (generate [_ {:keys [store rng inputs]}]
+  (generate [_ {:keys [store inputs rng]}]
     (view id rng (p/read-collection store id) (rounds-input (:rounds inputs))))
   p/Action
   (handle-action [_ {:keys [store rng]} action {:keys [rounds]}]

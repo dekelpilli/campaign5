@@ -36,9 +36,8 @@
   (update mod :vars #(vars/resolve-vars rng %)))
 
 (defn- new-mod [reliquary-mods {:keys [rng]}]
-  (let [idx (rng/next-int rng 0 (count reliquary-mods))]
-    (->> (nth reliquary-mods idx)
-         (resolve-mod rng))))
+  (->> (r/sample rng reliquary-mods)
+       (resolve-mod rng)))
 
 (def ^:private new-reliquary (comp vector new-mod))
 
