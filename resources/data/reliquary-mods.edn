@@ -22,7 +22,7 @@
   :affinities #{:offence :utility}}
  {:vars       {:initiative 1}
   :template   "+{{initiative}} initiative for each contained soul with a non-distinct era."
-  :affinities #{:tactical}}
+  :affinities #{:tactics}}
  {:vars       {:chance 3}
   :template   "+{{chance}}% to proc souls in this reliquary while you have at least one other era-dependent modifier that is active."
   :affinities #{:meta}}
@@ -53,7 +53,7 @@
   :template   "While at least one contained soul is of humanoid origin, +{{skills}} with {{ability}} skills."
   :affinities #{:utility}}
  {:template   "Whenever a contained soul of fey origin procs, gain one free-action use of the Dash action that expires at the end of the combat"
-  :affinities #{:tactical}}
+  :affinities #{:tactics}}
  {:vars       {:ab {:value  1
                     :points 4}}
   :template   "While at least two contained souls are of fiendish origin, +{{ab}} AB with spells."

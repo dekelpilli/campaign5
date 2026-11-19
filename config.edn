@@ -68,11 +68,11 @@
  :reporting  #include "reporting.edn"
  :loot-table [{:id     :rings
                :ranges [[1 18] [100 100]]}
-              {:id     :souls
-               :ranges [[19 36] [100 100]]}
-              {:id     :tarot
-               :ranges [[37 54] [100 100]]}
               {:id     :rune-loot
+               :ranges [[19 36] [100 100]]}
+              {:id     :souls
+               :ranges [[37 54] [100 100]]}
+              {:id     :tarot
                :ranges [[55 72] [100 100]]}
               {:id     :vestiges
                :ranges [[73 90] [100 100]]}

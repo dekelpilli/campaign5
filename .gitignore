@@ -17,3 +17,7 @@ libs/
 
 # should be checked in once campaign starts
 history.edn
+
+# mdbook output
+
+docs/book

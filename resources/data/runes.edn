@@ -3,7 +3,7 @@
            :mods        [{:id         "alfa"
                           :vars       {:levelled false}
                           :template   "Climbing atop a scaffold while you build it does not consume movement.{{#if levelled}} Additionally, this movement does not provoke opportunity attacks.{{/if}}"
-                          :affinities #{:tactical}}
+                          :affinities #{:tactics}}
                          {:id         "bravo"
                           :vars       {:damage 2}
                           :template   "You have +{{damage}} damage while perched."
@@ -14,11 +14,11 @@
                           :affinities #{:utility}}
                          {:id         "delta"
                           :template   "Your scaffolds provide full cover."
-                          :affinities #{:tactical}}]}
+                          :affinities #{:tactics}}]}
           {:inspiration "Sharpshooter"
            :mods        [{:id         "alfa"
                           :template   "Being prone does not impose disadvantage on your ranged attacks."
-                          :affinities #{:offence :tactical}}
+                          :affinities #{:offence :tactics}}
                          {:id         "bravo"
                           :vars       {:damage {:value 4
                                                 :step  2}}

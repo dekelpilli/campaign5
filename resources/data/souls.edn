@@ -97,15 +97,15 @@
  {:trait   "Strategy"
   :passive {:vars       {:initiative 1}
             :template   "+{{initiative}} initiative."
-            :affinities #{:tactical}}
+            :affinities #{:tactics}}
   :proc    {:template   "You may choose this round's initiative order."
-            :affinities #{:tactical}}}
+            :affinities #{:tactics}}}
  {:trait   "Speed"
   :passive {:vars       {:speed 5}
             :template   "+{{speed}}ft of walking speed."
-            :affinities #{:tactical}}
+            :affinities #{:tactics}}
   :proc    {:template   "You may dash as a bonus action during this round."
-            :affinities #{:tactical}}}
+            :affinities #{:tactics}}}
  {:trait   "Arcana"
   :passive {:vars       {:threshold 1}
             :template   "-{{threshold}} standard success threshold with attacks from non-cantrip spells."

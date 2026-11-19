@@ -1,0 +1,12 @@
+[book]
+title = "Spies and Spiders Loot"
+src = "src"
+
+[output.html]
+preferred-dark-theme = "navy"
+default-theme = "navy"
+git-repository-url = "https://github.com/dekelpilli/campaign5"
+site-url = "/campaign5/"
+
+[preprocessor.edn-tables]
+command = "bb scripts/preprocess.clj"

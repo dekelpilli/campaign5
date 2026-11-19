@@ -56,7 +56,7 @@
   (add-random-discoverable :survivability legendary data ctx card))
 
 (defmethod handle-card "The Chariot" [legendary data ctx card]
-  (add-random-discoverable :tactical legendary data ctx card))
+  (add-random-discoverable :tactics legendary data ctx card))
 
 (defmethod handle-card "Strength" [legendary data ctx card]
   (add-random-discoverable :offence legendary data ctx card))

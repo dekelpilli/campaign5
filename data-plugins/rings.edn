@@ -1,4 +1,5 @@
 ;TODO points balance pass, including potentially reducing max ring points?
+; TODO as part of this, consider lowering number of rings found to 1
 {:tables     {:rings [;Diamond rings: powerful and exclusive
                       {:name       "Jaguar's"
                        :material   "Diamond"
@@ -36,7 +37,7 @@
                        :material   "Gold"
                        :data/vars  {:feat {:random :feats}}
                        :template   "For every 3 Peacock's rings you have equipped, you may choose one to gain one feat from those specified on your Peacock's rings. This ring grants the option of the {{feat}} feat."
-                       :affinities #{:control :meta :offence :support :resource :survivability :tactical :utility}
+                       :affinities #{:control :meta :offence :support :resource :survivability :tactics :utility}
                        :points     10}
                       {:name       "Dragon's"
                        :material   "Gold"
@@ -46,7 +47,7 @@
                       {:name       "Cheetah's"
                        :material   "Gold"
                        :template   "+5 feet to all of your speed types for each equipped Cheetah's ring."
-                       :affinities #{:tactical}
+                       :affinities #{:tactics}
                        :points     8}
                       {:name       "Octopus'"
                        :material   "Silver"
@@ -54,10 +55,15 @@
                        :affinities #{:offence :utility}
                        :template   "+1 {{ ability }} for each equipped Octopus' ring."
                        :points     5}
+                      {:name       "Orangutan's"
+                       :material   "Gold"
+                       :template   "+5ft reach for reviving downed allies while you have at least two Orangutan's rings equipped."
+                       :affinities #{:support :tactics}
+                       :points     6}
                       ;Silver rings: conditions based on other rings
                       {:name       "Anglerfish's"
                        :material   "Silver"
-                       :affinities #{:tactical}
+                       :affinities #{:tactics}
                        :template   "You emit bright light in a radius of 5 feet from you for each equipped non-Silver ring."
                        :points     5}
                       {:name       "Horse's"
@@ -67,7 +73,7 @@
                        :points     4}
                       {:name       "Kangaroo's"
                        :material   "Silver"
-                       :affinities #{:tactical}
+                       :affinities #{:tactics}
                        :template   "+5ft maximum jump distance/height for each distinct equipped ring material."
                        :points     4}
                       {:name       "Goat's"
@@ -77,7 +83,7 @@
                        :points     8}
                       {:name       "Dolphin's"
                        :material   "Silver"
-                       :affinities #{:tactical}
+                       :affinities #{:tactics}
                        :template   "-1 major effect threshold for each equipped Diamond ring. Note that this does not change your major success threshold."
                        :points     11}
                       {:name       "Porcupine's"
@@ -112,7 +118,7 @@
                        :template   "Your highest point-cost ring(s) apply their effects twice. This has no effect if an Elephant's ring is among your highest point-cost rings."
                        :affinities #{:meta}
                        :points     13}
-                      {:name       "Dalmation's"
+                      {:name       "Dalmatian's"
                        :material   "Opal"
                        :template   "Your maximum ring points is increased by 10."
                        :affinities #{:meta}

@@ -1,0 +1,32 @@
+# Specialisations
+
+At certain points in the campaign, the party will gain a set of specialisations.
+The party will take it in turns to pick from the following bonuses over the course of a few sessions.
+
+The entire party gains the effects of a chosen specialisation, and the player gains a loot result matching the 
+specialisation's category (or a loot roll for a Miscellaneous specialisations).
+
+| Name         | Category          | Effect                                                                                                                                                                                                      | Taken |
+|--------------|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------|
+| Bare         | Rings             | Shrines of Forging can reduce a ring's cost by one more than usual.                                                                                                                                         | ❌     |
+| Forager      | Rings             | Whenever you find rings, you may choose two rings out of three (instead of just receiving two rings).                                                                                                       | ❌     |
+| Jeweller     | Rings             | Shrines of Forging cost 40 tokens instead of 50. The sell price of rings affected by Shrines of Forging reduces accordingly.                                                                                | ❌     |
+| Marquee      | Rings             | You can ignore the point cost on one of your rings.                                                                                                                                                         | ❌     |
+| Dissociative | Souls/reliquaries | You can merge two souls that have been targeted by a Fulfilment shrine at least 4 times (each). The souls are destroyed, but create a new Soul with your choice of Passive and Proc mods from those souls.  | ❌     |
+| Intentional  | Souls/reliquaries | Whenever you find a soul, also gain an itemised reliquary mod. You can sell it for 5 soul tokens, or consume it to guarantee its mod will be added the next time you use a Refinement or Annexation shrine. | ❌     |
+| Overcharged  | Souls/reliquaries | Shrines of Annexation add modifiers until a reliquary has 4 modifiers (instead of 3).                                                                                                                       | ❌     |
+| Overloaded   | Souls/reliquaries | Your reliquaries may contain up to 4 souls (instead of 3).                                                                                                                                                  | ❌     |
+| All-in       | Legendaries/tarot | You may turn in 3 cards instead of 2 to create a legendary item. Their sell price scales accordingly.                                                                                                       | ❌     |
+| Hedger       | Legendaries/tarot | Whenever you draw a tarot card, draw one additional card and choose one of the two. Shuffle the other one back into the deck.                                                                               | ❌     |
+| Recycler     | Legendaries/tarot | Whenever you sell a legendary item, you may move one card used to create it to the top of the deck.                                                                                                         | ❌     |
+| Seeker       | Legendaries/tarot | When using a Shrine of Discovered Potential, you receive two offers and may choose one of them.                                                                                                             | ❌     |
+| Galvanised   | Runes             | You can equip 4 runes, instead of 3 (and therefore may have four inspirations).                                                                                                                             | ❌     |
+| Salvager     | Runes             | When selling one-mod, un-upgraded runes, also gain 25 tokens that can only be used for shrines targeting runes.                                                                                             | ❌     |
+| Substantive  | Runes             | Your runes can have up to 5 mods, instead of 4.                                                                                                                                                             | ❌     |
+| Vacillator   | Runes             | Shrines of Reimagining are free, and Shrines of Inspiration are free when you already have the maximum number of inspirations.                                                                              | ❌     |
+| Creative     | Vestiges          | For every 10 boons gained, a player may come up with one theme/archetype for which a new vestige type will be created.                                                                                      | ❌     |
+| Insatiable   | Vestiges          | The maximum level of vestiges is 6 instead of 5.                                                                                                                                                            | ❌     |
+| Picky        | Vestiges          | All vestige boons are revealed. When you level up a vestige, you may level it up twice, but neither levels grant any boons.                                                                                 | ❌     |
+| Selective    | Vestiges          | You may convert a level 1 vestige to any other vestige depiction, at no cost.                                                                                                                               | ❌     |
+| Compensated  | Miscellaneous     | When rejecting the result of a Shrine, refund 20% of the tokens used (stacking with other refunding mechanics).                                                                                             | ❌     |
+| Gambler      | Miscellaneous     | The chance of obtaining special loot results is doubled.                                                                                                                                                    | ❌     |

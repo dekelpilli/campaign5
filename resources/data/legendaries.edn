@@ -33,7 +33,7 @@
                   :affinities #{:support :control}}
                  {:template   "You may learn any Curse, regardless if it is available on your class' spell list."
                   :metadata   ["A Curse is a non-damaging necrotic spell that causes a condition, mark, or other negative effect on a target."]
-                  :affinities #{:tactical :support :control}}
+                  :affinities #{:tactics :support :control}}
                  {:template "After you cast a non-necromancy spell, you have a 1/8 chance to lose an additional equivalent spell slot, if available."}
                  {:template   "{{#gt level 1}}+1 AB with necromancy spells while you are concentrating on multiple spells.{{/gt}}"
                   :affinities #{:offence}}]
@@ -49,10 +49,10 @@
                   :affinities #{:offence :support}}
                  {:template   "For every two Curses you know, you may learn one necrotic spell beyond your spells known limit."
                   :metadata   ["A Curse is a non-damaging necrotic spell that causes a condition, mark, or other negative effect on a target."]
-                  :affinities #{:tactical}}
+                  :affinities #{:tactics}}
                  {:template   "You may choose to immediately cast a Curse with a casting time of no more than an action when you roll for initiative. When you do so, your turn is skipped during the first round of the combat."
                   :metadata   ["A Curse is a non-damaging necrotic spell that causes a condition, mark, or other negative effect on a target."]
-                  :affinities #{:tactical :support :control}}
+                  :affinities #{:tactics :support :control}}
                  {:template   "+{{resistance}} to necrotic damage."
                   :vars       {:resistance {:value 4
                                             :step  2}}
@@ -62,13 +62,13 @@
                   :signature? true
                   :affinities #{:offence}}
                  {:template   "{{#gt level 2}}Whenever{{else}}No more than once per turn, when{{/eq}} you move at least 20ft in a straight line, regain 10ft of movement."
-                  :affinities #{:tactical}}
+                  :affinities #{:tactics}}
                  {:template   "{{#gt level 1}}Whenever you leave a space, this item leaves a persistent zone that deals {{plus level 1}} poison harm to creatures of your choice, and lasts until the start of your next turn.{{/gt}}"
-                  :affinities #{:tactical}}
+                  :affinities #{:tactics}}
                  {:template "You cannot use non-walking movement in combat, including jumping."}
                  {:template "You cannot become invisible."}]
   :discoverable [{:template   "Creatures that have been hurt by your items at least 3 times in a turn become rattled until the end of their next turn."
-                  :affinities #{:tactical}}
+                  :affinities #{:tactics}}
                  {:template   "Enemies in persistent zones created by you or your items have -{{resistance}} resistance."
                   :vars       {:resistance {:value  1
                                             :points 2}}
@@ -76,20 +76,20 @@
                  {:template   "You have +{{speed}}ft of walking speed."
                   :vars       {:speed {:value 10
                                        :step  5}}
-                  :affinities #{:tactical}}
+                  :affinities #{:tactics}}
                  {:template   "Hurt from persistent zones created by your items lingers for {{rounds}} round(s) after creatures leave the zones."
                   :vars       {:rounds {:value 1
                                         :step  1}}
                   :affinities #{:offence}}
                  {:template   "You learn the {{sns-maneuver \"Charge\"}} maneuver. No more than {{times}} per long rest, you may use it without consuming exertion."
                   :vars       {:times 1}
-                  :affinities #{:tactical :offence}}]}
+                  :affinities #{:tactics :offence}}]}
  {:name         "Maw of Mischief"
   :inherent     [{:template   "As an action, you may cause one of your minions to explode, immediately killing them. Make a fortitude spell attack against creatures within 5 feet of the minion, dealing acid damage equal to half of the minion's hit points at the time."
                   :signature? true
                   :affinities #{:offence}}
                  {:template   "Your minions take their turns are immediately before you, instead of immediately after."
-                  :affinities #{:tactical}}
+                  :affinities #{:tactics}}
                  {:template   "Minions you cause to explode resurrect in a space adjacent to you at the start of their next turn. If the minion came from an effect with a limited duration, this only happens the duration did not expire (including due to losing concentration). They resurrect with hit points equal to those they had at the time of their death."
                   :affinities #{:resource}}
                  {:template "Your minions have -2 AB if none of your minions died in the previous round of combat. This has no effect during the first round of combat."}
@@ -100,7 +100,7 @@
   :discoverable [{:template   "Your minions have +{{speed}}ft of walking speed."
                   :vars       {:speed {:value 10
                                        :step  5}}
-                  :affinities #{:tactical}}
+                  :affinities #{:tactics}}
                  {:template   "+{{damage}} damage with AoEs."
                   :vars       {:damage {:value 2}}
                   :affinities #{:offence}}
@@ -120,7 +120,7 @@
  {:name         "Huginn and Muninn"
   :inherent     [{:template   "When you roll for initiative, or as an action, you may summon two tiny raven minions{{#eq level 1}}, requiring concentration{{/eq}}. They have 60ft flying speed, 0 defences, hit points equal to {{level}}x your intelligence score, and cannot take actions. You can see and hear through either raven at will. If you already have active ravens, summoning them again will recreate them in a space adjacent to you."
                   :signature? true
-                  :affinities #{:tactical}}
+                  :affinities #{:tactics}}
                  {:template   "Your History and Perception checks are made with advantage if your ravens have witnessed a combat death since your last long rest."
                   :affinities #{:utility}}
                  {:template   "+2 Intelligence for each of your ravens that is alive."
@@ -170,7 +170,7 @@
                  {:template   "Your critical damage bonus is increased by your Wisdom modifier."
                   :affinities #{:offence}}
                  {:template   "Your base walking speed is at least twice your Wisdom score."
-                  :affinities #{:tactical}}]}
+                  :affinities #{:tactics}}]}
  {:name         "The Whispering Ice"
   :inherent     [{:template   "When you cast an instantaneous Storm (subschool or name) spell with a spell slot no higher than your spellcasting ability's bonus, you may choose for it to last for additional rounds equal to {{#eq level 1}}a tenth{{else}}an eighth{{/eq}} of your spellcasting ability's score. During each of your turns for the duration, you may use your action to trigger the spell's effects again in the exact same area/space affected by the original casting."
                   :signature? true ;level 4; allow moving the target slightly?
@@ -194,10 +194,10 @@
                  {:template   "You may increase the AoEs of your Area spells by up to {{aoe}} feet."
                   :vars       {:aoe {:value  5
                                      :points 2}}
-                  :affinities #{:tactical}}
+                  :affinities #{:tactics}}
                  {:template   "+{{defences}} to your defences against Storm spells, and your Storm spells don't add your damage bonuses when damaging you or your allies."
                   :vars       {:defences 1}
-                  :affinities #{:survivability :tactical}}]}
+                  :affinities #{:survivability :tactics}}]}
  {:name         "Kestos Himas"
   :inherent     [{:template   "When a non-charmed enemy that can see you targets you with an attack, you may make a Will attack against it as an opportunity attack. On a hit, the target becomes {{sns-condition \"charmed\"}}, or {{sns-condition \"dominated\"}} on a critical hit. The creature may attempt to save out of of the effect at the end of its subsequent turns, becoming immune to this effect once it has done so successfully."
                   :signature? true
@@ -232,13 +232,13 @@
  {:name         "Carnwennan"
   :inherent     [{:template   "When you roll initiative, you become shrouded in a magical darkness that engulfs you until you make an attack, or until the end of the combat. You can see through this darkness, but other creatures need magical darkvision or truesight to do so."
                   :signature? true
-                  :affinities #{:tactical :offence :defence}}
+                  :affinities #{:tactics :offence :defence}}
                  {:template   "+1 critical success range with attacks while in magical darkness."
                   :affinities #{:offence}}
                  {:template "Minor successes deal full slashing damage to you while you are not in magical darkness."}
                  {:template "-1 Reflex against spell attacks."}
                  {:template   "{{#gt level 1}}You become shrouded in magical darkness when you attack while you are hidden and not already in magical darkness.{{/gt}}"
-                  :affinities #{:tactical}}
+                  :affinities #{:tactics}}
                  {:template   "{{#gt level 1}}No more than once per combat, when you become shrouded in magical darkness, you may cause on adjacent ally to also become shrouded in darkness.{{/gt}}"
                   :affinities #{:support}}
                  {:template   "{{#gt level 2}}+{{level}} resistance to physical damage while in darkness.{{/gt}}"
@@ -265,7 +265,7 @@
  {:name         "Staff of Asclepius"
   :inherent     [{:template   "You may summon a small snake minion as a tarot action{{#lt level 3}}, requiring concentration{{/lt}}. It has 30ft of movement, 0 defences, is immune to hurt, but cannot take actions. When performing an action that restores hit points or alleviates conditions, you may choose for that spell to originate from this snake instead."
                   :signature? true
-                  :affinities #{:tactical :support}}
+                  :affinities #{:tactics :support}}
                  {:template   "You learn the {{sns-spell \"Venomous Succor\"}} spell, and may cast it once per short rest without consuming a spell slot.{{#gt level 1}} When you cast Venomous Succor via your snake, at the start of a target's turn, you may use a tarot action to cause the healing to be increased by your bonuses to healing with actions.{{/gt}}"
                   :affinities #{:support}}
                  {:template "-5 outgoing healing with actions while you have no active snake minion."}]
@@ -340,7 +340,7 @@
                   :affinities #{:offence}}
                  {:template   "You may increase the areas of your area effects that can deal lightning damage by {{feet}}ft."
                   :vars       {:feet 5}
-                  :affinities #{:tactical :offence}}]}
+                  :affinities #{:tactics :offence}}]}
  {:name         "Megingjörð"
   :inherent     [{:template   "When you add your Strength modifier to an attack you make, add it twice."
                   :signature? true
@@ -475,7 +475,7 @@
                  {:template   "Your weapon attacks gain damage equal to your offhand weapon's die (but not ability bonus)."
                   :affinities #{:offence}}
                  {:template   "+1 initiative for each trait granted by your offhand weapon's 'offhand' trait."
-                  :affinities #{:tactical}}
+                  :affinities #{:tactics}}
                  {:template   "+{{bonus}} AB while dual wielding weapons with the same category. +{{bonus}} critical range while dual wielding weapon with different categories."
                   :vars       {:bonus {:value  1
                                        :points 4}}
@@ -548,7 +548,7 @@
                   :signature? true
                   :affinities #{:offence :control}}
                  {:template   "When preparing spells, treat spells with 'earth' in their name as if they were on your class' spell list."
-                  :affinities #{:tactical}}
+                  :affinities #{:tactics}}
                  {:template   "You cannot be knocked prone by the {{sns-spell \"Earth Tremor\"}} and {{sns-spell \"Earthquake\"}} spells."
                   :affinities #{:survivability}}
                  {:template "You treat all difficult terrain as a persistent zone (or multiple persistent zones if it is not contiguous) that deals 2 fire harm."}
@@ -644,7 +644,7 @@
                   :vars       {:healing 2}
                   :affinities #{:support}}
                  {:template   "No more than once per long rest, when you heal a downed creature with a standard action, you regain your standard action for that turn, but must use it to make a melee attack."
-                  :affinities #{:tactical}}]}
+                  :affinities #{:tactics}}]}
  #_{:name         ""
     :inherent     [{:template   ""
                     :affinities #{}}

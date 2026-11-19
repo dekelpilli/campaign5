@@ -56,7 +56,7 @@ Loot can be obtained or improved in the following ways:
 ## Affinities
 - Control (lower enemy Offence/Tactics)
 - Support (outgoing healing, allies/area benefits, lowering enemy Survivability)
-- Tactical (avoiding control conditions, initiative, movement, improved uptime/usability of abilities (range, reach, etc), disengage)
+- Tactics (avoiding control conditions, initiative, movement, improved uptime/usability of abilities (range, reach, etc), disengage)
 - Resource (reduce resource usage/improve resource recovery)
 - Offence (damage, harm, crit, accuracy)
 - Survivability (defence/hp/regen/incoming healing)

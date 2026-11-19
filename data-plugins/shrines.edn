@@ -6,6 +6,10 @@
                          :effect  "Turn in two rings, a rune, a tarot card, a soul, or a vestige to generate equivalent new items."
                          :cost    30
                          :targets ["ring" "rune" "soul" "tarot" "vestige"]}
+                        {:name    "Delegation"
+                         :effect  "Cause one of your missions to only be considered done when its condition is completed by another character of your choice."
+                         :cost    10
+                         :targets ["mission"]}
                         {:name    "Alteration"
                          :effect  "Choose a physical hurt type. All current and future mods on the item that reference this hurt type instead refer to another physical hurt type of your choice. An item can only be affected by one instance of this shrine."
                          :cost    5
@@ -22,10 +26,6 @@
                          :effect  "Choose a non-physical hurt type. All current and future mods on the item that reference this hurt type instead refer to another non-physical hurt type of your choice. An item can only be affected by one instance of this shrine."
                          :cost    10
                          :targets ["legendary"]}
-                        {:name    "Delegation"
-                         :effect  "Cause one of your missions to only be considered done when its condition is completed by another character of your choice."
-                         :cost    10
-                         :targets ["mission"]}
                         {:name    "Forging"
                          :effect  "Reduce the point cost of a ring by 1, to no less than half of its original point cost."
                          :cost    50
@@ -77,6 +77,10 @@
                         {:name    "Bestowing"
                          :effect  "Unlock the next tier of boons granted by a vestige."
                          :cost    100
+                         :targets ["vestige"]}
+                        {:name    "Exaltation"
+                         :effect  "Convert a level 1 vestige into a vestige of a new (custom) focus. Define a depiction and the information line for a new vestige type. The new focus must be a general archetype, not class/character-specific."
+                         :cost    25
                          :targets ["vestige"]}]}
  :let        {:shrine {:choose :shrines}}
  :view-model {:loot/title    "Shrine of {{ shrine.name }}"

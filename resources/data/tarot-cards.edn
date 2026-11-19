@@ -11,7 +11,7 @@
  {:name     "The Lovers"
   :template "The resulting legendary item will start with a 'survivability' affinity modifier from another legendary item's discoverable mods."}
  {:name     "The Chariot"
-  :template "The resulting legendary item will start with a 'tactical' affinity modifier from another legendary item's discoverable mods."}
+  :template "The resulting legendary item will start with a 'tactics' affinity modifier from another legendary item's discoverable mods."}
  {:name     "Strength"
   :template "The resulting legendary item will start with a 'offence' affinity modifier from another legendary item's discoverable mods."}
  {:name     "Wheel of Fortune"
