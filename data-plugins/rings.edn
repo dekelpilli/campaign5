@@ -1,5 +1,3 @@
-;TODO points balance pass, including potentially reducing max ring points?
-; TODO as part of this, consider lowering number of rings found to 1
 {:tables     {:rings [;Diamond rings: powerful and exclusive
                       {:name       "Jaguar's"
                        :material   "Diamond"
@@ -26,7 +24,7 @@
                        :material   "Diamond"
                        :template   "+1 to death saves while you have no other equipped Diamond rings."
                        :affinities #{:survivability}
-                       :points     12}
+                       :points     11}
                       {:name       "Sunfish's"
                        :material   "Diamond"
                        :template   "+1 experience gained while you have no other equipped Diamond rings."
@@ -38,7 +36,7 @@
                        :data/vars  {:feat {:random :feats}}
                        :template   "For every 3 Peacock's rings you have equipped, you may choose one to gain one feat from those specified on your Peacock's rings. This ring grants the option of the {{feat}} feat."
                        :affinities #{:control :meta :offence :support :resource :survivability :tactics :utility}
-                       :points     10}
+                       :points     8}
                       {:name       "Dragon's"
                        :material   "Gold"
                        :template   "Gain 1 gold for each equipped Dragon's ring whenever you personally find at least one loot roll, to a maximum of 50 gold."
@@ -50,7 +48,7 @@
                        :affinities #{:tactics}
                        :points     8}
                       {:name       "Octopus'"
-                       :material   "Silver"
+                       :material   "Gold"
                        :data/vars  {:ability {:random :ability-scores}}
                        :affinities #{:offence :utility}
                        :template   "+1 {{ ability }} for each equipped Octopus' ring."
@@ -70,7 +68,7 @@
                        :material   "Silver"
                        :affinities #{:utility}
                        :template   "Your long rests can be 1 hour shorter for each equipped Opal ring, to a minimum of 2 hours."
-                       :points     4}
+                       :points     3}
                       {:name       "Kangaroo's"
                        :material   "Silver"
                        :affinities #{:tactics}
@@ -79,7 +77,7 @@
                       {:name       "Goat's"
                        :material   "Silver"
                        :affinities #{:support}
-                       :template   "+1 Scapegoating for each other equipped ring. Whenever a creature adjacent to you takes damage, you can reduce its damage taken by an amount up your Scapegoating, then take an equal amount of true damage."
+                       :template   "+1 Scapegoating for each other equipped ring. Whenever a creature adjacent to you takes damage, you can use a ring action to reduce its damage taken by an amount up your Scapegoating, then take an equal amount of true damage."
                        :points     8}
                       {:name       "Dolphin's"
                        :material   "Silver"
@@ -89,23 +87,28 @@
                       {:name       "Porcupine's"
                        :material   "Silver"
                        :affinities #{:offence}
-                       :template   "This ring deals +1d4 piecing harm to creatures that hit you with an attack for each equipped Gold ring."
-                       :points     7}
+                       :template   "This ring deals piecing harm, equal to 1d4 for each equipped Gold ring, to creatures that hit you with an attack."
+                       :points     6}
                       {:name       "Silverback's"
                        :material   "Silver"
                        :affinities #{:offence}
                        :template   "+1 damage with attacks for every two equipped rings."
-                       :points     9}
+                       :points     8}
                       {:name       "Axolotl's"
                        :material   "Silver"
                        :template   "Whenever you use a limited resource, heal yourself or an adjacent ally an amount equal to the number of rings worn related to sea creatures."
                        :affinities #{:survivability :support}
                        :metadata   ["Sea creature rings: Anglerfish, Axolotl, Dolphin, Octopus, Sunfish"]
-                       :points     9}
+                       :points     7}
+                      {:name       "Tortoise's"
+                       :material   "Silver"
+                       :template   "+1 maximum hit points for each Survivability mod on your rings."
+                       :affinities #{:survivability}
+                       :points     7}
                       ;Opal rings: purely used to benefit/modify other rings. Useless if equipped without other rings.
                       {:name       "Chameleon's"
                        :material   "Opal"
-                       :template   "This ring may count as if it was of any type (animal), and of any material (even if the ring of the chosen type is not usually of the chosen material). The ring itself has no effect."
+                       :template   "This ring may count as if it was of any type (animal), and of any material (even if the ring of the chosen type is not usually of the chosen material). The ring counts as having no mods."
                        :affinities #{:meta}
                        :points     4}
                       {:name       "Crow's"
@@ -122,12 +125,12 @@
                        :material   "Opal"
                        :template   "Your maximum ring points is increased by 10."
                        :affinities #{:meta}
-                       :points     10}
+                       :points     11}
                       {:name       "Aardvark's"
                        :material   "Opal"
                        :template   "Your rings' costs are always at least one point lower than their base costs."
                        :affinities #{:meta}
-                       :points     5}
+                       :points     6}
                       {:name       "Mole's"
                        :material   "Opal"
                        :template   "Equipped rings whose base point cost is greater than 10 always cost exactly 10 points."
@@ -138,13 +141,11 @@
                        :template   "Choose a ring type (animal). All equipped rings of that type apply their effects to your minions instead of to you (although any conditions are still based on your rings)."
                        :affinities #{:meta}
                        :points     2}]}
- :let        {:rings {:draw :rings
-                      :n    2}}
- :view-model {:loot/title    "Rings"
-              :loot/sections [{:section/heading "Rings"
-                               :section/items   {:data/each :rings
-                                                 :data/as   {:item/title    "{{name}} {{material}} Ring"
-                                                             :item/body     {:data/field :template}
-                                                             :item/metadata ["Points: {{points}}"
-                                                                             "Affinities: {{join affinities}}"
-                                                                             {:data/field :metadata}]}}}]}}
+ :let        {:ring {:choose :rings}}
+ :view-model {:loot/title    "{{ring.name}} {{ring.material}} Ring"
+              :loot/vars     {:points {:value {:data/field [:ring :points]}
+                                       :step  -1}}
+              :loot/sections [{:section/items [{:item/body     {:data/field [:ring :template]}
+                                                :item/metadata ["Points: {{points}}"
+                                                                "Affinities: {{join ring.affinities}}"
+                                                                {:data/field [:ring :metadata]}]}]}]}}

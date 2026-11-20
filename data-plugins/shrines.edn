@@ -28,7 +28,7 @@
                          :targets ["legendary"]}
                         {:name    "Forging"
                          :effect  "Reduce the point cost of a ring by 1, to no less than half of its original point cost."
-                         :cost    50
+                         :cost    35
                          :targets ["ring"]}
                         {:name    "Honing"
                          :effect  "Upgrade a random upgradeable mod on a rune with 4 or more mods."

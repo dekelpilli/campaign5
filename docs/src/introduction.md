@@ -12,7 +12,7 @@ so you retain your overall net worth if you want to swap out an item.
 
 | Range | Result                                                                                  |
 |-------|-----------------------------------------------------------------------------------------|
-| 1-18  | 2 [rings](loot/rings.md)                                                                |
+| 1-18  | A [ring](loot/rings.md)                                                                 |
 | 19-36 | A [rune](loot/runes.md)                                                                 |
 | 37-54 | A [soul](loot/souls-and-reliquaries.md)                                                 |
 | 55-72 | A [tarot card](loot/tarot-and-legendaries.md)                                           |
