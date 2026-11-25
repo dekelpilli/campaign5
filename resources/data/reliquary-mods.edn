@@ -64,9 +64,9 @@
   :affinities #{:offence}}
  {:template   "If all contained souls are of the same origin, they all proc whenever one of them procs."
   :affinities #{:meta}}
- {:vars       {:damage {:value 2
-                        :step  1}}
-  :template   "Damage and harm dealt by contained souls is increased by {{damage}}."
+ {:vars       {:harm {:value 2
+                      :step  1}}
+  :template   "Harm dealt by contained souls is increased by {{harm}}."
   :affinities #{:offence}}
  {:vars       {:resistance {:value  1
                             :points 3}}

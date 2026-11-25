@@ -18,4 +18,7 @@ Note that some cards might change how upgrading your item works, or which mods a
 
 # Tarot Cards
 
+The `priority` of tarot cards determines the order in which their effects are applied, with lower priorities happening first.
+For example, a 10 of Swords applies its effects after The Tower, so that the upgrade happens after the replacement. 
+
 <!-- tarot-table -->

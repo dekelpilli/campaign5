@@ -29,6 +29,7 @@
  {:name         "Maleficarum"
   :inherent     [{:template   "If you cast a Concentration Curse while you are already concentrating on a Curse, the spell shares concentration with your existing concentration. You can concentrate on {{#lt level 3}}2{{else}}3{{/lt}} such Curses at a time."
                   :signature? true
+                  ;TODO instead of this definition, make a list? currently bane is not included
                   :metadata   ["A Curse is a non-damaging necrotic spell that causes a condition, mark, or other negative effect on a target."]
                   :affinities #{:support :control}}
                  {:template   "You may learn any Curse, regardless if it is available on your class' spell list."

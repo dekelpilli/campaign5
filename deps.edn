@@ -7,4 +7,4 @@
                       :extra-deps  {io.github.clojure/tools.build {:mvn/version "0.10.14"}}
                       :ns-default  build}
            :outdated {:deps      {com.github.liquidz/antq {:mvn/version "RELEASE"}}
-                      :main-opts ["-m" "antq.core"]}}}
+                      :main-opts ["-m" "antq.core" "--upgrade" "--force"]}}}

@@ -53,11 +53,11 @@
                        :affinities #{:offence :utility}
                        :template   "+1 {{ ability }} for each equipped Octopus' ring."
                        :points     5}
-                      {:name       "Orangutan's"
+                      {:name       "Squid's"
                        :material   "Gold"
                        :template   "+5ft reach for reviving downed allies while you have at least two Orangutan's rings equipped."
                        :affinities #{:support :tactics}
-                       :points     6}
+                       :points     7}
                       ;Silver rings: conditions based on other rings
                       {:name       "Anglerfish's"
                        :material   "Silver"
@@ -98,7 +98,7 @@
                        :material   "Silver"
                        :template   "Whenever you use a limited resource, heal yourself or an adjacent ally an amount equal to the number of rings worn related to sea creatures."
                        :affinities #{:survivability :support}
-                       :metadata   ["Sea creature rings: Anglerfish, Axolotl, Dolphin, Octopus, Sunfish"]
+                       :metadata   ["Sea creature rings: Anglerfish, Axolotl, Dolphin, Octopus, Squid, Sunfish"]
                        :points     7}
                       {:name       "Tortoise's"
                        :material   "Silver"
